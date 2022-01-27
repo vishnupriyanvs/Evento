@@ -21,7 +21,7 @@ const user = Db.define('user', {
         allowNull: false
     },
     gender: {
-        type: Sequelize.ENUM('Male','Female','Transgender','Prefer Not to Respond'),
+        type: Sequelize.ENUM('Male', 'Female', 'Transgender', 'Prefer Not to Respond'),
         allowNull: true
     },
     email: {
@@ -39,25 +39,29 @@ const user = Db.define('user', {
     jobTitleId: {
         type: Sequelize.SMALLINT,
         allowNull: false,
-        references : {model : 'job_titles', key : 'id'}
+        references: { model: 'job_titles', key: 'id' }
     },
     gradeId: {
         type: Sequelize.SMALLINT,
         allowNull: false,
-        references : {model : 'grades', key : 'id'}
+        references: { model: 'grades', key: 'id' }
     },
     locationId: {
         type: Sequelize.SMALLINT,
         allowNull: false,
-        references : {model : 'locations', key : 'id'}
+        references: { model: 'locations', key: 'id' }
     },
     departmentId: {
         type: Sequelize.SMALLINT,
         allowNull: false,
-        references : {model : 'departments' ,key : 'id'}
+        references: { model: 'departments', key: 'id' }
     }
 },
-{initialAutoIncrement : 1000, underscored: true}
+    {
+        initialAutoIncrement: 1000,
+        underscored: true,
+        timestamps: false
+    }
 );
 
 

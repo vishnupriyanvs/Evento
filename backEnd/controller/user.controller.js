@@ -57,6 +57,10 @@ function updateUser(req, res) {
         });
 }
 
+function loginUser(req, res){
+    
+}
+
 function findUsers(req, res) {
     userDao.findAll().
         then((data) => {

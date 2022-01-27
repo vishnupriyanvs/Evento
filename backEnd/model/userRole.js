@@ -21,7 +21,10 @@ const userRole = Db.define('userRole', {
         references : {model : 'roles' , key : 'id'}
     }
 },
-{ underscored: true }
+{ 
+    underscored: true,
+    timestamps: false
+ }
 );
 
 role.hasMany(userRole)

@@ -15,6 +15,9 @@ const Grade = Db.define('grade', {
         type: Sequelize.TEXT,
         allowNull: true
     }
-});
+},
+    {
+        timestamps: false
+    });
 
 module.exports = Grade;
