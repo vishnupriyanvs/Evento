@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
-const db = require('../config/database');
+const Db = require('../config/database');
 
-const department = db.define('department', {
+const Department = Db.define('department', {
     id: {
         type: Sequelize.SMALLINT,
         primaryKey: true,
@@ -13,4 +13,4 @@ const department = db.define('department', {
     }
 });
 
-module.exports = department;
+module.exports = Department;

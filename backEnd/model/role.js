@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
-const db = require('../config/database');
+const Db = require('../config/database');
 
-const role = db.define('role', {
+const role = Db.define('role', {
     id: {
         type: Sequelize.SMALLINT,
         primaryKey: true,

@@ -1,12 +1,12 @@
 const Sequelize = require('sequelize');
-const db = require('../config/database');
+const Db = require('../config/database');
 
 const department = require('./department')
 const grade = require('./grade')
-const job_title = require('./job_title')
+const jobTitle = require('./jobTitle')
 const location = require('./location')
 
-const user = db.define('user', {
+const user = Db.define('user', {
     id: {
         type: Sequelize.BIGINT,
         primaryKey: true,
@@ -21,7 +21,7 @@ const user = db.define('user', {
         allowNull: false
     },
     gender: {
-        type: Sequelize.ENUM,
+        type: Sequelize.ENUM('Male','Female','Transgender','Prefer Not to Respond'),
         allowNull: true
     },
     email: {
@@ -29,41 +29,41 @@ const user = db.define('user', {
         allowNull: false
     },
     contact: {
-        type: Sequelize.NUMBER,
+        type: Sequelize.STRING,
         allowNull: false
     },
-    image_url: {
+    imageUrl: {
         type: Sequelize.STRING,
         allowNull: true
     },
-    job_title_id: {
+    jobTitleId: {
         type: Sequelize.SMALLINT,
         allowNull: false,
-        references : {model : 'job_title', key : 'id'}
+        references : {model : 'job_titles', key : 'id'}
     },
-    grade_id: {
+    gradeId: {
         type: Sequelize.SMALLINT,
         allowNull: false,
-        references : {model : 'grade', key : 'id'}
+        references : {model : 'grades', key : 'id'}
     },
-    location_id: {
+    locationId: {
         type: Sequelize.SMALLINT,
         allowNull: false,
-        references : {model : 'location', key : 'id'}
+        references : {model : 'locations', key : 'id'}
     },
-    department_id: {
+    departmentId: {
         type: Sequelize.SMALLINT,
         allowNull: false,
-        references : {model : 'department' ,key : 'id'}
+        references : {model : 'departments' ,key : 'id'}
     }
 },
-{initialAutoIncrement : 1000}
+{initialAutoIncrement : 1000, underscored: true}
 );
 
 
 department.hasMany(user)
 grade.hasMany(user)
-job_title.hasMany(user)
+jobTitle.hasMany(user)
 location.hasMany(user)
 
 module.exports = user;

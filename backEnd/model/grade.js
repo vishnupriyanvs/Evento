@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
-const db = require('../config/database');
+const Db = require('../config/database');
 
-const grade = db.define('grade', {
+const Grade = Db.define('grade', {
     id: {
         type: Sequelize.SMALLINT,
         primaryKey: true,
@@ -17,4 +17,4 @@ const grade = db.define('grade', {
     }
 });
 
-module.exports = grade;
+module.exports = Grade;

@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
-const db = require('../config/database');
+const Db = require('../config/database');
 
-const job_title = db.define('job_title', {
+const JobTitle = Db.define('jobTitle', {
     id: {
         type: Sequelize.SMALLINT,
         primaryKey: true,
@@ -11,6 +11,8 @@ const job_title = db.define('job_title', {
         type: Sequelize.STRING,
         allowNull: false
     }
-});
+},
+{ underscored: true }
+);
 
-module.exports = job_title;
+module.exports = JobTitle;

@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
-const db = require('../config/database');
+const Db = require('../config/database');
 
-const location = db.define('location', {
+const location = Db.define('location', {
     id: {
         type: Sequelize.SMALLINT,
         primaryKey: true,
