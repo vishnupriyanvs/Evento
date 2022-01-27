@@ -1,4 +1,6 @@
 const userDao = require('../dao/user.dao');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 
 var userController = {
@@ -7,6 +9,7 @@ var userController = {
     findUserById: findUserById,
     updateUser: updateUser,
     deleteById: deleteById,
+    loginUser : loginUser
 }
 
 async function addUser(req, res) {
@@ -58,7 +61,30 @@ function updateUser(req, res) {
 }
 
 function loginUser(req, res){
+    const username = req.body.username;
+    const password = req.body.password;
     
+    userDao.findByUsername(username).
+        then((data) => {
+            userPassword = data.password;
+            console.log(userPassword);
+            const result = bcrypt.compareSync(password, userPassword);
+            if (!result) return res.status(401).send('Password not valid!');
+            const expiresIn = 24 * 60 * 60;
+            const accessToken = jwt.sign({ username: data.username, role_id: data.userRole.roleId }, process.env.SECRET_KEY, {
+                expiresIn: expiresIn
+            });
+            userInfo = data;
+            res.status(200).send({
+                "user": data,
+                "accessToken": accessToken,
+                "expires_in": expiresIn
+            });
+        })
+        .catch((error) => {
+            console.log(error);
+            return res.status(404).send('User not found!');
+        });
 }
 
 function findUsers(req, res) {
