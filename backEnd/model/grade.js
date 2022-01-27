@@ -9,7 +9,8 @@ const Grade = Db.define('grade', {
     },
     type: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+        unique: true
     },
     description: {
         type: Sequelize.TEXT,

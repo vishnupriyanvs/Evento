@@ -13,9 +13,10 @@ const userRole = Db.define('userRole', {
     userId: {
         type: Sequelize.BIGINT,
         allowNull: false,
+        unique: true,
         references : {model:'users', key : 'id'}
     },
-    roleID: {
+    roleId: {
         type: Sequelize.SMALLINT,
         allowNull: false,
         references : {model : 'roles' , key : 'id'}

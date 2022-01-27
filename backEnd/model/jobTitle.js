@@ -9,7 +9,8 @@ const JobTitle = Db.define('jobTitle', {
     },
     title: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+        unique: true
     }
 },
     { underscored: true, timestamps: false }
