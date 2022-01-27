@@ -13,7 +13,7 @@ function authenticateToken(req, res, next) {
         if (err) return res.sendStatus(403);
         req.user = user;
         console.log(user);
-        if (req.user.role_id === userRoles.admin)
+        if (req.user.role_id === userRoles.admin )
             next();
         else { console.log("Not Admin"); return res.sendStatus(403); }
     })
