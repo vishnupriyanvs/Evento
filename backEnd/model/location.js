@@ -9,7 +9,8 @@ const location = Db.define('location', {
     },
     place: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+        unique: true
     }
 },
     {

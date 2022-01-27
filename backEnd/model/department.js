@@ -9,7 +9,8 @@ const Department = Db.define('department', {
     },
     name: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+        unique: true
     },
 
 },
