@@ -12,7 +12,7 @@ const JobTitle = Db.define('jobTitle', {
         allowNull: false
     }
 },
-{ underscored: true }
+    { underscored: true, timestamps: false }
 );
 
 module.exports = JobTitle;

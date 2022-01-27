@@ -11,6 +11,9 @@ const location = Db.define('location', {
         type: Sequelize.STRING,
         allowNull: false
     }
-});
+},
+    {
+        timestamps: false
+    });
 
 module.exports = location;
