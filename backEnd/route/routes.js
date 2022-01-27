@@ -9,8 +9,8 @@ const roleRoutes = require('./role.route');
 const userRoutes = require('./user.route');
 const userRoleRoutes = require('./userRole.route');
 
-router.use('/departments',departmentRoutes);
-router.use('/grades',gradeRoutes);
+router.use('./departments',departmentRoutes);
+router.use('./grades',gradeRoutes);
 router.use('/jobTitles',jobTitleRoutes);
 router.use('/locations',locationRoutes);
 router.use('/roles',roleRoutes);
