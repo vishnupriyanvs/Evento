@@ -21,17 +21,28 @@ const user = Db.define('user', {
         type: Sequelize.STRING,
         allowNull: false
     },
+    name: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
     gender: {
         type: Sequelize.ENUM('Male', 'Female', 'Transgender', 'Prefer Not to Respond'),
         allowNull: true
     },
     email: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+        validate : {
+            isEmail : true
+        }
     },
     contact: {
         type: Sequelize.STRING,
-        allowNull: false
+        allowNull: false,
+        validate : {
+            isNumeric : true,
+            len : [10]
+        }
     },
     imageUrl: {
         type: Sequelize.STRING,
