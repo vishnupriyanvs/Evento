@@ -67,17 +67,19 @@ function loginUser(req, res){
     userDao.findByUsername(username).
         then((data) => {
             userPassword = data.password;
-            console.log(userPassword);
+            //console.log(userPassword);
             const result = bcrypt.compareSync(password, userPassword);
             if (!result) return res.status(401).send('Password not valid!');
-            const expiresIn = 24 * 60 * 60;
-            const accessToken = jwt.sign({ username: data.username, role_id: data.userRole.roleId }, process.env.SECRET_KEY, {
+            const expiresIn = '30s';
+            const accessToken = jwt.sign({ username: data.username, role_id: data.userRole.roleId }, process.env.ACCESS_TOKEN_SECRET_KEY, {
                 expiresIn: expiresIn
             });
+            const refreshToken = jwt.sign({accessToken: accessToken}, process.env.REFRESH_TOKEN_SECRET_KEY);
             userInfo = data;
             res.status(200).send({
                 "user": data,
                 "accessToken": accessToken,
+                "refreshToken": refreshToken,
                 "expires_in": expiresIn
             });
         })
