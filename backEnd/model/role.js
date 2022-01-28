@@ -1,7 +1,9 @@
 const Sequelize = require('sequelize');
 const Db = require('../config/database');
 
-const role = Db.define('role', {
+// const User = require('./user');
+
+const Role = Db.define('role', {
     id: {
         type: Sequelize.SMALLINT,
         primaryKey: true,
@@ -21,4 +23,8 @@ const role = Db.define('role', {
         timestamps: false
     });
 
-module.exports = role;
+
+
+// Role.belongsToMany(User, { through: 'user_roles' });
+
+module.exports = Role;

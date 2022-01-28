@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const Db = require('../config/database');
+// const user = require('./user');
 
 const Department = Db.define('department', {
     id: {
@@ -17,5 +18,7 @@ const Department = Db.define('department', {
     {
         timestamps: false
     });
+
+// Department.hasMany(user)
 
 module.exports = Department;

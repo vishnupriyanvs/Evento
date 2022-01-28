@@ -1,7 +1,8 @@
 const Sequelize = require('sequelize');
 const Db = require('../config/database');
+// const user = require('./user');
 
-const location = Db.define('location', {
+const Location = Db.define('location', {
     id: {
         type: Sequelize.SMALLINT,
         primaryKey: true,
@@ -17,4 +18,6 @@ const location = Db.define('location', {
         timestamps: false
     });
 
-module.exports = location;
+// Location.hasMany(user)
+
+module.exports = Location;

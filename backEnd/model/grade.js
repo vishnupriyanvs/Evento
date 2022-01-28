@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const Db = require('../config/database');
+// const user = require('./user');
 
 const Grade = Db.define('grade', {
     id: {
@@ -20,5 +21,7 @@ const Grade = Db.define('grade', {
     {
         timestamps: false
     });
+    
+// Grade.hasMany(user)
 
 module.exports = Grade;

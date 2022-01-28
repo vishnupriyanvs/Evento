@@ -1,12 +1,14 @@
 const Sequelize = require('sequelize');
 const Db = require('../config/database');
 
-const department = require('./department')
-const grade = require('./grade')
-const jobTitle = require('./jobTitle')
-const location = require('./location')
+const Department = require('./department')
+const Grade = require('./grade')
+const JobTitle = require('./jobTitle')
+const Location = require('./location');
+const Role = require('./role');
 
-const user = Db.define('user', {
+
+const User = Db.define('user', {
     id: {
         type: Sequelize.BIGINT,
         primaryKey: true,
@@ -48,26 +50,6 @@ const user = Db.define('user', {
         type: Sequelize.STRING,
         allowNull: true
     },
-    jobTitleId: {
-        type: Sequelize.SMALLINT,
-        allowNull: false,
-        references: { model: 'job_titles', key: 'id' }
-    },
-    gradeId: {
-        type: Sequelize.SMALLINT,
-        allowNull: false,
-        references: { model: 'grades', key: 'id' }
-    },
-    locationId: {
-        type: Sequelize.SMALLINT,
-        allowNull: false,
-        references: { model: 'locations', key: 'id' }
-    },
-    departmentId: {
-        type: Sequelize.SMALLINT,
-        allowNull: false,
-        references: { model: 'departments', key: 'id' }
-    }
 },
     {
         initialAutoIncrement: 1000,
@@ -77,9 +59,20 @@ const user = Db.define('user', {
 );
 
 
-department.hasMany(user)
-grade.hasMany(user)
-jobTitle.hasMany(user)
-location.hasMany(user)
+User.belongsTo(Department);
+Department.hasMany(User);
 
-module.exports = user;
+User.belongsTo(Grade);
+Grade.hasMany(User);
+
+User.belongsTo(JobTitle);
+JobTitle.hasMany(User)
+
+User.belongsTo(Location);
+Location.hasMany(User);
+
+
+User.belongsToMany(Role, {through: 'user_roles' });
+Role.belongsToMany(User, { through: 'user_roles' });
+
+module.exports = User;
