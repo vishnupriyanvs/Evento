@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const Db = require('../config/database');
+// const user = require('./user');
 
 const JobTitle = Db.define('jobTitle', {
     id: {
@@ -15,5 +16,6 @@ const JobTitle = Db.define('jobTitle', {
 },
     { underscored: true, timestamps: false }
 );
+// JobTitle.hasMany(user)
 
 module.exports = JobTitle;
