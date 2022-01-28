@@ -1,0 +1,23 @@
+
+.eventTileBody{
+    display: flex;
+    background-color: rgba(131, 177, 132, 0.4);
+    justify-content: space-between;
+    border-radius: 10px;
+    
+}
+
+.eventTitle{
+
+    font-size: large;
+    display: flex;
+    align-items: center;
+}
+
+.eventOp{
+    display: flex;
+    font-size: large;
+    align-items: center; 
+    gap: 1rem;
+
+}

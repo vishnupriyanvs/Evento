@@ -1,0 +1,32 @@
+
+
+.mainFlex{
+    display: flex;
+    /* align-items: center; */
+
+    justify-content: space-between;
+    
+    
+}
+
+.flexLeftItem{
+
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: center;
+    align-self: center;
+}
+
+.flexRightItem{
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: center;
+    align-self: center;
+}
+
+.sizedBox{
+
+    width: 50px;
+}
