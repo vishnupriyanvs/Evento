@@ -35,15 +35,16 @@ function MyForm(props){
 
         axios.post('http://localhost:4000/users/login', inputs)
             .then(response => { 
-                sessionStorage.setItem('myToken', response.data.accessToken)
-                sessionStorage.setItem('myRole', response.data.user.userRole.roleId)
                 console.log(response)
+                console.log(response.data.user.id)
+                sessionStorage.setItem('myToken', response.data.accessToken)
+                sessionStorage.setItem('myRole', response.data.user.roles[0].user_roles.roleId)
                 toast.success("Welcome" + " " + response.data.user.name, {
                     transition: Slide,
                     hideProgressBar: false,
                     autoClose: 6000
                 })
-                       
+               window.location = `user/temp/${response.data.user.id}`        
             })
             .catch(error =>{
                 sessionStorage.clear();
@@ -53,9 +54,9 @@ function MyForm(props){
             })
     };
 
-    function goToHome(){
-        window.location = '/';
-    }
+    // function goToHome(){
+    //     window.location = '/';
+    // }
 
     return(
         <>
@@ -89,7 +90,7 @@ function MyForm(props){
 
             <center>
             <Button variant="primary" type="submit" >Login</Button>&nbsp;&nbsp;
-            <Button variant="danger" onClick = {goToHome} >Cancel</Button>
+            <Button variant="danger" >Cancel</Button>
             </center>
 
         </Form>
