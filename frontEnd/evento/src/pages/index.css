@@ -2,7 +2,7 @@ body {
   font-family: "Inter", sans-serif;
 }
 
-.container {
+.containers {
   display: grid;
   height: 100vh;
   grid-template-columns: 1fr 6fr 6fr 6fr;
