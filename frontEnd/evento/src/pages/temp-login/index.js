@@ -42,6 +42,8 @@ function AdminAccess(){
       <div style={{ marginTop: "50px" }}>
         <h1 className="display-3" style={{marginTop: '20px'}}><b>User Data</b></h1>
         <h3>Name : {users.name}</h3>
+        <h3>username : {users.username}</h3>
+        <h3>password : {users.password}</h3>
       </div>
     </>
   );
