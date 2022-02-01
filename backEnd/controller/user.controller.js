@@ -2,6 +2,8 @@ const userDao = require('../dao/user.dao');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
+var tokenList = {};
+
 
 var userController = {
     addUser: addUser,
@@ -9,7 +11,8 @@ var userController = {
     findUserById: findUserById,
     updateUser: updateUser,
     deleteById: deleteById,
-    loginUser : loginUser
+    loginUser : loginUser,
+    reLogin : reLogin
 }
 
 async function addUser(req, res) {
@@ -27,12 +30,83 @@ async function addUser(req, res) {
 function findUserById(req, res) {
     userDao.findById(req.params.id).
         then((data) => {
+            console.log(data);
             res.send(data);
         })
         .catch((error) => {
             console.log(error);
         });
 }
+
+
+function loginUser(req, res){
+    const username = req.body.username;
+    const password = req.body.password;
+    
+    userDao.findByUsername(username).
+        then((data) => {
+            userPassword = data.password;
+            //console.log(userPassword);
+            const result = bcrypt.compareSync(password, userPassword);
+            if (!result) return res.status(401).send('Password not valid!');
+            //console.log(data.roles[0].user_roles.roleId)
+            const accessToken = jwt.sign({ id:data.id}, process.env.ACCESS_TOKEN_SECRET_KEY, {
+                expiresIn: process.env.ACCESS_TOKEN_EXPIRESIN
+            });
+            expiresIn = '2h';
+            const refreshToken = jwt.sign({id: data.id }, process.env.REFRESH_TOKEN_SECRET_KEY,{
+                expiresIn: process.env.REFRESH_TOKEN_EXPIRESIN
+            });
+            //userInfo = data;
+            res.status(200).send({
+                "user": data,
+                "accessToken": accessToken,
+                "refreshToken": refreshToken,
+                "expires_in": expiresIn
+            });
+
+            const response = {
+                "accessToken" : accessToken,
+                "refreshToken" : refreshToken
+              }
+            tokenList[refreshToken] = response;
+        })
+        .catch((error) => {
+            console.log(error);
+            return res.status(404).send('User not found!');
+        });
+}
+
+function reLogin(req,res){
+    const refreshToken = req.body.refreshToken;
+    console.log(refreshToken)   ;
+    console.log(tokenList);
+    if( refreshToken && (refreshToken in tokenList)){
+
+      //decode refreshToken to get user id
+      jwt.verify( refreshToken, process.env.REFRESH_TOKEN_SECRET_KEY, (err, decoded) => {
+        if (err) {
+          return res.status(401).send({
+            message: "Unauthorized!"
+          });
+        }
+        var userId = decoded.id;
+        var accessToken = jwt.sign({ id: userId }, process.env.ACCESS_TOKEN_SECRET_KEY, {
+          expiresIn: process.env.ACCESS_TOKEN_EXPIRESIN
+        });
+        const response = {
+          "accessToken": accessToken,
+        }
+        // update the token in the list
+        tokenList[refreshToken].accessToken = accessToken
+        res.status(200).json(response);  
+    });
+    }else{
+      res.status(404).send('invalid request')
+    }
+}
+
+
 
 function deleteById(req, res) {
     userDao.deleteById(req.params.id).
@@ -60,34 +134,6 @@ function updateUser(req, res) {
         });
 }
 
-function loginUser(req, res){
-    const username = req.body.username;
-    const password = req.body.password;
-    
-    userDao.findByUsername(username).
-        then((data) => {
-            userPassword = data.password;
-            //console.log(userPassword);
-            const result = bcrypt.compareSync(password, userPassword);
-            if (!result) return res.status(401).send('Password not valid!');
-            const expiresIn = '30s';
-            const accessToken = jwt.sign({ username: data.username, role_id: data.userRole.roleId }, process.env.ACCESS_TOKEN_SECRET_KEY, {
-                expiresIn: expiresIn
-            });
-            const refreshToken = jwt.sign({accessToken: accessToken}, process.env.REFRESH_TOKEN_SECRET_KEY);
-            userInfo = data;
-            res.status(200).send({
-                "user": data,
-                "accessToken": accessToken,
-                "refreshToken": refreshToken,
-                "expires_in": expiresIn
-            });
-        })
-        .catch((error) => {
-            console.log(error);
-            return res.status(404).send('User not found!');
-        });
-}
 
 function findUsers(req, res) {
     userDao.findAll().

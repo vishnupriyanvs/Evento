@@ -1,5 +1,6 @@
 const User = require('../model/user');
-const UserRole = require('../model/userRole')
+// const UserRole = require('../model/userRole')
+const Role = require('../model/role')
 
 var userDao = {
     findAll: findAll,
@@ -16,14 +17,19 @@ function findAll() {
 
 
 function findById(id) {
-    return User.findByPk(id);
+    return User.findOne({
+        where : {id : id}, 
+        include : [{
+            model : Role
+        }]
+    });
 }
 
 function findByUsername(username) {
     return User.findOne({
         where : {username : username},
         include: [{
-            model: UserRole
+            model: Role
            }]
     });
 }
