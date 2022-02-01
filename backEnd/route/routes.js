@@ -7,7 +7,9 @@ const jobTitleRoutes = require('./jobTitle.route');
 const locationRoutes = require('./location.route');
 const roleRoutes = require('./role.route');
 const userRoutes = require('./user.route');
-// const userRoleRoutes = require('./userRole.route');
+const eventRoutes = require('./event.route');
+const invitationRoutes = require('./invitation.route');
+const eventFeedbackRoutes = require('./eventFeedback.route')
 
 router.use('/departments',departmentRoutes);
 router.use('/grades',gradeRoutes);
@@ -15,7 +17,10 @@ router.use('/jobTitles',jobTitleRoutes);
 router.use('/locations',locationRoutes);
 router.use('/roles',roleRoutes);
 router.use('/users',userRoutes);
-// router.use('/userroles',userRoleRoutes);
+router.use('/events',eventRoutes);
+router.use('/invitations',invitationRoutes);
+router.use('/feedbacks',eventFeedbackRoutes);
+
 
 
 module.exports = router;
