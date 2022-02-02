@@ -73,8 +73,8 @@ function MainPage() {
                 </div> : <div>
                     <div className='sideBarIcons'><FontAwesomeIcon icon={faCalendar} size="3x" color="#91A4B7" onClick={() => navigateEvents("calender-events")}/><span className='sideBarText'>Calendar</span></div>
                     <div className='sideBarIcons'><FontAwesomeIcon icon={faFastForward} size="3x" color="#91A4B7" onClick={() => navigateEvents("upcoming-events")}/><span className='sideBarText'>Upcoming Events</span></div>
-                    <div className='sideBarIcons'><FontAwesomeIcon icon={faCheckCircle} size="3x" color="#91A4B7" /><span className='sideBarText'>Completed Events</span></div>
-                    <div className='sideBarIcons'><FontAwesomeIcon icon={faStopCircle} size="3x" color="#91A4B7" /><span className='sideBarText'>Cancelled Events</span></div>
+                    <div className='sideBarIcons'><FontAwesomeIcon icon={faCheckCircle} size="3x" color="#91A4B7" onClick={() => navigateEvents("past-events")}/><span className='sideBarText'>Completed Events</span></div>
+                    <div className='sideBarIcons'><FontAwesomeIcon icon={faStopCircle} size="3x" color="#91A4B7" onClick={() => navigateEvents("cancelled-events")} /><span className='sideBarText'>Cancelled Events</span></div>
                 </div>}
             {/* Error while mapping in SideBar! <SideBar listContent = {["Upcoming Events"]} listItemFn={[navigateEvents("upcoming-events")]} /> */}
         </div>
