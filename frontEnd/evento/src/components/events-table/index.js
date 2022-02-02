@@ -5,31 +5,31 @@ import { faUserPlus, faEdit } from "@fortawesome/free-solid-svg-icons";
 import services from "../../services";
 
 function EventsTable(props) {
-
+    //console.log(props)
     const [tHeader, setTHeader] = useState([]);
     const [tRow, setTrow] = useState([
-        {
-            'Event Title': "React",
-            'Status': "Active",
-            'Start Date': "20/12/2021",
-            'Actions': 'Completed',
-            'End Date': "20/12/2021"
+        // {
+        //     'Event Title': "React",
+        //     'Status': "Active",
+        //     'Start Date': "20/12/2021",
+        //     'Actions': 'Completed',
+        //     'End Date': "20/12/2021"
 
-        },
-        {
-            'Event Title': "Angular",
-            'Status': "Inactive",
-            'Start Date': "20/01/2021",
-            'Actions': "Inactive",
-            'End Date': "20/12/2021"
-        },
-        {
-            'Event Title': "Vue",
-            'Status': "Inactive",
-            'Start Date': "20/01/2021",
-            'Actions': "Deactivate",
-            'End Date': "20/12/2021"
-        }
+        // },
+        // {
+        //     'Event Title': "Angular",
+        //     'Status': "Inactive",
+        //     'Start Date': "20/01/2021",
+        //     'Actions': "Inactive",
+        //     'End Date': "20/12/2021"
+        // },
+        // {
+        //     'Event Title': "Vue",
+        //     'Status': "Inactive",
+        //     'Start Date': "20/01/2021",
+        //     'Actions': "Deactivate",
+        //     'End Date': "20/12/2021"
+        // }
     ]);
     const checkPage = (page, tHeader, tRow) => {
         switch (page) {
@@ -38,7 +38,7 @@ function EventsTable(props) {
                 tHeader = tHeader.filter((title, i) => { return title !== 'End Date' });
                 setTHeader(tHeader);
                 tRow = tRow.filter((content, i) => { return delete content["End Date"] })
-                setTrow(tRow);
+                setTrow(props.events);
                 break;
 
             case services.eventType.COMPLETED_EVENT:
@@ -46,11 +46,18 @@ function EventsTable(props) {
                 tHeader = tHeader.filter((title, i) => { return title !== 'Actions' });
                 setTHeader(tHeader);
                 tRow = tRow.filter((content, i) => { return delete content["Actions"] })
-                setTrow(tRow);
+                setTrow(props.events);
                 break;
 
             case services.eventType.CANCELED_EVENT:
-                console.log("CAMCELLED EVENT");
+                tHeader = tHeader.filter((title, i) => { return title !== 'End Date' });
+                setTHeader(tHeader);
+                tRow = tRow.filter((content, i) => { return delete content["End Date"] })
+                setTrow(props.events);
+                tHeader = tHeader.filter((title, i) => { return title !== 'Actions' });
+                setTHeader(tHeader);
+                tRow = tRow.filter((content, i) => { return delete content["Actions"] })
+                setTrow(props.events);
                 break;
             default:
                 console.log("Nothing Selected")
@@ -69,7 +76,7 @@ function EventsTable(props) {
 
     }, [props.titles, props.content])
 
-
+    console.log(tRow)
     return (
         <center>
             <table id="events">
