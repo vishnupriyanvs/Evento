@@ -51,11 +51,11 @@ function loginUser(req, res){
             if (!result) return res.status(401).send('Password not valid!');
             //console.log(data.roles[0].user_roles.roleId)
             const accessToken = jwt.sign({ id:data.id}, process.env.ACCESS_TOKEN_SECRET_KEY, {
-                expiresIn: process.env.ACCESS_TOKEN_EXPIRESIN
+                expiresIn: 1800
             });
             expiresIn = '2h';
             const refreshToken = jwt.sign({id: data.id }, process.env.REFRESH_TOKEN_SECRET_KEY,{
-                expiresIn: process.env.REFRESH_TOKEN_EXPIRESIN
+                expiresIn: 120000
             });
             //userInfo = data;
             res.status(200).send({

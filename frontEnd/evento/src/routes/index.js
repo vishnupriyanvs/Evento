@@ -35,7 +35,7 @@ function Paths() {
                     <Route path="view-event/:id/" element={<ViewEvents />} />
                     <Route path="create-event/" element={<CreateEventForm />} />
                     <Route path="edit-event/:id" element={<EditEventForm />} />
-                <Route path="temp/:id" element = {<AdminAccess />} />
+                    <Route path="temp/:id" element = {<AdminAccess />} />
 
                 </Route>
 
