@@ -83,6 +83,4 @@ function findByEventStatus(req, res) {
         });
 }
 
-
-
 module.exports = eventController;

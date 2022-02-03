@@ -41,7 +41,7 @@ function EventsTable(props) {
                 setTrow(props.events);
                 break;
 
-            case services.eventType.COMPLETED_EVENT:
+            case services.eventType.COMPLETED_EVENT || services.eventType.ONGOING_EVENT:
 
                 tHeader = tHeader.filter((title, i) => { return title !== 'Actions' });
                 setTHeader(tHeader);

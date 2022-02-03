@@ -42,7 +42,7 @@ const Event = Db.define('event', {
         allowNull: true
     },
     isActive: {
-        type : Sequelize.ENUM('Active','In Progress','Completed','Cancelled'),
+        type : Sequelize.ENUM('Active','InProgress','Completed','Cancelled'),
         allowNull: false,
         defaultValue : 'Active'
     },
