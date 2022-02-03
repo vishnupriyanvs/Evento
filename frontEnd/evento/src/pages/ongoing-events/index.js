@@ -14,7 +14,7 @@ function OngoingEvents() {
         navigate(`../view-event/${id}`);
     }
 
-    const checkFilter = ["cancellationReason", "created_by", "description", "id", "imageUrl", "resourcePerson", "venue", "website"]
+    // const checkFilter = ["cancellationReason","contactPerson", "created_by", "description", "id", "imageUrl", "resourcePerson", "venue", "website"]
 
     const [events, setEvents] = useState([]);
 
@@ -22,26 +22,27 @@ function OngoingEvents() {
         axios
             .get('http://localhost:4000/events/status/InProgress')
             .then(response => {
-                console.log('Oncoming event Promise was fulfilled');
+                console.log('Ongoing event Promise was fulfilled');
                 setEvents(response.data)
+                // console.log('Response' + events)
             })
             .catch((err) => {
                 console.log(err)
             })
     }, [])
 
-    useEffect(() => {
-        checkFilter.forEach((data) => {
-            events.filter((content) => { return delete content[data] })
-        })
-    }, [events])
+    // useEffect(() => {
+    //     checkFilter.forEach((data) => {
+    //         events.filter((content) => { return delete content[data] })
+    //     })
+    // }, [events])
 
-
+    //console.log(events)
     return (
         <div className="upcomingEventsTable">
             <SizedBox height="2vh" />
             <EventsTable
-                titles={['Event-Titles', 'Start Date','End Date','Status','Contact Person']}
+                titles={['Event-Titles', 'Start Date','End Date','Status']}
                 events={events}
                 onClick={navigateToEvent}
                 eventType={services.eventType.ONGOING_EVENT}

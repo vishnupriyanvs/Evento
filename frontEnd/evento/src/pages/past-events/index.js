@@ -14,7 +14,7 @@ function PastEvents() {
         navigate(`../view-event/${id}`);
     }
 
-    const checkFilter = ["cancellationReason", "contact_person", "created_by", "description", "id", "imageUrl", "resourcePerson", "venue", "website"]
+    // const checkFilter = ["cancellationReason", "contact_person", "created_by", "description", "id", "imageUrl", "resourcePerson", "venue", "website"]
 
     const [events, setEvents] = useState([]);
 
@@ -30,11 +30,11 @@ function PastEvents() {
             })
     }, [])
 
-    useEffect(() => {
-        checkFilter.forEach((data) => {
-            events.filter((content) => { return delete content[data]
-        })
-    }, [events])})
+    // useEffect(() => {
+    //     checkFilter.forEach((data) => {
+    //         events.filter((content) => { return delete content[data]
+    //     })
+    // }, [events])})
 
 
     return (

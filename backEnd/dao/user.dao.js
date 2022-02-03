@@ -8,7 +8,9 @@ var userDao = {
     findById: findById,
     findByUsername : findByUsername,
     deleteById: deleteById,
-    updateUser: updateUser
+    updateUser: updateUser,
+
+    findContactPersons : findContactPersons
 }
 
 function findAll() {
@@ -58,4 +60,15 @@ function updateUser(user, id) {
     };
     return User.update(updateUser, { where: { id: id } });
 }
+
+
+///////////////////////
+
+function findContactPersons() {
+    return User.findAll({
+        attributes : ["id","name"]
+    });
+}
+
+
 module.exports = userDao;

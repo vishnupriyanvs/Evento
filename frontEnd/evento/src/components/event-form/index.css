@@ -135,6 +135,14 @@ textarea {
   gap: 8px;
 }
 
+.formColMain{
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  width: 100%;
+  gap: 8px;
+}
+
 .formRowBtn{
     display: flex; 
     gap: 8px; 

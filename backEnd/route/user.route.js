@@ -12,4 +12,6 @@ router.delete('/:id', userController.deleteById);
 router.post('/login',userController.loginUser);
 router.post('/relogin',userController.reLogin);
 
+router.get('/contactpersons/',userController.findContactPersons)
+
 module.exports = router;

@@ -1,32 +1,73 @@
 import React from "react";
 import './index.css';
+import {Button} from 'react-bootstrap'
 
 
-function EventForm() {
-
+function EventForm(props) {
+    console.log(props)
     return (
         <div className="form-style-5">
-            <form>
+            <form onSubmit={props.handleSubmit}>
                 <fieldset>
-                    <input type="text" name="field1" placeholder="Your Name *" />
-                    {/* <input type="email" name="field2" placeholder="Your Email *"/> */}
-                    <textarea name="field3" placeholder="Event Description" rows="5"></textarea>
+                    
+                    <div className="formRow">
+                        <div className="formColMain">
+                        <div>Event Title</div>
+                        <input 
+                            type="text"
+                            id = "event-title" 
+                            name="title" 
+                            value={props.events.title}
+                            onChange={props.handleChange}
+                            placeholder="Enter Event Title" />
+                        </div>
+                    </div>
+
+                    <div className="formRow">
+                        <div className="formColMain">
+                        <div>Event Description</div>
+                        <textarea 
+                            rows="5"
+                            id = "event-description" 
+                            name="description" 
+                            value={props.events.description}
+                            onChange={props.handleChange}
+                            placeholder="Event Description" />
+                        </div>
+                    </div>
+                    
                     <div className="formTable">
                         <div className="formRow">
                             <div className="formCol">
                                 <div>Start Date</div>
-                                <input type="date" name="start-date" placeholder="Start Date *" />
+                                <input 
+                                    type = "date" 
+                                    id = "start-date"
+                                    name ="startDate" 
+                                    value = {props.events.startDate} 
+                                    onChange={props.handleChange} />
                             </div>
                             <div className="formCol">
                                 <div>End Date</div>
-                                <input type="date" name="end-date" placeholder="End Date *" />
+                                <input 
+                                    type = "date" 
+                                    id = "end-date"
+                                    name ="endDate" 
+                                    value = {props.events.endDate}
+                                    onChange={props.handleChange} />
                             </div>
                         </div>
 
                         <div className="formRow">
                             <div className="formCol">
                                 <div>Venue</div>
-                                <input type="text" name="start-date" placeholder="Venue" />
+                                <input 
+                                    type="text" 
+                                    id = "venue"
+                                    name ="venue" 
+                                    value = {props.events.venue}
+                                    onChange={props.handleChange} 
+                                    placeholder="Enter Venue/Meeting Link" />
                             </div>
                             <div className="formCol">
                                 <div>Image</div>
@@ -37,7 +78,13 @@ function EventForm() {
                         <div className="formRow">
                             <div className="formCol">
                                 <div>Resource Person</div>
-                                <input type="text" name="start-date" placeholder="Name of resource person" />
+                                <input 
+                                    type="text" 
+                                    id = "resource-person"
+                                    name ="resourcePerson" 
+                                    value = {props.events.resourcePerson}
+                                    onChange={props.handleChange} 
+                                    placeholder="Name of resource person" />
                             </div>
                             <div className="formCol">
                                 <div>Contact Person</div>
@@ -52,12 +99,20 @@ function EventForm() {
                         <div className="formRow">
                             <div className="formCol">
                                 <div>Website Details</div>
-                                <input type="url" name="website-url" placeholder="url of websites" />
+                                <input 
+                                    type="url" 
+                                    id = "website-url"
+                                    name ="website" 
+                                    value = {props.events.website}
+                                    onChange={props.handleChange} 
+                                    placeholder="Enter website details" />
                             </div>
                             <div className="formCol">
                                 <div>Event Status</div>
-                                <select id="job" name="field4" >
-                                    <option value="Active">Active</option>
+                                <select 
+                                    id="event-status" 
+                                    name="field4" >
+                                    <option value="Active" >Active</option>
                                     <option value="Inactive">Inactive</option>
                                 </select>
                             </div>
@@ -65,11 +120,16 @@ function EventForm() {
                     </div>
                 </fieldset>
 
-                <div className="formRowBtn">
+                {/* <div className="formRowBtn">
 
                     <input type="submit" value="Create" id="createBtn" />
                     <input type="submit" value="Cancel" id="cancelBtn" />
 
+                </div> */}
+
+                <div>
+                    <Button type='submit' variant="primary">{props.buttonValue}</Button>
+                    <Button type='reset' variant='danger' onClick={props.handleReset} >Cancel</Button>
                 </div>
 
             </form>

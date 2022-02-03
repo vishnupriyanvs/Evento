@@ -8,9 +8,6 @@ import CreateEvent from "../create-event-btn";
 
 function Navbar(props) {
 
-   
-    
-
     return (
         <div>
             <div className="mainFlex">
