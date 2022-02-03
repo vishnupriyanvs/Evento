@@ -1,15 +1,19 @@
 const Event = require('../model/event');
+const { Op } = require("sequelize");
+
 var eventDao = {
-    findAll: findAll,
+    // findAll: findAll,
     create: create,
     findById: findById,
     deleteById: deleteById,
-    updateEvent: updateEvent
+    updateEvent: updateEvent,
+
+    findByEventStatus : findByEventStatus
 }
 
-function findAll() {
-    return Event.findAll();
-}
+// function findAll() {
+//     return Event.findAll();
+// }
 
 
 function findById(id) {
@@ -40,4 +44,14 @@ function updateEvent(event, id) {
     };
     return Event.update(updateEvent, { where: { id: id } });
 }
+
+////////////////////////
+
+function findByEventStatus(isActive){
+    return Event.findAll({ where: { isActive :  isActive}} );
+}
+
+
 module.exports = eventDao;
+
+

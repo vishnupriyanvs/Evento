@@ -44,7 +44,7 @@ function AdminAccess(){
         <h3>Name : {users.name}</h3>
         <h3>username : {users.username}</h3>
         <h3>password : {users.password}</h3>
-        <img src="E:\EVENTO\Evento\backEnd\asset\images\vsvj.jpg" />
+        {/* <img src="E:\EVENTO\Evento\backEnd\asset\images\vsvj.jpg" /> */}
       </div>
     </>
   );
