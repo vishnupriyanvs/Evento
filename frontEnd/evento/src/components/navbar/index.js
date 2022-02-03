@@ -5,9 +5,11 @@ import { faCoffee, faBars, faCalendar, faPowerOff, faImage } from '@fortawesome/
 import SearchBar from "./search-bar";
 import SizedBox from "../sized-box";
 import CreateEvent from "../create-event-btn";
+import {useParams} from 'react-router-dom';
 
 function Navbar(props) {
-
+    const {id} = useParams()
+    console.log('params id' + id)
     return (
         <div>
             <div className="mainFlex">
@@ -25,7 +27,7 @@ function Navbar(props) {
                     {/* <FontAwesomeIcon icon={faCalendar} size="2x" onClick={props.onCalenderClick}/> */}
                     <SearchBar />
                     <SizedBox width="8vh" />
-                    <CreateEvent onClick={props.onClick}/>
+                    <CreateEvent onClick={props.onClick} id={id}/>
                     <SizedBox width="8vh" />
                     <FontAwesomeIcon icon={faImage} size="2x" color="#91A4B7"/>
                     

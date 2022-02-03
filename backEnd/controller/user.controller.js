@@ -138,7 +138,7 @@ function updateUser(req, res) {
 
 
 function findUsers(req, res) {
-    userDao.findAll().
+    userDao.findAllUsers().
         then((data) => {
             res.send(data);
         })

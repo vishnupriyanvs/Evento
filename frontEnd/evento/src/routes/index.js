@@ -25,15 +25,15 @@ function Paths() {
             <Routes>
 
                 <Route path="/" element={<Login />} />
-                <Route path="/user/" element={<MainPage />} >
+                <Route path="/user" element={<MainPage />} >
                     <Route index element={<Home />} />
                     <Route path="upcoming-events" element={<UpcomingEvents />} />
                     <Route path="ongoing-events" element={<OngoingEvents />} />
                     <Route path="past-events" element={<PastEvents />} />
                     <Route path="cancelled-events" element={<CancelledEvents />} />
                     <Route path="calender-events" element={<CalenderEvents />} />
-                    <Route path="view-event/:id/" element={<ViewEvents />} />
-                    <Route path="create-event/" element={<CreateEventForm />} />
+                    <Route path="view-event/:id" element={<ViewEvents />} />
+                    <Route path="create-event/:id" element={<CreateEventForm />} />
                     <Route path="edit-event/:id" element={<EditEventForm />} />
                     <Route path="temp/:id" element = {<AdminAccess />} />
 

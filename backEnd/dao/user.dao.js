@@ -3,7 +3,7 @@ const User = require('../model/user');
 const Role = require('../model/role')
 
 var userDao = {
-    findAll: findAll,
+    findAllUsers: findAllUsers,
     create: create,
     findById: findById,
     findByUsername : findByUsername,
@@ -13,7 +13,7 @@ var userDao = {
     findContactPersons : findContactPersons
 }
 
-function findAll() {
+function findAllUsers() {
     return User.findAll();
 }
 

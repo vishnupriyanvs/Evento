@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import EventForm from "../../components/event-form";
 import './index.css'
 
@@ -16,6 +16,16 @@ function CreateEventForm(){
         setEvents(values => ({...values,[name]:value}))
     }
 
+    useEffect(() => {
+        axios
+            .get("http://localhost:4000/users/contactpersons")
+                .then((response) => {
+                //console.log("Promise was fullfilles");
+                //console.log(response);
+                setUsers(response.data);
+        });
+      }, []);
+
     const handleSubmit = (event) => {
         console.log(events)
         event.preventDefault()
@@ -24,19 +34,13 @@ function CreateEventForm(){
             axios   
                  .post('http://localhost:4000/events/',events)
                  .then(response => {
-                     console.log(response)
+                     setEvents(response.data)
                      alert(`${events.title} added successfully`)
                  })
                  .catch(error => {
                      console.log(error)
                  })
     }
-
-    axios
-        .get('http://localhost:4000/users/contactpersons')
-            .then(response => {
-                setUsers(response.data)
-            })
 
     const handleReset = () => {
         console.clear()
@@ -50,6 +54,7 @@ function CreateEventForm(){
                 handleSubmit = {handleSubmit}
                 handleChange = {handleChange} 
                 handleReset = {handleReset}
+                users = {users}
                 buttonValue = "Create Event"/>
         </div>
     )

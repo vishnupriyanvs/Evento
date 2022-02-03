@@ -88,14 +88,39 @@ function EventForm(props) {
                             </div>
                             <div className="formCol">
                                 <div>Contact Person</div>
-                                <select id="job" name="field4" >
-                                    <optgroup label="HR Admins">
-                                        <option value="Suresh">Suresh</option>
-                                        <option value="other_indoor">Ramesh</option>
+                                <select 
+                                    id="contact-person" 
+                                    name="contactPerson"
+                                    value = {props.events.contact_person} 
+                                    onChange={props.handleChange}>
+                                    <optgroup label="Select Person">
+                                        {props.users.map((user) => (
+                                            <option 
+                                                id = "contact-persons-list"
+                                                value = {user.id}
+                                                key = {user.id} >
+                                            {user.name}
+                                            </option>
+                                        ))}
                                     </optgroup></select>
                             </div>
                         </div>
+                        {/* id="test-select"
+              name="PatientID"
+              value={input.PatientID}
+              onChange={handleChange}
+            >
+              <option>Select Patient</option>
 
+              {patient.map((patients) => (
+                <option
+                  value={patients.PatientID}
+                  id="test-list"
+                  key={patients.PatientID}
+                >
+                  {patients.PatientName}
+                </option>
+              ))} */}
                         <div className="formRow">
                             <div className="formCol">
                                 <div>Website Details</div>

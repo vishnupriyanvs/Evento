@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { useState } from 'react';
 import axios from 'axios';
 import { Form, Button } from 'react-bootstrap';
-import { toast, Slide } from 'react-toastify'
+import { toast, Slide } from 'react-toastify';
 
 
 function LoginForm() {
@@ -22,6 +22,7 @@ function LoginForm() {
 toast.configure()
 function MyForm(props) {
     const [inputs, setInputs] = useState({});
+    const navigate = useNavigate()
 
     function handleChange(event) {
         const name = event.target.name;
@@ -44,7 +45,7 @@ function MyForm(props) {
                     hideProgressBar: false,
                     autoClose: 6000
                 })
-                window.location = `user/temp/${response.data.user.id}`
+                navigate(`user/temp/${response.data.user.id}`)
             })
             .catch(error => {
                 sessionStorage.clear();
