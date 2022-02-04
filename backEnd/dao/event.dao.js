@@ -50,7 +50,7 @@ function updateEvent(event, id) {
 function findByEventStatus(isActive){
     return Event.findAll({ 
         where: { isActive :  isActive},
-        attributes: ['title', 'start_date','end_date','is_active']
+        attributes: ['id','title', 'start_date','end_date','is_active']
     });
 }
 

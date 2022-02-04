@@ -3,8 +3,12 @@ import React,{useState,useEffect} from 'react'
 import EventForm from "../../components/event-form";
 import './index.css'
 
-function CreateEventForm(){
+import {useParams} from 'react-router-dom';
 
+function CreateEventForm(){
+    const {id} = useParams()
+    console.log('from CreateEvent page '+id)
+    
     const [events,setEvents] = useState({})
     const [users,setUsers] = useState([])
      // const [submitted,setSubmitted] = useState(false)
@@ -15,7 +19,8 @@ function CreateEventForm(){
 
         setEvents(values => ({...values,[name]:value}))
     }
-
+    // setEvents(values => ({...values,"created_by":`${id}`}))
+    console.log('line 23' +events)
     useEffect(() => {
         axios
             .get("http://localhost:4000/users/contactpersons")
@@ -27,9 +32,11 @@ function CreateEventForm(){
       }, []);
 
     const handleSubmit = (event) => {
-        console.log(events)
+        console.log('line 35' + events)
         event.preventDefault()
+        setEvents(values => ({...values,"created_by": '1000'}))
         // setSubmitted(true)
+        console.log(events.created_by + 'helo')
 
             axios   
                  .post('http://localhost:4000/events/',events)
@@ -55,7 +62,8 @@ function CreateEventForm(){
                 handleChange = {handleChange} 
                 handleReset = {handleReset}
                 users = {users}
-                buttonValue = "Create Event"/>
+                buttonValue = "Create Event"
+                paramid = {id} />
         </div>
     )
 }

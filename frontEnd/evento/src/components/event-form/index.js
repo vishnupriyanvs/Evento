@@ -90,7 +90,7 @@ function EventForm(props) {
                                 <div>Contact Person</div>
                                 <select 
                                     id="contact-person" 
-                                    name="contactPerson"
+                                    name="contact_person"
                                     value = {props.events.contact_person} 
                                     onChange={props.handleChange}>
                                     <optgroup label="Select Person">
@@ -105,22 +105,6 @@ function EventForm(props) {
                                     </optgroup></select>
                             </div>
                         </div>
-                        {/* id="test-select"
-              name="PatientID"
-              value={input.PatientID}
-              onChange={handleChange}
-            >
-              <option>Select Patient</option>
-
-              {patient.map((patients) => (
-                <option
-                  value={patients.PatientID}
-                  id="test-list"
-                  key={patients.PatientID}
-                >
-                  {patients.PatientName}
-                </option>
-              ))} */}
                         <div className="formRow">
                             <div className="formCol">
                                 <div>Website Details</div>
@@ -135,12 +119,37 @@ function EventForm(props) {
                             <div className="formCol">
                                 <div>Event Status</div>
                                 <select 
-                                    id="event-status" 
-                                    name="field4" >
-                                    <option value="Active" >Active</option>
-                                    <option value="Inactive">Inactive</option>
+                                    id="is-active" 
+                                    name="isActive" 
+                                    onChange={props.handleChange}>
+                                    <option value="Active" default>Active</option>
+                                    <option value="InProgress">InProgress</option>
                                 </select>
+                            </div>  
+                        </div>
+
+                        <div className="formRow">
+                            <div className="formCol">
+                                <div>Created By</div>
+                                <input 
+                                    type="text" 
+                                    id = "created-by"
+                                    name ="created_by" 
+                                    // onChange={props.handleChange}
+                                    defaultValue={props.paramid}
+                                    disabled
+                                    />
                             </div>
+                            <div className="formCol">
+                                <div>Updated By</div>
+                                <input 
+                                    type="text" 
+                                    id = "created-by"
+                                    name ="created_by" 
+                                    onChange={props.handleChange}
+                                    defaultValue={props.paramid}
+                                    />
+                            </div>  
                         </div>
                     </div>
                 </fieldset>

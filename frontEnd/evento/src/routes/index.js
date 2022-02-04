@@ -14,6 +14,8 @@ import Home from "../pages/home";
 import AdminAccess from "../pages/temp-login";
 import OngoingEvents from "../pages/ongoing-events";
 
+
+
 function Paths() {
 
 
@@ -27,14 +29,14 @@ function Paths() {
                 <Route path="/" element={<Login />} />
                 <Route path="/user" element={<MainPage />} >
                     <Route index element={<Home />} />
-                    <Route path="upcoming-events" element={<UpcomingEvents />} />
-                    <Route path="ongoing-events" element={<OngoingEvents />} />
-                    <Route path="past-events" element={<PastEvents />} />
-                    <Route path="cancelled-events" element={<CancelledEvents />} />
+                    <Route path="upcoming-events/:id" element={<UpcomingEvents />} />
+                    <Route path="ongoing-events/:id" element={<OngoingEvents />} />
+                    <Route path="past-events/:id" element={<PastEvents />} />
+                    <Route path="cancelled-events/:id" element={<CancelledEvents />} />
                     <Route path="calender-events" element={<CalenderEvents />} />
-                    <Route path="view-event/:id" element={<ViewEvents />} />
+                    <Route path="view-event/:id/:eventid" element={<ViewEvents />} />
                     <Route path="create-event/:id" element={<CreateEventForm />} />
-                    <Route path="edit-event/:id" element={<EditEventForm />} />
+                    <Route path="edit-event/:id/:eventid" element={<EditEventForm />} />
                     <Route path="temp/:id" element = {<AdminAccess />} />
 
                 </Route>
