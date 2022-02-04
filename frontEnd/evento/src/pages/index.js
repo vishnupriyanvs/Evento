@@ -10,7 +10,7 @@ import {useParams} from 'react-router-dom';
 
 function MainPage() {
     const {id} = useParams()
-    console.log('from Main page '+id)
+    //console.log('from Main page '+id)
     const navigate = useNavigate();
 
     const [dimension, setDimension] = useState({})

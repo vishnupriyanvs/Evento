@@ -41,7 +41,7 @@ function PastEvents() {
         <div className="upcomingEventsTable">
             <SizedBox height="2vh" />
             <EventsTable
-                titles={['Event-Titles', 'Start Date', 'End Date','Status']}
+                titles={['Event ID','Event-Titles', 'Start Date', 'End Date','Status']}
                 events={events}
                 onClick={navigateToEvent}
                 eventType={services.eventType.COMPLETED_EVENT}

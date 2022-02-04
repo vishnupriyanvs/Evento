@@ -3,13 +3,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./index.css";
 import { faUserPlus, faEdit } from "@fortawesome/free-solid-svg-icons";
 import services from "../../services";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,useParams } from "react-router-dom";
 
 function EventsTable(props) {
   // console.log(props.events)
+
+  const {id} = useParams()
+  console.log(id)
   const navigate = useNavigate();
   const [tHeader, setTHeader] = useState([]);
   const [tRow, setTrow] = useState([]);
+
+  const [eventDetails, setEventDetails] = useState([props.events]);
 
   const checkPage = (page, tHeader, tRow) => {
     switch (page) {
@@ -136,13 +141,25 @@ function EventsTable(props) {
                 {Object.entries(item).map((itemTitle, key) => {
                   const [element, value] = itemTitle;
                   {
-                    console.log(element, value);
+                    console.log(element, value, key);
                   }
-                  if (element !== "id") {
+                  let eventid;
+                //   if(element == "id"){
+                //        eventid = value;
+                //        console.log(eventid + "idfrom element")
+                //   }
+                  if (element == "id") {
+                    {eventid= value}
+                    return (
+                        <>
+                          <td  onClick={() => navigate(`/user/view-event/${id}/${value}`)}>EV0{value}</td>
+                        </>
+                      );
+                  }
                     if (element == "title") {
                       return (
                         <>
-                          <td onClick={() => navigate(`#`)}>{value}</td>
+                          <td  onClick={() => navigate(`/view-event/${id}/${eventid}`)}>{value}</td>
                         </>
                       );
                     }
@@ -159,7 +176,7 @@ function EventsTable(props) {
                           <>
                             <td>
                               <select>
-                                <option value="" selected disabled hidden>
+                                <option value="" selected >
                                   {value}
                                 </option>
                                 <option value="InProgress">InProgress</option>
@@ -183,7 +200,7 @@ function EventsTable(props) {
                           )
                       }
                     }
-                  }
+                  
                 })}
               </tr>
             );
