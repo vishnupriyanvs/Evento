@@ -12,7 +12,9 @@ var userController = {
     updateUser: updateUser,
     deleteById: deleteById,
     loginUser : loginUser,
-    reLogin : reLogin
+    reLogin : reLogin,
+
+    findContactPersons : findContactPersons
 }
 
 async function addUser(req, res) {
@@ -136,7 +138,19 @@ function updateUser(req, res) {
 
 
 function findUsers(req, res) {
-    userDao.findAll().
+    userDao.findAllUsers().
+        then((data) => {
+            res.send(data);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+}
+
+
+//////////////////
+function findContactPersons(req, res) {
+    userDao.findContactPersons().
         then((data) => {
             res.send(data);
         })

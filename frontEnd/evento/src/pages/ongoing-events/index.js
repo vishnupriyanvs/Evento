@@ -7,23 +7,24 @@ import services from "../../services";
 import axios from 'axios';
 
 
-function CancelledEvents() {
+function OngoingEvents() {
 
     const navigate = useNavigate();
     const navigateToEvent = (id) => {
         navigate(`../view-event/${id}`);
     }
 
-    // const checkFilter = ["cancellationReason", "contact_person", "created_by", "description", "id", "imageUrl", "resourcePerson", "venue", "website","endDate"]
+    // const checkFilter = ["cancellationReason","contactPerson", "created_by", "description", "id", "imageUrl", "resourcePerson", "venue", "website"]
 
     const [events, setEvents] = useState([]);
 
     useEffect(() => {
         axios
-            .get('http://localhost:4000/events/status/Cancelled')
+            .get('http://localhost:4000/events/status/InProgress')
             .then(response => {
-                console.log('Cancelled event Promise was fulfilled');
+                console.log('Ongoing event Promise was fulfilled');
                 setEvents(response.data)
+                // console.log('Response' + events)
             })
             .catch((err) => {
                 console.log(err)
@@ -36,18 +37,18 @@ function CancelledEvents() {
     //     })
     // }, [events])
 
-
+    //console.log(events)
     return (
         <div className="upcomingEventsTable">
             <SizedBox height="2vh" />
             <EventsTable
-                titles={['Event-Titles', 'Start Date','Status']}
+                titles={['Event-Titles', 'Start Date','End Date','Status']}
                 events={events}
                 onClick={navigateToEvent}
-                eventType={services.eventType.CANCELED_EVENT}
+                eventType={services.eventType.ONGOING_EVENT}
             />
         </div>
     )
 }
 
-export default CancelledEvents;
+export default OngoingEvents;

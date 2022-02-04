@@ -3,15 +3,17 @@ const User = require('../model/user');
 const Role = require('../model/role')
 
 var userDao = {
-    findAll: findAll,
+    findAllUsers: findAllUsers,
     create: create,
     findById: findById,
     findByUsername : findByUsername,
     deleteById: deleteById,
-    updateUser: updateUser
+    updateUser: updateUser,
+
+    findContactPersons : findContactPersons
 }
 
-function findAll() {
+function findAllUsers() {
     return User.findAll();
 }
 
@@ -58,4 +60,15 @@ function updateUser(user, id) {
     };
     return User.update(updateUser, { where: { id: id } });
 }
+
+
+///////////////////////
+
+function findContactPersons() {
+    return User.findAll({
+        attributes : ["id","name"]
+    });
+}
+
+
 module.exports = userDao;

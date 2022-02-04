@@ -1,5 +1,5 @@
 const Event = require('../model/event');
-const { Op } = require("sequelize");
+const User = require('../model/user');
 
 var eventDao = {
     // findAll: findAll,
@@ -48,7 +48,10 @@ function updateEvent(event, id) {
 ////////////////////////
 
 function findByEventStatus(isActive){
-    return Event.findAll({ where: { isActive :  isActive}} );
+    return Event.findAll({ 
+        where: { isActive :  isActive},
+        attributes: ['id','title', 'start_date','end_date','is_active']
+    });
 }
 
 
