@@ -1,11 +1,37 @@
 import './index.css'
-
+import {useState,useEffect,React} from 'react';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 
 function ViewEvents() {
 
+    const [events,setEvents] = useState({});
+    const [users,setUsers] = useState([]);
+    const {eventid} = useParams()
+    //console.log(eventid)
 
-
+    useEffect(() => {
+        axios.get(`http://localhost:4000/events/${eventid}`)
+            .then(response => {
+                //console.log('Past event Promise was fulfilled');
+                setEvents(response.data)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+    }, [])  
+    
+    useEffect(() => {
+        axios.get(`http://localhost:4000/users/${events.contact_person}`)
+        .then(response => {
+            setUsers(response.data)
+        })
+        .catch((err)=> {
+            console.log(err)
+        })
+    },[events])
+    
     return (
         <>
             <div className="cards-container">
@@ -13,19 +39,24 @@ function ViewEvents() {
                     <img src="https://effectussoftware.com/blog/wp-content/uploads/2020/02/What-is-React-JS.jpg" />
                     <div className="contentss">
                         <div className='event-content'>
-                            <div className='content-event-title'>LEARN REACT FOR FUN</div>
-                            <div className='content-event-description'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+                            <div className='content-event-title'>{events.title}</div>
+                            <div className='content-event-description'>{events.description}</div>
                         </div>
 
                         <div className='event-fixture'>
-                            <div className='content-event-date'>13-16 JUN 2022 <span>9.00 am - 12.00 pm</span></div>
-                            <div className='content-event-venue'><a>Click here to join meeting</a></div>
-                            <div className='content-event-contact-person'>NAVEEN VASUDEVA MENON</div>
+                            <div className='content-event-date'>
+                            <span>{events.startDate} : {events.endDate}
+                            </span>    
+                            </div>
+                            <div className='content-event-venue'><a>{events.venue}</a></div>
+                            <div className='content-event-contact-person'>{events.resourcePerson}</div>
                         </div>
 
                         <div className='content-event-further-info'>
-                            <div>www.anniedoewebsite.com</div>
-                            <div>Contact</div>
+                            <div>{events.website}</div>
+                            <div>{users.name}</div>
+                            <div>{users.email}</div>
+                            <div>{users.contact}</div>
                         </div>
                     </div></div>
 

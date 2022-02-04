@@ -8,7 +8,9 @@ router.post('/', userController.addUser);
 router.get('/contactpersons',userController.findContactPersons)
 
 router.get('/',userController.findUsers);
-router.get('/:id',authenticateToken(['Admin']), userController.findUserById);
+//router.get('/:id',authenticateToken(['Admin']), userController.findUserById);
+router.get('/:id', userController.findUserById);
+
 router.put('/:id', userController.updateUser);
 router.delete('/:id', userController.deleteById);
 
