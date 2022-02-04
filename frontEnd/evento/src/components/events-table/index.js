@@ -72,29 +72,24 @@ function EventsTable(props) {
                             <th key={i}>{tHeader[i]}</th>
                         )}
                     </tr>
-                    {tRow.map((item, i) =>
-                        <tr key={i}>
-                            {Object.entries(item).map((itemTitle, key) =>
-                                itemTitle[0] !== 'is_active' ?
-                                    itemTitle[1] !== 'Actions' ?
-                                        <td key={key} onClick={props.onClick}>HI {itemTitle[1]}</td>                   
-                                    :
-                                        <td>
-                                            <FontAwesomeIcon icon={faUserPlus} />
-                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <FontAwesomeIcon icon={faEdit} />
-                                        </td>
-                                    :
-                                    <td>
-                                        <select className="box">
-                                            <option value="" selected disabled hidden>HELLO {itemTitle[1]}</option>
-                                            <option value="Active">Active</option>
-                                            <option value="In Progress">In Progress</option>
-                                        </select>
-                                    </td>
-                                // <td>{itemTitle[1]}</td>
-                            )}
-                        </tr>
+                    {tRow.map((item, i) => {
+                        const action = tHeader.includes('Actions');
+                        console.log(action)
+                        return (
+                            <tr key={i}>
+                                {Object.entries(item).map((itemTitle, key) =>
+                                    <td key={key} onClick={props.onClick}>{itemTitle[1]}</td>
+                                )}
+                                {action && <td>
+                                    <FontAwesomeIcon icon={faUserPlus} />
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <FontAwesomeIcon icon={faEdit} />
+                                </td>}
+
+                            </tr>
+                        )
+                    }
+                   
                     )}
                 </tbody>
             </table>
