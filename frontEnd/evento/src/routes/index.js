@@ -13,6 +13,7 @@ import Home from "../pages/home";
 
 import AdminAccess from "../pages/temp-login";
 import OngoingEvents from "../pages/ongoing-events";
+import {InviteUser} from "../pages/send-invitations"
 
 
 
@@ -37,6 +38,7 @@ function Paths() {
                     <Route path="view-event/:id/:eventid" element={<ViewEvents />} />
                     <Route path="create-event/:id" element={<CreateEventForm />} />
                     <Route path="edit-event/:id/:eventid" element={<EditEventForm />} />
+                    <Route path="sendinvitations/:id/:eventid" element={<InviteUser />} />
                     <Route path="temp/:id" element = {<AdminAccess />} />
 
                 </Route>

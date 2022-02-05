@@ -141,7 +141,7 @@ function EventsTable(props) {
                 {Object.entries(item).map((itemTitle, key) => {
                   const [element, value] = itemTitle;
                   {
-                    console.log(element, value, key);
+                    //console.log(element, value, key);
                   }
                   let eventid;
                 //   if(element == "id"){
@@ -149,7 +149,7 @@ function EventsTable(props) {
                 //        console.log(eventid + "idfrom element")
                 //   }
                   if (element == "id") {
-                    {eventid= value}
+                    {eventid = value}
                     return (
                         <>
                           <td  onClick={() => navigate(`/user/view-event/${id}/${value}`)}>EV0{value}</td>
@@ -185,9 +185,9 @@ function EventsTable(props) {
                               </select>
                             </td>
                             {action && <td>
-                                 <FontAwesomeIcon icon={faUserPlus}/>
+                                 <FontAwesomeIcon icon={faUserPlus} onClick={() => navigate('#')}/>
                                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                 <FontAwesomeIcon icon={faEdit} />
+                                 <FontAwesomeIcon icon={faEdit} onClick={() => navigate('#')}/>
                              </td>}
                           </>
                         );

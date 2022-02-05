@@ -7,7 +7,7 @@ import {useParams} from 'react-router-dom';
 
 function CreateEventForm(){
     const {id} = useParams()
-    console.log('from CreateEvent page '+id)
+   // console.log('from CreateEvent page '+id)
     
     const [events,setEvents] = useState({})
     const [users,setUsers] = useState([])
@@ -31,10 +31,12 @@ function CreateEventForm(){
         });
       }, []);
 
+     // console.log(events + "totototo")
+
     const handleSubmit = (event) => {
         console.log('line 35' + events)
         event.preventDefault()
-        setEvents(values => ({...values,"created_by": '1000'}))
+        setEvents(values => ({...values,"created_by": id,"updated_by" : id}))
         // setSubmitted(true)
         console.log(events.created_by + 'helo')
 
@@ -63,7 +65,7 @@ function CreateEventForm(){
                 handleReset = {handleReset}
                 users = {users}
                 buttonValue = "Create Event"
-                paramid = {id} />
+                created_by = {id} />
         </div>
     )
 }
