@@ -1,15 +1,19 @@
 import './index.css'
 import {useState,useEffect,React} from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useNavigate,useParams } from 'react-router-dom';
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUserPlus, faEdit } from "@fortawesome/free-solid-svg-icons";
 
 
 function ViewEvents() {
 
+  const navigate = useNavigate();
     const [events,setEvents] = useState({});
     const [users,setUsers] = useState([]);
-    const {eventid} = useParams()
-    //console.log(eventid)
+    const {id,eventid} = useParams()
+    console.log(id,eventid)
 
     useEffect(() => {
         axios.get(`http://localhost:4000/events/${eventid}`)
@@ -31,6 +35,13 @@ function ViewEvents() {
             console.log(err)
         })
     },[events])
+
+    let action = false;
+    //console.log('action = ',action,events)
+    if(events.isActive == 'Active'){
+         action = true;
+         //console.log('action = ',action)
+    }
     
     return (
         <>
@@ -39,6 +50,11 @@ function ViewEvents() {
                     <img src="https://effectussoftware.com/blog/wp-content/uploads/2020/02/What-is-React-JS.jpg" />
                     <div className="contentss">
                         <div className='event-content'>
+                        {action && <div>
+                                 <FontAwesomeIcon icon={faUserPlus} onClick={() => navigate(`/user/sendinvitations/${id}/${eventid}`)}/>
+                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                 <FontAwesomeIcon icon={faEdit} onClick={() => navigate(`/user/edit-event/${id}/${eventid}`)}/>
+                             </div>}
                             <div className='content-event-title'>{events.title}</div>
                             <div className='content-event-description'>{events.description}</div>
                         </div>

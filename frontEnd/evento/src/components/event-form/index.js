@@ -136,8 +136,9 @@ function EventForm(props) {
                                     id = "created-by"
                                     name ="created_by" 
                                     // onChange={props.handleChange}
-                                    defaultValue={props.paramid}
+                                    defaultValue={props.events.created_by || props.created_by}
                                     disabled
+    
                                     />
                             </div>
                             <div className="formCol">
@@ -146,8 +147,9 @@ function EventForm(props) {
                                     type="text" 
                                     id = "created-by"
                                     name ="created_by" 
-                                    onChange={props.handleChange}
-                                    defaultValue={props.paramid}
+                                    //onChange={props.handleChange}
+                                    defaultValue={props.created_by || props.updated_by}
+                                    disabled
                                     />
                             </div>  
                         </div>
