@@ -22,11 +22,19 @@ const Event = Db.define('event', {
         allowNull: true
     },
     startDate: {
-        type : Sequelize.DATE,
+        type : Sequelize.DATEONLY,
         allowNull: false,
     },
     endDate: {
-        type : Sequelize.DATE,
+        type : Sequelize.DATEONLY,
+        allowNull: false
+    },
+    startTime: {
+        type : Sequelize.TIME,
+        allowNull: false,
+    },
+    endTime: {
+        type : Sequelize.TIME,
         allowNull: false
     },
     venue: {
@@ -59,6 +67,9 @@ const Event = Db.define('event', {
 
 Event.belongsTo(User,{foreignKey : 'created_by'})
 User.hasMany(Event,{foreignKey : 'created_by'})
+
+Event.belongsTo(User,{foreignKey : 'updated_by'})
+User.hasMany(Event,{foreignKey : 'updated_by'})
 
 
 Event.belongsTo(User,{foreignKey : 'contact_person'})
