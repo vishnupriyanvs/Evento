@@ -3,12 +3,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./index.css";
 import { faUserPlus, faEdit } from "@fortawesome/free-solid-svg-icons";
 import services from "../../services";
-import { useNavigate,useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import StatusSelectionBtn from "../event-select-btn";
 
 function EventsTable(props) {
   // console.log(props.events)
 
-  const {id} = useParams()
+  const { id } = useParams()
   console.log(id)
   const navigate = useNavigate();
   const [tHeader, setTHeader] = useState([]);
@@ -140,67 +141,66 @@ function EventsTable(props) {
               <tr key={i}>
                 {Object.entries(item).map((itemTitle, key) => {
                   const [element, value] = itemTitle;
-                  {
-                    //console.log(element, value, key);
-                  }
+
                   let eventid;
-                //   if(element == "id"){
-                //        eventid = value;
-                //        console.log(eventid + "idfrom element")
-                //   }
+                  //   if(element == "id"){
+                  //        eventid = value;
+                  //        console.log(eventid + "idfrom element")
+                  //   }
                   if (element == "id") {
-                    {eventid = value}
+                    { eventid = value }
                     return (
-                        <>
-                          <td  onClick={() => navigate(`/user/view-event/${id}/${value}`)}>EV0{value}</td>
-                        </>
-                      );
+                      <>
+                        <td onClick={() => navigate(`/user/view-event/${id}/${value}`)}>EV0{value}</td>
+                      </>
+                    );
                   }
-                    if (element == "title") {
+                  if (element == "title") {
+                    return (
+                      <>
+                        <td onClick={() => navigate(`/view-event/${id}/${eventid}`)}>{value}</td>
+                      </>
+                    );
+                  }
+                  if (element == "start_date" || element == "end_date") {
+                    return (
+                      <>
+                        <td>{value.split("T")[0]}</td>
+                      </>
+                    );
+                  }
+                  if (element == "is_active") {
+                    if (value == "Active") {
                       return (
                         <>
-                          <td  onClick={() => navigate(`/view-event/${id}/${eventid}`)}>{value}</td>
+                          <td>
+                            {/* <select>
+                              <option value="" selected >
+                                {value}
+                              </option>
+                              <option value="InProgress">InProgress</option>
+                              <option value="Completed">Completed</option>
+                              <option value="Cancelled">Cancelled</option>
+                            </select> */}
+                            <StatusSelectionBtn options={["InProgress", "Completed", "Cancelled", "Active"]} given={value} role={"Admin"} />
+                          </td>
+                          {action && <td>
+                            <FontAwesomeIcon icon={faUserPlus} onClick={() => navigate('#')} />
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <FontAwesomeIcon icon={faEdit} onClick={() => navigate('#')} />
+                          </td>}
                         </>
                       );
                     }
-                    if (element == "start_date" || element == "end_date" ) {
+                    else {
                       return (
                         <>
-                          <td>{value.split("T")[0]}</td>
+                          <td>{value}</td>
                         </>
-                      );
+                      )
                     }
-                    if (element == "is_active") {
-                      if (value == "Active") {
-                        return (
-                          <>
-                            <td>
-                              <select>
-                                <option value="" selected >
-                                  {value}
-                                </option>
-                                <option value="InProgress">InProgress</option>
-                                <option value="Completed">Completed</option>
-                                <option value="Cancelled">Cancelled</option>
-                              </select>
-                            </td>
-                            {action && <td>
-                                 <FontAwesomeIcon icon={faUserPlus} onClick={() => navigate('#')}/>
-                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                 <FontAwesomeIcon icon={faEdit} onClick={() => navigate('#')}/>
-                             </td>}
-                          </>
-                        );
-                      } 
-                      else{
-                          return(
-                              <>
-                                <td>{value}</td>
-                              </>
-                          )
-                      }
-                    }
-                  
+                  }
+
                 })}
               </tr>
             );
