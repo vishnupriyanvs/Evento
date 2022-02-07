@@ -2,6 +2,8 @@ import React, { useRef,useState,useEffect } from 'react';
 import emailjs from 'emailjs-com';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import Select from 'react-select';
+import {Form,Button} from 'react-bootstrap'
 
 export  const InviteUser = () => {
   const form = useRef();
@@ -9,14 +11,16 @@ export  const InviteUser = () => {
   const {id,eventid} = useParams();
   const [events,setEvents] = useState({});
   const [users,setUsers] = useState([]);
+  let [invitee,setInvitee] = useState({"eventId" : eventid});
+  
+  const options = [];
+  const inviteesArray = [];
+ 
 
   useEffect(() => {
     axios.get(`http://localhost:4000/events/${eventid}`)
       .then(response => {
-        console.log('promise executed successfully')
-        console.log(response)
         setEvents(response.data);
-        console.log(events)
       })
       .catch(error => {
         console.log(error);
@@ -26,49 +30,72 @@ export  const InviteUser = () => {
   useEffect(() => {
     axios.get(`http://localhost:4000/users`)
       .then(response => {
-        setUsers(response.data);
+        setUsers(response.data)
       })
       .catch(error => {
         console.log(error)
       })
   },[])
 
-  // console.log(events.title)
-  // console.log(users)
+
+users.map((user) => {
+  const obj = {value : `${user.email}`, key : `${user.id}` , label: `${user.name}`}
+  options.push(obj)
+})
+
+
+function handleChange(event){
+    const name = 'userId'
+    event.forEach((newevent,index) => {
+        const value = event[index].key
+        invitee = {...invitee,[name]:value}
+        inviteesArray.push(invitee)
+      }) 
+    }
+  
+
   const sendEmail = (e) => {
     e.preventDefault();
-
     emailjs.sendForm('gmail_try', 'template_gmail_try', form.current, 'user_drLq450jZbjUn4iK1PeZw')
       .then((result) => {
           console.log(result.text);
       }, (error) => {
           console.log(error.text);
       });
+      
+    const uniqueInviteesArray = Array.from(inviteesArray.reduce((map, obj)=> map.set(obj.userId, obj), new Map()).values())
+
+    axios.post(`http://localhost:4000/invitations/`,uniqueInviteesArray)
+        .then(response => {
+         alert(`Invitation sent successfully`)
+      })
+      .catch(error => {
+          console.log(error)
+      })
+      
   };
 
   return (
-    <form ref={form} onSubmit={sendEmail}>
-      <label>Event Title</label>
-      <input type="text" name="event_title" value={events.title}></input>
+    <Form ref={form} onSubmit={sendEmail}>
+      <Form.Label>Event Title</Form.Label>
+      <Form.Control type="text" name="event_title" value={events.title}></Form.Control>
       <br/>
-      <label>Description</label>
-      <input type="text" name="description" value={events.description}></input>
+      <Form.Label>Description</Form.Label>
+      <Form.Control type="text" name="description" value={events.description}></Form.Control>
       <br/>
-      {/* <label>Name</label>
-      <input type="text" name="user_name" /> */}
-      
-      <label>Add User Email</label>
-      <select id="email" name="email" multiple>
-        <optgroup label="Add Invitee">
-          {users.map((user) => (
-              <option id = "users-list"  value = {user.email} key = {user.id} >{console.log(user.email)}{user.name}</option>
-          ))}
-         </optgroup></select>
-
+      <Form.Label>Add User Email</Form.Label>
+      <Select 
+        id="email" 
+        name="email" 
+        onChange={handleChange} 
+        options = {options}
+        isMulti = {true}
+        value = {options.email} />
       <br/>
-      <label>Message</label>
-      <textarea name="message" />
-      <input type="submit" value="Send" />
-    </form>
+      <Form.Label>Message</Form.Label>
+      <Form.Control type="textarea" name="message" row="5"/>
+      <br/><br/>
+      <Form.Control type="submit" value="Send" />
+    </Form>
   );
 };

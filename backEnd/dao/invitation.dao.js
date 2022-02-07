@@ -1,35 +1,43 @@
-const Event = require('../model/event');
-var eventDao = {
+const Invitation = require('../model/invitation');
+var invitationDao = {
     findAll: findAll,
     create: create,
     findById: findById,
     deleteById: deleteById,
-    updateEvent: updateEvent
+    updateInvitation: updateInvitation
 }
 
 function findAll() {
-    return Event.findAll();
+    return Invitation.findAll();
 }
 
 
 function findById(id) {
-    return Event.findByPk(id);
+    return Invitation.findByPk(id);
 }
 
 function deleteById(id) {
-    return Event.destroy({ where: { id: id } });
+    return Invitation.destroy({ where: { id: id } });
 }
 
-function create(event) {
-    var newEvent = new Event(event);
-    return newEvent.save();
+// function create(invitation) {
+//     //var newInvitation = new Invitation(invitation);
+//     return Invitation.create({invitation});
+//     //return newInvitation.save();
+// }
+
+function create(invitation) {
+   var data = Invitation.bulkCreate(invitation, {returning: true});
+   return data;
 }
 
-function updateEvent(event, id) {
-    var updateEvent = {
-        invitation_response: event.invitation_response,
-        invitation_cancellation_reason : event.invitation_cancellation_reason
+// const create = await Invitation.create(invitation)
+
+function updateInvitation(invitation, id) {
+    var updateInvitation = {
+        invitation_response: invitation.invitation_response,
+        invitation_cancellation_reason : invitation.invitation_cancellation_reason
     };
-    return Event.update(updateEvent, { where: { id: id } });
+    return Invitation.update(updateInvitation, { where: { id: id } });
 }
-module.exports = eventDao;
+module.exports = invitationDao;

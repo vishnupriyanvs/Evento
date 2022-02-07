@@ -185,9 +185,9 @@ function EventsTable(props) {
                               </select>
                             </td>
                             {action && <td>
-                                 <FontAwesomeIcon icon={faUserPlus} onClick={() => navigate('#')}/>
+                                 <FontAwesomeIcon icon={faUserPlus} onClick={() => navigate(`/user/sendinvitations/${id}/${eventid}`)}/>
                                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                 <FontAwesomeIcon icon={faEdit} onClick={() => navigate('#')}/>
+                                 <FontAwesomeIcon icon={faEdit} onClick={() => navigate(`/user/edit-event/${id}/${eventid}`)}/>
                              </td>}
                           </>
                         );

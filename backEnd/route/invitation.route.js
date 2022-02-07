@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const eventController = require('../controller/event.controller');
+const invitationController = require('../controller/invitation.controller');
 
-router.post('/', eventController.addEvent);
-router.get('/', eventController.findEvents);
-router.get('/:id', eventController.findEventById);
-router.put('/:id', eventController.updateEvent);
-router.delete('/:id', eventController.deleteById);
+router.post('/', invitationController.addInvitation);
+router.get('/', invitationController.findInvitations);
+router.get('/:id', invitationController.findInvitationById);
+router.put('/:id', invitationController.updateInvitation);
+router.delete('/:id', invitationController.deleteById);
 
 module.exports = router;
