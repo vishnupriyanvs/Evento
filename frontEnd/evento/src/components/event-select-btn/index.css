@@ -1,0 +1,53 @@
+.SelectnBtn1 {
+  display: inline-block;
+  position: relative;
+  width: 50%;
+}
+.SelectnBtn1-content {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  /* background-color: black; */
+  padding: 8px;
+  /* border-top-left-radius: 16px;
+  border-top-right-radius: 16px; */
+  border-radius: 16px;
+  outline: 1px solid rgb(20, 243, 20);
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+.SelectnBtn1-options {
+  position: absolute;
+  width: 100%;
+}
+.SelectnBtn1-option {
+  visibility: hidden;
+  background-color: inherit;
+  padding: 8px;
+
+}
+
+.SelectnBtn1-option:last-child {
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+}
+
+.SelectnBtn1:hover .SelectnBtn1-option {
+  visibility: visible;
+  background-color: whitesmoke;
+  /* width: min-content; */
+}
+
+.SelectnBtn1:hover .SelectnBtn1-option:hover {
+  visibility: visible;
+  background-color: gainsboro;
+}
+
+@media only screen and (max-width: 1000px) {
+    .SelectnBtn1 {
+        display: inline-block;
+        position: relative;
+        width: 100%;
+      }
+}
+
