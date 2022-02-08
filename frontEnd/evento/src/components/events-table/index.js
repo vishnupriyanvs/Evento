@@ -147,7 +147,7 @@ function EventsTable(props) {
                   //        eventid = value;
                   //        console.log(eventid + "idfrom element")
                   //   }
-                  if (element == "id") {
+                  if (element === "id") {
                     { eventid = value }
                     return (
                       <>
@@ -155,22 +155,22 @@ function EventsTable(props) {
                       </>
                     );
                   }
-                  if (element == "title") {
+                  if (element === "title") {
                     return (
                       <>
                         <td onClick={() => navigate(`/view-event/${id}/${eventid}`)}>{value}</td>
                       </>
                     );
                   }
-                  if (element == "start_date" || element == "end_date") {
+                  if (element === "start_date" || element === "end_date") {
                     return (
                       <>
                         <td>{value.split("T")[0]}</td>
                       </>
                     );
                   }
-                  if (element == "is_active") {
-                    if (value == "Active") {
+                  if (element === "is_active") {
+                    if (value === "Active") {
                       return (
                         <>
                           <td>
