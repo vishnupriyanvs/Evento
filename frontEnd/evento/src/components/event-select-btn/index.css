@@ -24,6 +24,7 @@
   visibility: hidden;
   background-color: inherit;
   padding: 8px;
+  z-index: 3;
 
 }
 
@@ -35,6 +36,7 @@
 .SelectnBtn1:hover .SelectnBtn1-option {
   visibility: visible;
   background-color: whitesmoke;
+  position: relative;
   /* width: min-content; */
 }
 
