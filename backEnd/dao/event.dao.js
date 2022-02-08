@@ -2,7 +2,7 @@ const Event = require('../model/event');
 const User = require('../model/user');
 
 var eventDao = {
-    // findAll: findAll,
+    findAll: findAll,
     create: create,
     findById: findById,
     deleteById: deleteById,
@@ -11,9 +11,9 @@ var eventDao = {
     findByEventStatus : findByEventStatus
 }
 
-// function findAll() {
-//     return Event.findAll();
-// }
+function findAll() {
+    return Event.findAll();
+}
 
 
 function findById(id) {

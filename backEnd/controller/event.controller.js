@@ -59,8 +59,14 @@ function updateEvent(req, res) {
         });
 }
 
-function findEvents(req, res) {
-    eventDao.findAll().
+
+
+
+//////////////////////////////
+
+function findByEventStatus(req, res) {
+    console.log(req.params.is_active)
+    eventDao.findByEventStatus(req.params.is_active).
         then((data) => {
             res.send(data);
         })
@@ -70,11 +76,8 @@ function findEvents(req, res) {
 }
 
 
-//////////////////////////////
-
-function findByEventStatus(req, res) {
-    console.log(req.params.is_active)
-    eventDao.findByEventStatus(req.params.is_active).
+function findEvents(req, res) {
+    eventDao.findAll().
         then((data) => {
             res.send(data);
         })
