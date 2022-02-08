@@ -34,7 +34,7 @@ function Paths() {
                     <Route path="ongoing-events/:id" element={<OngoingEvents />} />
                     <Route path="past-events/:id" element={<PastEvents />} />
                     <Route path="cancelled-events/:id" element={<CancelledEvents />} />
-                    <Route path="calender-events" element={<CalenderEvents />} />
+                    <Route path="calender-events/:id" element={<CalenderEvents />} />
                     <Route path="view-event/:id/:eventid" element={<ViewEvents />} />
                     <Route path="create-event/:id" element={<CreateEventForm />} />
                     <Route path="edit-event/:id/:eventid" element={<EditEventForm />} />
