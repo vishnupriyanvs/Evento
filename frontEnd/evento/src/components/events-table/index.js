@@ -83,48 +83,6 @@ function EventsTable(props) {
  
   }, [props.titles, props.content]);
 
-  //console.log(tRow)
-
-  // const choose(itemTitle){
-
-  // }
-
-  // return (
-  //     <center>
-  //         <table id="events">
-  //             <tbody>
-  //                 <tr>
-  //                     {tHeader.map((item, i) =>
-
-  //                         <th key={i}>{tHeader[i]}</th>
-  //                     )}
-  //                 </tr>
-  //                 {tRow.map((item, i) => {
-  //                    //console.log('hi' )
-  //                     const action = tHeader.includes('Actions');
-  //                     console.log(action)
-  //                     return (
-  //                         <tr key={i}>
-  //                             {Object.entries(item).map((itemTitle, key) =>
-  //                                 // {choose(itemTitle)}
-  //                                 <td key={key} onClick={props.onClick}>{itemTitle[1]}</td>
-  //                             )}
-  //                             {action && <td>
-  //                                 <FontAwesomeIcon icon={faUserPlus} />
-  //                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  //                                 <FontAwesomeIcon icon={faEdit} />
-  //                             </td>}
-
-  //                         </tr>
-  //                     )
-  //                 }
-
-  //                 )}
-  //             </tbody>
-  //         </table>
-  //     </center>
-
-  // )
 
   return (
     <center>
@@ -136,78 +94,36 @@ function EventsTable(props) {
             ))}
           </tr>
           {tRow.map((item, i) => {
-            //console.log('hi' )
+            console.log(item)
             const action = tHeader.includes("Actions");
-
-            //console.log(action)
-            return (
-              <tr key={i}>
-                {Object.entries(item).map((itemTitle, key) => {
-                  const [element, value] = itemTitle;
-
-                  let eventid;
-                  //   if(element == "id"){
-                  //        eventid = value;
-                  //        console.log(eventid + "idfrom element")
-                  //   }
-                  if (element == "id") {
-                    { eventid = value }
-                    return (
-                      <>
-                        <td onClick={() => navigate(`/user/view-event/${id}/${value}`)}>EV0{value}</td>
-                      </>
-                    );
-                  }
-                  if (element == "title") {
-                    return (
-                      <>
-                        <td onClick={() => navigate(`/view-event/${id}/${eventid}`)}>{value}</td>
-                      </>
-                    );
-                  }
-                  if (element == "start_date" || element == "end_date") {
-                    return (
-                      <>
-                        <td>{value.split("T")[0]}</td>
-                      </>
-                    );
-                  }
-                  if (element == "is_active") {
-                    if (value == "Active") {
-                      return (
-                        <>
-                          <td>
-                            {/* <select>
-                              <option value="" selected >
-                                {value}
-                              </option>
-                              <option value="InProgress">InProgress</option>
-                              <option value="Completed">Completed</option>
-                              <option value="Cancelled">Cancelled</option>
-                            </select> */}
-                            <StatusSelectionBtn options={["InProgress", "Completed", "Cancelled", "Active"]} given={value} role={"Admin"} index={i}/>
-                          </td>
-                          {action && <td>
-                            <FontAwesomeIcon icon={faUserPlus} onClick={() => navigate('#')} />
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <FontAwesomeIcon icon={faEdit} onClick={() => navigate('#')} />
-                          </td>}
-                        </>
-                      );
-                    }
-                    else {
-                      return (
-                        <>
-                          <td> <StatusSelectionBtn options={[value]} given={value} role={"Admin"} index={i}/></td>
-                        </>
-                      )
-                    }
-                  }
-
-                })}
+            return(
+              <tr>
+                <td onClick={() => navigate(`/user/view-event/${id}/${item.id}`)}>{item.title}</td>
+                <td>{item.start_date}</td>
+                  {item.is_active == 'Active' || item.is_active == 'Cancelled' ? 
+                    action ? 
+                    <>
+                      <td>
+                        <StatusSelectionBtn options={["InProgress", "Completed", "Cancelled", "Active"]} given={item.is_active} role={"Admin"} index={i}/>
+                      </td>
+                      <td>
+                        <FontAwesomeIcon icon={faUserPlus} onClick={() => navigate(`/user/sendinvitations/${id}/${item.id}`)} />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <FontAwesomeIcon icon={faEdit} onClick={() => navigate(`/user/edit-event/${id}/${item.id}`)} />
+                      </td>
+                    </>
+                    :
+                    <td> <StatusSelectionBtn options={[item.is_active]} given={item.is_active} role={"Admin"} index={i}/></td>
+                    :
+                    <>
+                      <td>{item.end_date}</td>
+                      <td> <StatusSelectionBtn options={[item.is_active]} given={item.is_active} role={"Admin"} index={i}/></td>
+                    </>
+                   
+            }
+                
               </tr>
-            );
-          })}
+          )})}
         </tbody>
       </table>
     </center>

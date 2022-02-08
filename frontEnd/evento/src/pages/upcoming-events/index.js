@@ -70,7 +70,7 @@ function UpcomingEvents() {
         <div className="upcomingEventsTable">
             <SizedBox height="2vh" />
             <EventsTable
-                titles={['Event ID','Event-Titles', 'Start Date','Status','Actions']}
+                titles={['Event-Titles', 'Start Date','Status','Actions']}
                 events={events}
                 // onClick={navigateToEvent(events.id)}
                 // onClick = {() => navigate(`../view-event/${id}/${events.id}`)}

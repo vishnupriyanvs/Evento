@@ -2,7 +2,7 @@ import React from "react";
 import './index.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCoffee, faBars, faCalendar, faPowerOff, faImage } from '@fortawesome/free-solid-svg-icons'
-import SearchBar from "./search-bar";
+import SearchBars from "./search-bar";
 import SizedBox from "../sized-box";
 import CreateEvent from "../create-event-btn";
 import {useParams} from 'react-router-dom';
@@ -25,7 +25,7 @@ function Navbar(props) {
                 <div className="flexRightItem">
 
                     {/* <FontAwesomeIcon icon={faCalendar} size="2x" onClick={props.onCalenderClick}/> */}
-                    <SearchBar />
+                    <SearchBars />
                     <SizedBox width="8vh" />
                     <CreateEvent onClick={props.onClick} id={id}/>
                     <SizedBox width="8vh" />
