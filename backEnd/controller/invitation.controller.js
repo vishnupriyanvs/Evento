@@ -1,19 +1,19 @@
-const eventDao = require('../dao/event.dao');
+const invitationDao = require('../dao/invitation.dao');
 
 
-var eventController = {
-    addEvent: addEvent,
-    findEvents: findEvents,
-    findEventById: findEventById,
-    updateEvent: updateEvent,
+var invitationController = {
+    addInvitation: addInvitation,
+    findInvitations: findInvitations,
+    findInvitationById: findInvitationById,
+    updateInvitation: updateInvitation,
     deleteById: deleteById,
 }
 
-async function addEvent(req, res) {
-    let event = req.body;
+async function addInvitation(req, res) {
+    let invitation = req.body;
     
-    eventDao.create(event).
-        then((data) => {
+    invitationDao.create(invitation)
+        .then((data) => {
             res.send(data);
         })
         .catch((error) => {
@@ -21,8 +21,8 @@ async function addEvent(req, res) {
         });
 }
 
-function findEventById(req, res) {
-    eventDao.findById(req.params.id).
+function findInvitationById(req, res) {
+    invitationDao.findById(req.params.id).
         then((data) => {
             res.send(data);
         })
@@ -32,11 +32,11 @@ function findEventById(req, res) {
 }
 
 function deleteById(req, res) {
-    eventDao.deleteById(req.params.id).
+    invitationDao.deleteById(req.params.id).
         then((data) => {
             res.status(200).json({
-                message: "Event deleted successfully",
-                event: data
+                message: "Invitation deleted successfully",
+                invitation: data
             })
         })
         .catch((error) => {
@@ -44,12 +44,12 @@ function deleteById(req, res) {
         });
 }
 
-function updateEvent(req, res) {
-    eventDao.updateEvent(req.body, req.params.id).
+function updateInvitation(req, res) {
+    invitationDao.updateInvitation(req.body, req.params.id).
         then((data) => {
             res.status(200).json({
-                message: "Event updated successfully",
-                event: data
+                message: "Invitation updated successfully",
+                invitation: data
             })
         })
         .catch((error) => {
@@ -57,8 +57,8 @@ function updateEvent(req, res) {
         });
 }
 
-function findEvents(req, res) {
-    eventDao.findAll().
+function findInvitations(req, res) {
+    invitationDao.findAll().
         then((data) => {
             res.send(data);
         })
@@ -69,4 +69,4 @@ function findEvents(req, res) {
 
 
 
-module.exports = eventController;
+module.exports = invitationController;
