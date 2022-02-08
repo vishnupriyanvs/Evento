@@ -12,6 +12,8 @@ function ViewEvents() {
     const navigate = useNavigate();
     const [events, setEvents] = useState({});
     const [users, setUsers] = useState([]);
+    const [participants, setParticipants] = useState(0)
+    const [participantResponse, setParticipantRespponse] = useState([])
     const { id, eventid } = useParams()
     console.log(id, eventid)
 
@@ -24,6 +26,7 @@ function ViewEvents() {
             .catch((err) => {
                 console.log(err)
             })
+        infoParticipants(eventid);
     }, [])
 
     useEffect(() => {
@@ -34,13 +37,33 @@ function ViewEvents() {
             .catch((err) => {
                 console.log(err)
             })
+
+
     }, [events])
 
+    const infoParticipants = (eventid) => {
+
+        const config = {
+            method: 'get',
+            url: `http://localhost:4000/invitations/${eventid}`,
+        };
+        axios(config).then((response) => {
+
+            setParticipants(response.data.length)
+            response.data.forEach((item, i) => {
+
+                // console.log(item.user.name, item.invitationResponse);
+                participantResponse.push({ "name": item.user.name, "response": item.invitationResponse });
+            })
+
+        })
+        setParticipantRespponse(participantResponse)
+        console.log(participantResponse);
+    }
+
     let action = false;
-    //console.log('action = ',action,events)
     if (events.isActive == 'Active') {
         action = true;
-        //console.log('action = ',action)
     }
 
     return (
@@ -57,7 +80,7 @@ function ViewEvents() {
                             </div>}
                             <div className='content-event-title'>{events.title}</div>
                             <div className='content-event-description'>{events.description}</div>
-                        </div>
+                        </div>    
 
                         <div className='event-fixture'>
                             <div className='content-event-date'>
@@ -81,7 +104,8 @@ function ViewEvents() {
                                 </div>
                             </div>
                         </div>
-                    </div></div>
+                    </div>
+                </div>
 
                 <div className='event-invitees-participants'>
                     <div className='event-invitees'>
@@ -96,7 +120,7 @@ function ViewEvents() {
                         <div>Icon</div>
                         <div>
                             <b>Participants</b>
-                            <h1>180</h1>
+                            <h1>{participants}</h1>
                         </div>
                     </div>
                 </div>
@@ -108,10 +132,22 @@ function ViewEvents() {
                             <div className='flex-th-content'>Response</div>
                         </div>
 
-                        <div className='flex-tr'>
-                            <div className='flex-td'>Nihal</div>
-                            <div className='flex-td'>Yes</div>
-                        </div>
+
+                        {
+                            participantResponse.map((item, i) => {
+
+                                return (
+                                    <div className='flex-tr'>
+                                        <div className='flex-td'>{item.name}</div>
+                                        <div className='flex-td'>{item.response}</div>
+                                    </div>
+                                )
+                            }
+
+                            )
+                        }
+
+
 
                     </div>
 
