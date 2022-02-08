@@ -79,6 +79,8 @@ function EventsTable(props) {
     if (props.titles) setTHeader(props.titles);
     checkPage(props.eventType, props.titles, props.events);
     if (props.content) setTrow(props.content);
+
+ 
   }, [props.titles, props.content]);
 
   //console.log(tRow)
@@ -136,6 +138,7 @@ function EventsTable(props) {
           {tRow.map((item, i) => {
             //console.log('hi' )
             const action = tHeader.includes("Actions");
+
             //console.log(action)
             return (
               <tr key={i}>
@@ -147,7 +150,7 @@ function EventsTable(props) {
                   //        eventid = value;
                   //        console.log(eventid + "idfrom element")
                   //   }
-                  if (element === "id") {
+                  if (element == "id") {
                     { eventid = value }
                     return (
                       <>
@@ -155,22 +158,22 @@ function EventsTable(props) {
                       </>
                     );
                   }
-                  if (element === "title") {
+                  if (element == "title") {
                     return (
                       <>
                         <td onClick={() => navigate(`/view-event/${id}/${eventid}`)}>{value}</td>
                       </>
                     );
                   }
-                  if (element === "start_date" || element === "end_date") {
+                  if (element == "start_date" || element == "end_date") {
                     return (
                       <>
                         <td>{value.split("T")[0]}</td>
                       </>
                     );
                   }
-                  if (element === "is_active") {
-                    if (value === "Active") {
+                  if (element == "is_active") {
+                    if (value == "Active") {
                       return (
                         <>
                           <td>
@@ -182,7 +185,7 @@ function EventsTable(props) {
                               <option value="Completed">Completed</option>
                               <option value="Cancelled">Cancelled</option>
                             </select> */}
-                            <StatusSelectionBtn options={["InProgress", "Completed", "Cancelled", "Active"]} given={value} role={"Admin"} />
+                            <StatusSelectionBtn options={["InProgress", "Completed", "Cancelled", "Active"]} given={value} role={"Admin"} index={i}/>
                           </td>
                           {action && <td>
                             <FontAwesomeIcon icon={faUserPlus} onClick={() => navigate('#')} />
@@ -195,7 +198,7 @@ function EventsTable(props) {
                     else {
                       return (
                         <>
-                          <td>{value}</td>
+                          <td> <StatusSelectionBtn options={[value]} given={value} role={"Admin"} index={i}/></td>
                         </>
                       )
                     }
