@@ -71,10 +71,10 @@ function MainPage() {
                     <div className="liClick" onClick={() => navigateEvents(`ongoing-events/${id}`)}><FontAwesomeIcon icon={faFastForward} size="x" color="#91A4B7" /><span>Ongoing Events</span></div>
                     <div className="liClick" onClick={() => navigateEvents(`cancelled-events/${id}`)} ><FontAwesomeIcon icon={faStopCircle} size="x" color="#91A4B7" /><span>Cancelled Events</span></div>
                     <div className="liClick" onClick={() => navigateEvents(`past-events/${id}`)}><FontAwesomeIcon icon={faCheckCircle} size="x" color="#91A4B7" /><span>Past Events</span></div>
-                    <div className="liClick" onClick={() => navigateEvents("calender-events")}><FontAwesomeIcon icon={faCalendar} size="x" color="#91A4B7" /><span>Calender</span></div>
+                    <div className="liClick" onClick={() => navigateEvents(`calender-events/${id}`)}><FontAwesomeIcon icon={faCalendar} size="x" color="#91A4B7" /><span>Calender</span></div>
                   
                 </div> : <div>
-                    <div className='sideBarIcons'><FontAwesomeIcon icon={faCalendar} size="3x" color="#91A4B7" onClick={() => navigateEvents("calender-events")}/><span className='sideBarText'>Calendar</span></div>
+                    <div className='sideBarIcons'><FontAwesomeIcon icon={faCalendar} size="3x" color="#91A4B7" onClick={() => navigateEvents(`calender-events/${id}`)}/><span className='sideBarText'>Calendar</span></div>
                     <div className='sideBarIcons'><FontAwesomeIcon icon={faFastForward} size="3x" color="#91A4B7" onClick={() => navigateEvents(`upcoming-events/${id}`)}/><span className='sideBarText'>Upcoming Events</span></div>
                     <div className='sideBarIcons'><FontAwesomeIcon icon={faFastForward} size="3x" color="#91A4B7" onClick={() => navigateEvents(`ongoing-events/${id}`)}/><span className='sideBarText'>Ongoing Events</span></div>
                     <div className='sideBarIcons'><FontAwesomeIcon icon={faCheckCircle} size="3x" color="#91A4B7" onClick={() => navigateEvents(`past-events/${id}`)}/><span className='sideBarText'>Completed Events</span></div>
