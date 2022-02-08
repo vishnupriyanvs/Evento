@@ -12,9 +12,9 @@ const Invitation = Db.define('invitation', {
         autoIncrement: true
     },
     invitationResponse: {
-        type : Sequelize.ENUM('Yes','No','Not Responded'),
+        type : Sequelize.ENUM('Yes','No','NotResponded'),
         allowNull: false,
-        defaultValue : 'Not Responded'
+        defaultValue : 'NotResponded'
     },
     invitationCancelReason : {
         type : Sequelize.TEXT,

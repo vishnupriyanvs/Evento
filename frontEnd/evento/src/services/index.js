@@ -1,7 +1,9 @@
 const eventType = require('./event-type');
+const myEventType = require('./my-event-type');
 
 const services = {
-    eventType
+    eventType,
+    myEventType
 }
 
 module.exports = services;

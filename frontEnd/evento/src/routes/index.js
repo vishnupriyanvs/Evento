@@ -6,6 +6,7 @@ import MainPage from "../pages";
 import Login from "../pages/login";
 import PastEvents from "../pages/past-events";
 import UpcomingEvents from "../pages/upcoming-events";
+import InvitedEvents from "../pages/my-events/upcoming-events/invited-events";
 import CancelledEvents from "../pages/cancelled-events";
 import CreateEventForm from "../pages/create-event-form";
 import EditEventForm from "../pages/edit-event-form";
@@ -31,6 +32,7 @@ function Paths() {
                 <Route path="/user" element={<MainPage />} >
                     <Route index element={<Home />} />
                     <Route path="upcoming-events/:id" element={<UpcomingEvents />} />
+                    <Route path="my-events/upcoming-events/invited/:id" element={<InvitedEvents />} />
                     <Route path="ongoing-events/:id" element={<OngoingEvents />} />
                     <Route path="past-events/:id" element={<PastEvents />} />
                     <Route path="cancelled-events/:id" element={<CancelledEvents />} />

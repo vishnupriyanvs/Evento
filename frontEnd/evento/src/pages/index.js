@@ -77,7 +77,7 @@ function MainPage() {
 
                     <div className="liClick" onClick={() => navigateEvents(`upcoming-events/${id}`)}><FontAwesomeIcon icon={faFastForward} size="x" color="#91A4B7" /><span>Upcoming Events</span><FontAwesomeIcon icon={faAngleDown} onClick={() => { subMenu(1); }} /></div>
                     <div className='ul-div'>
-                        <div className='li-div'><div className='li-div-text'>Invited Events</div></div>
+                        <div className='li-div'  onClick={() => navigateEvents(`my-events/upcoming-events/invited/${id}`)}><div className='li-div-text'>Invited Events</div></div>
                         <div className='li-div'><div className='li-div-text'>Accepted Events</div></div>
                         <div className='li-div'><div className='li-div-text'>Rejected Events</div></div>
 
