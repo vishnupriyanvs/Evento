@@ -16,7 +16,7 @@ body {
   font-weight: 800;
   text-transform: uppercase;
   font-size: 12px;
-  color: #004d40;
+  /* color: #004d40; */
   text-align: center;
   transition: grid-template-columns 2s;
 }
@@ -45,9 +45,10 @@ main::-webkit-scrollbar {
 .sidebar {
   width: 100%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  background-color: whitesmoke;
+  background-color: #0d1829;
   grid-area: sidebar;
   transition: all 0.5s;
+  padding-top: 24px;
   /* transform: translateX(-30rem); */
   /* overflow-x:visible; */
 }
@@ -55,7 +56,6 @@ main::-webkit-scrollbar {
   /* transform: translateX(0); */
   width: 200%;
   z-index: 1;
-
 }
 
 .sideBarIcons {
@@ -70,18 +70,17 @@ main::-webkit-scrollbar {
   z-index: 1;
 }
 
-.sideBarIcons:hover{
-  box-shadow: inset 0 0 0 0 rgba(0, 0, 0, 0.2), 4px 0 0 0 #91A4B7;
+.sideBarIcons:hover {
+  box-shadow: inset 0 0 0 0 rgba(0, 0, 0, 0.2), 4px 0 0 0 #91a4b7;
   z-index: 1;
   cursor: pointer;
   /* width: 200%;
   background-color: whitesmoke; */
-  
 }
 .sideBarIcons:hover .sideBarText {
   visibility: visible;
   text-align: center;
- 
+  color: whitesmoke;
 }
 
 a {
@@ -103,10 +102,13 @@ a {
   display: flex;
   justify-content: start;
   gap: 0.8rem;
+  color: aliceblue;
+  margin-top: 24px;
 }
 
 .liClick:hover {
   background-color: lightgreen;
+  color: aliceblue;
 }
 
 /* Create event align */
@@ -114,6 +116,28 @@ a {
   display: flex;
   justify-content: flex-end;
   width: 100%;
+}
+li {
+  color: aliceblue;
+}
+
+.ul-div {
+  color: white;
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  border-left: 6px solid gray;
+  height: inherit;
+  margin-left: 24px;
+  visibility: hidden;
+  position: absolute;
+}
+
+.li-div {
+  display: flex;
+  justify-content: left;
+  padding-left: 24px;
+  margin-top: 16px;
 }
 
 @media only screen and (max-width: 1000px) {

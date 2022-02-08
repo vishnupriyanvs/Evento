@@ -10,20 +10,22 @@ function StatusSelectionBtn(props) {
     useEffect(() => {
         setDefault(props.given);
         setOptions(props.options);
-        styleSet(props.given);
+        styleSet(props.given, props.index);
+        let a = document.querySelectorAll('.SelectnBtn1-content');
+        console.log(a);
 
     }, [])
 
-    const styleSet = (item) => {
-        let a = document.querySelector('.SelectnBtn1-content');
+    const styleSet = (item, key) => {
+        let a = document.querySelectorAll('.SelectnBtn1-content');
         if (item === 'InProgress')
-            a.setAttribute('style', 'outline:1px solid #FF8A00; color:#FF8A00')
+            a[key].setAttribute('style', 'outline:1px solid #FF8A00; color:#FF8A00')
         if (item === 'Cancelled')
-            a.setAttribute('style', 'outline: 1px solid rgb(243, 20, 20); color:rgb(243, 20, 20);')
+            a[key].setAttribute('style', 'outline: 1px solid rgb(243, 20, 20); color:rgb(243, 20, 20);')
         if (item === 'Active')
-            a.setAttribute('style', 'outline: 1px solid #0000FF; color: #0000FF')
+            a[key].setAttribute('style', 'outline: 1px solid #0000FF; color: #0000FF')
         if (item === 'Completed')
-            a.setAttribute('style', 'outline:1px solid rgb(20, 243, 20); color: rgb(20, 243, 20)')
+            a[key].setAttribute('style', 'outline:1px solid rgb(20, 243, 20); color: rgb(20, 243, 20)')
 
     }
 
@@ -41,16 +43,16 @@ function StatusSelectionBtn(props) {
                             return (
                                 <div key={i} className="SelectnBtn1-option" onClick={() => {
                                     setDefault(item)
-                                    let a = document.querySelector('.SelectnBtn1-content');
+                                    let a = document.querySelectorAll('.SelectnBtn1-content');
                                     if (item === 'InProgress') {
-                                        a.setAttribute('style', 'outline:1px solid #FF8A00; color:#FF8A00')
+                                        a[props.index].setAttribute('style', 'outline:1px solid #FF8A00; color:#FF8A00')
                                     }
                                     if (item === 'Cancelled')
-                                        a.setAttribute('style', 'outline: 1px solid rgb(243, 20, 20); color:rgb(243, 20, 20);')
+                                        a[props.index].setAttribute('style', 'outline: 1px solid rgb(243, 20, 20); color:rgb(243, 20, 20);')
                                     if (item === 'Active')
-                                        a.setAttribute('style', 'outline: 1px solid #0000FF; color: #0000FF')
+                                        a[props.index].setAttribute('style', 'outline: 1px solid #0000FF; color: #0000FF')
                                     if (item === 'Completed')
-                                        a.setAttribute('style', 'outline:1px solid rgb(20, 243, 20); color: rgb(20, 243, 20)')
+                                        a[props.index].setAttribute('style', 'outline:1px solid rgb(20, 243, 20); color: rgb(20, 243, 20)')
 
                                     console.log(a)
                                 }}>{item}</div>
