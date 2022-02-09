@@ -94,7 +94,7 @@ function EventsTable(props) {
             ))}
           </tr>
           {tRow.map((item, i) => {
-            console.log(item)
+            // console.log(item)
             const action = tHeader.includes("Actions");
             return(
               <tr>
