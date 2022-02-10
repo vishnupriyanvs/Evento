@@ -7,7 +7,7 @@ import {useParams} from 'react-router-dom';
 function EditEventForm(){
 
     const {id,eventid} = useParams()
-    //console.log('from update page = ' + id + ' ' + eventid)
+    
     const [events,setEvents] = useState({})
     const [users,setUsers] = useState([])
     const options = []
@@ -20,12 +20,11 @@ function EditEventForm(){
         setEvents(values => ({...values,[name]:value}))
     }
     // setEvents(values => ({...values,"created_by":`${id}`}))
-    //console.log('line 23' +events)
-
+    
     useEffect(() => {
         axios.get(`http://localhost:4000/events/${eventid}`)
             .then(response => {
-                console.log("Promise was fullfilled");
+               
                 setEvents(response.data);
             })
             .catch(error => {
@@ -37,8 +36,8 @@ function EditEventForm(){
         axios
             .get("http://localhost:4000/users/contactpersons")
                 .then((response) => {
-                console.log("Promise was fullfilles");
-                //console.log(response);
+               
+                
                 setUsers(response.data);
         });
       },[]);
@@ -49,11 +48,11 @@ function EditEventForm(){
       })
 
     const handleSubmit = (event) => {
-        console.log('line 35' + events)
+        
         event.preventDefault()
         setEvents(values => ({...values,"updated_by": id}))
         // setSubmitted(true)
-        console.log(events.created_by + 'helo')
+       
 
             axios   
                  .put(`http://localhost:4000/events/${eventid}`,events)

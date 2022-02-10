@@ -9,14 +9,14 @@ import { useParams } from 'react-router-dom';
 
 function UsersMainPage() {
     const { id } = useParams()
-    //console.log('from Main page '+id)
+    
     const navigate = useNavigate();
 
     const [dimension, setDimension] = useState({})
     const [sideCheck, setSideCheck] = useState(false);
 
     useEffect(() => {
-        //console.log("width");
+        
         // navbarCheck();
         setDimension({
             height: window.innerHeight,

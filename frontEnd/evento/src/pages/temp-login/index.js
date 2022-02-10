@@ -6,11 +6,11 @@ import {useParams} from 'react-router-dom'
 
 function AdminAccess(){
     const {id} = useParams()
-    console.log(id)
+  
     const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    console.log("The use effect hook has been executed");
+   
 
     var config = {
         method: 'get',
@@ -22,8 +22,7 @@ function AdminAccess(){
       };
 
     axios(config).then((response) => {
-      console.log("promise fulfilled");
-      console.log(response);
+     
       setUsers(response.data);
     })
 

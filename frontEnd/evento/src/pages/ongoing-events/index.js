@@ -22,9 +22,9 @@ function OngoingEvents() {
         axios
             .get('http://localhost:4000/events/status/InProgress')
             .then(response => {
-                console.log('Ongoing event Promise was fulfilled');
+                
                 setEvents(response.data)
-                // console.log('Response' + events)
+                
             })
             .catch((err) => {
                 console.log(err)
@@ -37,7 +37,7 @@ function OngoingEvents() {
     //     })
     // }, [events])
 
-    //console.log(events)
+   
     return (
         <div className="upcomingEventsTable">
             <SizedBox height="2vh" />

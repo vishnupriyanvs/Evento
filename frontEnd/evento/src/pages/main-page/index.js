@@ -15,7 +15,7 @@ function MainPage() {
     const [sideCheck, setSideCheck] = useState(false);
 
     useEffect(() => {
-        console.log("width");
+       
         // navbarCheck();
         setDimension({
             height: window.innerHeight,

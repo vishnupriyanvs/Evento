@@ -15,8 +15,7 @@ function CreateEventForm(){
     
     
     function handleChange(event){
-        console.log(event)
-        console.log(event.name)
+        
         let name,value;
         if(event.name == 'contact_person'){
              name = event.name
@@ -29,7 +28,7 @@ function CreateEventForm(){
         }
         setEvents(values => ({...values,[name]:value}))
     }
-    console.log('line 23' +events)
+   
     useEffect(() => {
         axios
             .get("http://localhost:4000/users/contactpersons")
@@ -46,10 +45,10 @@ function CreateEventForm(){
      
 
     const handleSubmit = (event) => {
-        console.log('line 35' + events)
+        
         event.preventDefault()
         setEvents(values => ({...values,"created_by": id,"updated_by" : id}))
-        console.log(events.created_by + 'helo')
+        
 
             axios   
                  .post('http://localhost:4000/events/',events)
@@ -66,7 +65,7 @@ function CreateEventForm(){
         console.clear()
     }
 
-    console.log(users)
+   
     return(
         <div className="createEventForm">
             <EventForm 

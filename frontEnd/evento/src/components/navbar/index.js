@@ -10,8 +10,8 @@ import {useParams,useNavigate} from 'react-router-dom';
 function Navbar(props) {
     const {id} = useParams()
     const navigateMyEvents = useNavigate()
-    console.log(props)
-    //console.log('params id' + id)
+    
+    
     return (
         <div>
             <div className="mainFlex">

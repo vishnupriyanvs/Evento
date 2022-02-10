@@ -8,7 +8,7 @@ import StatusSelectionBtn from "../event-select-btn";
 import { Button } from "react-bootstrap";
 
 function MyEventsTable(props) {
-  // console.log(props.events)
+  
 
   const { id } = useParams()
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ function MyEventsTable(props) {
   const [tRow, setTrow] = useState([]);
 
   const [eventDetails, setEventDetails] = useState([props.events]);
-  console.log(props)
+ 
 
   const checkPage = (page, tHeader, tRow) => {
     switch (page) {
@@ -24,7 +24,7 @@ function MyEventsTable(props) {
         // tHeader = tHeader.filter((title, i) => {
         //   return title !== "End Date";
         // });
-        console.log("Hi from upcoming invited")
+       
         setTHeader(tHeader);
 
         // tRow = tRow.filter((content, i) => {
@@ -34,8 +34,7 @@ function MyEventsTable(props) {
         break;
 
       case services.myEventType.UPCOMING_EVENT.ACCEPTED_EVENT:
-        console.log(services.myEventType.COMPLETED_EVENT.ACCEPTED_EVENT)
-        console.log("Hi from upcoming accept")
+       
         tHeader = tHeader.filter((title, i) => {
           return title !== "Actions";
         });
@@ -47,7 +46,7 @@ function MyEventsTable(props) {
         break;
 
       case services.myEventType.UPCOMING_EVENT.REJECTED_EVENT:
-        console.log("Hi from upcoming reject")
+        
         tHeader = tHeader.filter((title, i) => {
           return title !== "Actions";
         });
@@ -61,12 +60,12 @@ function MyEventsTable(props) {
       case services.myEventType.COMPLETED_EVENT.ACCEPTED_EVENT:
         
         setTHeader(tHeader);
-        console.log("Hi from complete accept")
+        
         setTrow(tRow);
         break;
 
       case services.myEventType.COMPLETED_EVENT.REJECTED_EVENT:
-        console.log("Hi from complete reject")
+      
         tHeader = tHeader.filter((title, i) => {
           return title !== "Actions";
         });
@@ -78,7 +77,7 @@ function MyEventsTable(props) {
         break;
 
       case services.myEventType.CANCELLED_EVENT:
-        console.log("Hi from cancel")
+       
         tHeader = tHeader.filter((title, i) => {
           return title !== "Actions";
         });
@@ -93,11 +92,11 @@ function MyEventsTable(props) {
           return delete content["Actions"];
         });
         setTrow(tRow);
-        console.log(tRow)
+        
         break;
 
       case services.myEventType.ONGOING_EVENT:
-        console.log("Hi from ongoing")
+       
         tHeader = tHeader.filter((title, i) => {
           return title !== "Actions";
         });
@@ -112,7 +111,7 @@ function MyEventsTable(props) {
     }
   };
 
- // console.log(props.myEventType)
+ 
   useEffect(() => {
     if (props.titles) setTHeader(props.titles);
     checkPage(props.myEventType, props.titles, props.events);
@@ -120,8 +119,8 @@ function MyEventsTable(props) {
 
 
   }, [props.titles, props.content]);
-  //console.log(props.content)
   
+
   return (
     <center>
       <table id="events">
@@ -132,7 +131,7 @@ function MyEventsTable(props) {
             ))}
           </tr>
           {tRow.map((item, i) => {
-            //console.log(item.event)
+            
             const action = tHeader.includes("Actions");
             return (
               <tr>

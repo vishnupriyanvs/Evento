@@ -25,15 +25,15 @@ function SearchBar(){
             })
     },[])
 
-    //console.log(events)
+    
     events.map((celeb) => {
         const obj = {value : `${celeb.id}`, label : `${celeb.title}`}
         options.push(obj);
     });
-   // console.log(options)
+   
 
    function handleChange(event){
-       console.log(event)
+      
         navigate(`/user/view-event/${id}/${event.value}`)
    }
 

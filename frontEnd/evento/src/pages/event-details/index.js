@@ -15,12 +15,12 @@ function ViewEvents() {
     const [participants, setParticipants] = useState(0)
     const [participantResponse, setParticipantRespponse] = useState([])
     const { id, eventid } = useParams()
-    console.log(id, eventid)
+    
 
     useEffect(() => {
         axios.get(`http://localhost:4000/events/${eventid}`)
             .then(response => {
-                //console.log('Past event Promise was fulfilled');
+               
                 setEvents(response.data)
             })
             .catch((err) => {
@@ -52,13 +52,13 @@ function ViewEvents() {
             setParticipants(response.data.length)
             response.data.forEach((item, i) => {
 
-                // console.log(item.user.name, item.invitationResponse);
+              
                 participantResponse.push({ "name": item.user.name, "response": item.invitationResponse });
             })
 
         })
         setParticipantRespponse(participantResponse)
-        console.log(participantResponse);
+       
     }
 
     let action = false;
