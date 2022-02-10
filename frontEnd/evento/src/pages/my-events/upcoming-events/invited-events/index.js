@@ -10,62 +10,19 @@ import {useParams} from 'react-router-dom';
 
 function InvitedEvents() {
     const {id} = useParams()
-    //console.log('from Upcoming page '+id)
-    
     const navigate = useNavigate();
-    // const navigateToEvent = (eventid) => {
-    //     navigate(`../view-event/${id}/${eventid}`);
-    // }
-
-    //  const navigateToEvent = (go) => {navigate(`../view-event/${id}/${go}`)} 
-    //  const mapping = () => {
-    //     events.map((event) => {navigateToEvent(event.id)})
-    // }
-    //  useEffect(() =>{
-    //     // function mapping(){
-    //     //     events.map((event) => {navigateToEvent(event.id)})
-    //     // }
-        
-    //  },[])
-     
-    // const checkFilter = ["cancellationReason", "contact_person", "created_by", "description", "id", "imageUrl", "resourcePerson", "venue", "website","endDate"]
-
     const [events, setEvents] = useState([]);
-
     useEffect(() => {
         axios
             .get(`http://localhost:4000/invitations/response/Active/NotResponded/${id}`)
             .then(response => {
-                //console.log('Upcoming event Promise was fulfilled');
+                console.log('Upcoming event Promise was fulfilled');
                 setEvents(response.data)
             })
             .catch((err) => {
                 console.log(err)
             })
     }, [])
-
-    // useEffect(() => {
-    //     checkFilter.forEach((data) => {
-    //         events.filter((content) => { return delete content[data] })
-    //     })
-    // }, [events])
-    
-    // const viewEventDetails = (() => {
-    //     events.map((event) => {
-    //         onClick = {() => navigate(`../view-event/${id}/${event.id}`)} 
-    //     })
-    // })
-
-    
-  
-    
-// {staffs.map((staff) => (
-//     <span key={staff.StaffID}>
-//       <Staff details={staff} />
-//     </span>
-//   ))}
-    
-    //console.log(events)
     return (
         <div className="upcomingEventsTable">
             <SizedBox height="2vh" />

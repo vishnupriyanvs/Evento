@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import CalenderEvents from "../pages/calender-events";
 import ViewEvents from "../pages/event-details";
 import MainPage from "../pages";
 import UsersMainPage from "../pages/my-events/main";
@@ -22,6 +21,8 @@ import Home from "../pages/home";
 import AdminAccess from "../pages/temp-login";
 import OngoingEvents from "../pages/ongoing-events";
 import {InviteUser} from "../pages/send-invitations"
+import AdminCalenderEvents from "../pages/calendar-admin";
+import UserCalendarEvents from "../pages/my-events/calendar-users";
 
 
 
@@ -43,7 +44,7 @@ function Paths() {
                     <Route path="ongoing-events/:id" element={<OngoingEvents />} />
                     <Route path="past-events/:id" element={<PastEvents />} />
                     <Route path="cancelled-events/:id" element={<CancelledEvents />} />
-                    <Route path="calender-events/:id" element={<CalenderEvents />} />
+                    <Route path="calender-events/:id" element={<AdminCalenderEvents />} />
                     <Route path="view-event/:id/:eventid" element={<ViewEvents />} />
                     <Route path="create-event/:id" element={<CreateEventForm />} />
                     <Route path="edit-event/:id/:eventid" element={<EditEventForm />} />
@@ -60,6 +61,7 @@ function Paths() {
                     <Route path="past-events/accepted/:id" element={<PastAcceptedEvents />} />
                     <Route path="cancelled-events/:id" element={<UserCancelledEvents />} />
                     <Route path="ongoing-events/:id" element={<UserOnGoingEvents />} />
+                    <Route path= "calendar-events/:id" element={<UserCalendarEvents/>} />
                 </Route>
 
 

@@ -1,4 +1,5 @@
 const Event = require('../model/event');
+const Invitation = require('../model/invitation');
 const User = require('../model/user');
 
 var eventDao = {
@@ -8,7 +9,9 @@ var eventDao = {
     deleteById: deleteById,
     updateEvent: updateEvent,
 
-    findByEventStatus : findByEventStatus
+    findByEventStatus : findByEventStatus,
+    updateEventStatus : updateEventStatus,
+    findEventForUserCalendar : findEventForUserCalendar
 }
 
 function findAll() {
@@ -51,6 +54,24 @@ function findByEventStatus(isActive){
     return Event.findAll({ 
         where: { isActive :  isActive},
         attributes: ['id','title', 'start_date','end_date','is_active']
+    });
+}
+
+function updateEventStatus(isActive, id) {
+    var updateEvent = {
+        isActive : isActive,
+    };
+    return Event.update(updateEvent, { where: { id: id } });
+}
+
+
+function findEventForUserCalendar(id){
+    return Event.findAll({ 
+        include : [{
+            model : Invitation,
+            where: { user_id : id}
+        }],
+        attributes: ['id','title', 'startDate','endDate','startTime','endTime','isActive']
     });
 }
 

@@ -92,10 +92,10 @@ function UsersMainPage() {
                         <div className='li-div'><div className='li-div-text'onClick={() => navigateEvents(`my-events/past-events/accepted/${id}`)}>Accepted Events</div></div>
 
                     </div>
-                    <div className="liClick" onClick={() => navigateEvents(`calender-events/${id}`)}><FontAwesomeIcon icon={faCalendar} size="x" color="#91A4B7" /><span>Calender</span></div>
+                    <div className="liClick" onClick={() => navigateEvents(`my-events/calendar-events/${id}`)}><FontAwesomeIcon icon={faCalendar} size="x" color="#91A4B7" /><span>Calender</span></div>
 
                 </div> : <div>
-                    <div className='sideBarIcons'><FontAwesomeIcon icon={faCalendar} size="3x" color="#91A4B7" onClick={() => navigateEvents(`calender-events/${id}`)} /><span className='sideBarText'>Calendar</span></div>
+                    <div className='sideBarIcons'><FontAwesomeIcon icon={faCalendar} size="3x" color="#91A4B7" onClick={() => navigateEvents(`my-events/calendar-events/${id}`)} /><span className='sideBarText'>Calendar</span></div>
                     &nbsp; <div className='sideBarIcons'><FontAwesomeIcon icon={faFastForward} size="3x" color="#91A4B7" onClick={() => navigateEvents(`my-events/upcoming-events/invited/${id}`)} /><span className='sideBarText'>Upcoming Events</span></div>
                     <div className='sideBarIcons'><FontAwesomeIcon icon={faFastForward} size="3x" color="#91A4B7" onClick={() => navigateEvents(`my-events/ongoing-events/${id}`)} /><span className='sideBarText'>Ongoing Events</span></div>
                     <div className='sideBarIcons'><FontAwesomeIcon icon={faCheckCircle} size="3x" color="#91A4B7" onClick={() => navigateEvents(`my-events/past-events/accepted/${id}`)} /><span className='sideBarText'>Completed Events</span></div>

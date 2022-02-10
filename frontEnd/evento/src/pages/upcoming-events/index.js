@@ -13,23 +13,6 @@ function UpcomingEvents() {
     console.log('from Upcoming page '+id)
     
     const navigate = useNavigate();
-    // const navigateToEvent = (eventid) => {
-    //     navigate(`../view-event/${id}/${eventid}`);
-    // }
-
-    //  const navigateToEvent = (go) => {navigate(`../view-event/${id}/${go}`)} 
-    //  const mapping = () => {
-    //     events.map((event) => {navigateToEvent(event.id)})
-    // }
-    //  useEffect(() =>{
-    //     // function mapping(){
-    //     //     events.map((event) => {navigateToEvent(event.id)})
-    //     // }
-        
-    //  },[])
-     
-    // const checkFilter = ["cancellationReason", "contact_person", "created_by", "description", "id", "imageUrl", "resourcePerson", "venue", "website","endDate"]
-
     const [events, setEvents] = useState([]);
 
     useEffect(() => {
@@ -44,37 +27,12 @@ function UpcomingEvents() {
             })
     }, [])
 
-    // useEffect(() => {
-    //     checkFilter.forEach((data) => {
-    //         events.filter((content) => { return delete content[data] })
-    //     })
-    // }, [events])
-    
-    // const viewEventDetails = (() => {
-    //     events.map((event) => {
-    //         onClick = {() => navigate(`../view-event/${id}/${event.id}`)} 
-    //     })
-    // })
-
-    
-  
-    
-// {staffs.map((staff) => (
-//     <span key={staff.StaffID}>
-//       <Staff details={staff} />
-//     </span>
-//   ))}
-    
-    console.log(events)
     return (
         <div className="upcomingEventsTable">
             <SizedBox height="2vh" />
             <EventsTable
                 titles={['Event-Titles', 'Start Date','Status','Actions']}
                 events={events}
-                // onClick={navigateToEvent(events.id)}
-                // onClick = {() => navigate(`../view-event/${id}/${events.id}`)}
-                // onClick ={mapping}
                 eventType={services.eventType.UPCOMING_EVENT}
             />
         </div>
