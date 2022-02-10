@@ -5,6 +5,7 @@ var invitationController = {
     addInvitation: addInvitation,
     findInvitations: findInvitations,
     findInvitationById: findInvitationById,
+    findInvitationsByEventId: findInvitationsByEventId,
     updateInvitation: updateInvitation,
     deleteById: deleteById,
     findInvitationsResponseByStatus:findInvitationsResponseByStatus,
@@ -87,6 +88,18 @@ function findInvitationsResponseByStatus(req, res) {
         .catch((error) => {
             console.log(error);
         });
+}
+
+function findInvitationsByEventId(req, res) {
+    const eventid = req.params.eventid;
+    console.log(eventid)
+    invitationDao.findEventsByEventId(eventid).then((data) => {
+        res.send(data)
+    })
+        .catch(err => {
+            res.send(err);
+            // console.log(err);
+        })
 }
 
 
