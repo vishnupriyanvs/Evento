@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '../components/navbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendar, faFastForward, faCheckCircle, faStopCircle, faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import { faCalendar, faFastForward, faCheckCircle, faStopCircle, faAngleDown ,faInbox} from '@fortawesome/free-solid-svg-icons';
 import './index.css';
 import { Outlet, useNavigate } from 'react-router-dom';
 
@@ -61,7 +61,7 @@ function MainPage() {
 
     return (<div className="containers">
         <nav>
-            <Navbar openMenu={clickMenu} onClick={() => navigate(`create-event/${id}`)} />
+            <Navbar openMenu={clickMenu} myEvent={faInbox} endPoint={'my-events/upcoming-events/invited/'} onClick={() => navigate(`create-event/${id}`)} />
         </nav>
 
 
@@ -76,22 +76,13 @@ function MainPage() {
                 <div id="parent-node">
 
                     <div className="liClick" onClick={() => navigateEvents(`upcoming-events/${id}`)}><FontAwesomeIcon icon={faFastForward} size="x" color="#91A4B7" /><span>Upcoming Events</span><FontAwesomeIcon icon={faAngleDown} onClick={() => { subMenu(1); }} /></div>
-                    <div className='ul-div'>
-                        <div className='li-div'><div className='li-div-text'>Invited Events</div></div>
-                        <div className='li-div'><div className='li-div-text'>Accepted Events</div></div>
-                        <div className='li-div'><div className='li-div-text'>Rejected Events</div></div>
-
-                    </div>
+                    
 
                     <div className="liClick" onClick={() => navigateEvents(`ongoing-events/${id}`)}><FontAwesomeIcon icon={faFastForward} size="x" color="#91A4B7" /><span>Ongoing Events</span></div>
                     <div className="liClick" onClick={() => navigateEvents(`cancelled-events/${id}`)} ><FontAwesomeIcon icon={faStopCircle} size="x" color="#91A4B7" /><span>Cancelled Events</span></div>
 
                     <div className="liClick" onClick={() => navigateEvents(`past-events/${id}`)}><FontAwesomeIcon icon={faCheckCircle} size="x" color="#91A4B7" /><span>Past Events</span><FontAwesomeIcon icon={faAngleDown} onClick={() => { subMenu(5) }} /></div>
-                    <div className='ul-div'>
-                        <div className='li-div'><div className='li-div-text'>Rejected Events</div></div>
-                        <div className='li-div'><div className='li-div-text'>Accepted Events</div></div>
-
-                    </div>
+                    
                     <div className="liClick" onClick={() => navigateEvents(`calender-events/${id}`)}><FontAwesomeIcon icon={faCalendar} size="x" color="#91A4B7" /><span>Calender</span></div>
 
                 </div> : <div>

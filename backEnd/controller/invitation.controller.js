@@ -7,6 +7,8 @@ var invitationController = {
     findInvitationById: findInvitationById,
     updateInvitation: updateInvitation,
     deleteById: deleteById,
+    findInvitationsResponseByStatus:findInvitationsResponseByStatus,
+    findInvitationsResponse:findInvitationsResponse,
 }
 
 async function addInvitation(req, res) {
@@ -67,6 +69,25 @@ function findInvitations(req, res) {
         });
 }
 
+function findInvitationsResponse(req, res) {
+    invitationDao.findInvitationsResponse(req.params.is_active,req.params.id)
+        .then((data) => {
+            res.send(data);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+}
+
+function findInvitationsResponseByStatus(req, res) {
+    invitationDao.findInvitationsResponseByStatus(req.params.is_active,req.params.invitation_response,req.params.id)
+        .then((data) => {
+            res.send(data);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+}
 
 
 module.exports = invitationController;

@@ -1,9 +1,12 @@
 const Invitation = require('../model/invitation');
+const Event = require('../model/event');
 var invitationDao = {
     findAll: findAll,
     create: create,
     findById: findById,
     deleteById: deleteById,
+    findInvitationsResponse:findInvitationsResponse,
+    findInvitationsResponseByStatus:findInvitationsResponseByStatus,
     updateInvitation: updateInvitation
 }
 
@@ -32,6 +35,38 @@ function create(invitation) {
 }
 
 // const create = await Invitation.create(invitation)
+
+
+function findInvitationsResponse(isActive,userId){
+    return Invitation.findAll({ 
+        where: { 
+            userId : userId
+        },
+        include : [{
+            model : Event,
+            where:{
+                isActive : isActive
+            }
+        }]
+    });
+}
+
+
+function findInvitationsResponseByStatus(isActive,invitationResponse,userId){
+    return Invitation.findAll({ 
+        where: { 
+            
+            invitationResponse :  invitationResponse,
+            userId : userId
+        },
+        include : [{
+            model : Event,
+            where:{
+                isActive : isActive
+            }
+        }]
+    });
+}
 
 function updateInvitation(invitation, id) {
     var updateInvitation = {

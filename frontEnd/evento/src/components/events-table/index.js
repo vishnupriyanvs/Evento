@@ -68,6 +68,7 @@ function EventsTable(props) {
           return delete content["Actions"];
         });
         setTrow(tRow);
+        console.log(tRow)
         break;
 
       default:
