@@ -1,5 +1,7 @@
 const Invitation = require('../model/invitation');
 const Event = require('../model/event');
+const User = require('../model/user')
+
 var invitationDao = {
     findAll: findAll,
     create: create,
@@ -7,7 +9,8 @@ var invitationDao = {
     deleteById: deleteById,
     findInvitationsResponse:findInvitationsResponse,
     findInvitationsResponseByStatus:findInvitationsResponseByStatus,
-    updateInvitation: updateInvitation
+    updateInvitation: updateInvitation,
+    findEventsByEventId: findEventsByEventId
 }
 
 function findAll() {
@@ -75,4 +78,14 @@ function updateInvitation(invitation, id) {
     };
     return Invitation.update(updateInvitation, { where: { id: id } });
 }
+
+function findEventsByEventId(eventid) {
+    return Invitation.findAll({
+        where: { eventId: eventid },
+        include: [{
+            model: User
+        }]
+    })
+}
+
 module.exports = invitationDao;

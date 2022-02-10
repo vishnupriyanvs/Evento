@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserPlus, faEdit, faClock, faUserAlt, faGlobe, faPhone } from "@fortawesome/free-solid-svg-icons";
+import { faUserPlus, faEdit, faClock, faUserAlt, faGlobe, faPhone, faUsers, faUserCheck } from "@fortawesome/free-solid-svg-icons";
 
 
 function ViewEvents() {
@@ -13,14 +13,15 @@ function ViewEvents() {
     const [events, setEvents] = useState({});
     const [users, setUsers] = useState([]);
     const [participants, setParticipants] = useState(0)
-    const [participantResponse, setParticipantRespponse] = useState([])
-    const { id, eventid } = useParams()
+    const [participantResponse, setParticipantRespponse] = useState([]);
+    const [invitees, setInvitees] = useState([]);
+    const [cancellationReason, setCancellationReason] = useState([]);
+    const { id, eventid } = useParams();
     console.log(id, eventid)
 
     useEffect(() => {
         axios.get(`http://localhost:4000/events/${eventid}`)
             .then(response => {
-                //console.log('Past event Promise was fulfilled');
                 setEvents(response.data)
             })
             .catch((err) => {
@@ -37,27 +38,32 @@ function ViewEvents() {
             .catch((err) => {
                 console.log(err)
             })
-
-
     }, [events])
 
     const infoParticipants = (eventid) => {
 
         const config = {
             method: 'get',
-            url: `http://localhost:4000/invitations/${eventid}`,
+            url: `http://localhost:4000/invitations/event/${eventid}`,
         };
         axios(config).then((response) => {
-
+            console.log(response.data)
             setParticipants(response.data.length)
             response.data.forEach((item, i) => {
-
-                // console.log(item.user.name, item.invitationResponse);
-                participantResponse.push({ "name": item.user.name, "response": item.invitationResponse });
+                participantResponse.push({ "id": item.id, "name": item.user.name, "response": item.invitationResponse });
             })
+            let invites = response.data;
+            invites = invites.filter((item, i) => { if (item.invitationResponse === 'Yes') return item })
+            setInvitees(invites);
+            invites = response.data.filter((item, i) => { if (item.invitationResponse === 'No') return item })
+            setCancellationReason(invites);
+            console.log(invites);
 
         })
-        setParticipantRespponse(participantResponse)
+        setParticipantRespponse(participantResponse);
+
+
+
         console.log(participantResponse);
     }
 
@@ -70,7 +76,7 @@ function ViewEvents() {
         <>
             <div className="cards-container">
                 <div className="cards">
-                    <img src="https://effectussoftware.com/blog/wp-content/uploads/2020/02/What-is-React-JS.jpg" />
+                    <img src={`http://localhost:4000/images/download/${eventid}`} />
                     <div className="contentss">
                         <div className='event-content'>
                             {action && <div>
@@ -80,7 +86,7 @@ function ViewEvents() {
                             </div>}
                             <div className='content-event-title'>{events.title}</div>
                             <div className='content-event-description'>{events.description}</div>
-                        </div>    
+                        </div>
 
                         <div className='event-fixture'>
                             <div className='content-event-date'>
@@ -109,18 +115,18 @@ function ViewEvents() {
 
                 <div className='event-invitees-participants'>
                     <div className='event-invitees'>
-                        <div>Icon</div>
+                        <div><FontAwesomeIcon icon={faUsers} size={"4x"} /></div>
                         <div>
                             <b>Invitees</b>
-                            <h1>80</h1>
+                            <h1>{participants}</h1>
                         </div>
                     </div>
 
                     <div className='event-participants'>
-                        <div>Icon</div>
+                        <div><FontAwesomeIcon icon={faUserCheck} size={"4x"} /></div>
                         <div>
                             <b>Participants</b>
-                            <h1>{participants}</h1>
+                            <h1>{invitees.length}</h1>
                         </div>
                     </div>
                 </div>
@@ -136,11 +142,15 @@ function ViewEvents() {
                         {
                             participantResponse.map((item, i) => {
 
+                                cancellationReason.forEach((content, key) => {
+                                    if (content.id === item.id) item['reason'] = content['invitationCancelReason']
+                                })
+
                                 return (
-                                    <div className='flex-tr'>
+                                    <div className='flex-tr'>  
                                         <div className='flex-td'>{item.name}</div>
-                                        <div className='flex-td'>{item.response}</div>
-                                    </div>
+                                        <div className='flex-td'>{item.response}{item.reason ? <span className='tooltips'>{item.reason}</span> : null}</div>
+                                    </div> 
                                 )
                             }
 

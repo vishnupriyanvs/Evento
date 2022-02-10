@@ -5,6 +5,7 @@ const invitationController = require('../controller/invitation.controller');
 router.post('/', invitationController.addInvitation);
 router.get('/', invitationController.findInvitations);
 router.get('/:id', invitationController.findInvitationById);
+router.get('/event/:eventid', invitationController.findInvitationsByEventId)
 router.put('/:id', invitationController.updateInvitation);
 router.delete('/:id', invitationController.deleteById);
 
