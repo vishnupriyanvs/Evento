@@ -6,7 +6,10 @@ import MyEventsTable from "../../../../components/my-events-table";
 import services from "../../../../services";
 import axios from 'axios';
 
+
 import {useParams} from 'react-router-dom';
+
+
 
 function InvitedEvents() {
     const {id} = useParams()
@@ -31,6 +34,8 @@ function InvitedEvents() {
     // const checkFilter = ["cancellationReason", "contact_person", "created_by", "description", "id", "imageUrl", "resourcePerson", "venue", "website","endDate"]
 
     const [events, setEvents] = useState([]);
+    
+    
 
     useEffect(() => {
         axios
@@ -38,11 +43,35 @@ function InvitedEvents() {
             .then(response => {
                 //console.log('Upcoming event Promise was fulfilled');
                 setEvents(response.data)
+                
             })
             .catch((err) => {
                 console.log(err)
             })
     }, [])
+    
+
+    const handleSubmit = (event) => {
+        const value = event.target.value;
+        console.log(value)
+        console.log(events[0].id)
+        
+        event.preventDefault()
+        
+        // setSubmitted(true)
+        console.log(events.created_by + 'helo')
+
+            axios   
+                 .put(`http://localhost:4000/invitations/${value}/${events[0].id}`,events)
+                 .then(response => {
+                     setEvents(response.data)
+                 })
+                 .catch(error => {
+                     console.log(error)
+                 })
+                //navigate(`/user/my-events/upcoming-events/invited/${id}`);
+                
+    }
 
     // useEffect(() => {
     //     checkFilter.forEach((data) => {
@@ -72,6 +101,7 @@ function InvitedEvents() {
             <MyEventsTable
                 titles={['Event-Titles', 'Start Date','End Date','Status','Actions']}
                 events={events}
+                handleSubmit={handleSubmit}
                 // onClick={navigateToEvent(events.id)}
                 // onClick = {() => navigate(`../view-event/${id}/${events.id}`)}
                 // onClick ={mapping}

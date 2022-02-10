@@ -10,5 +10,5 @@ router.delete('/:id', invitationController.deleteById);
 
 router.get('/response/:is_active/:invitation_response/:id',invitationController.findInvitationsResponseByStatus);
 router.get('/response/:is_active/:id',invitationController.findInvitationsResponse);
-
+router.put('/:invitation_response/:id', invitationController.updateInvitation);
 module.exports = router;

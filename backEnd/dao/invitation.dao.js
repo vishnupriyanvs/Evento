@@ -68,10 +68,9 @@ function findInvitationsResponseByStatus(isActive,invitationResponse,userId){
     });
 }
 
-function updateInvitation(invitation, id) {
+function updateInvitation(invitationResponse, id) {
     var updateInvitation = {
-        invitation_response: invitation.invitation_response,
-        invitation_cancellation_reason : invitation.invitation_cancellation_reason
+        invitationResponse: invitationResponse,
     };
     return Invitation.update(updateInvitation, { where: { id: id } });
 }

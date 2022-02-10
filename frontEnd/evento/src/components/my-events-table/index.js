@@ -16,6 +16,7 @@ function MyEventsTable(props) {
   const [tRow, setTrow] = useState([]);
 
   const [eventDetails, setEventDetails] = useState([props.events]);
+  console.log(props)
 
   const checkPage = (page, tHeader, tRow) => {
     switch (page) {
@@ -120,7 +121,7 @@ function MyEventsTable(props) {
 
   }, [props.titles, props.content]);
   //console.log(props.content)
-
+  
   return (
     <center>
       <table id="events">
@@ -147,9 +148,9 @@ function MyEventsTable(props) {
                     <>
                       <td> <StatusSelectionBtn options={[item.event.isActive]} given={item.event.isActive} role={"Admin"} index={i} /></td>
                         <td>
-                          <Button variant="primary" size="sm" type="submit">Yes</Button>
+                          <Button variant="primary" size="sm" onClick={props.handleSubmit} value="Yes" type="submit">Yes</Button>
                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                          <Button variant="danger" size="sm" type="submit">No</Button>
+                          <Button variant="danger" size="sm" onClick={props.handleSubmit} value="No" type="submit">No</Button>
                         </td>
                     </>
                     :

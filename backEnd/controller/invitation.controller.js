@@ -47,7 +47,7 @@ function deleteById(req, res) {
 }
 
 function updateInvitation(req, res) {
-    invitationDao.updateInvitation(req.body, req.params.id).
+    invitationDao.updateInvitation(req.params.invitation_response, req.params.id).
         then((data) => {
             res.status(200).json({
                 message: "Invitation updated successfully",
