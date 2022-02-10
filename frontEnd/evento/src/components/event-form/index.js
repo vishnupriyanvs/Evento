@@ -93,7 +93,7 @@ function EventForm(props) {
                             </div>
                             <div className="formCol">
                                 <div>Image</div>
-                                <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" />
+                                <input type="file" id="avatar" name="avatar" accept="image/png, image/jpeg" onChange={props.handleFileChange}/>
                             </div>
                         </div>
 

@@ -10,7 +10,7 @@ const userRoutes = require('./user.route');
 const eventRoutes = require('./event.route');
 const invitationRoutes = require('./invitation.route');
 const eventFeedbackRoutes = require('./eventFeedback.route')
-
+const eventImages = require('./images.route')
 
 router.use('/departments',departmentRoutes);
 router.use('/grades',gradeRoutes);
@@ -21,5 +21,6 @@ router.use('/users',userRoutes);
 router.use('/events',eventRoutes);
 router.use('/invitations',invitationRoutes);
 router.use('/feedbacks',eventFeedbackRoutes);
+router.use('/images', eventImages)
 
 module.exports = router;
