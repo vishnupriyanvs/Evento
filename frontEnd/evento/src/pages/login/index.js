@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
-
+import './index.css'
 
 import { useState } from 'react';
 import axios from 'axios';

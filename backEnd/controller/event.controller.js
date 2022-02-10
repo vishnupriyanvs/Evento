@@ -8,7 +8,9 @@ var eventController = {
     updateEvent: updateEvent,
     deleteById: deleteById,
 
-    findByEventStatus : findByEventStatus
+    findByEventStatus : findByEventStatus,
+    updateEventStatus : updateEventStatus,
+    findEventForUserCalendar : findEventForUserCalendar
 }
 
 async function addEvent(req, res) {
@@ -78,6 +80,30 @@ function findByEventStatus(req, res) {
 
 function findEvents(req, res) {
     eventDao.findAll().
+        then((data) => {
+            res.send(data);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+}
+
+
+function updateEventStatus(req, res) {
+    eventDao.updateEventStatus(req.params.isActive, req.params.id).
+        then((data) => {
+            res.status(200).json({
+                message: "Event Status updated successfully",
+                event: data
+            })
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+}
+
+function findEventForUserCalendar(req, res) {
+    eventDao.findEventForUserCalendar(req.params.id).
         then((data) => {
             res.send(data);
         })

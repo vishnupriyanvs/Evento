@@ -84,6 +84,8 @@ function EventsTable(props) {
  
   }, [props.titles, props.content]);
 
+  
+
 
   return (
     <center>
@@ -95,7 +97,7 @@ function EventsTable(props) {
             ))}
           </tr>
           {tRow.map((item, i) => {
-            console.log(item)
+            // console.log(item)
             const action = tHeader.includes("Actions");
             return(
               <tr>
@@ -105,7 +107,7 @@ function EventsTable(props) {
                     action ? 
                     <>
                       <td>
-                        <StatusSelectionBtn options={["InProgress", "Completed", "Cancelled", "Active"]} given={item.is_active} role={"Admin"} index={i}/>
+                        <StatusSelectionBtn options={["InProgress", "Completed", "Cancelled", "Active"]} given={item.is_active} role={"Admin"} index={i} eventid={item.id}/>
                       </td>
                       <td>
                         <FontAwesomeIcon icon={faUserPlus} onClick={() => navigate(`/user/sendinvitations/${id}/${item.id}`)} />
@@ -115,6 +117,12 @@ function EventsTable(props) {
                     </>
                     :
                     <td> <StatusSelectionBtn options={[item.is_active]} given={item.is_active} role={"Admin"} index={i}/></td>
+                    :
+                    item.is_active == 'InProgress' ? 
+                    <>
+                      <td>{item.end_date}</td>
+                      <td> <StatusSelectionBtn options={["InProgress", "Completed", "Cancelled", "Active"]} given={item.is_active} role={"Admin"} index={i} eventid={item.id}/></td>
+                    </>
                     :
                     <>
                       <td>{item.end_date}</td>

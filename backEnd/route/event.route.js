@@ -9,5 +9,8 @@ router.put('/:id', eventController.updateEvent);
 router.delete('/:id', eventController.deleteById);
 
 router.get('/status/:is_active',eventController.findByEventStatus);
+router.put('/:id/:isActive',eventController.updateEventStatus);
+
+router.get('/calendar/:id', eventController.findEventForUserCalendar);
 
 module.exports = router;
