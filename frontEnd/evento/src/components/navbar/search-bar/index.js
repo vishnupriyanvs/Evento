@@ -1,23 +1,54 @@
-import React, { useEffect, useState } from "react";
-import './index.css';
+import './index'
+import React, { useEffect, useState } from 'react'
+import axios from 'axios';
+import { Form } from 'react-bootstrap';
+import Select from 'react-select';
+import { useNavigate, useParams } from 'react-router-dom';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import SizedBox from "../../sized-box";
-import axios from "axios";
-import {Select} from 'react-select'
 
-function SearchBar() {
+function SearchBar(){
+    const [events,setEvents] = useState([]);
+    const options = [];
+    const {id} = useParams()
+    const navigate = useNavigate()
 
-   
+    useEffect(() => {
+        axios.get('http://localhost:4000/events/')
+            .then(response => {
+                setEvents(response.data)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    },[])
 
-    return (
-        <div className="searchBar">
-            <select type="search" placeholder="Search by date" className="searchBoxInput"/>
-            <SizedBox width="0.5rem" />
-            <FontAwesomeIcon icon={faSearch} size="2x" className="searchIcon" color="#91A4B7"/>
+    //console.log(events)
+    events.map((celeb) => {
+        const obj = {value : `${celeb.id}`, label : `${celeb.title}`}
+        options.push(obj);
+    });
+   // console.log(options)
 
-        </div>
-        
+   function handleChange(event){
+       console.log(event)
+        navigate(`/user/view-event/${id}/${event.value}`)
+   }
+
+    return(
+        <Form >
+            <Select 
+                id='search'
+                options = {options}
+                onChange = {handleChange}
+                placeholder = 'Search for events'
+            ><h1>HI</h1></Select>
+            {/* <SizedBox width="5em" />
+            <FontAwesomeIcon icon={faSearch} size="2x" className="searchIcon" color="#91A4B7"/> */}
+
+        </Form>
     )
 }
 
