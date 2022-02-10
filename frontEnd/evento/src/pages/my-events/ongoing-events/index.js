@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from "react";
-import SizedBox from "../../../../components/sized-box";
+import SizedBox from "../../../components/sized-box";
 import './index.css';
 import { useNavigate, Link } from "react-router-dom";
-import MyEventsTable from "../../../../components/my-events-table";
-import services from "../../../../services";
+import MyEventsTable from "../../../components/my-events-table";
+import services from "../../../services";
 import axios from 'axios';
 
 import {useParams} from 'react-router-dom';
 
-function InvitedEvents() {
+function UserOnGoingEvents() {
     const {id} = useParams()
-    //console.log('from Upcoming page '+id)
+    console.log('from Upcoming page '+id)
     
     const navigate = useNavigate();
     // const navigateToEvent = (eventid) => {
@@ -34,9 +34,9 @@ function InvitedEvents() {
 
     useEffect(() => {
         axios
-            .get(`http://localhost:4000/invitations/response/Active/NotResponded/${id}`)
+            .get(`http://localhost:4000/invitations/response/InProgress/Yes/${id}`)
             .then(response => {
-                //console.log('Upcoming event Promise was fulfilled');
+                console.log('Upcoming event Promise was fulfilled');
                 setEvents(response.data)
             })
             .catch((err) => {
@@ -65,7 +65,7 @@ function InvitedEvents() {
 //     </span>
 //   ))}
     
-    //console.log(events)
+    console.log(events)
     return (
         <div className="upcomingEventsTable">
             <SizedBox height="2vh" />
@@ -75,10 +75,10 @@ function InvitedEvents() {
                 // onClick={navigateToEvent(events.id)}
                 // onClick = {() => navigate(`../view-event/${id}/${events.id}`)}
                 // onClick ={mapping}
-                myEventType={services.myEventType.UPCOMING_EVENT.INVITED_EVENT}
+                myEventType={services.myEventType.ONGOING_EVENT}
             />
         </div>
     )
 }
 
-export default InvitedEvents;
+export default UserOnGoingEvents;

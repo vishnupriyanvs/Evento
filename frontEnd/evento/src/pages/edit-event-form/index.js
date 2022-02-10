@@ -10,7 +10,7 @@ function EditEventForm(){
     //console.log('from update page = ' + id + ' ' + eventid)
     const [events,setEvents] = useState({})
     const [users,setUsers] = useState([])
-    
+    const options = []
      // const [submitted,setSubmitted] = useState(false)
     
     function handleChange(event){
@@ -43,6 +43,11 @@ function EditEventForm(){
         });
       },[]);
 
+      users.map((user) => {
+        const obj = {value : `${user.id}`,  label: `${user.name}`}
+        options.push(obj)
+      })
+
     const handleSubmit = (event) => {
         console.log('line 35' + events)
         event.preventDefault()
@@ -73,7 +78,7 @@ function EditEventForm(){
                 handleSubmit = {handleSubmit}
                 handleChange = {handleChange} 
                 handleReset = {handleReset}
-                users = {users}
+                users = {options}
                 buttonValue = "Update Event"
                 updated_by = {id}
                 eventid = {eventid} />

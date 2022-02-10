@@ -1,4 +1,5 @@
 "id";"title";"description";"image_url";"start_date";"end_date";"start_time";"end_time";"venue";"resource_person";"website";"is_active";"cancellation_reason";"created_by";"updated_by";"contact_person"
+<<<<<<< HEAD
 1;"New React Training";"Training on React";"";"2022-02-15";"2022-02-17";"00:09:00";"00:04:30";"www.google.meet-xyz-byxx-tts""";"Deepak Rao";"";"Active";"";1004;1000;1000
 2;"Node Training";"Training on Node";"";"2022-02-15";"2022-02-17";"00:09:00";"00:04:30";"www.google.meet-xyz-byxx-tts";"Deepak Rao";"";"Completed";"";1004;1000;1000
 3;"Xmas Celeb";"Xmas Celeb";"";"2022-02-15";"2022-02-17";"00:09:00";"00:04:30";"Seminar Hall";"Deepak Rao";"";"Cancelled";"Covid ";1004;0;1000
@@ -8,3 +9,15 @@
 7;"zszs";"zszssss";"";"2022-03-11";"2022-03-13";"00:09:00";"00:04:30";"Office Courtyard";"Pepper Mint";"";"InProgress";"";1004;1000;1001
 8;"eerererer";"ererererer";"";"2022-02-26";"2022-02-20";"00:09:00";"00:04:30";"Office Courtyard";"Sona Grace John";"";"InProgress";"";1004;1000;1004
 9;"Angular Training";"asasasasasas";"";"2022-03-05";"2022-03-12";"00:09:00";"00:04:30";"www.meet.nop-pop-iti";"John P D";"";"InProgress";"";1004;1000;1003
+=======
+1;"New React Training";"Training on React";"";"2022-02-15";"2022-02-17";"09:00:00";"10:30:00";"www.google.meet-xyz-byxx-tts""";"Deepak Rao";"";"Active";"";1004;1003;1000
+2;"Node Training";"Training on Node";"";"2022-02-18";"2022-02-20";"09:00:00";"10:30:00";"www.google.meet-xyz-byxx-tts";"Deepak Rao";"";"Completed";"";1004;1003;1000
+3;"Xmas Celeb";"Xmas Celeb";"";"2022-02-21";"2022-02-21";"09:00:00";"10:30:00";"Seminar Hall";"Deepak Rao";"";"Cancelled";"Covid ";1004;1003;1000
+4;".net Training";"Training on Node";"";"2022-02-24";"2022-02-25";"09:00:00";"10:30:00";"www.google.meet-xyz-byxx-tts";"Deepak Rao";"";"Completed";"";1004;1003;1000
+5;"Vue Training";"Training on Vue";"";"2022-02-25";"2022-02-25";"09:00:00";"10:30:00";"www.google.meet-xyz-byxx-tts";"Adithi Rao";"";"InProgress";"";1003;1003;1001
+6;"Introduction to Magento";"Training on Magento";"";"2022-02-11";"2022-02-11";"09:00:00";"04:00:00";"www.google.meet-xyz-byxx-yyy";"Mohit Varma";"www.magento.com";"Active";"";1003;1003;1002
+7;"zszs";"zszssss";"";"2022-03-21";"2022-03-21";"09:00:00";"04:00:00";"Office Courtyard";"Pepper Mint";"";"InProgress";"";1004;1003;1001
+8;"eerererer";"ererererer";"";"2022-03-22";"2022-02-22";"09:00:00";"04:00:00";"Office Courtyard";"Sona Grace John";"";"InProgress";"";1004;1003;1004
+9;"Angular Training";"asasasasasas";"";"2022-03-23";"2022-03-25";"09:00:00";"04:00:00";"www.meet.nop-pop-iti";"John P D";"";"InProgress";"";1004;1003;1003
+26;"jill jill";"jilll jilll jillll";"";"2022-02-18";"2022-02-20";"12:45:00";"14:45:00";"www.meet.nop-pop-iti";"RockOnam";"";"Active";"";1003;1003;1003
+>>>>>>> 744d4055977f09b8face78a7b161d2f575027402

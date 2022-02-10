@@ -3,10 +3,17 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import CalenderEvents from "../pages/calender-events";
 import ViewEvents from "../pages/event-details";
 import MainPage from "../pages";
+import UsersMainPage from "../pages/my-events/main";
 import Login from "../pages/login";
 import PastEvents from "../pages/past-events";
 import UpcomingEvents from "../pages/upcoming-events";
 import InvitedEvents from "../pages/my-events/upcoming-events/invited-events";
+import AcceptedEvents from "../pages/my-events/upcoming-events/accepted-events";
+import RejectedEvents from "../pages/my-events/upcoming-events/rejected-events";
+import PastRejectedEvents from "../pages/my-events/past-events/rejected-events";
+import PastAcceptedEvents from "../pages/my-events/past-events/accepted-events";
+import UserCancelledEvents from "../pages/my-events/cancelled-events";
+import UserOnGoingEvents from "../pages/my-events/ongoing-events";
 import CancelledEvents from "../pages/cancelled-events";
 import CreateEventForm from "../pages/create-event-form";
 import EditEventForm from "../pages/edit-event-form";
@@ -30,13 +37,13 @@ function Paths() {
 
                 <Route path="/" element={<Login />} />
                 <Route path="/user" element={<MainPage />} >
+                
                     <Route index element={<Home />} />
                     <Route path="upcoming-events/:id" element={<UpcomingEvents />} />
-                    <Route path="my-events/upcoming-events/invited/:id" element={<InvitedEvents />} />
                     <Route path="ongoing-events/:id" element={<OngoingEvents />} />
                     <Route path="past-events/:id" element={<PastEvents />} />
                     <Route path="cancelled-events/:id" element={<CancelledEvents />} />
-                    <Route path="calender-events" element={<CalenderEvents />} />
+                    <Route path="calender-events/:id" element={<CalenderEvents />} />
                     <Route path="view-event/:id/:eventid" element={<ViewEvents />} />
                     <Route path="create-event/:id" element={<CreateEventForm />} />
                     <Route path="edit-event/:id/:eventid" element={<EditEventForm />} />
@@ -44,7 +51,16 @@ function Paths() {
                     <Route path="temp/:id" element = {<AdminAccess />} />
 
                 </Route>
-
+                
+                <Route path="/user/my-events" element={<UsersMainPage />} >
+                    <Route path="upcoming-events/invited/:id" element={<InvitedEvents />} />
+                    <Route path="upcoming-events/accepted/:id" element={<AcceptedEvents />} />
+                    <Route path="upcoming-events/rejected/:id" element={<RejectedEvents />} />
+                    <Route path="past-events/rejected/:id" element={<PastRejectedEvents />} />
+                    <Route path="past-events/accepted/:id" element={<PastAcceptedEvents />} />
+                    <Route path="cancelled-events/:id" element={<UserCancelledEvents />} />
+                    <Route path="ongoing-events/:id" element={<UserOnGoingEvents />} />
+                </Route>
 
 
             </Routes>

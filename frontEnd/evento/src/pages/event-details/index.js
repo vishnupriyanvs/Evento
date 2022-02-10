@@ -1,19 +1,21 @@
 import './index.css'
-import {useState,useEffect,React} from 'react';
+import { useState, useEffect, React } from 'react';
 import axios from 'axios';
-import { useNavigate,useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserPlus, faEdit } from "@fortawesome/free-solid-svg-icons";
+import { faUserPlus, faEdit, faClock, faUserAlt, faGlobe, faPhone } from "@fortawesome/free-solid-svg-icons";
 
 
 function ViewEvents() {
 
-  const navigate = useNavigate();
-    const [events,setEvents] = useState({});
-    const [users,setUsers] = useState([]);
-    const {id,eventid} = useParams()
-    console.log(id,eventid)
+    const navigate = useNavigate();
+    const [events, setEvents] = useState({});
+    const [users, setUsers] = useState([]);
+    const [participants, setParticipants] = useState(0)
+    const [participantResponse, setParticipantRespponse] = useState([])
+    const { id, eventid } = useParams()
+    console.log(id, eventid)
 
     useEffect(() => {
         axios.get(`http://localhost:4000/events/${eventid}`)
@@ -24,25 +26,46 @@ function ViewEvents() {
             .catch((err) => {
                 console.log(err)
             })
-    }, [])  
-    
+        infoParticipants(eventid);
+    }, [])
+
     useEffect(() => {
         axios.get(`http://localhost:4000/users/${events.contact_person}`)
-        .then(response => {
-            setUsers(response.data)
+            .then(response => {
+                setUsers(response.data)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+
+
+    }, [events])
+
+    const infoParticipants = (eventid) => {
+
+        const config = {
+            method: 'get',
+            url: `http://localhost:4000/invitations/${eventid}`,
+        };
+        axios(config).then((response) => {
+
+            setParticipants(response.data.length)
+            response.data.forEach((item, i) => {
+
+                // console.log(item.user.name, item.invitationResponse);
+                participantResponse.push({ "name": item.user.name, "response": item.invitationResponse });
+            })
+
         })
-        .catch((err)=> {
-            console.log(err)
-        })
-    },[events])
+        setParticipantRespponse(participantResponse)
+        console.log(participantResponse);
+    }
 
     let action = false;
-    //console.log('action = ',action,events)
-    if(events.isActive == 'Active'){
-         action = true;
-         //console.log('action = ',action)
+    if (events.isActive == 'Active') {
+        action = true;
     }
-    
+
     return (
         <>
             <div className="cards-container">
@@ -50,31 +73,39 @@ function ViewEvents() {
                     <img src="https://effectussoftware.com/blog/wp-content/uploads/2020/02/What-is-React-JS.jpg" />
                     <div className="contentss">
                         <div className='event-content'>
-                        {action && <div>
-                                 <FontAwesomeIcon icon={faUserPlus} onClick={() => navigate(`/user/sendinvitations/${id}/${eventid}`)}/>
-                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                 <FontAwesomeIcon icon={faEdit} onClick={() => navigate(`/user/edit-event/${id}/${eventid}`)}/>
-                             </div>}
+                            {action && <div>
+                                <FontAwesomeIcon icon={faUserPlus} onClick={() => navigate(`/user/sendinvitations/${id}/${eventid}`)} />
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                <FontAwesomeIcon icon={faEdit} onClick={() => navigate(`/user/edit-event/${id}/${eventid}`)} />
+                            </div>}
                             <div className='content-event-title'>{events.title}</div>
                             <div className='content-event-description'>{events.description}</div>
-                        </div>
+                        </div>    
 
                         <div className='event-fixture'>
                             <div className='content-event-date'>
-                            <span>{events.startDate} : {events.endDate}
-                            </span>    
+                                <FontAwesomeIcon icon={faClock} /> <span>{events.startDate} : {events.endDate}</span>
+                                <div className='content-event-venue'><a href="#">{events.venue}</a></div>
                             </div>
-                            <div className='content-event-venue'><a>{events.venue}</a></div>
-                            <div className='content-event-contact-person'>{events.resourcePerson}</div>
+
+                            <div className='content-event-contact-person'><FontAwesomeIcon icon={faUserAlt} /><span>{events.resourcePerson}</span></div>
                         </div>
 
                         <div className='content-event-further-info'>
-                            <div>{events.website}</div>
-                            <div>{users.name}</div>
-                            <div>{users.email}</div>
-                            <div>{users.contact}</div>
+                            <div className='flex-left'><div><FontAwesomeIcon icon={faGlobe} />&nbsp;&nbsp;&nbsp;{events.website ? events.website : "www.no-website.com"}</div></div>
+                            <div className='flex-right'>
+                                <div className='flex-side-left'>
+                                    <FontAwesomeIcon icon={faPhone} />
+                                </div>
+                                <div className='flex-side-right'>
+                                    <div>{users.name}</div>
+                                    <div>{users.email}</div>
+                                    <div>{users.contact}</div>
+                                </div>
+                            </div>
                         </div>
-                    </div></div>
+                    </div>
+                </div>
 
                 <div className='event-invitees-participants'>
                     <div className='event-invitees'>
@@ -89,7 +120,7 @@ function ViewEvents() {
                         <div>Icon</div>
                         <div>
                             <b>Participants</b>
-                            <h1>180</h1>
+                            <h1>{participants}</h1>
                         </div>
                     </div>
                 </div>
@@ -101,10 +132,22 @@ function ViewEvents() {
                             <div className='flex-th-content'>Response</div>
                         </div>
 
-                        <div className='flex-tr'>
-                            <div className='flex-td'>Nihal</div>
-                            <div className='flex-td'>Yes</div>
-                        </div>
+
+                        {
+                            participantResponse.map((item, i) => {
+
+                                return (
+                                    <div className='flex-tr'>
+                                        <div className='flex-td'>{item.name}</div>
+                                        <div className='flex-td'>{item.response}</div>
+                                    </div>
+                                )
+                            }
+
+                            )
+                        }
+
+
 
                     </div>
 

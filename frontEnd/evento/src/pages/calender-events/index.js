@@ -2,6 +2,7 @@ import Calendar from 'react-awesome-calendar';
 import React,{useState,useEffect} from 'react';
 import axios from 'axios';
 import './index.css';
+import { useParams } from 'react-router-dom';
 
 // const events = [{
 //     id: 1,
@@ -24,6 +25,8 @@ import './index.css';
 // }];
 
 function CalenderEvents() {
+
+    const {id} = useParams();
 
     const [events,setEvents] = useState([]);
     const allEvents = []

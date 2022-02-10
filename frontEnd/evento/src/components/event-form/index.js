@@ -1,6 +1,7 @@
 import React from "react";
 import './index.css';
-import {Button} from 'react-bootstrap'
+import {Button} from 'react-bootstrap';
+import Select from 'react-select'
 
 
 function EventForm(props) {
@@ -57,6 +58,27 @@ function EventForm(props) {
                                     onChange={props.handleChange} />
                             </div>
                         </div>
+                        <div className="formTable">
+                        <div className="formRow">
+                            <div className="formCol">
+                                <div>Start Time</div>
+                                <input 
+                                    type = "time" 
+                                    id = "start-time"
+                                    name ="startTime" 
+                                    value = {props.events.startTime} 
+                                    onChange={props.handleChange} />
+                            </div>
+                            <div className="formCol">
+                                <div>End Time</div>
+                                <input 
+                                    type = "time" 
+                                    id = "end-time"
+                                    name ="endTime" 
+                                    value = {props.events.endTime}
+                                    onChange={props.handleChange} />
+                            </div>
+                        </div>
 
                         <div className="formRow">
                             <div className="formCol">
@@ -88,12 +110,16 @@ function EventForm(props) {
                             </div>
                             <div className="formCol">
                                 <div>Contact Person</div>
-                                <select 
+                                <Select 
                                     id="contact-person" 
                                     name="contact_person"
                                     value = {props.events.contact_person} 
-                                    onChange={props.handleChange}>
-                                    <optgroup label="Select Person">
+                                    //onChange={props.handleChange}
+                                    options = {props.users}
+                                    value={props.users.find(c => c.value === props.users.id)}
+                                    onChange={props.handleChange}
+                                    />
+                                    {/* <optgroup label="Select Person">
                                         {props.users.map((user) => (
                                             <option 
                                                 id = "contact-persons-list"
@@ -102,7 +128,8 @@ function EventForm(props) {
                                             {user.name}
                                             </option>
                                         ))}
-                                    </optgroup></select>
+                                    </optgroup> */}
+                                
                             </div>
                         </div>
                         <div className="formRow">
@@ -128,7 +155,7 @@ function EventForm(props) {
                             </div>  
                         </div>
 
-                        <div className="formRow">
+                        {/* <div className="formRow">
                             <div className="formCol">
                                 <div>Created By</div>
                                 <input 
@@ -152,8 +179,9 @@ function EventForm(props) {
                                     disabled
                                     />
                             </div>  
-                        </div>
+                        </div> */}
                     </div>
+                </div>
                 </fieldset>
 
                 {/* <div className="formRowBtn">
