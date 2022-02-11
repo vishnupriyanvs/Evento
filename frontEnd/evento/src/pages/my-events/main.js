@@ -9,14 +9,14 @@ import { useParams } from 'react-router-dom';
 
 function UsersMainPage() {
     const { id } = useParams()
-    
+    //console.log('from Main page '+id)
     const navigate = useNavigate();
 
     const [dimension, setDimension] = useState({})
     const [sideCheck, setSideCheck] = useState(false);
 
     useEffect(() => {
-        
+        //console.log("width");
         // navbarCheck();
         setDimension({
             height: window.innerHeight,
@@ -95,11 +95,11 @@ function UsersMainPage() {
                     <div className="liClick" onClick={() => navigateEvents(`my-events/calendar-events/${id}`)}><FontAwesomeIcon icon={faCalendar} size="x" color="#91A4B7" /><span>Calender</span></div>
 
                 </div> : <div>
-                    <div className='sideBarIcons'><FontAwesomeIcon icon={faCalendar} size="3x" color="#91A4B7" onClick={() => navigateEvents(`my-events/calendar-events/${id}`)} /><span className='sideBarText'>Calendar</span></div>
-                    &nbsp; <div className='sideBarIcons'><FontAwesomeIcon icon={faFastForward} size="3x" color="#91A4B7" onClick={() => navigateEvents(`my-events/upcoming-events/invited/${id}`)} /><span className='sideBarText'>Upcoming Events</span></div>
-                    <div className='sideBarIcons'><FontAwesomeIcon icon={faFastForward} size="3x" color="#91A4B7" onClick={() => navigateEvents(`my-events/ongoing-events/${id}`)} /><span className='sideBarText'>Ongoing Events</span></div>
-                    <div className='sideBarIcons'><FontAwesomeIcon icon={faCheckCircle} size="3x" color="#91A4B7" onClick={() => navigateEvents(`my-events/past-events/accepted/${id}`)} /><span className='sideBarText'>Completed Events</span></div>
-                    <div className='sideBarIcons'><FontAwesomeIcon icon={faStopCircle} size="3x" color="#91A4B7" onClick={() => navigateEvents(`my-events/cancelled-events/${id}`)} /><span className='sideBarText'>Cancelled Events</span></div>
+                    <div className='sideBarIcons'><FontAwesomeIcon icon={faCalendar} size="2x" color="#91A4B7" onClick={() => navigateEvents(`my-events/calendar-events/${id}`)} /><span className='sideBarText'>Calendar</span></div>
+                    &nbsp; <div className='sideBarIcons'><FontAwesomeIcon icon={faFastForward} size="2x" color="#91A4B7" onClick={() => navigateEvents(`my-events/upcoming-events/invited/${id}`)} /><span className='sideBarText'>Upcoming Events</span></div>
+                    <div className='sideBarIcons'><FontAwesomeIcon icon={faFastForward} size="2x" color="#91A4B7" onClick={() => navigateEvents(`my-events/ongoing-events/${id}`)} /><span className='sideBarText'>Ongoing Events</span></div>
+                    <div className='sideBarIcons'><FontAwesomeIcon icon={faCheckCircle} size="2x" color="#91A4B7" onClick={() => navigateEvents(`my-events/past-events/accepted/${id}`)} /><span className='sideBarText'>Completed Events</span></div>
+                    <div className='sideBarIcons'><FontAwesomeIcon icon={faStopCircle} size="2x" color="#91A4B7" onClick={() => navigateEvents(`my-events/cancelled-events/${id}`)} /><span className='sideBarText'>Cancelled Events</span></div>
                 </div>}
             {/* Error while mapping in SideBar! <SideBar listContent = {["Upcoming Events"]} listItemFn={[navigateEvents("upcoming-events")]} /> */}
         </div>
