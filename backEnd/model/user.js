@@ -75,4 +75,5 @@ Location.hasMany(User);
 User.belongsToMany(Role, {through: 'user_roles' });
 Role.belongsToMany(User, { through: 'user_roles' });
 
+
 module.exports = User;

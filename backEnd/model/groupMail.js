@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 const Db = require('../config/database');
 // const user = require('./user');
 
-const Department = Db.define('department', {
+const GroupMails = Db.define('groupMail', {
     id: {
         type: Sequelize.SMALLINT,
         primaryKey: true,
@@ -21,9 +21,12 @@ const Department = Db.define('department', {
 
 },
     {
-        timestamps: false
+        timestamps: false,
+        underscored: true
     });
 
-// Department.hasMany(user)
+// User.belongsTo(Location);
+// Location.hasMany(User);
 
-module.exports = Department;
+
+module.exports = GroupMails;

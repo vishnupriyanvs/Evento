@@ -8,7 +8,7 @@ import axios from 'axios';
 
 import {useParams} from 'react-router-dom';
 
-function PastRejectedEvents() {
+function PastRejectedEvents(props) {
     const {id} = useParams()
    
     
@@ -67,6 +67,8 @@ function PastRejectedEvents() {
     
   
     return (
+        <>
+        <p>{props.toptitle}</p>
         <div className="upcomingEventsTable">
             <SizedBox height="2vh" />
             <MyEventsTable
@@ -78,6 +80,7 @@ function PastRejectedEvents() {
                 myEventType={services.myEventType.COMPLETED_EVENT.REJECTED_EVENT}
             />
         </div>
+        </>
     )
 }
 

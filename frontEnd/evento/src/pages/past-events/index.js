@@ -7,7 +7,7 @@ import services from "../../services";
 import axios from 'axios';
 
 
-function PastEvents() {
+function PastEvents(props) {
 
     const navigate = useNavigate();
     const navigateToEvent = (id) => {
@@ -38,6 +38,8 @@ function PastEvents() {
 
 
     return (
+        <>
+        <p>{props.toptitle}</p>
         <div className="upcomingEventsTable">
             <SizedBox height="2vh" />
             <EventsTable
@@ -47,6 +49,7 @@ function PastEvents() {
                 eventType={services.eventType.COMPLETED_EVENT}
             />
         </div>
+        </>
     )
 }
 

@@ -7,7 +7,7 @@ import services from "../../services";
 import axios from 'axios';
 
 
-function OngoingEvents() {
+function OngoingEvents(props) {
 
     const navigate = useNavigate();
     const navigateToEvent = (id) => {
@@ -39,6 +39,8 @@ function OngoingEvents() {
 
    
     return (
+        <>
+        <p>{props.toptitle}</p>
         <div className="upcomingEventsTable">
             <SizedBox height="2vh" />
             <EventsTable
@@ -48,6 +50,7 @@ function OngoingEvents() {
                 eventType={services.eventType.ONGOING_EVENT}
             />
         </div>
+        </>
     )
 }
 

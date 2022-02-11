@@ -11,6 +11,7 @@ const eventRoutes = require('./event.route');
 const invitationRoutes = require('./invitation.route');
 const eventFeedbackRoutes = require('./eventFeedback.route')
 const eventImages = require('./images.route')
+const groupMail = require('./groupMail.route')
 
 router.use('/departments',departmentRoutes);
 router.use('/grades',gradeRoutes);
@@ -22,5 +23,6 @@ router.use('/events',eventRoutes);
 router.use('/invitations',invitationRoutes);
 router.use('/feedbacks',eventFeedbackRoutes);
 router.use('/images', eventImages)
+router.use('/groupmails',groupMail );
 
 module.exports = router;

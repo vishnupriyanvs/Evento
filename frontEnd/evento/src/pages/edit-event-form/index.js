@@ -80,7 +80,8 @@ function EditEventForm(){
                 users = {options}
                 buttonValue = "Update Event"
                 updated_by = {id}
-                eventid = {eventid} />
+                eventid = {eventid} 
+                disabled = {true}/>
         </div>
     )
 

@@ -8,7 +8,7 @@ import axios from 'axios';
 
 import {useParams} from 'react-router-dom';
 
-function UpcomingEvents() {
+function UpcomingEvents(props) {
     const {id} = useParams()
    
     
@@ -28,6 +28,8 @@ function UpcomingEvents() {
     }, [])
 
     return (
+        <>
+        <h5 className="heading">{props.toptitle}</h5>
         <div className="upcomingEventsTable">
             <SizedBox height="2vh" />
             <EventsTable
@@ -36,6 +38,7 @@ function UpcomingEvents() {
                 eventType={services.eventType.UPCOMING_EVENT}
             />
         </div>
+        </>
     )
 }
 

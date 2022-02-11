@@ -8,7 +8,7 @@ import axios from 'axios';
 
 import {useParams} from 'react-router-dom';
 
-function UserOnGoingEvents() {
+function UserOnGoingEvents(props) {
     const {id} = useParams()
     
     
@@ -67,6 +67,8 @@ function UserOnGoingEvents() {
     
    
     return (
+        <>
+        <p>{props.toptitle}</p>
         <div className="upcomingEventsTable">
             <SizedBox height="2vh" />
             <MyEventsTable
@@ -77,7 +79,7 @@ function UserOnGoingEvents() {
                 // onClick ={mapping}
                 myEventType={services.myEventType.ONGOING_EVENT}
             />
-        </div>
+        </div></>
     )
 }
 

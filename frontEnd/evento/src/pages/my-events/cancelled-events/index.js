@@ -8,7 +8,7 @@ import axios from 'axios';
 
 import {useParams} from 'react-router-dom';
 
-function UserCancelledEvents() {
+function UserCancelledEvents(props) {
     const {id} = useParams()
   
     
@@ -68,6 +68,8 @@ function UserCancelledEvents() {
     
     
     return (
+        <>
+        <p>{props.toptitle}</p>
         <div className="upcomingEventsTable">
             <SizedBox height="2vh" />
             <MyEventsTable
@@ -78,7 +80,7 @@ function UserCancelledEvents() {
                 // onClick ={mapping}
                 myEventType={services.myEventType.CANCELLED_EVENT}
             />
-        </div>
+        </div></>
     )
 }
 

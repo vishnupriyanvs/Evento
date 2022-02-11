@@ -11,7 +11,7 @@ import {useParams} from 'react-router-dom';
 
 
 
-function InvitedEvents() {
+function InvitedEvents(props) {
     const {id} = useParams()
     const navigate = useNavigate();
     const [events, setEvents] = useState([]);
@@ -76,6 +76,8 @@ function InvitedEvents() {
     
    
     return (
+        <>
+        <p>{props.toptitle}</p>
         <div className="upcomingEventsTable">
             <SizedBox height="2vh" />
             <MyEventsTable
@@ -88,6 +90,7 @@ function InvitedEvents() {
                 myEventType={services.myEventType.UPCOMING_EVENT.INVITED_EVENT}
             />
         </div>
+        </>
     )
 }
 
