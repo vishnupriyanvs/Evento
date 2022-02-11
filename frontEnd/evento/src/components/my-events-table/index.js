@@ -6,6 +6,8 @@ import services from "../../services";
 import { useNavigate, useParams } from "react-router-dom";
 import StatusSelectionBtn from "../event-select-btn";
 import { Button } from "react-bootstrap";
+import Feedback from "../feedback"
+import axios from "axios"
 
 function MyEventsTable(props) {
   
@@ -14,10 +16,12 @@ function MyEventsTable(props) {
   const navigate = useNavigate();
   const [tHeader, setTHeader] = useState([]);
   const [tRow, setTrow] = useState([]);
+  const [invitationArray,setInvitationArray] = useState([]);
 
   const [eventDetails, setEventDetails] = useState([props.events]);
  
-
+  const eventInfo =props.events;
+  
   const checkPage = (page, tHeader, tRow) => {
     switch (page) {
       case services.myEventType.UPCOMING_EVENT.INVITED_EVENT:
@@ -119,10 +123,27 @@ function MyEventsTable(props) {
 
 
   }, [props.titles, props.content]);
+
+  useEffect(() => {
+    const arr = [];
+    axios
+        .get(`http://localhost:4000/feedbacks`)
+        .then(response => {
+            response.data.forEach(item => {
+              arr.push(item.invitationId);
+            })
+            setInvitationArray(arr);
+        })
+        .catch(err =>{
+            
+        })
+
+},[])
   
 
   return (
     <center>
+      {props.events.length == 0 ? <h1>You have no Events</h1> :
       <table id="events">
         <tbody>
           <tr>
@@ -147,16 +168,16 @@ function MyEventsTable(props) {
                     <>
                       <td> <StatusSelectionBtn options={[item.event.isActive]} given={item.event.isActive} role={"Admin"} index={i} /></td>
                         <td>
-                          <Button variant="primary" size="sm" onClick={props.handleSubmit} value="Yes" type="submit">Yes</Button>
+                          <Button variant="primary" size="sm" onClick={props.handleSubmit} value="Yes" >Yes</Button>
                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                          <Button variant="danger" size="sm" onClick={props.handleSubmit} value="No" type="submit">No</Button>
+                          <Button variant="danger" size="sm" onClick={props.handleSubmit} value="No" >No</Button>
                         </td>
                     </>
                     :
                     <>
                       <td> <StatusSelectionBtn options={[item.event.isActive]} given={item.event.isActive} role={"Admin"} index={i} /></td>
                         <td>
-                          <Button variant="primary" size="sm" type="submit">Feedback</Button>
+                          {invitationArray.includes(item.id) ? <Button variant="primary" size="sm" disabled>Feedback</Button> :<Feedback invitationId={item.id} title={item.event.title}/>}
                         </td>
                     </>
                     :
@@ -172,6 +193,7 @@ function MyEventsTable(props) {
           })}
         </tbody>
       </table>
+    }
     </center>
   );
 }
