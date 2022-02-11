@@ -13,7 +13,7 @@ function StatusSelectionBtn(props) {
         setOptions(props.options);
         styleSet(props.given, props.index);
         let a = document.querySelectorAll('.SelectnBtn1-content');
-        //console.log(a);
+        
 
     }, [])
 
@@ -32,11 +32,11 @@ function StatusSelectionBtn(props) {
 
     //console.log(props.eventid)
     function handleChange(status){
-        console.log(status,props.eventid)
+       
 
         axios.put(`http://localhost:4000/events/${props.eventid}/${status}`)
             .then(response => {
-                console.log(response.data)
+               
             })
             .catch(error => {
                 console.log(error)
@@ -72,7 +72,7 @@ function StatusSelectionBtn(props) {
                                         a[props.index].setAttribute('style', 'outline:1px solid rgb(20, 243, 20); color: rgb(20, 243, 20)')
                                         handleChange(item)}
 
-                                    //console.log(a)
+                                   
                                 }}>{item}</div>
                             )
                         }

@@ -10,7 +10,7 @@ import {useParams} from 'react-router-dom';
 
 function PastAcceptedEvents() {
     const {id} = useParams()
-    console.log('from Upcoming page '+id)
+   
     
     const navigate = useNavigate();
     // const navigateToEvent = (eventid) => {
@@ -36,7 +36,7 @@ function PastAcceptedEvents() {
         axios
             .get(`http://localhost:4000/invitations/response/Completed/Yes/${id}`)
             .then(response => {
-                console.log('Upcoming event Promise was fulfilled');
+               
                 setEvents(response.data)
             })
             .catch((err) => {
@@ -65,7 +65,7 @@ function PastAcceptedEvents() {
 //     </span>
 //   ))}
     
-    console.log(events)
+   
     return (
         <div className="upcomingEventsTable">
             <SizedBox height="2vh" />

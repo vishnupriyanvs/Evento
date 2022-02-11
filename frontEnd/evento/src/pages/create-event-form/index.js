@@ -52,7 +52,7 @@ function CreateEventForm() {
 
 
     const handleSubmit = (event) => {
-        console.log('line 35' + events)
+        
         event.preventDefault()
         const formData = new FormData()
         formData.append('avatar', file);

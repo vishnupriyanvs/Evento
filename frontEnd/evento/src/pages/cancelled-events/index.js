@@ -22,7 +22,7 @@ function CancelledEvents() {
         axios
             .get('http://localhost:4000/events/status/Cancelled')
             .then(response => {
-                console.log('Cancelled event Promise was fulfilled');
+                
                 setEvents(response.data)
             })
             .catch((err) => {

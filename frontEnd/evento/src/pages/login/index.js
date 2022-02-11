@@ -32,12 +32,11 @@ function MyForm(props) {
 
     function handleSubmit(event) {
         event.preventDefault();
-        console.log(inputs);
+       
 
         axios.post('http://localhost:4000/users/login', inputs)
             .then(response => {
-                console.log(response)
-                console.log(response.data.user.id)
+               
                 sessionStorage.setItem('myToken', response.data.accessToken)
                 sessionStorage.setItem('myRole', response.data.user.roles[0].user_roles.roleId)
                 toast.success("Welcome" + " " + response.data.user.name, {

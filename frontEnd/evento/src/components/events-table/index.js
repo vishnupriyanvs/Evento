@@ -7,10 +7,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import StatusSelectionBtn from "../event-select-btn";
 
 function EventsTable(props) {
-  // console.log(props.events)
-
+  
   const { id } = useParams()
-  console.log(id)
+  
   const navigate = useNavigate();
   const [tHeader, setTHeader] = useState([]);
   const [tRow, setTrow] = useState([]);
@@ -68,7 +67,7 @@ function EventsTable(props) {
           return delete content["Actions"];
         });
         setTrow(tRow);
-        console.log(tRow)
+       
         break;
 
       default:
@@ -97,7 +96,7 @@ function EventsTable(props) {
             ))}
           </tr>
           {tRow.map((item, i) => {
-            // console.log(item)
+            
             const action = tHeader.includes("Actions");
             return(
               <tr>

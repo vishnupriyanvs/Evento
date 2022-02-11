@@ -10,7 +10,7 @@ import {useParams} from 'react-router-dom';
 
 function UserCancelledEvents() {
     const {id} = useParams()
-    console.log('from Upcoming page '+id)
+  
     
     const navigate = useNavigate();
     // const navigateToEvent = (eventid) => {
@@ -36,7 +36,7 @@ function UserCancelledEvents() {
         axios
             .get(`http://localhost:4000/invitations/response/Cancelled/${id}`)
             .then(response => {
-                console.log(response.data);
+               
 
                 setEvents(response.data)
             })

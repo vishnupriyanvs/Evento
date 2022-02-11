@@ -22,6 +22,7 @@ function ViewEvents() {
     useEffect(() => {
         axios.get(`http://localhost:4000/events/${eventid}`)
             .then(response => {
+               
                 setEvents(response.data)
             })
             .catch((err) => {
@@ -50,6 +51,9 @@ function ViewEvents() {
             console.log(response.data)
             setParticipants(response.data.length)
             response.data.forEach((item, i) => {
+
+              
+                participantResponse.push({ "name": item.user.name, "response": item.invitationResponse });
                 participantResponse.push({ "id": item.id, "name": item.user.name, "response": item.invitationResponse });
             })
             let invites = response.data;
@@ -60,11 +64,8 @@ function ViewEvents() {
             console.log(invites);
 
         })
-        setParticipantRespponse(participantResponse);
-
-
-
-        console.log(participantResponse);
+        setParticipantRespponse(participantResponse)
+       
     }
 
     let action = false;

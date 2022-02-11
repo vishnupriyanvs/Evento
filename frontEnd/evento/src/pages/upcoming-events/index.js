@@ -10,7 +10,7 @@ import {useParams} from 'react-router-dom';
 
 function UpcomingEvents() {
     const {id} = useParams()
-    console.log('from Upcoming page '+id)
+   
     
     const navigate = useNavigate();
     const [events, setEvents] = useState([]);
@@ -19,7 +19,7 @@ function UpcomingEvents() {
         axios
             .get('http://localhost:4000/events/status/Active')
             .then(response => {
-                console.log('Upcoming event Promise was fulfilled');
+                
                 setEvents(response.data)
             })
             .catch((err) => {

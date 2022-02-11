@@ -6,29 +6,82 @@ import MyEventsTable from "../../../../components/my-events-table";
 import services from "../../../../services";
 import axios from 'axios';
 
+
 import {useParams} from 'react-router-dom';
+
+
 
 function InvitedEvents() {
     const {id} = useParams()
     const navigate = useNavigate();
     const [events, setEvents] = useState([]);
+    
+    
+
     useEffect(() => {
         axios
             .get(`http://localhost:4000/invitations/response/Active/NotResponded/${id}`)
             .then(response => {
-                console.log('Upcoming event Promise was fulfilled');
+               
                 setEvents(response.data)
+                
             })
             .catch((err) => {
                 console.log(err)
             })
     }, [])
+    
+
+    const handleSubmit = (event) => {
+        const value = event.target.value;
+        
+        
+        event.preventDefault()
+        
+        // setSubmitted(true)
+       
+
+            axios   
+                 .put(`http://localhost:4000/invitations/${value}/${events[0].id}`,events)
+                 .then(response => {
+                     setEvents(response.data)
+                 })
+                 .catch(error => {
+                     console.log(error)
+                 })
+                //navigate(`/user/my-events/upcoming-events/invited/${id}`);
+                
+    }
+
+    // useEffect(() => {
+    //     checkFilter.forEach((data) => {
+    //         events.filter((content) => { return delete content[data] })
+    //     })
+    // }, [events])
+    
+    // const viewEventDetails = (() => {
+    //     events.map((event) => {
+    //         onClick = {() => navigate(`../view-event/${id}/${event.id}`)} 
+    //     })
+    // })
+
+    
+  
+    
+// {staffs.map((staff) => (
+//     <span key={staff.StaffID}>
+//       <Staff details={staff} />
+//     </span>
+//   ))}
+    
+   
     return (
         <div className="upcomingEventsTable">
             <SizedBox height="2vh" />
             <MyEventsTable
                 titles={['Event-Titles', 'Start Date','End Date','Status','Actions']}
                 events={events}
+                handleSubmit={handleSubmit}
                 // onClick={navigateToEvent(events.id)}
                 // onClick = {() => navigate(`../view-event/${id}/${events.id}`)}
                 // onClick ={mapping}

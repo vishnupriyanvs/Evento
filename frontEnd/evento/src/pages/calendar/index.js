@@ -47,7 +47,7 @@ function CalendarEvents(props) {
         }
     })
 
-    console.log(allEvents)
+   
     return (
         <div className="calenderSize">
             <Calendar

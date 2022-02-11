@@ -58,12 +58,18 @@ main::-webkit-scrollbar {
   z-index: 1;
 }
 
+
 .sideBarIcons {
   padding-top: 48px;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   /* transition: width 2s; */
   /* transition-timing-function: ease; */
 }
+
 
 .sideBarIcons .sideBarText {
   visibility: hidden;

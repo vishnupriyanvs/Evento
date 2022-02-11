@@ -22,7 +22,7 @@ function PastEvents() {
         axios
             .get('http://localhost:4000/events/status/Completed')
             .then(response => {
-                console.log('Past event Promise was fulfilled');
+               
                 setEvents(response.data)
             })
             .catch((err) => {
