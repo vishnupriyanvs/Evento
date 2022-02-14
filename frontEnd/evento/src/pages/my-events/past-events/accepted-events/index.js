@@ -65,7 +65,7 @@ function PastAcceptedEvents(props) {
 //     </span>
 //   ))}
     
-   
+   console.log(events)
     return (
         <>
         <p>{props.toptitle}</p>

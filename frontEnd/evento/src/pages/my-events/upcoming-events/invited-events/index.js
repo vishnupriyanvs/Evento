@@ -33,14 +33,8 @@ function InvitedEvents(props) {
     
 
     const handleSubmit = (event) => {
+        
         const value = event.target.value;
-        
-        
-        event.preventDefault()
-        
-        // setSubmitted(true)
-       
-
             axios   
                  .put(`http://localhost:4000/invitations/${value}/${events[0].id}`,events)
                  .then(response => {
@@ -49,8 +43,9 @@ function InvitedEvents(props) {
                  .catch(error => {
                      console.log(error)
                  })
-                //navigate(`/user/my-events/upcoming-events/invited/${id}`);
-                
+
+            // 
+            window.location.reload(false);         
     }
 
     // useEffect(() => {
