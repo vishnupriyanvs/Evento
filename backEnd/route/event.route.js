@@ -12,5 +12,6 @@ router.get('/status/:is_active',eventController.findByEventStatus);
 router.put('/:id/:isActive',eventController.updateEventStatus);
 
 router.get('/calendar/:id', eventController.findEventForUserCalendar);
+router.put('/cancellation/reason/:id', eventController.updateEventCancellation);
 
 module.exports = router;
