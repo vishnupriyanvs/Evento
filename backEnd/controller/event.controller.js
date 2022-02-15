@@ -63,8 +63,8 @@ function updateEvent(req, res) {
 }
 
 function updateEventCancellation(req, res) {
-    console.log(req.params.id,req.body.cancellationReason)
-    eventDao.updateEventCancellation(req.body.cancellationReason, req.params.id).
+    console.log(req.params.id,req.body.cancellationReason, req.body.isActive)
+    eventDao.updateEventCancellation(req.body.cancellationReason, req.params.id, req.body.isActive).
         then((data) => {
             res.status(200).json({
 

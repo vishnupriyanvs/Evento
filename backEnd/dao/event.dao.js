@@ -65,9 +65,10 @@ function updateEventStatus(isActive, id) {
     return Event.update(updateEvent, { where: { id: id } });
 }
 
-function updateEventCancellation(cancellationReason, id) {
+function updateEventCancellation(cancellationReason, id, isActive) {
     var updateEvent = {
-        cancellationReason : cancellationReason
+        cancellationReason : cancellationReason,
+        isActive : isActive,
     };
     return Event.update(updateEvent, { where: { id: id } });
 }
