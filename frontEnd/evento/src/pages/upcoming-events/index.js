@@ -26,7 +26,7 @@ function UpcomingEvents() {
                 console.log(err)
             })
     }, [])
-
+console.log(events)
     return (
         <div className="upcomingEventsTable">
             <SizedBox height="2vh" />

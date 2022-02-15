@@ -5,11 +5,14 @@ import './index.css';
 import axios from "axios";
 import Popup from 'reactjs-popup';
 import { Button, Form, Container } from 'react-bootstrap';
+import { confirm } from "react-confirm-box";
+import services from "../../services";
 
 function StatusSelectionBtn(props) {
     const [options, setOptions] = useState(["Hi", "Its", "Working"]);
     const [defaults, setDefault] = useState();
     const [cancellationReason, setCancellationReason] = useState('');
+    const [flag, setFlag] = useState(false);
 
     useEffect(() => {
         setDefault(props.given);
@@ -44,12 +47,14 @@ function StatusSelectionBtn(props) {
             })
             .then(response => {
                 console.log(response.data)
-                alert("Cancellation Successful")
+                setDefault("Cancelled")
                 
             })
             .catch(error => {
                 console.log(error)
             })
+            setFlag(true);
+
     }
 
     //console.log(props.eventid)
@@ -62,15 +67,16 @@ function StatusSelectionBtn(props) {
                 console.log(error)
             })
     }
-
+    console.log(props.reason)
     return (
 
         <div className="SelectnBtn1">
             <div className="SelectnBtn1-content">
 
 
-                {defaults === 'Cancelled' && options.includes(defaults) ?  <Popup trigger={<Button variant="danger"  size="sm">Reason</Button>}
+                {defaults === 'Cancelled' && options.includes(defaults) && props.eventType === services.eventType.UPCOMING_EVENT ?  <Popup trigger={<div >{props.reason !== undefined ? "Reason": defaults}</div>}
                 position="bottom right ">
+               
                 <Container style={{ backgroundColor: "white" }} id="triggerBox">
                     <Form onSubmit={(e) => e.preventDefault()}>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
@@ -81,21 +87,23 @@ function StatusSelectionBtn(props) {
                             <Form.Label>Reason for Cancellation</Form.Label>
                             <Form.Control as="textarea" onChange={handleReasonChange} rows={3} />
                         </Form.Group>
-                        <Button variant="primary" type="submit" onClick={() => handleEventCancellation()}>
+
+                        {!flag ? <Button variant="primary" type="submit" onClick={() => handleEventCancellation(props.invitationId)}>
                             Submit
-                        </Button>
+                        </Button>:<Button variant="danger" onClick={() => {const x = document.getElementById("triggerBox");console.log(x); x.style.display='none'; window.location.reload(false)}}>Close</Button>
+                        }
                     </Form>
                 </Container>
             </Popup>:<div>{options.includes(defaults) ? defaults : null}</div>}
                 
-                <div> <FontAwesomeIcon icon={faAngleDown} /></div>
+                {props.eventType === services.eventType.UPCOMING_EVENT || props.eventType === services.eventType.ONGOING_EVENT ? <div> <FontAwesomeIcon icon={faAngleDown} /></div> : null }
             </div>
             {props.role === 'Admin' ? (<div className="SelectnBtn1-options">
                 {
                     options.map((item, i) => {
                         if (item !== defaults) {
                             return (
-                                <div key={i} className="SelectnBtn1-option" onClick={() => {
+                                <div key={i} className="SelectnBtn1-option" onClick={async() => {
                                     setDefault(item)
                                     let a = document.querySelectorAll('.SelectnBtn1-content');
                                     if (item === 'InProgress') {
@@ -103,8 +111,13 @@ function StatusSelectionBtn(props) {
                                         handleChange(item);
                                     }
                                     if (item === 'Cancelled'){
-                                        a[props.index].setAttribute('style', 'outline: 1px solid rgb(243, 20, 20); color:rgb(243, 20, 20);')
-                                        // handleChange(item)
+                                        const result = await confirm("Are you sure?");
+                                        if (result) {
+                                          
+                                          a[props.index].setAttribute('style', 'outline: 1px solid rgb(243, 20, 20); color:rgb(243, 20, 20);')
+                                          return;
+                                        }
+                                        window.location.reload(false)                                      // handleChange(item)
                                     }
                                     if (item === 'Active'){
                                         a[props.index].setAttribute('style', 'outline: 1px solid #0000FF; color: #0000FF')

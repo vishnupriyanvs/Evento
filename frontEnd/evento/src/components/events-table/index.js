@@ -106,7 +106,7 @@ function EventsTable(props) {
                     action ? 
                     <>
                       <td>
-                        <StatusSelectionBtn options={["InProgress", "Completed", "Cancelled", "Active"]} given={item.is_active} role={"Admin"} index={i} eventid={item.id}/>
+                        <StatusSelectionBtn options={["InProgress", "Completed", "Cancelled", "Active"]} given={item.is_active} role={"Admin"} index={i} eventid={item.id} reason={item.cancellation_reason} eventType={props.eventType}/>
                       </td>
                       <td>
                         <FontAwesomeIcon icon={faUserPlus} onClick={() => navigate(`/user/sendinvitations/${id}/${item.id}`)} />
@@ -115,12 +115,12 @@ function EventsTable(props) {
                       </td>
                     </>
                     :
-                    <td> <StatusSelectionBtn options={[item.is_active]} given={item.is_active} role={"Admin"} index={i}/></td>
+                    <td> <StatusSelectionBtn options={[item.is_active]} given={item.is_active} role={"Admin"} index={i} eventType={props.eventType}/></td>
                     :
                     item.is_active == 'InProgress' ? 
                     <>
                       <td>{item.end_date}</td>
-                      <td> <StatusSelectionBtn options={["InProgress", "Completed", "Cancelled", "Active"]} given={item.is_active} role={"Admin"} index={i} eventid={item.id}/></td>
+                      <td> <StatusSelectionBtn options={["InProgress", "Completed", "Cancelled", "Active"]} given={item.is_active} role={"Admin"} index={i} eventid={item.id} eventType={props.eventType}/></td>
                     </>
                     :
                     <>

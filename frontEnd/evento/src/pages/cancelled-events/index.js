@@ -36,7 +36,7 @@ function CancelledEvents() {
     //     })
     // }, [events])
 
-
+console.log(events)
     return (
         <div className="upcomingEventsTable">
             <SizedBox height="2vh" />
