@@ -15,18 +15,62 @@ function CreateEventForm() {
     const [filename, setFileName] = useState()
     const options = []
 
+    function handleContactPerson(event){
+        let name, value;
+        
+        name = event.name
+        value = event.value
+          
+        setEvents(values => ({ ...values, [name]: value }))
+    }
+
 
     function handleChange(event) {
-        console.log(event)
-        console.log(event.name)
         let name, value;
-        if (event.name == 'contact_person') {
-            name = event.name
-            value = event.value
+        name = event.target.name
+        value = event.target.value
+        //Start Date Validation
+        if (event.target.name === "startDate") {
+            var today = new Date();          
+            const selectDate = new Date(event.target.value)
+            if(selectDate < today){
+                alert("Please enter a valid date")
+                event.target.value = null
+                return false
+            }
         }
-        else {
-            name = event.target.name
-            value = event.target.value
+        //End Date Validation
+        if (event.target.name === "endDate") {
+            var today = new Date(); 
+            const tempDate = document.getElementById("start-date").value 
+            const startDate = new Date(tempDate);   
+            const selectDate = new Date(event.target.value)
+            if(selectDate < today || selectDate < startDate){
+                alert("Please enter a valid date")
+                event.target.value = null
+                return false
+            }
+        }
+        //Start Time Validation
+        if(event.target.name === "endTime"){
+            const tempStartDate = document.getElementById("start-date").value 
+            const tempEndDate = document.getElementById("end-date").value 
+            const tempStartTime = document.getElementById("start-time").value 
+            const tempEndTime = event.target.value
+            
+            if(tempEndDate === tempStartDate){
+                
+                if(tempStartTime === tempEndTime){
+                    alert("Please enter a valid time")
+                    event.target.value = null
+                    return false
+                }
+                if(tempStartTime > tempEndTime){
+                    alert("Please enter a valid time")
+                    event.target.value = null
+                    return false
+                }
+            }
         }
         setEvents(values => ({ ...values, [name]: value }))
     }
@@ -52,7 +96,7 @@ function CreateEventForm() {
 
 
     const handleSubmit = (event) => {
-        
+
         event.preventDefault()
         const formData = new FormData()
         formData.append('avatar', file);
@@ -91,6 +135,7 @@ function CreateEventForm() {
                 events={events}
                 handleSubmit={handleSubmit}
                 handleChange={handleChange}
+                handleContactPerson={handleContactPerson}
                 handleFileChange={handleFileChange}
                 handleReset={handleReset}
                 users={options}

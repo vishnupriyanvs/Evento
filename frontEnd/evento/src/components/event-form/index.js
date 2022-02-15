@@ -13,83 +13,83 @@ function EventForm(props) {
                     
                     <div className="formRow">
                         <div className="formColMain">
-                        <div>Event Title</div>
+                        <div>Event Title<span className="mandatory">*</span></div>
                         <input 
                             type="text"
                             id = "event-title" 
                             name="title" 
                             value={props.events.title}
                             onChange={props.handleChange}
-                            placeholder="Enter Event Title" />
+                            placeholder="Enter Event Title" required />
                         </div>
                     </div>
 
                     <div className="formRow">
                         <div className="formColMain">
-                        <div>Event Description</div>
+                        <div>Event Description<span className="mandatory">*</span></div>
                         <textarea 
                             rows="5"
                             id = "event-description" 
                             name="description" 
                             value={props.events.description}
                             onChange={props.handleChange}
-                            placeholder="Event Description" />
+                            placeholder="Event Description" required/>
                         </div>
                     </div>
                     
                     <div className="formTable">
                         <div className="formRow">
                             <div className="formCol">
-                                <div>Start Date</div>
+                                <div>Start Date<span className="mandatory">*</span></div>
                                 <input 
                                     type = "date" 
                                     id = "start-date"
                                     name ="startDate" 
                                     value = {props.events.startDate} 
-                                    onChange={props.handleChange} />
+                                    onChange={props.handleChange} required />
                             </div>
                             <div className="formCol">
-                                <div>End Date</div>
+                                <div>End Date<span className="mandatory">*</span></div>
                                 <input 
                                     type = "date" 
                                     id = "end-date"
                                     name ="endDate" 
                                     value = {props.events.endDate}
-                                    onChange={props.handleChange} />
+                                    onChange={props.handleChange} required />
                             </div>
                         </div>
                         <div className="formTable">
                         <div className="formRow">
                             <div className="formCol">
-                                <div>Start Time</div>
+                                <div>Start Time<span className="mandatory">*</span></div>
                                 <input 
                                     type = "time" 
                                     id = "start-time"
                                     name ="startTime" 
                                     value = {props.events.startTime} 
-                                    onChange={props.handleChange} />
+                                    onChange={props.handleChange} required />
                             </div>
                             <div className="formCol">
-                                <div>End Time</div>
+                                <div>End Time<span className="mandatory">*</span></div>
                                 <input 
                                     type = "time" 
                                     id = "end-time"
                                     name ="endTime" 
                                     value = {props.events.endTime}
-                                    onChange={props.handleChange} />
+                                    onChange={props.handleChange} required />
                             </div>
                         </div>
 
                         <div className="formRow">
                             <div className="formCol">
-                                <div>Venue</div>
+                                <div>Venue<span className="mandatory">*</span></div>
                                 <input 
                                     type="text" 
                                     id = "venue"
                                     name ="venue" 
                                     value = {props.events.venue}
                                     onChange={props.handleChange} 
-                                    placeholder="Enter Venue/Meeting Link" />
+                                    placeholder="Enter Venue/Meeting Link" required/>
                             </div>
                             <div className="formCol">
                                 <div>Image</div>
@@ -99,17 +99,17 @@ function EventForm(props) {
 
                         <div className="formRow">
                             <div className="formCol">
-                                <div>Resource Person</div>
+                                <div>Resource Person<span className="mandatory">*</span></div>
                                 <input 
                                     type="text" 
                                     id = "resource-person"
                                     name ="resourcePerson" 
                                     value = {props.events.resourcePerson}
                                     onChange={props.handleChange} 
-                                    placeholder="Name of resource person" />
+                                    placeholder="Name of resource person" required />
                             </div>
                             <div className="formCol">
-                                <div>Contact Person</div>
+                                <div>Contact Person<span className="mandatory">*</span></div>
                                 <Select 
                                     id="contact-person" 
                                     name="contact_person"
@@ -117,8 +117,8 @@ function EventForm(props) {
                                     //onChange={props.handleChange}
                                     options = {props.users}
                                     value={props.users.find(c => c.value === props.users.id)}
-                                    onChange={props.handleChange}
-                                    />
+                                    onChange={props.handleContactPerson}
+                                    required />
                                     {/* <optgroup label="Select Person">
                                         {props.users.map((user) => (
                                             <option 
@@ -144,7 +144,7 @@ function EventForm(props) {
                                     placeholder="Enter website details" />
                             </div>
                             <div className="formCol">
-                                <div>Event Status</div>
+                                <div>Event Status<span className="mandatory">*</span></div>
                                 <select 
                                     id="is-active" 
                                     name="isActive" 
