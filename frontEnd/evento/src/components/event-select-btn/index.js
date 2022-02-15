@@ -3,10 +3,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import './index.css';
 import axios from "axios";
+import Popup from 'reactjs-popup';
+import { Button, Form, Container } from 'react-bootstrap';
 
 function StatusSelectionBtn(props) {
     const [options, setOptions] = useState(["Hi", "Its", "Working"]);
     const [defaults, setDefault] = useState();
+    const [cancellationReason, setCancellationReason] = useState('');
 
     useEffect(() => {
         setDefault(props.given);
@@ -29,11 +32,55 @@ function StatusSelectionBtn(props) {
             a[key].setAttribute('style', 'outline:1px solid rgb(20, 243, 20); color: rgb(20, 243, 20)')
 
     }
+    const handleReasonChange =(event) =>{
+        const value = event.target.value;
+        setCancellationReason(value);
+    }
+    const handleEventCancellation = () =>{
+        axios
+            .put(`http://localhost:4000/events/cancellation/reason/${props.eventid}`,{
+                cancellationReason:cancellationReason
+            })
+            .then(response => {
+                
+                
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
 
     //console.log(props.eventid)
     function handleChange(status){
        
+        if(status === "Cancelled"){
+            return(
+                <Popup trigger={<Button variant="danger"  size="sm">No</Button>}
+                position="bottom right ">
+                <Container style={{ backgroundColor: "white" }} id="triggerBox">
+                    <Form onSubmit={(e) => e.preventDefault()}>
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                            <Form.Label>Event Title :&nbsp;</Form.Label>
+                            <Form.Label style={{fontWeight:"bold"}}> {props.title}</Form.Label>
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                            <Form.Label>Reason for Cancellation</Form.Label>
+                            <Form.Control as="textarea" onChange={handleReasonChange} rows={3} />
+                        </Form.Group>
+                        {/* <Rate rating={rating} onRating={(rate) => setRating(rate)} /> */}
 
+                        {/* {!flag ? <Button variant="primary" type="submit" onClick={() => handleCancellation(props.invitationId)}>
+                            Submit
+                        </Button>:<Button variant="danger" onClick={() => {const x = document.getElementById("triggerBox");console.log(x); x.style.display='none'; window.location.reload(false)}}>Close</Button>
+                        } */}
+                        <Button variant="primary" type="submit" onClick={() => handleEventCancellation()}>
+                            Submit
+                        </Button>
+                    </Form>
+                </Container>
+            </Popup>
+            )
+        }
         axios.put(`http://localhost:4000/events/${props.eventid}/${status}`)
             .then(response => {
                

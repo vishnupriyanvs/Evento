@@ -1,7 +1,7 @@
 const Invitation = require('../model/invitation');
 const Event = require('../model/event');
 const User = require('../model/user')
-
+const Sequelize = require("sequelize")
 var invitationDao = {
     findAll: findAll,
     create: create,
@@ -10,7 +10,8 @@ var invitationDao = {
     findInvitationsResponse:findInvitationsResponse,
     findInvitationsResponseByStatus:findInvitationsResponseByStatus,
     updateInvitation: updateInvitation,
-    findEventsByEventId: findEventsByEventId
+    findEventsByEventId: findEventsByEventId,
+   
 }
 
 function findAll() {
@@ -71,11 +72,27 @@ function findInvitationsResponseByStatus(isActive,invitationResponse,userId){
     });
 }
 
-function updateInvitation(invitationResponse, id) {
-    var updateInvitation = {
-        invitationResponse: invitationResponse,
-    };
-    return Invitation.update(updateInvitation, { where: { id: id } });
+
+
+function updateInvitation(invitationResponse,invitationCancelReason,id) {
+    if(invitationResponse ==="Yes"){
+        var updateInvitation = {
+            invitationResponse: invitationResponse
+        };
+        return Invitation.update(updateInvitation, { where: { id: id } });
+    }
+    else{
+        if(invitationCancelReason){
+            var updateInvitation = {
+                invitationResponse: invitationResponse,
+                invitationCancelReason:invitationCancelReason
+            };
+            return Invitation.update(updateInvitation, { where: { id: id } });
+        }
+        
+        return Sequelize.ValidationError;
+        
+    }
 }
 
 function findEventsByEventId(eventid) {

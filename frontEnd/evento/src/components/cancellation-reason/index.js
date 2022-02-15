@@ -8,31 +8,32 @@ import axios from "axios"
 
 
 
-function Feedback(props) {
-    const [rating, setRating] = useState(0); 
-    const [feedback,setFeedback] = useState('');
+function Cancellation(props) {
+    
+    const [cancellation,setCancellation] = useState('');
     const [flag,setFlag] = useState(false);
 
-   
+    
 
     const handleChange = (event) =>{
         const value = event.target.value;
-        setFeedback(value)
+        setCancellation(value)
     }
 
-    const handleFeedback = (invitationId) => {
+    const handleCancellation = (invitationId) => {
 
-        console.log({
-            invitationId:invitationId,
-            feedback:feedback
-        })
+        // console.log({
+        //     invitationId:invitationId,
+        //     invitationCancelReason:cancellation
+        // })
 
         axios
-            .post('http://localhost:4000/feedbacks',{
-                invitationId:invitationId,
-                feedback:feedback
+            .put(`http://localhost:4000/invitations/${invitationId}`,{
+                invitationCancelReason:cancellation,
+                invitationResponse:"No"
             })
             .then(response => {
+                
                 
             })
             .catch(error => {
@@ -46,7 +47,7 @@ function Feedback(props) {
 
     return (
         <div >
-            <Popup trigger={<Button variant="primary" size="sm">Feedback</Button>}
+            <Popup trigger={<Button variant="danger"  size="sm">No</Button>}
                 position="bottom right ">
                 <Container style={{ backgroundColor: "white" }} id="triggerBox">
                     <Form onSubmit={(e) => e.preventDefault()}>
@@ -55,12 +56,12 @@ function Feedback(props) {
                             <Form.Label style={{fontWeight:"bold"}}> {props.title}</Form.Label>
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                            <Form.Label>Feedback</Form.Label>
+                            <Form.Label>Reason for Cancellation</Form.Label>
                             <Form.Control as="textarea" onChange={handleChange} rows={3} />
                         </Form.Group>
                         {/* <Rate rating={rating} onRating={(rate) => setRating(rate)} /> */}
 
-                        {!flag ? <Button variant="primary" type="submit" onClick={() => handleFeedback(props.invitationId)}>
+                        {!flag ? <Button variant="primary" type="submit" onClick={() => handleCancellation(props.invitationId)}>
                             Submit
                         </Button>:<Button variant="danger" onClick={() => {const x = document.getElementById("triggerBox");console.log(x); x.style.display='none'; window.location.reload(false)}}>Close</Button>
                         }
@@ -70,4 +71,4 @@ function Feedback(props) {
         </div>
     );
 }
-export default Feedback;
+export default Cancellation;
