@@ -10,7 +10,8 @@ var eventController = {
 
     findByEventStatus : findByEventStatus,
     updateEventStatus : updateEventStatus,
-    findEventForUserCalendar : findEventForUserCalendar
+    findEventForUserCalendar : findEventForUserCalendar,
+    updateEventCancellation:updateEventCancellation
 }
 
 async function addEvent(req, res) {
@@ -52,6 +53,21 @@ function updateEvent(req, res) {
     eventDao.updateEvent(req.body, req.params.id).
         then((data) => {
             res.status(200).json({
+                message: "Event updated successfully",
+                event: data
+            })
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+}
+
+function updateEventCancellation(req, res) {
+    console.log(req.params.id,req.body.cancellationReason, req.body.isActive)
+    eventDao.updateEventCancellation(req.body.cancellationReason, req.params.id, req.body.isActive).
+        then((data) => {
+            res.status(200).json({
+
                 message: "Event updated successfully",
                 event: data
             })

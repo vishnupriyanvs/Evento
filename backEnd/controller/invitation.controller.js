@@ -10,6 +10,7 @@ var invitationController = {
     deleteById: deleteById,
     findInvitationsResponseByStatus:findInvitationsResponseByStatus,
     findInvitationsResponse:findInvitationsResponse,
+    
 }
 
 async function addInvitation(req, res) {
@@ -48,7 +49,8 @@ function deleteById(req, res) {
 }
 
 function updateInvitation(req, res) {
-    invitationDao.updateInvitation(req.params.invitation_response, req.params.id).
+    
+    invitationDao.updateInvitation(req.body.invitationResponse,req.body.invitationCancelReason ? req.body.invitationCancelReason : null ,req.params.id).
         then((data) => {
             res.status(200).json({
                 message: "Invitation updated successfully",
@@ -56,7 +58,7 @@ function updateInvitation(req, res) {
             })
         })
         .catch((error) => {
-            console.log(error);
+            res.send("Please submit the cancellation reason")
         });
 }
 
@@ -89,6 +91,8 @@ function findInvitationsResponseByStatus(req, res) {
             console.log(error);
         });
 }
+
+
 
 function findInvitationsByEventId(req, res) {
     const eventid = req.params.eventid;

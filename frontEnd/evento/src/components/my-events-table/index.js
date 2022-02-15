@@ -8,6 +8,7 @@ import StatusSelectionBtn from "../event-select-btn";
 import { Button } from "react-bootstrap";
 import Feedback from "../feedback"
 import axios from "axios"
+import Cancellation from "../cancellation-reason";
 
 function MyEventsTable(props) {
   
@@ -170,7 +171,7 @@ function MyEventsTable(props) {
                         <td>
                           <Button variant="primary" size="sm" onClick={props.handleSubmit} value="Yes" >Yes</Button>
                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                          <Button variant="danger" size="sm" onClick={props.handleSubmit} value="No" >No</Button>
+                          <Cancellation invitationId={item.id} title={item.event.title}/>
                         </td>
                     </>
                     :

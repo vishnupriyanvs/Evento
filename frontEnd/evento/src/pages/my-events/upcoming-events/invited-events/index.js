@@ -36,7 +36,9 @@ function InvitedEvents(props) {
         
         const value = event.target.value;
             axios   
-                 .put(`http://localhost:4000/invitations/${value}/${events[0].id}`,events)
+                 .put(`http://localhost:4000/invitations/${events[0].id}`,{
+                     invitationResponse:value
+                 })
                  .then(response => {
                      setEvents(response.data)
                  })

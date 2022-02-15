@@ -26,7 +26,7 @@ function UpcomingEvents(props) {
                 console.log(err)
             })
     }, [])
-
+console.log(events)
     return (
         <>
         <h5 className="heading">{props.toptitle}</h5>

@@ -11,6 +11,7 @@ var eventDao = {
 
     findByEventStatus : findByEventStatus,
     updateEventStatus : updateEventStatus,
+    updateEventCancellation:updateEventCancellation,
     findEventForUserCalendar : findEventForUserCalendar
 }
 
@@ -53,7 +54,7 @@ function updateEvent(event, id) {
 function findByEventStatus(isActive){
     return Event.findAll({ 
         where: { isActive :  isActive},
-        attributes: ['id','title', 'start_date','end_date','is_active']
+        attributes: ['id','title', 'start_date','end_date','is_active','cancellation_reason']
     });
 }
 
@@ -64,6 +65,13 @@ function updateEventStatus(isActive, id) {
     return Event.update(updateEvent, { where: { id: id } });
 }
 
+function updateEventCancellation(cancellationReason, id, isActive) {
+    var updateEvent = {
+        cancellationReason : cancellationReason,
+        isActive : isActive,
+    };
+    return Event.update(updateEvent, { where: { id: id } });
+}
 
 function findEventForUserCalendar(id){
     return Event.findAll({ 

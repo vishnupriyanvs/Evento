@@ -36,7 +36,7 @@ function CancelledEvents(props) {
     //     })
     // }, [events])
 
-
+console.log(events)
     return (
         <>
         <p>{props.toptitle}</p>
