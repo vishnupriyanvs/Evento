@@ -39,10 +39,12 @@ function StatusSelectionBtn(props) {
     const handleEventCancellation = () =>{
         axios
             .put(`http://localhost:4000/events/cancellation/reason/${props.eventid}`,{
-                cancellationReason:cancellationReason
+                cancellationReason:cancellationReason,
+                isActive: 'Cancelled'
             })
             .then(response => {
-                
+                console.log(response.data)
+                alert("Cancellation Successful")
                 
             })
             .catch(error => {
@@ -52,35 +54,6 @@ function StatusSelectionBtn(props) {
 
     //console.log(props.eventid)
     function handleChange(status){
-       
-        if(status === "Cancelled"){
-            return(
-                <Popup trigger={<Button variant="danger"  size="sm">No</Button>}
-                position="bottom right ">
-                <Container style={{ backgroundColor: "white" }} id="triggerBox">
-                    <Form onSubmit={(e) => e.preventDefault()}>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                            <Form.Label>Event Title :&nbsp;</Form.Label>
-                            <Form.Label style={{fontWeight:"bold"}}> {props.title}</Form.Label>
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                            <Form.Label>Reason for Cancellation</Form.Label>
-                            <Form.Control as="textarea" onChange={handleReasonChange} rows={3} />
-                        </Form.Group>
-                        {/* <Rate rating={rating} onRating={(rate) => setRating(rate)} /> */}
-
-                        {/* {!flag ? <Button variant="primary" type="submit" onClick={() => handleCancellation(props.invitationId)}>
-                            Submit
-                        </Button>:<Button variant="danger" onClick={() => {const x = document.getElementById("triggerBox");console.log(x); x.style.display='none'; window.location.reload(false)}}>Close</Button>
-                        } */}
-                        <Button variant="primary" type="submit" onClick={() => handleEventCancellation()}>
-                            Submit
-                        </Button>
-                    </Form>
-                </Container>
-            </Popup>
-            )
-        }
         axios.put(`http://localhost:4000/events/${props.eventid}/${status}`)
             .then(response => {
                
@@ -94,7 +67,27 @@ function StatusSelectionBtn(props) {
 
         <div className="SelectnBtn1">
             <div className="SelectnBtn1-content">
-                <div>{options.includes(defaults) ? defaults : null}</div>
+
+
+                {defaults === 'Cancelled' && options.includes(defaults) ?  <Popup trigger={<Button variant="danger"  size="sm">Reason</Button>}
+                position="bottom right ">
+                <Container style={{ backgroundColor: "white" }} id="triggerBox">
+                    <Form onSubmit={(e) => e.preventDefault()}>
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                            <Form.Label>Event Title :&nbsp;</Form.Label>
+                            <Form.Label style={{fontWeight:"bold"}}> {props.title}</Form.Label>
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                            <Form.Label>Reason for Cancellation</Form.Label>
+                            <Form.Control as="textarea" onChange={handleReasonChange} rows={3} />
+                        </Form.Group>
+                        <Button variant="primary" type="submit" onClick={() => handleEventCancellation()}>
+                            Submit
+                        </Button>
+                    </Form>
+                </Container>
+            </Popup>:<div>{options.includes(defaults) ? defaults : null}</div>}
+                
                 <div> <FontAwesomeIcon icon={faAngleDown} /></div>
             </div>
             {props.role === 'Admin' ? (<div className="SelectnBtn1-options">
@@ -111,7 +104,8 @@ function StatusSelectionBtn(props) {
                                     }
                                     if (item === 'Cancelled'){
                                         a[props.index].setAttribute('style', 'outline: 1px solid rgb(243, 20, 20); color:rgb(243, 20, 20);')
-                                        handleChange(item)}
+                                        // handleChange(item)
+                                    }
                                     if (item === 'Active'){
                                         a[props.index].setAttribute('style', 'outline: 1px solid #0000FF; color: #0000FF')
                                         handleChange(item)}
