@@ -3,7 +3,8 @@ import emailjs from 'emailjs-com';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Select from 'react-select';
-import {Form} from 'react-bootstrap'
+import {Form,Button} from 'react-bootstrap'
+import './index.css'
 
 export  const InviteUser = () => {
   const form = useRef();
@@ -139,14 +140,21 @@ const [typeOfInvitation,setTypeOfInvitation] = useState()
 
 
   return (
+    <div class="form-bg">
     <Form ref={form} onSubmit={sendEmail}>
+      <div class='title-class'>
       <Form.Label>Event Title</Form.Label>
-      <Form.Control type="text" name="event_title" value={events.title}></Form.Control>
+      <Form.Control  id = 'title-name' type="text" name="event_title" value={events.title}></Form.Control>
       <br/>
+      </div>
+      <div class='description-class'>
       <Form.Label>Description</Form.Label>
-      <Form.Control type="text" name="description" value={events.description}></Form.Control>
+      <Form.Control id='description-title' type="textarea" name="description" value={events.description}  ></Form.Control>
       <br/>
+      </div>
+      <div class='invitation'>
       <Form.Label>Send Invitation To :</Form.Label>
+      <br />
       <Form.Check
         inline
         type='radio'
@@ -197,10 +205,20 @@ const [typeOfInvitation,setTypeOfInvitation] = useState()
         null
       }
       </> 
+      </div>
+      <div class='message'>
       <Form.Label>Message</Form.Label>
       <Form.Control type="textarea" name="message" row="5"/>
       <br/><br/>
+      </div>
+      <div class = 'submit-button'>
       <Form.Control type="submit" value="Send" />
+      </div>
+      {/* <Button type='reset' variant='danger' >Cancel</Button> */}
+      <div class = 'cancel-button'>
+      <Form.Control type='reset' variant='danger' value="Cancel"/>
+      </div>
     </Form>
+    </div>
   );
 };
