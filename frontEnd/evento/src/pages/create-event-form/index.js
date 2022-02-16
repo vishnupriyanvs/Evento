@@ -107,32 +107,39 @@ function CreateEventForm() {
         event.preventDefault()
         const formData = new FormData()
         formData.append('avatar', file);
-        var config = {
-            method: 'post',
-            url: 'http://localhost:4000/images/upload',
-            data: formData,
-            headers: { 
-                'Authorization': `Bearer ${sessionStorage.getItem('myToken')}`, 
-                'Content-Type': 'application/json'
-              }
-        };
+        // var config = {
+        //     method: 'post',
+        //     url: 'http://localhost:4000/images/upload',
+        //     data: formData,
+        //     headers: { 
+        //         'Authorization': `Bearer ${sessionStorage.getItem('myToken')}`, 
+        //         'Content-Type': 'application/json'
+        //       }
+        // };
         setEvents(values => ({ ...values, "created_by": id, "updated_by": id }))
-        console.log(events.created_by + 'helo')
-
-        axios
-            .post('http://localhost:4000/events/', events)
-            .then(async response => {
-                setEvents(response.data);
-                console.log(response.data.id);
-                formData.append('eventid', response.data.id)
-                config.url = `http://localhost:4000/images/upload/${response.data.id}`
-                const x = await axios(config);
-                //console.log(x.data)
-                alert(`${events.title} added successfully`)
-            })
-            .catch(error => {
-                console.log(error)
-            })
+        
+        
+        
+            const response = await apiHandler('post',`events`,events)
+        
+            setEvents(response.data);
+            const imageResponse = await apiHandler('post',`images/upload/${response.data.id}`,formData)
+        
+          
+        // axios
+        //     .post('http://localhost:4000/events/', events)
+        //     .then(async response => {
+        //         setEvents(response.data);
+        //         console.log(response.data.id);
+        //         formData.append('eventid', response.data.id)
+        //         config.url = `http://localhost:4000/images/upload/${response.data.id}`
+        //         const x = await axios(config);
+        //         //console.log(x.data)
+        //         alert(`${events.title} added successfully`)
+        //     })
+        //     .catch(error => {
+        //         console.log(error)
+        //     })
     }
 
     const handleReset = () => {

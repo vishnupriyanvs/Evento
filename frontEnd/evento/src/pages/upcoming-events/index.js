@@ -7,6 +7,7 @@ import services from "../../constants";
 import axios from 'axios';
 import apiHandler from '../../api-handling';
 import {useParams} from 'react-router-dom';
+import tokenHandler from "../../api-handling/tokenHandler";
 
 function UpcomingEvents(props) {
     const {id} = useParams()
@@ -28,9 +29,17 @@ function UpcomingEvents(props) {
     // }, [])
 
     useEffect(async () => {
-        const x = await apiHandler('get',`events/status/Active`)
+        try{
+            const x = await apiHandler('get',`events/status/Active`)
+            setEvents(x.data)
+        }
+        catch(err){
+            const x = await tokenHandler('get',`events/status/Active`,sessionStorage.getItem('refreshToken'),apiHandler)
+            setEvents(x.data)
+        }
+        
         //console.log(x.data);
-        setEvents(x.data)
+        
       },[])
 
 // console.log(events)

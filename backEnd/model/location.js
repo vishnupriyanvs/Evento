@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 const Db = require('../config/database');
-// const user = require('./user');
+// const user = require('./user'); 
 
 const Location = Db.define('location', {
     id: {

@@ -4,7 +4,7 @@ async function apiHandler(method,url,inputs=''){
 var config = {
     method: method,
     url: `http://localhost:4000/${url}`,
-    data: JSON.stringify(inputs),
+    data: inputs,
     headers: { 
       'Authorization': `Bearer ${sessionStorage.getItem('myToken')}`, 
       'Content-Type': 'application/json'
@@ -18,5 +18,6 @@ try {
     return error;
 }
 }
+
 
 export default apiHandler;

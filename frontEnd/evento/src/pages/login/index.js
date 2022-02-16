@@ -38,6 +38,7 @@ function MyForm(props) {
             .then(response => {
                
                 sessionStorage.setItem('myToken', response.data.accessToken)
+                sessionStorage.setItem('refreshToken', response.data.refreshToken)
                 sessionStorage.setItem('myRole', response.data.user.roles[0].user_roles.roleId)
                 toast.success("Welcome" + " " + response.data.user.name, {
                     transition: Slide,
