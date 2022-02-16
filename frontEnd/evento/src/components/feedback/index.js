@@ -3,7 +3,7 @@ import Popup from 'reactjs-popup';
 import { Button, Form, Container } from 'react-bootstrap';
 import Rate from "../Rate";
 import axios from "axios"
-
+import apiHandler from "../../api-handling";
 
 
 
@@ -20,24 +20,33 @@ function Feedback(props) {
         setFeedback(value)
     }
 
-    const handleFeedback = (invitationId) => {
+    const handleFeedback = async (invitationId) => {
 
         console.log({
             invitationId:invitationId,
             feedback:feedback
         })
 
-        axios
-            .post('http://localhost:4000/feedbacks',{
-                invitationId:invitationId,
-                feedback:feedback
-            })
-            .then(response => {
+        // axios
+        //     .post('http://localhost:4000/feedbacks',{
+        //         invitationId:invitationId,
+        //         feedback:feedback
+        //     })
+        //     .then(response => {
                 
-            })
-            .catch(error => {
-                console.log(error)
-            })
+        //     })
+        //     .catch(error => {
+        //         console.log(error)
+        //     })
+
+        
+            const x = await apiHandler('post',`feedbacks`,{
+                         invitationId:invitationId,
+                         feedback:feedback
+                     })
+            //console.log(x.data);
+            
+    
 
             setFlag(true);
 

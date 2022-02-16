@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./index.css";
 import { faUserPlus, faEdit } from "@fortawesome/free-solid-svg-icons";
-import services from "../../services";
+import services from "../../constants";
 import { useNavigate, useParams } from "react-router-dom";
 import StatusSelectionBtn from "../event-select-btn";
 import { Button } from "react-bootstrap";

@@ -1,16 +1,17 @@
 const express = require('express');
 const router = express.Router();
 const invitationController = require('../controller/invitation.controller');
+const authenticateToken = require('../middleware/user.middleware');
 
-router.post('/', invitationController.addInvitation);
-router.get('/', invitationController.findInvitations);
-router.get('/:id', invitationController.findInvitationById);
-router.get('/event/:eventid', invitationController.findInvitationsByEventId)
-router.put('/:id', invitationController.updateInvitation);
-router.delete('/:id', invitationController.deleteById);
+router.post('/',authenticateToken(['Admin']), invitationController.addInvitation);
+router.get('/',authenticateToken(['Admin']), invitationController.findInvitations);
+router.get('/:id', authenticateToken(['Admin','Employee']),invitationController.findInvitationById);
+router.get('/event/:eventid',authenticateToken(['Admin']), invitationController.findInvitationsByEventId)
+router.put('/:id', authenticateToken(['Admin','Employee']),invitationController.updateInvitation);
+//router.delete('/:id',authenticateToken(['Admin']), invitationController.deleteById);
 
-router.get('/response/:is_active/:invitation_response/:id',invitationController.findInvitationsResponseByStatus);
-router.get('/response/:is_active/:id',invitationController.findInvitationsResponse);
+router.get('/response/:is_active/:invitation_response/:id',authenticateToken(['Admin','Employee']),invitationController.findInvitationsResponseByStatus);
+router.get('/response/:is_active/:id',authenticateToken(['Admin','Employee']),invitationController.findInvitationsResponse);
 
 // router.put('/:invitation_response/:id', invitationController.updateInvitation);
 

@@ -5,6 +5,7 @@ import axios from 'axios';
 import Select from 'react-select';
 import {Form,Button} from 'react-bootstrap'
 import './index.css'
+import apiHandler from '../../api-handling';
 
 export  const InviteUser = () => {
   const form = useRef();
@@ -23,36 +24,54 @@ export  const InviteUser = () => {
   const optionsGroup = [];
  
 
-  useEffect(() => {
-    axios.get(`http://localhost:4000/events/${eventid}`)
-      .then(response => {
-        setEvents(response.data);
-      })
-      .catch(error => {
-        console.log(error);
-      })
+  // useEffect(() => {
+  //   axios.get(`http://localhost:4000/events/${eventid}`)
+  //     .then(response => {
+  //       setEvents(response.data);
+  //     })
+  //     .catch(error => {
+  //       console.log(error);
+  //     })
+  // },[])
+
+  useEffect(async () => {
+    const x = await apiHandler('get',`events/${eventid}`)
+    //console.log(x.data);
+    setEvents(x.data)
   },[])
 
-  useEffect(() => {
-    axios.get(`http://localhost:4000/users`)
-      .then(response => {
-        setUsers(response.data)
-      })
-      .catch(error => {
-        console.log(error)
-      })
+
+  // useEffect(() => {
+  //   axios.get(`http://localhost:4000/users`)
+  //     .then(response => {
+  //       setUsers(response.data)
+  //     })
+  //     .catch(error => {
+  //       console.log(error)
+  //     })
+  // },[])
+  useEffect(async () => {
+    const x = await apiHandler('get',`users`)
+    //console.log(x.data);
+    setUsers(x.data)
   },[])
   
 
-  useEffect(() => {
-    axios.get(`http://localhost:4000/jobTitles/`)
-      .then(response => {
-        setGroups(response.data)
-      })
-      .catch(error =>{
-        console.log(error)
-      })
+  // useEffect(() => {
+  //   axios.get(`http://localhost:4000/jobTitles/`)
+  //     .then(response => {
+  //       setGroups(response.data)
+  //     })
+  //     .catch(error =>{
+  //       console.log(error)
+  //     })
+  // },[])
+  useEffect(async () => {
+    const x = await apiHandler('get',`jobTitles`)
+    //console.log(x.data);
+    setGroups(x.data)
   },[])
+
 
 
 users.map((user) => {
@@ -107,7 +126,7 @@ function handleChange(event){
           } 
   
 
-  const sendEmail = (e) => {
+  const sendEmail = async (e) => {
     e.preventDefault();
     console.log(form.current)
     emailjs.sendForm('gmail_try', 'template_gmail_try', form.current, 'user_drLq450jZbjUn4iK1PeZw')
@@ -120,14 +139,16 @@ function handleChange(event){
     
     const uniqueInviteesArray = Array.from(inviteesArray.reduce((map, obj)=> map.set(obj.userId, obj), new Map()).values())
 
-    axios.post(`http://localhost:4000/invitations/`,uniqueInviteesArray)
-        .then(response => {
-         alert(`Invitation sent successfully`)
-      })
-      .catch(error => {
-          console.log(error)
-      })
-      
+    // axios.post(`http://localhost:4000/invitations/`,uniqueInviteesArray)
+    //     .then(response => {
+    //      alert(`Invitation sent successfully`)
+    //   })
+    //   .catch(error => {
+    //       console.log(error)
+    //   })
+      const x = await apiHandler('get',`invitations`,uniqueInviteesArray)
+      //console.log(x.data);
+      alert('Invitation sent successfully');
   };
   
 

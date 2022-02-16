@@ -3,8 +3,9 @@ import SizedBox from "../../../components/sized-box";
 import './index.css';
 import { useNavigate, Link } from "react-router-dom";
 import MyEventsTable from "../../../components/my-events-table";
-import services from "../../../services";
+import services from "../../../constants";
 import axios from 'axios';
+import apiHandler from '../../../api-handling';
 
 import {useParams} from 'react-router-dom';
 
@@ -32,18 +33,25 @@ function UserCancelledEvents(props) {
 
     const [events, setEvents] = useState([]);
 
-    useEffect(() => {
-        axios
-            .get(`http://localhost:4000/invitations/response/Cancelled/${id}`)
-            .then(response => {
+    // useEffect(() => {
+    //     axios
+    //         .get(`http://localhost:4000/invitations/response/Cancelled/${id}`)
+    //         .then(response => {
                
 
-                setEvents(response.data)
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-    }, [])
+    //             setEvents(response.data)
+    //         })
+    //         .catch((err) => {
+    //             console.log(err)
+    //         })
+    // }, [])
+
+    useEffect(async () => {
+        const x = await apiHandler('get',`invitations/response/Cancelled/${id}`)
+        //console.log(x.data);
+        setEvents(x.data)
+      },[])
+
 
     // useEffect(() => {
     //     checkFilter.forEach((data) => {

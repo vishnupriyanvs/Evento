@@ -1,17 +1,18 @@
 const express = require('express');
 const router = express.Router();
 const eventController = require('../controller/event.controller');
+const authenticateToken = require('../middleware/user.middleware');
 
-router.post('/', eventController.addEvent);
-router.get('/', eventController.findEvents);
-router.get('/:id', eventController.findEventById);
-router.put('/:id', eventController.updateEvent);
-router.delete('/:id', eventController.deleteById);
+router.post('/',authenticateToken(['Admin']), eventController.addEvent);
+router.get('/',authenticateToken(['Admin']), eventController.findEvents);
+router.get('/:id',authenticateToken(['Admin','Employee']), eventController.findEventById);
+router.put('/:id',authenticateToken(['Admin']), eventController.updateEvent);
+//router.delete('/:id', authenticateToken(['Admin']),eventController.deleteById);
 
-router.get('/status/:is_active',eventController.findByEventStatus);
-router.put('/:id/:isActive',eventController.updateEventStatus);
+router.get('/status/:is_active',authenticateToken(['Admin','Employee']),eventController.findByEventStatus);
+router.put('/:id/:isActive',authenticateToken(['Admin']),eventController.updateEventStatus);
 
-router.get('/calendar/:id', eventController.findEventForUserCalendar);
-router.put('/cancellation/reason/:id', eventController.updateEventCancellation);
+router.get('/calendar/:id', authenticateToken(['Admin','Employee']),eventController.findEventForUserCalendar);
+router.put('/cancellation/reason/:id',authenticateToken(['Admin','Employee']), eventController.updateEventCancellation);
 
 module.exports = router;

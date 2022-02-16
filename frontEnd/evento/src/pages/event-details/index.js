@@ -2,10 +2,9 @@ import './index.css'
 import { useState, useEffect, React } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserPlus, faEdit, faClock, faUserAlt, faGlobe, faPhone, faUsers, faUserCheck } from "@fortawesome/free-solid-svg-icons";
-
+import apiHandler from '../../api-handling';
 
 function ViewEvents() {
 
@@ -19,27 +18,40 @@ function ViewEvents() {
     const { id, eventid } = useParams();
     console.log(id, eventid)
 
-    useEffect(() => {
-        axios.get(`http://localhost:4000/events/${eventid}`)
-            .then(response => {
+    // useEffect(() => {
+    //     axios.get(`http://localhost:4000/events/${eventid}`)
+    //         .then(response => {
                
-                setEvents(response.data)
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-        infoParticipants(eventid);
-    }, [])
+    //             setEvents(response.data)
+    //         })
+    //         .catch((err) => {
+    //             console.log(err)
+    //         })
+    //     infoParticipants(eventid);
+    // }, [])
+    
+    useEffect(async () => {
+        const x = await apiHandler('get',`events/${eventid}`)
+        //console.log(x.data);
+        setEvents(x.data)
+      },[])
 
-    useEffect(() => {
-        axios.get(`http://localhost:4000/users/${events.contact_person}`)
-            .then(response => {
-                setUsers(response.data)
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-    }, [events])
+
+    // useEffect(() => {
+    //     axios.get(`http://localhost:4000/users/${events.contact_person}`)
+    //         .then(response => {
+    //             setUsers(response.data)
+    //         })
+    //         .catch((err) => {
+    //             console.log(err)
+    //         })
+    // }, [events])
+
+    useEffect(async () => {
+        const x = await apiHandler('get',`users/${events.contact_person}`)
+        //console.log(x.data);
+        setUsers(x.data)
+      },[events])
 
     const infoParticipants = (eventid) => {
 

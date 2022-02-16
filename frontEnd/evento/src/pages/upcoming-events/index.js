@@ -3,9 +3,9 @@ import SizedBox from "../../components/sized-box";
 import './index.css';
 import { useNavigate, Link } from "react-router-dom";
 import EventsTable from "../../components/events-table";
-import services from "../../services";
+import services from "../../constants";
 import axios from 'axios';
-
+import apiHandler from '../../api-handling';
 import {useParams} from 'react-router-dom';
 
 function UpcomingEvents(props) {
@@ -15,18 +15,25 @@ function UpcomingEvents(props) {
     const navigate = useNavigate();
     const [events, setEvents] = useState([]);
 
-    useEffect(() => {
-        axios
-            .get('http://localhost:4000/events/status/Active')
-            .then(response => {
+    // useEffect(() => {
+    //     axios
+    //         .get('http://localhost:4000/events/status/Active')
+    //         .then(response => {
                 
-                setEvents(response.data)
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-    }, [])
-console.log(events)
+    //             setEvents(response.data)
+    //         })
+    //         .catch((err) => {
+    //             console.log(err)
+    //         })
+    // }, [])
+
+    useEffect(async () => {
+        const x = await apiHandler('get',`events/status/Active`)
+        //console.log(x.data);
+        setEvents(x.data)
+      },[])
+
+// console.log(events)
     return (
         <>
         <h5 className="heading">{props.toptitle}</h5>
