@@ -3,9 +3,7 @@ import Popup from 'reactjs-popup';
 import { Button, Form, Container } from 'react-bootstrap';
 import Rate from "../Rate";
 import axios from "axios"
-
-
-
+import apiHandler from '../../api-handling'
 
 
 function Cancellation(props) {
@@ -20,25 +18,28 @@ function Cancellation(props) {
         setCancellation(value)
     }
 
-    const handleCancellation = (invitationId) => {
+    const handleCancellation = async (invitationId) => {
 
         // console.log({
         //     invitationId:invitationId,
         //     invitationCancelReason:cancellation
         // })
 
-        axios
-            .put(`http://localhost:4000/invitations/${invitationId}`,{
-                invitationCancelReason:cancellation,
-                invitationResponse:"No"
-            })
-            .then(response => {
+        // axios
+        //     .put(`http://localhost:4000/invitations/${invitationId}`,{
+        //         invitationCancelReason:cancellation,
+        //         invitationResponse:"No"
+        //     })
+        //     .then(response => {
                 
                 
-            })
-            .catch(error => {
-                console.log(error)
-            })
+        //     })
+        //     .catch(error => {
+        //         console.log(error)
+        //     })
+
+    const x = await apiHandler('put',`invitations/${invitationId}`,{invitationCancelReason:cancellation, invitationResponse:"No"})
+        
 
             setFlag(true);
 

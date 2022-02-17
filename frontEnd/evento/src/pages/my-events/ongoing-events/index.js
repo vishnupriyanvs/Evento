@@ -3,12 +3,12 @@ import SizedBox from "../../../components/sized-box";
 import './index.css';
 import { useNavigate, Link } from "react-router-dom";
 import MyEventsTable from "../../../components/my-events-table";
-import services from "../../../services";
+import services from "../../../constants";
 import axios from 'axios';
-
+import apiHandler from '../../../api-handling';
 import {useParams} from 'react-router-dom';
 
-function UserOnGoingEvents() {
+function UserOnGoingEvents(props) {
     const {id} = useParams()
     
     
@@ -32,17 +32,24 @@ function UserOnGoingEvents() {
 
     const [events, setEvents] = useState([]);
 
-    useEffect(() => {
-        axios
-            .get(`http://localhost:4000/invitations/response/InProgress/Yes/${id}`)
-            .then(response => {
+    // useEffect(() => {
+    //     axios
+    //         .get(`http://localhost:4000/invitations/response/InProgress/Yes/${id}`)
+    //         .then(response => {
                
-                setEvents(response.data)
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-    }, [])
+    //             setEvents(response.data)
+    //         })
+    //         .catch((err) => {
+    //             console.log(err)
+    //         })
+    // }, [])
+
+    useEffect(async () => {
+        const x = await apiHandler('get',`invitations/response/InProgress/Yes/${id}`)
+        //console.log(x.data);
+        setEvents(x.data)
+      },[])
+
 
     // useEffect(() => {
     //     checkFilter.forEach((data) => {
@@ -67,6 +74,8 @@ function UserOnGoingEvents() {
     
    
     return (
+        <>
+        <p>{props.toptitle}</p>
         <div className="upcomingEventsTable">
             <SizedBox height="2vh" />
             <MyEventsTable
@@ -77,7 +86,7 @@ function UserOnGoingEvents() {
                 // onClick ={mapping}
                 myEventType={services.myEventType.ONGOING_EVENT}
             />
-        </div>
+        </div></>
     )
 }
 

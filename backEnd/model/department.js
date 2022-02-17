@@ -13,6 +13,11 @@ const Department = Db.define('department', {
         allowNull: false,
         unique: true
     },
+    mail : {
+        type : Sequelize.STRING,
+        allowNull : true,
+        unique : true
+    }
 
 },
     {

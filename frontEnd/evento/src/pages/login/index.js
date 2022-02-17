@@ -38,13 +38,19 @@ function MyForm(props) {
             .then(response => {
                
                 sessionStorage.setItem('myToken', response.data.accessToken)
+                sessionStorage.setItem('refreshToken', response.data.refreshToken)
                 sessionStorage.setItem('myRole', response.data.user.roles[0].user_roles.roleId)
                 toast.success("Welcome" + " " + response.data.user.name, {
                     transition: Slide,
                     hideProgressBar: false,
                     autoClose: 6000
                 })
-                navigate(`user/temp/${response.data.user.id}`)
+                if(response.data.user.roles[0].user_roles.roleId === 1){
+                    navigate(`/user/upcoming-events/${response.data.user.id}`)
+                }
+                else if(response.data.user.roles[0].user_roles.roleId === 2){
+                    navigate(`/user/my-events/upcoming-events/invited/${response.data.user.id}`)
+                }
             })
             .catch(error => {
                 sessionStorage.clear();

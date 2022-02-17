@@ -1,0 +1,75 @@
+.form-bg{ 
+    position: relative;
+    width: 905px;
+    height: 576px;
+    left: 40px;
+    top: 95px;
+    background: #EFEFEF;
+    border-radius: 7px;
+}
+
+.title-class{
+    position: absolute;
+    width: 804px;
+    height: 77px;
+    left: 50px;
+    top: 20px;
+}
+
+#title-name{
+    background: rgba(221, 227, 232, 0.74);
+box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.1);
+border-radius: 5px;
+}
+
+
+
+.description-class{
+    position: absolute;
+    width: 804px;
+    height: 1000px;
+    left: 50px;
+    top: 100px;
+}
+
+#description-title{
+background: rgba(221, 227, 232, 0.74);
+box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.1);
+border-radius: 5px;
+position: absolute;
+height: 1000;
+}
+
+.invitation{
+    position: absolute;
+    width: 799px;
+    height: 149px;
+    left: 50px;
+    top: 200px;
+
+}
+
+.message{
+    position: absolute;
+    width: 799px;
+    height: 149px;
+    left: 50px;
+    top: 350px;
+}
+
+.submit-button{
+    position: absolute;
+    width: 165px;
+    height: 56px;
+    left: 500px;
+    top: 500px;
+}
+
+.cancel-button{
+    position: absolute;
+    width: 165px;
+    height: 56px;
+    left: 300px;
+    top: 500px;
+}
+

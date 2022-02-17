@@ -3,48 +3,57 @@ import SizedBox from "../../../../components/sized-box";
 import './index.css';
 import { useNavigate, Link } from "react-router-dom";
 import MyEventsTable from "../../../../components/my-events-table";
-import services from "../../../../services";
+import services from "../../../../constants";
 import axios from 'axios';
-
-
+import apiHandler from '../../../../api-handling';
 import {useParams} from 'react-router-dom';
 
 
 
-function InvitedEvents() {
+function InvitedEvents(props) {
     const {id} = useParams()
     const navigate = useNavigate();
     const [events, setEvents] = useState([]);
     
     
 
-    useEffect(() => {
-        axios
-            .get(`http://localhost:4000/invitations/response/Active/NotResponded/${id}`)
-            .then(response => {
+    // useEffect(() => {
+    //     axios
+    //         .get(`http://localhost:4000/invitations/response/Active/NotResponded/${id}`)
+    //         .then(response => {
                
-                setEvents(response.data)
+    //             setEvents(response.data)
                 
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-    }, [])
+    //         })
+    //         .catch((err) => {
+    //             console.log(err)
+    //         })
+    // }, [])
+
+    useEffect(async () => {
+        const x = await apiHandler('get',`invitations/response/Active/NotResponded/${id}`)
+        //console.log(x.data);
+        setEvents(x.data)
+      },[])
     
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         
         const value = event.target.value;
-            axios   
-                 .put(`http://localhost:4000/invitations/${events[0].id}`,{
-                     invitationResponse:value
-                 })
-                 .then(response => {
-                     setEvents(response.data)
-                 })
-                 .catch(error => {
-                     console.log(error)
-                 })
+            // axios   
+            //      .put(`http://localhost:4000/invitations/${events[0].id}`,{
+            //          invitationResponse:value
+            //      })
+            //      .then(response => {
+            //          setEvents(response.data)
+            //      })
+            //      .catch(error => {
+            //          console.log(error)
+            //      })
+
+                const x = await apiHandler('put',`invitations/${events[0].id}`,{invitationResponse:value})
+                //console.log(x.data);
+                setEvents(x.data)
 
             // 
             window.location.reload(false);         
@@ -73,6 +82,8 @@ function InvitedEvents() {
     
    
     return (
+        <>
+        <p>{props.toptitle}</p>
         <div className="upcomingEventsTable">
             <SizedBox height="2vh" />
             <MyEventsTable
@@ -85,6 +96,7 @@ function InvitedEvents() {
                 myEventType={services.myEventType.UPCOMING_EVENT.INVITED_EVENT}
             />
         </div>
+        </>
     )
 }
 

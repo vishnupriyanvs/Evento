@@ -3,6 +3,7 @@ import React,{useState,useEffect} from 'react'
 import EventForm from "../../components/event-form";
 import './index.css'
 import {useParams} from 'react-router-dom';
+import apiHandler from '../../api-handling';
 
 function EditEventForm(){
 
@@ -68,48 +69,66 @@ function EditEventForm(){
     }
     // setEvents(values => ({...values,"created_by":`${id}`}))
     
-    useEffect(() => {
-        axios.get(`http://localhost:4000/events/${eventid}`)
-            .then(response => {
+    // useEffect(() => {
+    //     axios.get(`http://localhost:4000/events/${eventid}`)
+    //         .then(response => {
                
-                setEvents(response.data);
-            })
-            .catch(error => {
-                console.log(error)
-            })
-    },[])
+    //             setEvents(response.data);
+    //         })
+    //         .catch(error => {
+    //             console.log(error)
+    //         })
+    // },[])
 
-    useEffect(() => {
-        axios
-            .get("http://localhost:4000/users/contactpersons")
-                .then((response) => {
+    useEffect(async () => {
+        const x = await apiHandler('get',`events/${eventid}`)
+        //console.log(x.data);
+        setEvents(x.data)
+      },[])
+
+    // useEffect(() => {
+    //     axios
+    //         .get("http://localhost:4000/users/contactpersons")
+    //             .then((response) => {
                
                 
-                setUsers(response.data);
-        });
-      },[]);
+    //             setUsers(response.data);
+    //     });
+    //   },[]);
+
+    useEffect(async () => {
+        const x = await apiHandler('get',`users/contactpersons`)
+        //console.log(x.data);
+        setUsers(x.data)
+      },[])
 
       users.map((user) => {
         const obj = {value : `${user.id}`,  label: `${user.name}`}
         options.push(obj)
       })
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         
         event.preventDefault()
         setEvents(values => ({...values,"updated_by": id}))
         // setSubmitted(true)
        
 
-            axios   
-                 .put(`http://localhost:4000/events/${eventid}`,events)
-                 .then(response => {
-                     setEvents(response.data)
-                     alert(`${events.title} updated successfully`)
-                 })
-                 .catch(error => {
-                     console.log(error)
-                 })
+            // axios   
+            //      .put(`http://localhost:4000/events/${eventid}`,events)
+            //      .then(response => {
+            //          setEvents(response.data)
+            //          alert(`${events.title} updated successfully`)
+            //      })
+            //      .catch(error => {
+            //          console.log(error)
+            //      })
+
+            
+                const x = await apiHandler('put',`users/contactpersons`)
+                //console.log(x.data);
+                setUsers(x.data)
+              
     }
 
     const handleReset = () => {
@@ -128,7 +147,8 @@ function EditEventForm(){
                 users = {options}
                 buttonValue = "Update Event"
                 updated_by = {id}
-                eventid = {eventid} />
+                eventid = {eventid} 
+                disabled = {true}/>
         </div>
     )
 

@@ -1,7 +1,8 @@
 import React from "react";
 import {useState, useEffect} from 'react';
 import axios from 'axios';
-import {useParams} from 'react-router-dom'
+import {useParams} from 'react-router-dom';
+import apiHandler from "../../api-handling";
 
 
 function AdminAccess(){
@@ -9,30 +10,32 @@ function AdminAccess(){
   
     const [users, setUsers] = useState([]);
 
-  useEffect(() => {
-   
+  // useEffect(() => {
+  //   var config = {
+  //       method: 'get',
+  //       url: `http://localhost:4000/users/${id}`,
+  //       headers: { 
+  //         'Authorization': `Bearer ${sessionStorage.getItem('myToken')}`, 
+  //         'Content-Type': 'application/json'
+  //       }
+  //     };
+  //   axios(config).then((response) => {
+  //   setUsers(response.data);
+  //   })
 
-    var config = {
-        method: 'get',
-        url: `http://localhost:4000/users/${id}`,
-        headers: { 
-          'Authorization': `Bearer ${sessionStorage.getItem('myToken')}`, 
-          'Content-Type': 'application/json'
-        }
-      };
+  //   .catch(error =>{
+  //       sessionStorage.clear();
+  //       if(error){
+  //           alert('Not authorized') 
+  //       }
+  //   })
+  // }, []);
 
-    axios(config).then((response) => {
-     
-      setUsers(response.data);
-    })
-
-    .catch(error =>{
-        sessionStorage.clear();
-        if(error){
-            alert('Not authorized') 
-        }
-    })
-  }, []);
+  useEffect(async () => {
+    const x = await apiHandler('get',`users/${id}`)
+    //console.log(x.data);
+    setUsers(x.data)
+  },[])
 
 
 

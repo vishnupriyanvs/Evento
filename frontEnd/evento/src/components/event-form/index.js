@@ -5,7 +5,22 @@ import Select from 'react-select'
 
 
 function EventForm(props) {
-    console.log(props)
+    //console.log(props)
+    //console.log(new Date().getDate())
+
+    function Today(){
+        let today;
+        if(new Date().getMonth() <10){
+            today = `${new Date().getFullYear()}-0${new Date().getMonth()}-${new Date().getDate()}`
+        }
+        else{
+            today = `${new Date().getFullYear()}-${new Date().getMonth()}-${new Date().getDate()}`
+        }
+        console.log(today)
+        return today;
+    }
+    Today()
+
     return (
         <div className="form-style-5">
             <form onSubmit={props.handleSubmit}>
@@ -20,7 +35,9 @@ function EventForm(props) {
                             name="title" 
                             value={props.events.title}
                             onChange={props.handleChange}
-                            placeholder="Enter Event Title" required />
+                            placeholder="Enter Event Title" 
+                            disabled = {props.disabled} 
+                            required />
                         </div>
                     </div>
 
@@ -33,7 +50,10 @@ function EventForm(props) {
                             name="description" 
                             value={props.events.description}
                             onChange={props.handleChange}
-                            placeholder="Event Description" required/>
+                            placeholder="Event Description" 
+                            disabled = {props.disabled}
+                            required
+                            />
                         </div>
                     </div>
                     
@@ -46,7 +66,8 @@ function EventForm(props) {
                                     id = "start-date"
                                     name ="startDate" 
                                     value = {props.events.startDate} 
-                                    onChange={props.handleChange} required />
+                                    onChange={props.handleChange}
+                                     required />
                             </div>
                             <div className="formCol">
                                 <div>End Date<span className="mandatory">*</span></div>
@@ -55,7 +76,8 @@ function EventForm(props) {
                                     id = "end-date"
                                     name ="endDate" 
                                     value = {props.events.endDate}
-                                    onChange={props.handleChange} required />
+                                    onChange={props.handleChange} 
+                                    required />
                             </div>
                         </div>
                         <div className="formTable">
@@ -67,7 +89,8 @@ function EventForm(props) {
                                     id = "start-time"
                                     name ="startTime" 
                                     value = {props.events.startTime} 
-                                    onChange={props.handleChange} required />
+                                    onChange={props.handleChange}
+                                     required />
                             </div>
                             <div className="formCol">
                                 <div>End Time<span className="mandatory">*</span></div>

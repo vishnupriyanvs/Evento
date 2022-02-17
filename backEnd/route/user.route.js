@@ -3,16 +3,16 @@ const router = express.Router();
 const userController = require('../controller/user.controller');
 const authenticateToken = require('../middleware/user.middleware')
 
-router.post('/', userController.addUser);
+//router.post('/',authenticateToken(['Admin']),userController.addUser);
 
-router.get('/contactpersons',userController.findContactPersons)
+router.get('/contactpersons',authenticateToken(['Admin']),userController.findContactPersons)
 
-router.get('/',userController.findUsers);
+router.get('/',authenticateToken(['Admin']),userController.findUsers);
+router.get('/:id',authenticateToken(['Admin']), userController.findUserById);
 //router.get('/:id',authenticateToken(['Admin']), userController.findUserById);
-router.get('/:id', userController.findUserById);
 
-router.put('/:id', userController.updateUser);
-router.delete('/:id', userController.deleteById);
+//router.put('/:id',authenticateToken(['Admin']),userController.updateUser);
+//router.delete('/:id',authenticateToken(['Admin']),userController.deleteById);
 
 router.post('/login',userController.loginUser);
 router.post('/relogin',userController.reLogin);

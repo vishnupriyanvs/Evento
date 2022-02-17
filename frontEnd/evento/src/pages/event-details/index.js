@@ -2,10 +2,9 @@ import './index.css'
 import { useState, useEffect, React } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserPlus, faEdit, faClock, faUserAlt, faGlobe, faPhone, faUsers, faUserCheck } from "@fortawesome/free-solid-svg-icons";
-
+import apiHandler from '../../api-handling';
 
 function ViewEvents() {
 
@@ -19,37 +18,54 @@ function ViewEvents() {
     const { id, eventid } = useParams();
     console.log(id, eventid)
 
-    useEffect(() => {
-        axios.get(`http://localhost:4000/events/${eventid}`)
-            .then(response => {
+    // useEffect(() => {
+    //     axios.get(`http://localhost:4000/events/${eventid}`)
+    //         .then(response => {
                
-                setEvents(response.data)
-            })
-            .catch((err) => {
-                console.log(err)
-            })
+    //             setEvents(response.data)
+    //         })
+    //         .catch((err) => {
+    //             console.log(err)
+    //         })
+    //     infoParticipants(eventid);
+    // }, [])
+    
+    useEffect(async () => {
+        const x = await apiHandler('get',`events/${eventid}`)
+        //console.log(x.data);
+        setEvents(x.data)
         infoParticipants(eventid);
-    }, [])
+      },[])
 
-    useEffect(() => {
-        axios.get(`http://localhost:4000/users/${events.contact_person}`)
-            .then(response => {
-                setUsers(response.data)
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-    }, [events])
 
-    const infoParticipants = (eventid) => {
+    // useEffect(() => {
+    //     axios.get(`http://localhost:4000/users/${events.contact_person}`)
+    //         .then(response => {
+    //             setUsers(response.data)
+    //         })
+    //         .catch((err) => {
+    //             console.log(err)
+    //         })
+    // }, [events])
 
-        const config = {
-            method: 'get',
-            url: `http://localhost:4000/invitations/event/${eventid}`,
-        };
-        axios(config).then((response) => {
-            console.log(response.data)
-            setParticipants(response.data.length)
+    useEffect(async () => {
+        const x = await apiHandler('get',`users/${events.contact_person}`)
+        //console.log(x.data);
+        setUsers(x.data)
+      },[events])
+
+    const infoParticipants = async (eventid) => {
+
+        // const config = {
+        //     method: 'get',
+        //     url: `http://localhost:4000/invitations/event/${eventid}`,
+        //     headers: { 
+        //         'Authorization': `Bearer ${sessionStorage.getItem('myToken')}`, 
+        //         'Content-Type': 'application/json'
+        //     }
+        // };
+        const response = await apiHandler('get',`invitations/event/${eventid}`)
+        setParticipants(response.data.length)
             response.data.forEach((item, i) => {
 
               
@@ -61,10 +77,25 @@ function ViewEvents() {
             setInvitees(invites);
             invites = response.data.filter((item, i) => { if (item.invitationResponse === 'No') return item })
             setCancellationReason(invites);
-            console.log(invites);
+            setParticipantRespponse(participantResponse)
+        // axios(config).then((response) => {
+        //     console.log(response.data)
+        //     setParticipants(response.data.length)
+        //     response.data.forEach((item, i) => {
 
-        })
-        setParticipantRespponse(participantResponse)
+              
+        //         participantResponse.push({ "name": item.user.name, "response": item.invitationResponse });
+        //         participantResponse.push({ "id": item.id, "name": item.user.name, "response": item.invitationResponse });
+        //     })
+        //     let invites = response.data;
+        //     invites = invites.filter((item, i) => { if (item.invitationResponse === 'Yes') return item })
+        //     setInvitees(invites);
+        //     invites = response.data.filter((item, i) => { if (item.invitationResponse === 'No') return item })
+        //     setCancellationReason(invites);
+        //     console.log(invites);
+
+        // })
+        // setParticipantRespponse(participantResponse)
        
     }
 

@@ -2,8 +2,9 @@ import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import EventForm from "../../components/event-form";
 import './index.css'
-
+import apiHandler from '../../api-handling';
 import { useParams } from 'react-router-dom';
+
 
 function CreateEventForm() {
     const { id } = useParams()
@@ -79,14 +80,20 @@ function CreateEventForm() {
         setFile(event.target.files[0])
         setFileName(event.target.files[0].name)
     }
-    console.log('line 23' + events)
-    useEffect(() => {
-        axios
-            .get("http://localhost:4000/users/contactpersons")
-            .then((response) => {
-                setUsers(response.data);
-            });
-    }, []);
+    //console.log('line 23' + events)
+    // useEffect(() => {
+    //     axios
+    //         .get("http://localhost:4000/users/contactpersons")
+    //         .then((response) => {
+    //             setUsers(response.data);
+    //         });
+    // }, []);
+
+    useEffect(async () => {
+        const x = await apiHandler('get',`users/contactpersons`)
+        //console.log(x.data);
+        setUsers(x.data)
+      },[])
 
     users.map((user) => {
         const obj = { value: `${user.id}`, label: `${user.name}`, name: 'contact_person' }
@@ -95,33 +102,44 @@ function CreateEventForm() {
 
 
 
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
 
         event.preventDefault()
         const formData = new FormData()
         formData.append('avatar', file);
-        var config = {
-            method: 'post',
-            url: 'http://localhost:4000/images/upload',
-            data: formData
-        };
+        // var config = {
+        //     method: 'post',
+        //     url: 'http://localhost:4000/images/upload',
+        //     data: formData,
+        //     headers: { 
+        //         'Authorization': `Bearer ${sessionStorage.getItem('myToken')}`, 
+        //         'Content-Type': 'application/json'
+        //       }
+        // };
         setEvents(values => ({ ...values, "created_by": id, "updated_by": id }))
-        console.log(events.created_by + 'helo')
-
-        axios
-            .post('http://localhost:4000/events/', events)
-            .then(async response => {
-                setEvents(response.data);
-                console.log(response.data.id);
-                formData.append('eventid', response.data.id)
-                config.url = `http://localhost:4000/images/upload/${response.data.id}`
-                const x = await axios(config);
-                console.log(x.data)
-                alert(`${events.title} added successfully`)
-            })
-            .catch(error => {
-                console.log(error)
-            })
+        
+        
+        
+            const response = await apiHandler('post',`events`,events)
+        
+            setEvents(response.data);
+            const imageResponse = await apiHandler('post',`images/upload/${response.data.id}`,formData)
+        
+          
+        // axios
+        //     .post('http://localhost:4000/events/', events)
+        //     .then(async response => {
+        //         setEvents(response.data);
+        //         console.log(response.data.id);
+        //         formData.append('eventid', response.data.id)
+        //         config.url = `http://localhost:4000/images/upload/${response.data.id}`
+        //         const x = await axios(config);
+        //         //console.log(x.data)
+        //         alert(`${events.title} added successfully`)
+        //     })
+        //     .catch(error => {
+        //         console.log(error)
+        //     })
     }
 
     const handleReset = () => {

@@ -6,7 +6,8 @@ import axios from "axios";
 import Popup from 'reactjs-popup';
 import { Button, Form, Container } from 'react-bootstrap';
 import { confirm } from "react-confirm-box";
-import services from "../../services";
+import services from "../../constants";
+import apiHandler from "../../api-handling";
 
 function StatusSelectionBtn(props) {
     const [options, setOptions] = useState(["Hi", "Its", "Working"]);
@@ -39,34 +40,54 @@ function StatusSelectionBtn(props) {
         const value = event.target.value;
         setCancellationReason(value);
     }
-    const handleEventCancellation = () =>{
-        axios
-            .put(`http://localhost:4000/events/cancellation/reason/${props.eventid}`,{
-                cancellationReason:cancellationReason,
-                isActive: 'Cancelled'
-            })
-            .then(response => {
-                console.log(response.data)
-                setDefault("Cancelled")
+    const handleEventCancellation = async () =>{
+        // axios
+        //     .put(`http://localhost:4000/events/cancellation/reason/${props.eventid}`,{
+        //         cancellationReason:cancellationReason,
+        //         isActive: 'Cancelled'
+        //     })
+        //     .then(response => {
+        //         console.log(response.data)
+        //         setDefault("Cancelled")
                 
-            })
-            .catch(error => {
-                console.log(error)
-            })
+        //     })
+        //     .catch(error => {
+        //         console.log(error)
+        //     })
+
+        
+            const x = await apiHandler('put',`events/cancellation/reason/${props.eventid}`,{
+                         cancellationReason:cancellationReason,
+                         isActive: 'Cancelled'
+                     })
+            //console.log(x.data);
+            setDefault("Cancelled")
+          
+    
             setFlag(true);
+
+            
 
     }
 
     //console.log(props.eventid)
-    function handleChange(status){
-        axios.put(`http://localhost:4000/events/${props.eventid}/${status}`)
-            .then(response => {
+    async function handleChange(status){
+    //     axios.put(`http://localhost:4000/events/${props.eventid}/${status}`)
+    //         .then(response => {
                
-            })
-            .catch(error => {
-                console.log(error)
-            })
-    }
+    //         })
+    //         .catch(error => {
+    //             console.log(error)
+    //         })
+    const x = await apiHandler('put',`events/${props.eventid}/${status}`)
+     }
+    
+
+    
+        
+        //console.log(x.data);
+        
+
     console.log(props.reason)
     return (
 
