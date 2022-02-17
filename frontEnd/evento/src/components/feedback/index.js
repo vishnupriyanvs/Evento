@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Popup from 'reactjs-popup';
 import { Button, Form, Container } from 'react-bootstrap';
-import Rate from "../Rate";
 import axios from "axios"
 import apiHandler from "../../api-handling";
+import tokenHandler from "../../api-handling/tokenHandler";
+import {useNavigate} from "react-router-dom"
 
 
 
@@ -12,6 +13,7 @@ function Feedback(props) {
     const [rating, setRating] = useState(0); 
     const [feedback,setFeedback] = useState('');
     const [flag,setFlag] = useState(false);
+    const navigate = useNavigate();
 
    
 
@@ -38,17 +40,28 @@ function Feedback(props) {
         //     .catch(error => {
         //         console.log(error)
         //     })
+        try{
+            try{
+                const x = await apiHandler('post',`feedbacks`,{
+                    invitationId:invitationId,
+                    feedback:feedback
+                })
+                setFlag(true);
+            }
+            catch(err){
+                const x = await tokenHandler('post',`feedbacks`,sessionStorage.getItem('refreshToken'),apiHandler,{
+                    invitationId:invitationId,
+                    feedback:feedback
+                })
+                setFlag(true);
+            }
 
+        }
+        catch(err){
+            navigate("/")
+        }
         
-            const x = await apiHandler('post',`feedbacks`,{
-                         invitationId:invitationId,
-                         feedback:feedback
-                     })
-            //console.log(x.data);
             
-    
-
-            setFlag(true);
 
     }
 

@@ -1,0 +1,25 @@
+.popup-content {
+  margin: auto;
+  background-color: rgba(13, 24, 41, 0.76);
+  border: 1px solid white;
+  color:white;
+  width: 35%;
+  padding: 5px;
+  border-radius: 8px;
+}
+.resContainer{
+  padding: 5px;
+  
+  color:white;
+}
+.resSubmit{
+ margin-left: 83%;
+}
+.popup-arrow {
+  color:  white;
+}
+
+.popup-overlay {
+  background: rgba(13, 24, 41, 0.76);
+  border:1px solid grey;
+}
