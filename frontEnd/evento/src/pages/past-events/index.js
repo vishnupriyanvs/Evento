@@ -6,6 +6,7 @@ import EventsTable from "../../components/events-table";
 import services from "../../constants";
 import axios from 'axios';
 import apiHandler from '../../api-handling';
+import tokenHandler from '../../api-handling/tokenHandler';
 
 
 function PastEvents(props) {
@@ -31,12 +32,25 @@ function PastEvents(props) {
     //         })
     // }, [])
 
-    useEffect(async () => {
-        const x = await apiHandler('get',`events/status/Completed`)
-        //console.log(x.data);
-        setEvents(x.data)
-      },[])
 
+      
+
+      useEffect(async () => {
+        try{
+          try {
+            const x = await apiHandler('get',`events/status/Completed`);
+            //console.log(x.data);
+            setEvents(x.data);
+        } catch (error) {
+            const x = await tokenHandler('get',`events/status/Completed`,sessionStorage.getItem('refreshToken'),apiHandler);
+            setEvents(x.data);
+        }
+        }
+        catch{
+          navigate('/');
+        }
+      },[])
+     
 
     // useEffect(() => {
     //     checkFilter.forEach((data) => {

@@ -88,7 +88,7 @@ function StatusSelectionBtn(props) {
         //console.log(x.data);
         
 
-    console.log(props.reason)
+    //console.log(props.reason)
     return (
 
         <div className="SelectnBtn1">

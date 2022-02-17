@@ -7,6 +7,7 @@ import services from "../../../constants";
 import axios from 'axios';
 import apiHandler from '../../../api-handling';
 import {useParams} from 'react-router-dom';
+import tokenHandler from "../../../api-handling/tokenHandler";
 
 function UserOnGoingEvents(props) {
     const {id} = useParams()
@@ -44,10 +45,24 @@ function UserOnGoingEvents(props) {
     //         })
     // }, [])
 
-    useEffect(async () => {
-        const x = await apiHandler('get',`invitations/response/InProgress/Yes/${id}`)
-        //console.log(x.data);
-        setEvents(x.data)
+
+
+      
+
+      useEffect(async () => {
+        try{
+          try {
+            const x = await apiHandler('get',`invitations/response/InProgress/Yes/${id}`);
+            //console.log(x.data);
+            setEvents(x.data);
+        } catch (error) {
+            const x = await tokenHandler('get',`invitations/response/InProgress/Yes/${id}`,sessionStorage.getItem('refreshToken'),apiHandler);
+            setEvents(x.data);
+        }
+        }
+        catch{
+          navigate('/');
+        }
       },[])
 
 

@@ -1,15 +1,16 @@
 import React, { useRef,useState,useEffect } from 'react';
 import emailjs from 'emailjs-com';
-import { useParams } from 'react-router-dom';
+import { useParams,useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Select from 'react-select';
 import {Form,Button} from 'react-bootstrap'
 import './index.css'
 import apiHandler from '../../api-handling';
+import tokenHandler from '../../api-handling/tokenHandler';
 
 export  const InviteUser = () => {
   const form = useRef();
-
+  const navigate = useNavigate();
 
   const {id,eventid} = useParams();
   const [events,setEvents] = useState({});
@@ -34,13 +35,22 @@ export  const InviteUser = () => {
   //     })
   // },[])
 
+ 
   useEffect(async () => {
-    const x = await apiHandler('get',`events/${eventid}`)
-    //console.log(x.data);
-    setEvents(x.data)
+    try{
+      try {
+        const x = await apiHandler('get',`events/${eventid}`);
+        //console.log(x.data);
+        setEvents(x.data);
+    } catch (error) {
+        const x = await tokenHandler('get',`events/${eventid}`,sessionStorage.getItem('refreshToken'),apiHandler);
+        setEvents(x.data);
+    }
+    }
+    catch{
+      navigate('/');
+    }
   },[])
-
-
   // useEffect(() => {
   //   axios.get(`http://localhost:4000/users`)
   //     .then(response => {
@@ -50,11 +60,25 @@ export  const InviteUser = () => {
   //       console.log(error)
   //     })
   // },[])
+ 
+
+
   useEffect(async () => {
-    const x = await apiHandler('get',`users`)
-    //console.log(x.data);
-    setUsers(x.data)
+    try{
+      try {
+        const x = await apiHandler('get',`users`);
+        //console.log(x.data);
+        setUsers(x.data);
+    } catch (error) {
+        const x = await tokenHandler('get',`users`,sessionStorage.getItem('refreshToken'),apiHandler);
+        setUsers(x.data);
+    }
+    }
+    catch{
+      navigate('/');
+    }
   },[])
+  
   
 
   // useEffect(() => {
@@ -66,11 +90,24 @@ export  const InviteUser = () => {
   //       console.log(error)
   //     })
   // },[])
+ 
+
   useEffect(async () => {
-    const x = await apiHandler('get',`jobTitles`)
-    //console.log(x.data);
-    setGroups(x.data)
+    try{
+      try {
+        const x = await apiHandler('get',`jobTitles`);
+        //console.log(x.data);
+        setGroups(x.data);
+    } catch (error) {
+        const x = await tokenHandler('get',`jobTitles`,sessionStorage.getItem('refreshToken'),apiHandler);
+        setGroups(x.data);
+    }
+    }
+    catch{
+      navigate('/');
+    }
   },[])
+  
 
 
 

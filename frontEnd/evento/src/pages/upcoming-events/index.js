@@ -16,6 +16,8 @@ function UpcomingEvents(props) {
     const navigate = useNavigate();
     const [events, setEvents] = useState([]);
 
+
+
     // useEffect(() => {
     //     axios
     //         .get('http://localhost:4000/events/status/Active')
@@ -29,18 +31,33 @@ function UpcomingEvents(props) {
     // }, [])
 
     useEffect(async () => {
-        try{
-            const x = await apiHandler('get',`events/status/Active`)
-            setEvents(x.data)
+        try {
+            try{
+                const x = await apiHandler('get',`events/status/Active`)
+                setEvents(x.data)
+            }
+            catch(err){
+                const x = await tokenHandler('get',`events/status/Active`,sessionStorage.getItem('refreshToken'),apiHandler)
+                setEvents(x.data)
+            }
+        } catch (error) {
+            navigate('/')
         }
-        catch(err){
-            const x = await tokenHandler('get',`events/status/Active`,sessionStorage.getItem('refreshToken'),apiHandler)
-            setEvents(x.data)
-        }
+        
         
         //console.log(x.data);
         
       },[])
+
+    var today = new Date(); 
+    events.forEach(async (event) => {
+        if(event.start_date == today){
+            const x = await apiHandler('put',`events/${event.id}/InProgress`);
+            //console.log(x);
+        }
+      })
+
+
 
 // console.log(events)
     return (
