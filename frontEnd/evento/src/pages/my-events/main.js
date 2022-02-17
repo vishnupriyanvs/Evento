@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendar, faFastForward, faCheckCircle, faStopCircle, faAngleDown,faMask } from '@fortawesome/free-solid-svg-icons';
 import './index.css';
 import { Outlet, useNavigate } from 'react-router-dom';
-
+import SwitchUserAdminBtn from '../../components/switch-user-admin-btn';
 import { useParams } from 'react-router-dom';
 
 function UsersMainPage() {
@@ -14,7 +14,7 @@ function UsersMainPage() {
 
     const [dimension, setDimension] = useState({})
     const [sideCheck, setSideCheck] = useState(false);
-
+    const role =sessionStorage.getItem('myRole');
     useEffect(() => {
         //console.log("width");
         // navbarCheck();
@@ -101,6 +101,8 @@ function UsersMainPage() {
                     <div className='sideBarIcons'><FontAwesomeIcon icon={faCheckCircle} size="2x" color="#91A4B7" onClick={() => navigateEvents(`my-events/past-events/accepted/${id}`)} /><span className='sideBarText'>Completed Events</span></div>
                     <div className='sideBarIcons'><FontAwesomeIcon icon={faStopCircle} size="2x" color="#91A4B7" onClick={() => navigateEvents(`my-events/cancelled-events/${id}`)} /><span className='sideBarText'>Cancelled Events</span></div>
                 </div>}
+
+                {role === '1' ?  <div><SwitchUserAdminBtn onClick={() => navigate(`create-event/${id}`)} myEvent={faMask} endPoint={'/user/upcoming-events/'} checkAdmin={false}/></div>: null}
             {/* Error while mapping in SideBar! <SideBar listContent = {["Upcoming Events"]} listItemFn={[navigateEvents("upcoming-events")]} /> */}
         </div>
     </div>

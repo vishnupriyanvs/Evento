@@ -19,12 +19,16 @@
 .SelectnBtn1-options {
   position: absolute;
   width: 100%;
+  display: none;
+  visibility: hidden;
 }
 .SelectnBtn1-option {
+  display:none;
   visibility: hidden;
   background-color: inherit;
   padding: 8px;
   z-index: 3;
+  width: 100%;
 
 }
 
@@ -33,12 +37,13 @@
   border-bottom-right-radius: 16px;
 }
 
-.SelectnBtn1:hover .SelectnBtn1-option {
+.SelectnBtn1 .SelectnBtn1-option {
+  display: block;
   visibility: visible;
   background-color: whitesmoke;
   position: relative;
-  /* width: min-content; */
-}
+  width: 100%;
+} 
 
 .SelectnBtn1:hover .SelectnBtn1-option:hover {
   visibility: visible;

@@ -13,10 +13,12 @@ function EventsTable(props) {
   const navigate = useNavigate();
   const [tHeader, setTHeader] = useState([]);
   const [tRow, setTrow] = useState([]);
+  const [counter, setCounter] = useState(0)
+  const [pages, setPages] = useState([]);
 
   const [eventDetails, setEventDetails] = useState([props.events]);
 
-  const checkPage = (page, tHeader, tRow) => {
+  const checkPage = (page, tHeader, tRow, i) => {
     switch (page) {
       case services.eventType.UPCOMING_EVENT:
         tHeader = tHeader.filter((title, i) => {
@@ -27,7 +29,8 @@ function EventsTable(props) {
         tRow = tRow.filter((content, i) => {
           return delete content["end_date"];
         });
-        setTrow(tRow);
+        // setTrow(tRow);
+        setTrow(tRow.length > (i + 1) * 10 ? tRow.slice(tRow.length - (i + 1) * 10, tRow.length - (i * 10)).reverse() : tRow.slice(0, tRow.length - (i * 10)).reverse());
         break;
 
       case services.eventType.COMPLETED_EVENT:
@@ -38,7 +41,8 @@ function EventsTable(props) {
         tRow = tRow.filter((content, i) => {
           return delete content["Actions"];
         });
-        setTrow(tRow);
+        // setTrow(tRow);
+        setTrow(tRow.length > (i + 1) * 10 ? tRow.slice(tRow.length - (i + 1) * 10, tRow.length - (i * 10)).reverse() : tRow.slice(0, tRow.length - (i * 10)).reverse());
         break;
 
       case services.eventType.ONGOING_EVENT:
@@ -49,7 +53,8 @@ function EventsTable(props) {
         tRow = tRow.filter((content, i) => {
           return delete content["Actions"];
         });
-        setTrow(tRow);
+        // setTrow(tRow);
+        setTrow(tRow.length > (i + 1) * 10 ? tRow.slice(tRow.length - (i + 1) * 10, tRow.length - (i * 10)).reverse() : tRow.slice(0, tRow.length - (i * 10)).reverse());
         break;
 
       case services.eventType.CANCELED_EVENT:
@@ -66,7 +71,8 @@ function EventsTable(props) {
         tRow = tRow.filter((content, i) => {
           return delete content["Actions"];
         });
-        setTrow(tRow);
+        // setTrow(tRow);
+        setTrow(tRow.length > (i + 1) * 10 ? tRow.slice(tRow.length - (i + 1) * 10, tRow.length - (i * 10)).reverse() : tRow.slice(0, tRow.length - (i * 10)).reverse());
        
         break;
 
@@ -75,19 +81,31 @@ function EventsTable(props) {
     }
   };
 
+  const handlePagination = () => {
+    const t = props.events.length;
+    const q = Math.floor(t / 10);
+    const r = Math.floor(t % 10);
+    const p = r !== 0 ? q + 1 : q;
+
+    const pageList = Array.from(Array(p).keys())
+    setPages(pageList)
+  }
+
+
   useEffect(() => {
     if (props.titles) setTHeader(props.titles);
-    checkPage(props.eventType, props.titles, props.events);
-    if (props.content) setTrow(props.content);
+    checkPage(props.eventType, props.titles, props.events, counter);
+    // if (props.content) setTrow(props.content);
+    handlePagination()
 
  
-  }, [props.titles, props.content]);
+  }, [props.titles, props.content, counter]);
 
   
 
 
   return (
-    <center>
+    <div className="center-elements">
       <table id="events">
         <tbody>
           <tr>
@@ -134,7 +152,13 @@ function EventsTable(props) {
           )})}
         </tbody>
       </table>
-    </center>
+      <div className="pageList-items">
+        {counter >= 1 ? <button onClick={() => { setCounter(counter - 1); }} className="previous-btn">Previous</button> : null}
+        {pages.map((item, i) => <span onClick={()=> setCounter(item)}>{item+1}</span>)}
+        {counter <= (props.events.length % 10 !== 0 ? (Math.floor(props.events.length / 10) + 1) - 1 : Math.floor(props.events.length / 10) - 1)- 1 ? <button onClick={() => { setCounter(counter + 1); }} className="next-btn">Next</button> : null}
+
+      </div>
+      </div>
   );
 }
 
