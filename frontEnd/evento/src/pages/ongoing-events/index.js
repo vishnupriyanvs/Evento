@@ -21,15 +21,22 @@ function OngoingEvents(props) {
     const [events, setEvents] = useState([]);
 
     // useEffect(() => {
-    //     axios
-    //         .get('http://localhost:4000/events/status/InProgress')
+    //     var config = {
+    //         method: 'get',
+    //         url: 'http://localhost:4000/events/status/InProgress',
+    //         headers: {
+    //           'Authorization': `Bearer ${sessionStorage.getItem('myToken')}`,
+    //         },
+    //         data: ''
+    //       }
+    //     axios(config)
     //         .then(response => {
                 
     //             setEvents(response.data)
                 
     //         })
     //         .catch((err) => {
-    //             console.log(err)
+    //             console.log("Error Detected")
     //         })
     // }, [])
    
@@ -37,12 +44,12 @@ function OngoingEvents(props) {
       useEffect(async () => {
         try{
           try {
-            const x = await apiHandler('get',`events/status/InProgress`);
+            const response = await apiHandler('get',`events/status/InProgress`);
             //console.log(x.data);
-            setEvents(x.data);
+            setEvents(response.data);
         } catch (error) {
-            const x = await tokenHandler('get',`events/status/InProgress`,sessionStorage.getItem('refreshToken'),apiHandler);
-            setEvents(x.data);
+            const response = await tokenHandler('get',`events/status/InProgress`,sessionStorage.getItem('refreshToken'),apiHandler);
+            setEvents(response.data);
         }
         }
         catch{
@@ -51,11 +58,6 @@ function OngoingEvents(props) {
       },[])
 
 
-    // useEffect(() => {
-    //     checkFilter.forEach((data) => {
-    //         events.filter((content) => { return delete content[data] })
-    //     })
-    // }, [events])
 
     function Today(){
         let today;

@@ -7,7 +7,7 @@ var eventController = {
     findEventById: findEventById,
     updateEvent: updateEvent,
     deleteById: deleteById,
-
+ 
     findByEventStatus : findByEventStatus,
     updateEventStatus : updateEventStatus,
     findEventForUserCalendar : findEventForUserCalendar,
