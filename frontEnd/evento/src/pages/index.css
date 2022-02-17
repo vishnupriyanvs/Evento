@@ -49,6 +49,10 @@ main::-webkit-scrollbar {
   grid-area: sidebar;
   transition: all 0.5s;
   padding-top: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
   /* transform: translateX(-30rem); */
   /* overflow-x:visible; */
 }

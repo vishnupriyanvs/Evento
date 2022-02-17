@@ -9,7 +9,7 @@ import { confirm } from "react-confirm-box";
 import services from "../../constants";
 import apiHandler from "../../api-handling";
 import tokenHandler from "../../api-handling/tokenHandler";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 function StatusSelectionBtn(props) {
     const [options, setOptions] = useState(["Hi", "Its", "Working"]);
@@ -44,22 +44,9 @@ function StatusSelectionBtn(props) {
         setCancellationReason(value);
     }
     const handleEventCancellation = async () => {
-        // axios
-        //     .put(`http://localhost:4000/events/cancellation/reason/${props.eventid}`,{
-        //         cancellationReason:cancellationReason,
-        //         isActive: 'Cancelled'
-        //     })
-        //     .then(response => {
-        //         console.log(response.data)
-        //         setDefault("Cancelled")
-
-        //     })
-        //     .catch(error => {
-        //         console.log(error)
-        //     })
         try {
             try {
-                const x = await apiHandler('put', `events/cancellation/reason/${props.eventid}`, {
+                const response = await apiHandler('put', `events/cancellation/reason/${props.eventid}`, {
                     cancellationReason: cancellationReason,
                     isActive: 'Cancelled'
                 })
@@ -68,11 +55,10 @@ function StatusSelectionBtn(props) {
                 setFlag(true);
             }
             catch (err) {
-                const x = await tokenHandler('put', `events/cancellation/reason/${props.eventid}`,sessionStorage.getItem('refreshToken'),apiHandler,{
+                const response = await tokenHandler('put', `events/cancellation/reason/${props.eventid}`, sessionStorage.getItem('refreshToken'), apiHandler, {
                     cancellationReason: cancellationReason,
                     isActive: 'Cancelled'
                 })
-                //console.log(x.data);
                 setDefault("Cancelled")
                 setFlag(true);
             }
@@ -89,16 +75,18 @@ function StatusSelectionBtn(props) {
 
     //console.log(props.eventid)
     async function handleChange(status) {
-        //     axios.put(`http://localhost:4000/events/${props.eventid}/${status}`)
-        //         .then(response => {
+        try {
+            try {
 
-        //         })
-        //         .catch(error => {
-        //             console.log(error)
-        //         })
-        const x = await apiHandler('put', `events/${props.eventid}/${status}`)
+                const response = await apiHandler('put', `events/${props.eventid}/${status}`, null, false)
+            } catch (err) {
+                const response = await tokenHandler('put', `events/cancellation/reason/${props.eventid}`, sessionStorage.getItem('refreshToken'), apiHandler, null, false)
+            }
+        }
+        catch (err) {
+            navigate('/')
+        }
     }
-
 
 
 
@@ -108,11 +96,17 @@ function StatusSelectionBtn(props) {
     //console.log(props.reason)
     return (
 
-        <div className="SelectnBtn1">
+        <div className="SelectnBtn1" onClick={() => {
+            const x = document.querySelectorAll('.SelectnBtn1-options');
+            // if(x[props.index].getAttribute('style'))
+            console.log(getComputedStyle(x[props.index]).display)
+            if (getComputedStyle(x[props.index]).display === 'none')
+                x[props.index].setAttribute('style', 'display:flex; visibility: visible; flex-direction:column; width: 100%')
+            else
+                x[props.index].setAttribute('style', 'display:none; visibility: hidden;')
+        }}>
             <div className="SelectnBtn1-content">
-
-
-                {defaults === 'Cancelled' && options.includes(defaults) && props.eventType === services.eventType.UPCOMING_EVENT ? <Popup trigger={<div >{props.reason !== undefined ? "Reason" : defaults}</div>}
+                {defaults === 'Cancelled' && options.includes(defaults) && props.eventType === services.eventType.UPCOMING_EVENT ? <Popup trigger={<div id="select-btn-value">{props.reason !== undefined ? "Reason" : defaults}</div>}
                     position="bottom right ">
 
                     <Container style={{ backgroundColor: "white" }} id="triggerBox">
@@ -136,6 +130,9 @@ function StatusSelectionBtn(props) {
 
                 {props.eventType === services.eventType.UPCOMING_EVENT || props.eventType === services.eventType.ONGOING_EVENT ? <div> <FontAwesomeIcon icon={faAngleDown} /></div> : null}
             </div>
+
+
+
             {props.role === 'Admin' ? (<div className="SelectnBtn1-options">
                 {
                     options.map((item, i) => {
@@ -145,25 +142,37 @@ function StatusSelectionBtn(props) {
                                     setDefault(item)
                                     let a = document.querySelectorAll('.SelectnBtn1-content');
                                     if (item === 'InProgress') {
-                                        a[props.index].setAttribute('style', 'outline:1px solid #FF8A00; color:#FF8A00')
-                                        handleChange(item);
+                                        const result = await confirm("Are you sure?");
+                                        if (result) {
+                                            a[props.index].setAttribute('style', 'outline:1px solid #FF8A00; color:#FF8A00')
+                                            handleChange(item);
+                                        }
+                                        window.location.reload(false)   
+
                                     }
                                     if (item === 'Cancelled') {
                                         const result = await confirm("Are you sure?");
                                         if (result) {
-
                                             a[props.index].setAttribute('style', 'outline: 1px solid rgb(243, 20, 20); color:rgb(243, 20, 20);')
                                             return;
                                         }
                                         window.location.reload(false)                                      // handleChange(item)
                                     }
                                     if (item === 'Active') {
-                                        a[props.index].setAttribute('style', 'outline: 1px solid #0000FF; color: #0000FF')
-                                        handleChange(item)
+                                        const result = await confirm("Are you sure?");
+                                        if (result) {
+                                            a[props.index].setAttribute('style', 'outline: 1px solid #0000FF; color: #0000FF')
+                                            handleChange(item)
+                                        }
+                                        window.location.reload(false)   
                                     }
                                     if (item === 'Completed') {
-                                        a[props.index].setAttribute('style', 'outline:1px solid rgb(20, 243, 20); color: rgb(20, 243, 20)')
-                                        handleChange(item)
+                                        const result = await confirm("Are you sure?");
+                                        if (result) {
+                                            a[props.index].setAttribute('style', 'outline:1px solid rgb(20, 243, 20); color: rgb(20, 243, 20)')
+                                            handleChange(item)
+                                        }
+                                        window.location.reload(false)   
                                     }
 
 
