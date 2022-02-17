@@ -5,9 +5,10 @@ import "./index.css";
 
 function CreateEvent(props){
 
-
+    
 
     return(
+        
         <div className="createEventBtn" onClick={props.onClick}>
             <FontAwesomeIcon icon={faPlus} size="2x" />
             <b>Create Event</b>

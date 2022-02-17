@@ -3,7 +3,8 @@ import React, { useState, useEffect } from 'react'
 import EventForm from "../../components/event-form";
 import './index.css'
 import apiHandler from '../../api-handling';
-import { useParams } from 'react-router-dom';
+import { useParams , useNavigate} from 'react-router-dom';
+import tokenHandler from '../../api-handling/tokenHandler';
 
 
 function CreateEventForm() {
@@ -15,13 +16,13 @@ function CreateEventForm() {
     const [file, setFile] = useState(null);
     const [filename, setFileName] = useState()
     const options = []
-
-    function handleContactPerson(event){
+    const navigate = useNavigate();
+    function handleContactPerson(event) {
         let name, value;
-        
+
         name = event.name
         value = event.value
-          
+
         setEvents(values => ({ ...values, [name]: value }))
     }
 
@@ -32,9 +33,9 @@ function CreateEventForm() {
         value = event.target.value
         //Start Date Validation
         if (event.target.name === "startDate") {
-            var today = new Date();          
+            var today = new Date();
             const selectDate = new Date(event.target.value)
-            if(selectDate < today){
+            if (selectDate < today) {
                 alert("Please enter a valid date")
                 event.target.value = null
                 return false
@@ -42,31 +43,31 @@ function CreateEventForm() {
         }
         //End Date Validation
         if (event.target.name === "endDate") {
-            var today = new Date(); 
-            const tempDate = document.getElementById("start-date").value 
-            const startDate = new Date(tempDate);   
+            var today = new Date();
+            const tempDate = document.getElementById("start-date").value
+            const startDate = new Date(tempDate);
             const selectDate = new Date(event.target.value)
-            if(selectDate < today || selectDate < startDate){
+            if (selectDate < today || selectDate < startDate) {
                 alert("Please enter a valid date")
                 event.target.value = null
                 return false
             }
         }
         //Start Time Validation
-        if(event.target.name === "endTime"){
-            const tempStartDate = document.getElementById("start-date").value 
-            const tempEndDate = document.getElementById("end-date").value 
-            const tempStartTime = document.getElementById("start-time").value 
+        if (event.target.name === "endTime") {
+            const tempStartDate = document.getElementById("start-date").value
+            const tempEndDate = document.getElementById("end-date").value
+            const tempStartTime = document.getElementById("start-time").value
             const tempEndTime = event.target.value
-            
-            if(tempEndDate === tempStartDate){
-                
-                if(tempStartTime === tempEndTime){
+
+            if (tempEndDate === tempStartDate) {
+
+                if (tempStartTime === tempEndTime) {
                     alert("Please enter a valid time")
                     event.target.value = null
                     return false
                 }
-                if(tempStartTime > tempEndTime){
+                if (tempStartTime > tempEndTime) {
                     alert("Please enter a valid time")
                     event.target.value = null
                     return false
@@ -90,10 +91,23 @@ function CreateEventForm() {
     // }, []);
 
     useEffect(async () => {
-        const x = await apiHandler('get',`users/contactpersons`)
-        //console.log(x.data);
-        setUsers(x.data)
-      },[])
+        try {
+            try {
+                const x = await apiHandler('get', `users/contactpersons`)
+                //console.log(x.data);
+                setUsers(x.data)
+            }
+            catch (err) {
+                const x = await tokenHandler('get', `users/contactpersons`,sessionStorage.getItem('refreshToken'),apiHandler)
+                //console.log(x.data);
+                setUsers(x.data)
+            }
+        }
+        catch (err) {
+            navigate("/")
+        }
+
+    }, [])
 
     users.map((user) => {
         const obj = { value: `${user.id}`, label: `${user.name}`, name: 'contact_person' }
@@ -117,15 +131,15 @@ function CreateEventForm() {
         //       }
         // };
         setEvents(values => ({ ...values, "created_by": id, "updated_by": id }))
-        
-        
-        
-            const response = await apiHandler('post',`events`,events)
-        
-            setEvents(response.data);
-            const imageResponse = await apiHandler('post',`images/upload/${response.data.id}`,formData)
-        
-          
+
+
+
+        const response = await apiHandler('post', `events`, events)
+
+        setEvents(response.data);
+        const imageResponse = await apiHandler('post', `images/upload/${response.data.id}`, formData)
+
+
         // axios
         //     .post('http://localhost:4000/events/', events)
         //     .then(async response => {

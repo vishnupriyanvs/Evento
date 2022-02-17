@@ -70,4 +70,6 @@
     padding: 30px;
   }
 
-  
+  .responseButton{
+    display:flex;
+  }
