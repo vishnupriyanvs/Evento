@@ -7,9 +7,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import StatusSelectionBtn from "../event-select-btn";
 
 function EventsTable(props) {
-  
+
   const { id } = useParams()
-  
+
   const navigate = useNavigate();
   const [tHeader, setTHeader] = useState([]);
   const [tRow, setTrow] = useState([]);
@@ -20,6 +20,17 @@ function EventsTable(props) {
 
   const checkPage = (page, tHeader, tRow, i) => {
     switch (page) {
+      case services.eventType.ONGOING_EVENT:
+        tHeader = tHeader.filter((title, i) => {
+          return title !== "Actions";
+        });
+        setTHeader(tHeader);
+        tRow = tRow.filter((content, i) => {
+          return delete content["Actions"];
+        });
+        // setTrow(tRow);
+        setTrow(tRow.length > (i + 1) * 10 ? tRow.slice(tRow.length - (i + 1) * 10, tRow.length - (i * 10)).reverse() : tRow.slice(0, tRow.length - (i * 10)).reverse());
+        break;
       case services.eventType.UPCOMING_EVENT:
         tHeader = tHeader.filter((title, i) => {
           return title !== "End Date";
@@ -32,31 +43,6 @@ function EventsTable(props) {
         // setTrow(tRow);
         setTrow(tRow.length > (i + 1) * 10 ? tRow.slice(tRow.length - (i + 1) * 10, tRow.length - (i * 10)).reverse() : tRow.slice(0, tRow.length - (i * 10)).reverse());
         break;
-
-      case services.eventType.COMPLETED_EVENT:
-        tHeader = tHeader.filter((title, i) => {
-          return title !== "Actions";
-        });
-        setTHeader(tHeader);
-        tRow = tRow.filter((content, i) => {
-          return delete content["Actions"];
-        });
-        // setTrow(tRow);
-        setTrow(tRow.length > (i + 1) * 10 ? tRow.slice(tRow.length - (i + 1) * 10, tRow.length - (i * 10)).reverse() : tRow.slice(0, tRow.length - (i * 10)).reverse());
-        break;
-
-      case services.eventType.ONGOING_EVENT:
-        tHeader = tHeader.filter((title, i) => {
-          return title !== "Actions";
-        });
-        setTHeader(tHeader);
-        tRow = tRow.filter((content, i) => {
-          return delete content["Actions"];
-        });
-        // setTrow(tRow);
-        setTrow(tRow.length > (i + 1) * 10 ? tRow.slice(tRow.length - (i + 1) * 10, tRow.length - (i * 10)).reverse() : tRow.slice(0, tRow.length - (i * 10)).reverse());
-        break;
-
       case services.eventType.CANCELED_EVENT:
         tHeader = tHeader.filter((title, i) => {
           return title !== "End Date";
@@ -72,12 +58,35 @@ function EventsTable(props) {
           return delete content["Actions"];
         });
         // setTrow(tRow);
-        setTrow(tRow.length > (i + 1) * 10 ? tRow.slice(tRow.length - (i + 1) * 10, tRow.length - (i * 10)).reverse() : tRow.slice(0, tRow.length - (i * 10)).reverse());
-       
+        setTrow(tRow.length > (i + 1) * 10 ? tRow.slice(tRow.length - (i + 1) * 10, tRow.length - (i * 10)).reverse() : tRow.slice(0, tRow.length - (i * 10)).reverse())
         break;
+      case services.eventType.COMPLETED_EVENT:
+        tHeader = tHeader.filter((title, i) => {
+          return title !== "Actions";
+        });
+        setTHeader(tHeader);
+        tRow = tRow.filter((content, i) => {
+          return delete content["Actions"];
+        });
+        // setTrow(tRow);
+        setTrow(tRow.length > (i + 1) * 10 ? tRow.slice(tRow.length - (i + 1) * 10, tRow.length - (i * 10)).reverse() : tRow.slice(0, tRow.length - (i * 10)).reverse());
+        break; 
 
       default:
         console.log("Nothing Selected");
+    }
+
+    if(page === services.eventType.ONGOING_EVENT){
+      tHeader = tHeader.filter((title, i) => {
+        return title !== "Actions";
+      });
+      setTHeader(tHeader);
+      tRow = tRow.filter((content, i) => {
+        return delete content["Actions"];
+      });
+      // setTrow(tRow);
+      setTrow(tRow.length > (i + 1) * 10 ? tRow.slice(tRow.length - (i + 1) * 10, tRow.length - (i * 10)).reverse() : tRow.slice(0, tRow.length - (i * 10)).reverse());
+      
     }
   };
 
@@ -98,10 +107,10 @@ function EventsTable(props) {
     // if (props.content) setTrow(props.content);
     handlePagination()
 
- 
+
   }, [props.titles, props.content, counter]);
 
-  
+
 
 
   return (
@@ -114,17 +123,17 @@ function EventsTable(props) {
             ))}
           </tr>
           {tRow.map((item, i) => {
-            
+
             const action = tHeader.includes("Actions");
-            return(
+            return (
               <tr>
                 <td onClick={() => navigate(`/user/view-event/${id}/${item.id}`)}>{item.title}</td>
                 <td>{item.start_date}</td>
-                  {item.is_active == 'Active' || item.is_active == 'Cancelled' ? 
-                    action ? 
+                {item.is_active == 'Active' || item.is_active == 'Cancelled' ?
+                  action ?
                     <>
                       <td>
-                        <StatusSelectionBtn options={["InProgress", "Completed", "Cancelled", "Active"]} given={item.is_active} role={"Admin"} index={i} eventid={item.id} reason={item.cancellation_reason} eventType={props.eventType}/>
+                        <StatusSelectionBtn options={["InProgress", "Completed", "Cancelled", "Active"]} given={item.is_active} role={"Admin"} index={i} eventid={item.id} reason={item.cancellation_reason} eventType={props.eventType} />
                       </td>
                       <td>
                         <FontAwesomeIcon icon={faUserPlus} onClick={() => navigate(`/user/sendinvitations/${id}/${item.id}`)} />
@@ -133,32 +142,33 @@ function EventsTable(props) {
                       </td>
                     </>
                     :
-                    <td> <StatusSelectionBtn options={[item.is_active]} given={item.is_active} role={"Admin"} index={i} eventType={props.eventType}/></td>
-                    :
-                    item.is_active == 'InProgress' ? 
+                    <td> <StatusSelectionBtn options={[item.is_active]} given={item.is_active} role={"Admin"} index={i} eventType={props.eventType} /></td>
+                  :
+                  item.is_active == 'InProgress' ?
                     <>
                       <td>{item.end_date}</td>
-                      <td> <StatusSelectionBtn options={["InProgress", "Completed", "Cancelled", "Active"]} given={item.is_active} role={"Admin"} index={i} eventid={item.id} eventType={props.eventType}/></td>
+                      <td> <StatusSelectionBtn options={["InProgress", "Completed", "Cancelled", "Active"]} given={item.is_active} role={"Admin"} index={i} eventid={item.id} eventType={props.eventType} /></td>
                     </>
                     :
                     <>
                       <td>{item.end_date}</td>
-                      <td> <StatusSelectionBtn options={[item.is_active]} given={item.is_active} role={"Admin"} index={i}/></td>
+                      <td> <StatusSelectionBtn options={[item.is_active]} given={item.is_active} role={"Admin"} index={i} /></td>
                     </>
-                   
-            }
-                
+
+                }
+
               </tr>
-          )})}
+            )
+          })}
         </tbody>
       </table>
       <div className="pageList-items">
         {counter >= 1 ? <button onClick={() => { setCounter(counter - 1); }} className="previous-btn">Previous</button> : null}
-        {pages.map((item, i) => <span onClick={()=> setCounter(item)}>{item+1}</span>)}
-        {counter <= (props.events.length % 10 !== 0 ? (Math.floor(props.events.length / 10) + 1) - 1 : Math.floor(props.events.length / 10) - 1)- 1 ? <button onClick={() => { setCounter(counter + 1); }} className="next-btn">Next</button> : null}
+        {pages.map((item, i) => <span onClick={() => setCounter(item)}>{item + 1}</span>)}
+        {counter <= (props.events.length % 10 !== 0 ? (Math.floor(props.events.length / 10) + 1) - 1 : Math.floor(props.events.length / 10) - 1) - 1 ? <button onClick={() => { setCounter(counter + 1); }} className="next-btn">Next</button> : null}
 
       </div>
-      </div>
+    </div>
   );
 }
 
