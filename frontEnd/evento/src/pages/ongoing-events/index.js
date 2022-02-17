@@ -77,10 +77,10 @@ function OngoingEvents(props) {
     events.forEach(async (event) => {
         if(event.end_date == today){
             try {
-                const x = await apiHandler('put',`events/${event.id}/Completed`);
+                const response = await apiHandler('put',`events/${event.id}/Completed`, null, false);
                 //console.log(x);
             } catch (error) {
-                const x = await tokenHandler('put',`events/${event.id}/Completed`,sessionStorage.getItem('refreshToken'),apiHandler)
+                const response = await tokenHandler('put',`events/${event.id}/Completed`,sessionStorage.getItem('refreshToken'),apiHandler, null, false)
             }
         }
       })
