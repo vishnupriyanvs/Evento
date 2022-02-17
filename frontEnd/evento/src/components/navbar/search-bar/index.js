@@ -8,6 +8,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import SizedBox from "../../sized-box";
+import apiHandler from '../../../api-handling';
+import tokenHandler from '../../../api-handling/tokenHandler';
 
 function SearchBar(){
     const [events,setEvents] = useState([]);
@@ -15,14 +17,28 @@ function SearchBar(){
     const {id} = useParams()
     const navigate = useNavigate()
 
-    useEffect(() => {
-        axios.get('http://localhost:4000/events/')
-            .then(response => {
+    useEffect(async () => {
+        // axios.get('http://localhost:4000/events/')
+        //     .then(response => {
+        //         setEvents(response.data)
+        //     })
+        //     .catch(error => {
+        //         console.log(error)
+        //     })
+        try{
+            try{
+                const response = await apiHandler('get',`events`)
                 setEvents(response.data)
-            })
-            .catch(error => {
-                console.log(error)
-            })
+            }
+            catch(err){
+                const response = await tokenHandler('get',`events`,sessionStorage.getItem('refreshToken'),apiHandler)
+                setEvents(response.data)
+            }
+        }
+        catch(err){
+            navigate("/")
+        }
+        
     },[])
 
     

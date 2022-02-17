@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from "react";
 import SizedBox from "../../components/sized-box";
 import './index.css';
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, Redirect } from "react-router-dom";
 import EventsTable from "../../components/events-table";
 import services from "../../constants";
 import axios from 'axios';
 import apiHandler from '../../api-handling';
-import {useParams} from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import tokenHandler from "../../api-handling/tokenHandler";
 
+
 function UpcomingEvents(props) {
-    const {id} = useParams()
-   
-    
+    const { id } = useParams()
+
+
     const navigate = useNavigate();
     const [events, setEvents] = useState([]);
 
@@ -22,7 +23,7 @@ function UpcomingEvents(props) {
     //     axios
     //         .get('http://localhost:4000/events/status/Active')
     //         .then(response => {
-                
+
     //             setEvents(response.data)
     //         })
     //         .catch((err) => {
@@ -47,7 +48,7 @@ function UpcomingEvents(props) {
         
         //console.log(x.data);
         
-      },[])
+      }, [])
 
     var today = new Date(); 
     events.forEach(async (event) => {
@@ -62,15 +63,15 @@ function UpcomingEvents(props) {
 // console.log(events)
     return (
         <>
-        <h5 className="heading">{props.toptitle}</h5>
-        <div className="upcomingEventsTable">
-            <SizedBox height="2vh" />
-            <EventsTable
-                titles={['Event-Titles', 'Start Date','Status','Actions']}
-                events={events}
-                eventType={services.eventType.UPCOMING_EVENT}
-            />
-        </div>
+            <h5 className="heading">{props.toptitle}</h5>
+            <div className="upcomingEventsTable">
+                <SizedBox height="2vh" />
+                <EventsTable
+                    titles={['Event-Titles', 'Start Date', 'Status', 'Actions']}
+                    events={events}
+                    eventType={services.eventType.UPCOMING_EVENT}
+                />
+            </div>
         </>
     )
 }

@@ -6,6 +6,7 @@ import EventsTable from "../../components/events-table";
 import services from "../../constants";
 import axios from 'axios';
 import apiHandler from '../../api-handling';
+import tokenHandler from "../../api-handling/tokenHandler";
 
 
 function CancelledEvents(props) {
@@ -23,7 +24,7 @@ function CancelledEvents(props) {
     //     axios
     //         .get('http://localhost:4000/events/status/Cancelled')
     //         .then(response => {
-                
+
     //             setEvents(response.data)
     //         })
     //         .catch((err) => {
@@ -32,10 +33,23 @@ function CancelledEvents(props) {
     // }, [])
 
     useEffect(async () => {
-        const x = await apiHandler('get',`events/status/Cancelled`)
-        //console.log(x.data);
-        setEvents(x.data)
-      },[])
+        try {
+            try {
+                const x = await apiHandler('get', `events/status/Cancelled`)
+                //console.log(x.data);
+                setEvents(x.data)
+            }
+            catch (err) {
+                const x = await tokenHandler('get', `events/status/Cancelled`,sessionStorage.getItem('refreshToken'),apiHandler)
+                //console.log(x.data);
+                setEvents(x.data)
+            }
+        }
+        catch (err) {
+            navigate('/')
+        }
+
+    }, [])
 
 
     // useEffect(() => {
@@ -44,19 +58,19 @@ function CancelledEvents(props) {
     //     })
     // }, [events])
 
-console.log(events)
+    console.log(events)
     return (
         <>
-        <p>{props.toptitle}</p>
-        <div className="upcomingEventsTable">
-            <SizedBox height="2vh" />
-            <EventsTable
-                titles={['Event-Titles', 'Start Date','Status']}
-                events={events}
-                onClick={navigateToEvent}
-                eventType={services.eventType.CANCELED_EVENT}
-            />
-        </div>
+            <p>{props.toptitle}</p>
+            <div className="upcomingEventsTable">
+                <SizedBox height="2vh" />
+                <EventsTable
+                    titles={['Event-Titles', 'Start Date', 'Status']}
+                    events={events}
+                    onClick={navigateToEvent}
+                    eventType={services.eventType.CANCELED_EVENT}
+                />
+            </div>
         </>
     )
 }

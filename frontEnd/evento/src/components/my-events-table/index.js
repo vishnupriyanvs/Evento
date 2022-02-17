@@ -189,9 +189,11 @@ function MyEventsTable(props) {
                       <>
                         <td> <StatusSelectionBtn options={[item.event.isActive]} given={item.event.isActive} role={"Admin"} index={i} /></td>
                         <td>
+                          <div className="responseButton">
                           <Button variant="primary" size="sm" onClick={props.handleSubmit} value="Yes" >Yes</Button>
                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                           <Cancellation invitationId={item.id} title={item.event.title} />
+                          </div>
                         </td>
                       </>
                       :

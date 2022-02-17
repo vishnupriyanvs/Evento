@@ -66,7 +66,7 @@ function UsersMainPage() {
 
 
         <main>
-            <div>{dimension.height}, {dimension.width}</div>
+            {/* <div>{dimension.height}, {dimension.width}</div> */}
             <Outlet />
         </main>
 
