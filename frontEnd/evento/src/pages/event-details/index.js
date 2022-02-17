@@ -5,6 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserPlus, faEdit, faClock, faUserAlt, faGlobe, faPhone, faUsers, faUserCheck } from "@fortawesome/free-solid-svg-icons";
 import apiHandler from '../../api-handling';
+import tokenHandler from '../../api-handling/tokenHandler';
 
 function ViewEvents() {
 
@@ -30,12 +31,32 @@ function ViewEvents() {
     //     infoParticipants(eventid);
     // }, [])
     
-    useEffect(async () => {
-        const x = await apiHandler('get',`events/${eventid}`)
-        //console.log(x.data);
-        setEvents(x.data)
-        infoParticipants(eventid);
+    // useEffect(async () => {
+    //     const x = await apiHandler('get',`events/${eventid}`)
+    //     //console.log(x.data);
+    //     setEvents(x.data)
+    //     infoParticipants(eventid);
+    //   },[])
+
+
+      useEffect(async () => {
+        try{
+          try {
+            const x = await apiHandler('get',`events/${eventid}`);
+            //console.log(x.data);
+            setEvents(x.data);
+            infoParticipants(eventid);
+        } catch (error) {
+            const x = await tokenHandler('get',`events/${eventid}`,sessionStorage.getItem('refreshToken'),apiHandler);
+            setEvents(x.data);
+            infoParticipants(eventid);
+        }
+        }
+        catch{
+          navigate('/');
+        }
       },[])
+
 
 
     // useEffect(() => {
@@ -48,10 +69,26 @@ function ViewEvents() {
     //         })
     // }, [events])
 
-    useEffect(async () => {
-        const x = await apiHandler('get',`users/${events.contact_person}`)
-        //console.log(x.data);
-        setUsers(x.data)
+    // useEffect(async () => {
+    //     const x = await apiHandler('get',`users/${events.contact_person}`)
+    //     //console.log(x.data);
+    //     setUsers(x.data)
+    //   },[events])
+
+      useEffect(async () => {
+        try{
+          try {
+            const x = await apiHandler('get',`users/${events.contact_person}`);
+            //console.log(x.data);
+            setUsers(x.data)
+        } catch (error) {
+            const x = await tokenHandler('get',`users/${events.contact_person}`,sessionStorage.getItem('refreshToken'),apiHandler);
+            setUsers(x.data)
+        }
+        }
+        catch{
+          navigate('/');
+        }
       },[events])
 
     const infoParticipants = async (eventid) => {

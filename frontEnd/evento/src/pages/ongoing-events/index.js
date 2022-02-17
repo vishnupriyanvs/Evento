@@ -6,6 +6,7 @@ import EventsTable from "../../components/events-table";
 import services from "../../constants";
 import axios from 'axios';
 import apiHandler from '../../api-handling';
+import tokenHandler from "../../api-handling/tokenHandler";
 
 
 function OngoingEvents(props) {
@@ -31,10 +32,22 @@ function OngoingEvents(props) {
     //             console.log(err)
     //         })
     // }, [])
-    useEffect(async () => {
-        const x = await apiHandler('get',`events/status/InProgress`)
-        //console.log(x.data);
-        setEvents(x.data)
+   
+
+      useEffect(async () => {
+        try{
+          try {
+            const x = await apiHandler('get',`events/status/InProgress`);
+            //console.log(x.data);
+            setEvents(x.data);
+        } catch (error) {
+            const x = await tokenHandler('get',`events/status/InProgress`,sessionStorage.getItem('refreshToken'),apiHandler);
+            setEvents(x.data);
+        }
+        }
+        catch{
+          navigate('/');
+        }
       },[])
 
 
@@ -43,6 +56,34 @@ function OngoingEvents(props) {
     //         events.filter((content) => { return delete content[data] })
     //     })
     // }, [events])
+
+    function Today(){
+        let today;
+        if(new Date().getMonth() <10){
+            today = `${new Date().getFullYear()}-0${new Date().getMonth() + 1}-${new Date().getDate()}`
+        }
+        else{
+            today = `${new Date().getFullYear()}-${new Date().getMonth()}-${new Date().getDate()}`
+        }
+        console.log(today)
+        return today;
+    }
+    //console.log(Today())
+    const today = Today()
+    //console.log(today )
+    //console.log(typeof(today))
+
+    //console.log(events)
+    events.forEach(async (event) => {
+        if(event.end_date == today){
+            try {
+                const x = await apiHandler('put',`events/${event.id}/Completed`);
+                //console.log(x);
+            } catch (error) {
+                const x = await tokenHandler('put',`events/${event.id}/Completed`,sessionStorage.getItem('refreshToken'),apiHandler)
+            }
+        }
+      })
 
    
     return (

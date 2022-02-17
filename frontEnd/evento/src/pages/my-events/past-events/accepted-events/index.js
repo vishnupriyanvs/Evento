@@ -6,6 +6,7 @@ import MyEventsTable from "../../../../components/my-events-table";
 import services from "../../../../constants";
 import axios from 'axios';
 import apiHandler from '../../../../api-handling';
+import tokenHandler from "../../../../api-handling/tokenHandler";
 
 import {useParams} from 'react-router-dom';
 
@@ -45,10 +46,23 @@ function PastAcceptedEvents(props) {
     //         })
     // }, [])
 
-    useEffect(async () => {
-        const x = await apiHandler('get',`invitations/response/Completed/Yes/${id}`)
-        //console.log(x.data);
-        setEvents(x.data)
+
+     
+
+      useEffect(async () => {
+        try{
+          try {
+            const x = await apiHandler('get',`invitations/response/Completed/Yes/${id}`);
+            //console.log(x.data);
+            setEvents(x.data);
+        } catch (error) {
+            const x = await tokenHandler('get',`invitations/response/Completed/Yes/${id}`,sessionStorage.getItem('refreshToken'),apiHandler);
+            setEvents(x.data);
+        }
+        }
+        catch{
+          navigate('/');
+        }
       },[])
 
 

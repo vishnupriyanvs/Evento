@@ -7,6 +7,7 @@ import services from "../../../../constants";
 import axios from 'axios';
 import apiHandler from '../../../../api-handling';
 import {useParams} from 'react-router-dom';
+import tokenHandler from "../../../../api-handling/tokenHandler";
 
 
 
@@ -30,10 +31,23 @@ function InvitedEvents(props) {
     //         })
     // }, [])
 
-    useEffect(async () => {
-        const x = await apiHandler('get',`invitations/response/Active/NotResponded/${id}`)
-        //console.log(x.data);
-        setEvents(x.data)
+ 
+     
+
+      useEffect(async () => {
+        try{
+          try {
+            const x = await apiHandler('get',`invitations/response/Active/NotResponded/${id}`);
+            //console.log(x.data);
+            setEvents(x.data);
+        } catch (error) {
+            const x = await tokenHandler('get',`invitations/response/Active/NotResponded/${id}`,sessionStorage.getItem('refreshToken'),apiHandler);
+            setEvents(x.data);
+        }
+        }
+        catch{
+          navigate('/');
+        }
       },[])
     
 
@@ -51,10 +65,23 @@ function InvitedEvents(props) {
             //          console.log(error)
             //      })
 
-                const x = await apiHandler('put',`invitations/${events[0].id}`,{invitationResponse:value})
-                //console.log(x.data);
-                setEvents(x.data)
+            
 
+                
+                try{
+                    try {
+                        const x = await apiHandler('put',`invitations/${events[0].id}`,{invitationResponse:value})
+                        //console.log(x.data);
+                        setEvents(x.data)
+                  } catch (error) {
+                    const x = await apiHandler('put',`invitations/${events[0].id}`,{invitationResponse:value},sessionStorage.getItem('refreshToken'),apiHandler)
+                    //console.log(x.data);
+                    setEvents(x.data)
+                  }
+                  }
+                  catch{
+                    navigate('/');
+                  }
             // 
             window.location.reload(false);         
     }

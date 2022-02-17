@@ -2,8 +2,9 @@ import axios from 'axios'
 import React,{useState,useEffect} from 'react'
 import EventForm from "../../components/event-form";
 import './index.css'
-import {useParams} from 'react-router-dom';
+import {useParams,useNavigate} from 'react-router-dom';
 import apiHandler from '../../api-handling';
+import tokenHandler from '../../api-handling/tokenHandler';
 
 function EditEventForm(){
 
@@ -11,7 +12,8 @@ function EditEventForm(){
     
     const [events,setEvents] = useState({})
     const [users,setUsers] = useState([])
-    const options = []
+    const options = [];
+    const navigate = useNavigate();
      // const [submitted,setSubmitted] = useState(false)
     
     function handleChange(event){
@@ -80,10 +82,26 @@ function EditEventForm(){
     //         })
     // },[])
 
-    useEffect(async () => {
-        const x = await apiHandler('get',`events/${eventid}`)
-        //console.log(x.data);
-        setEvents(x.data)
+    // useEffect(async () => {
+    //     const x = await apiHandler('get',`events/${eventid}`)
+    //     //console.log(x.data);
+    //     setEvents(x.data)
+    //   },[])
+
+      useEffect(async () => {
+        try{
+          try {
+            const x = await apiHandler('get',`events/${eventid}`);
+            //console.log(x.data);
+            setEvents(x.data);
+        } catch (error) {
+            const x = await tokenHandler('get',`events/${eventid}`,sessionStorage.getItem('refreshToken'),apiHandler);
+            setEvents(x.data);
+        }
+        }
+        catch{
+          navigate('/');
+        }
       },[])
 
     // useEffect(() => {
@@ -96,10 +114,26 @@ function EditEventForm(){
     //     });
     //   },[]);
 
-    useEffect(async () => {
-        const x = await apiHandler('get',`users/contactpersons`)
-        //console.log(x.data);
-        setUsers(x.data)
+    // useEffect(async () => {
+    //     const x = await apiHandler('get',`users/contactpersons`)
+    //     //console.log(x.data);
+    //     setUsers(x.data)
+    //   },[])
+
+      useEffect(async () => {
+        try{
+          try {
+            const x = await apiHandler('get',`users/contactpersons`);
+            //console.log(x.data);
+            setUsers(x.data)
+        } catch (error) {
+            const x = await tokenHandler('get',`users/contactpersons`,sessionStorage.getItem('refreshToken'),apiHandler);
+            setUsers(x.data)
+        }
+        }
+        catch{
+          navigate('/');
+        }
       },[])
 
       users.map((user) => {
@@ -125,9 +159,24 @@ function EditEventForm(){
             //      })
 
             
-                const x = await apiHandler('put',`users/contactpersons`)
-                //console.log(x.data);
-                setUsers(x.data)
+                // const x = await apiHandler('put',`events/${eventid}`)
+                // //console.log(x.data);
+                // setUsers(x.data)
+
+                    try{
+                      try {
+                        const x = await apiHandler('put',`events/${eventid}`);
+                        //console.log(x.data);
+                        setUsers(x.data)
+                    } catch (error) {
+                        const x = await tokenHandler('put',`events/${eventid}`,sessionStorage.getItem('refreshToken'),apiHandler);
+                        setUsers(x.data)
+                    }
+                    }
+                    catch{
+                      navigate('/');
+                    }
+                
               
     }
 
