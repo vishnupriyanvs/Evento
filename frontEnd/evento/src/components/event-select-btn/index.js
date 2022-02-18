@@ -106,7 +106,7 @@ function StatusSelectionBtn(props) {
                 x[props.index].setAttribute('style', 'display:none; visibility: hidden;')
         }}>
             <div className="SelectnBtn1-content">
-                {defaults === 'Cancelled' && options.includes(defaults) && props.eventType === services.eventType.UPCOMING_EVENT ? <Popup trigger={<div id="select-btn-value">{props.reason !== undefined ? "Reason" : defaults}</div>}
+                {defaults === 'Cancelled' && options.includes(defaults) && (props.eventType === services.eventType.UPCOMING_EVENT || props.eventType === services.eventType.ONGOING_EVENT)? <Popup trigger={<div id="select-btn-value">{props.reason !== undefined ? "Reason" : defaults}</div>}
                     position="bottom right ">
 
                     <Container style={{ backgroundColor: "white" }} id="triggerBox">

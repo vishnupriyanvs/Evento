@@ -147,7 +147,7 @@ function EventsTable(props) {
                   item.is_active == 'InProgress' ?
                     <>
                       <td>{item.end_date}</td>
-                      <td> <StatusSelectionBtn options={["InProgress", "Completed", "Cancelled", "Active"]} given={item.is_active} role={"Admin"} index={i} eventid={item.id} eventType={props.eventType} /></td>
+                      <td> <StatusSelectionBtn options={["InProgress", "Completed", "Cancelled", "Active"]} given={item.is_active} role={"Admin"} index={i} eventid={item.id} reason={item.cancellation_reason} eventType={props.eventType} /></td>
                     </>
                     :
                     <>
