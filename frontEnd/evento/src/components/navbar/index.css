@@ -34,7 +34,7 @@
 .myEventIcons {
   /* padding-top: 48px; */
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   width:fit-content;
   justify-content: flex-start;
   align-items: center;
@@ -45,7 +45,7 @@
 .myEventIcons .sideBarText {
   visibility: hidden;
   z-index: 1;
-  /* position: absolute; */
+
 }
 
 .myEventIcons:hover {
@@ -64,4 +64,65 @@
 .myEventIcons .myEventText {
   visibility: hidden;
   z-index: 1;
+}
+
+.popup-box{
+  visibility: hidden;
+  color: white;
+  position: absolute;
+  width: fit-content;
+  right: 24px;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  background-color: #0d1829;  
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  padding-bottom: 16px;
+ 
+}
+
+.click{
+  
+}
+
+.popup-box .div-li-image{
+  
+  width: 200px;
+  height: 100px;
+
+  display: flex;
+  /* position: relative; */
+  align-items: center;
+  flex-direction: column;
+  padding-top: 16px;
+  border-left: 6px solid #91A4B7;
+}
+
+.popup-box_profile{
+  display: block;
+
+}
+
+.div-li{
+  color: aliceblue;
+  display: flex;
+  justify-content: space-around;
+  border-left: 6px solid #91A4B7;
+  padding-top: 16px;
+ 
+  
+}
+
+.profile-image{
+
+  width: 35%;
+  height: auto;
+  border-radius: 30px;
+}
+
+.profile-image-s{
+  width: 1%;
+  height: auto;
+  /* border-radius: 30px; */
 }

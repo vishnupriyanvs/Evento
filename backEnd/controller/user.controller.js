@@ -55,9 +55,9 @@ function loginUser(req, res){
             const accessToken = jwt.sign({ id:data.id}, process.env.ACCESS_TOKEN_SECRET_KEY, {
                 expiresIn: '20min'
             });
-            expiresIn= '2h'
+            expiresIn= '3h'
             const refreshToken = jwt.sign({id: data.id }, process.env.REFRESH_TOKEN_SECRET_KEY,{
-                expiresIn: 3600
+                expiresIn: '3h'
             });
             //userInfo = data;
             res.status(200).send({
