@@ -4,7 +4,7 @@ const eventController = require('../controller/event.controller');
 const authenticateToken = require('../middleware/user.middleware');
 
 router.post('/',authenticateToken(['Admin']), eventController.addEvent);
-router.get('/',authenticateToken(['Admin']), eventController.findEvents);
+router.get('/',authenticateToken(['Admin','Employee']), eventController.findEvents);
 router.get('/:id',authenticateToken(['Admin','Employee']), eventController.findEventById);
 router.put('/:id',authenticateToken(['Admin']), eventController.updateEvent);
 //router.delete('/:id', authenticateToken(['Admin']),eventController.deleteById);

@@ -130,21 +130,26 @@ function MyEventsTable(props) {
 
   useEffect(async () => {
     const arr = [];
-    try{
-      const response = await apiHandler('get', `feedbacks`)
-      response.data.forEach(item => {
-        arr.push(item.invitationId);
-      })
+    try {
+      try {
+        const response = await apiHandler('get', `feedbacks`)
+        response.data.forEach(item => {
+          arr.push(item.invitationId);
+        })
+      }
+      catch (err) {
+        const response = await tokenHandler('get', `feedbacks`, sessionStorage.getItem('refreshToken'), apiHandler)
+        response.data.forEach(item => {
+          arr.push(item.invitationId);
+        })
+      }
     }
-    catch(err){
-      const response= await tokenHandler('get',`feedbacks`,sessionStorage.getItem('refreshToken'),apiHandler)
-      response.data.forEach(item => {
-        arr.push(item.invitationId);
-      })
+    catch (err) {
+      navigate("/")
     }
-    
+
     //console.log(x.data);
-    
+
     setInvitationArray(arr);
     // axios
     //     .get(`http://localhost:4000/feedbacks`)
@@ -190,9 +195,9 @@ function MyEventsTable(props) {
                         <td> <StatusSelectionBtn options={[item.event.isActive]} given={item.event.isActive} role={"Admin"} index={i} /></td>
                         <td>
                           <div className="responseButton">
-                          <Button variant="primary" size="sm" onClick={props.handleSubmit} value="Yes" >Yes</Button>
-                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                          <Cancellation invitationId={item.id} title={item.event.title} />
+                            <Button variant="primary" size="sm" onClick={props.handleSubmit} value="Yes" >Yes</Button>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <Cancellation invitationId={item.id} title={item.event.title} />
                           </div>
                         </td>
                       </>

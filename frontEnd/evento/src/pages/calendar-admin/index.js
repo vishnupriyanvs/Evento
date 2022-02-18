@@ -27,12 +27,12 @@ function AdminCalenderEvents() {
     useEffect(async () => {
         try {
             try {
-                const x = await apiHandler('get', `events/${id}`)
+                const x = await apiHandler('get', `events`)
                 //console.log(x.data);
                 setEvents(x.data)
             }
             catch (err) {
-                const x = await tokenHandler('get', `events/${id}`,sessionStorage.getItem('refreshToken'),apiHandler)
+                const x = await tokenHandler('get', `events`,sessionStorage.getItem('refreshToken'),apiHandler)
                 //console.log(x.data);
                 setEvents(x.data)
             }

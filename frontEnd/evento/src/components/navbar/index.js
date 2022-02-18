@@ -12,6 +12,7 @@ function Navbar(props) {
     const navigateMyEvents = useNavigate()
     console.log(props)
     const role =sessionStorage.getItem('myRole');
+    console.log(role)
     //console.log('params id' + id)
     return (
         <div>
@@ -26,11 +27,11 @@ function Navbar(props) {
 
                     {/* <FontAwesomeIcon icon={faCalendar} size="2x" onClick={props.onCalenderClick}/> */}
                    
-                    {role === 1 ? <div className='myEventIcons'><FontAwesomeIcon icon={props.myEvent} size="2x" color="#91A4B7" onClick={() => navigateMyEvents(`${props.endPoint}${id}`)} /><span className='myEventText'>My Events</span></div> : null }
+                    {role == 1 && <div className='myEventIcons'><FontAwesomeIcon icon={props.myEvent} size="2x" color="#91A4B7" onClick={() => navigateMyEvents(`${props.endPoint}${id}`)} /><span className='myEventText'>My Events</span></div>}
     
                     <SearchBars />
                     <SizedBox width="8vh" />
-                    {role === 1 ? <CreateEvent onClick={props.onClick} id={id}/> : null}
+                    {role == 1 && <CreateEvent onClick={props.onClick} id={id}/>}
                     <SizedBox width="8vh" />
                     <FontAwesomeIcon icon={faImage} size="2x" color="#91A4B7"/>
                     
