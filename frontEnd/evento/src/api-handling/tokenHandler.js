@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-async function tokenHandler(method, url, refreshToken, cb, inputs=''){
+async function tokenHandler(method, url, refreshToken, cb, inputs='', contentType = true){
     var config = {
         method: 'post',
         url: `http://localhost:4000/users/relogin`,
@@ -17,7 +17,7 @@ async function tokenHandler(method, url, refreshToken, cb, inputs=''){
       const token = response.data.accessToken;
       sessionStorage.setItem('myToken', token)
     //   sessionStorage.setItem('refreshToken', newRefreshToken)
-      return await cb(method,url,inputs='')
+      return await cb(method,url,inputs='', contentType)
      
 
 }
