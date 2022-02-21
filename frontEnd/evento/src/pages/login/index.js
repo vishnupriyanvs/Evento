@@ -68,13 +68,13 @@ function MyForm(props) {
 
     return (
         
-        <>
-            <div className="container">
-                <div className="card" >
+        <div className="loginBody">
+            <div className="containerx">
+                <div className="cardx" >
                     <div className="content">
                         <center>
-                            <img src ="experion.png"></img>
-                            <h2 className="display-3" > Evento</h2>
+                            <img className="experionImg" src ="experion.png"></img>
+                            <h4 className="display-3" > Event Hosting Platform</h4>
                         </center>
                         <Form onSubmit={handleSubmit}>
                             <Form.Group className="mb-3">
@@ -114,44 +114,8 @@ function MyForm(props) {
             </div>
             <script type="text/javascript" src="vanilla-tilt.js"></script>
     
-            {/* <div className='wrapper'>
-                <center> <h1 className="display-3" style={{ marginTop: '20px' }}> Sign In</h1></center>
-                <Form onSubmit={handleSubmit}>
-                    <Form.Group className="mb-3">
-                        <Form.Label>User Name</Form.Label>
-                        <div className="form-field d-flex align-items-center"> <span className="fa fa-user"></span>
-                            <Form.Control className="input" type="text" name="username" placeholder="Enter UserName"
-                                value={inputs.username || ''} onChange={handleChange}
-                                required>
-
-                            </Form.Control>
-
-                        </div>
-                    </Form.Group>
-
-                    <Form.Group className="mb-3">
-
-                        <Form.Label>Password</Form.Label>
-                        <div className="form-field d-flex align-items-center"> <span className="fa fa-key"></span>
-                            <Form.Control className="input" type="password" name="password" placeholder="Enter Password"
-                                value={inputs.password || ''} onChange={handleChange}
-                                required>
-                                    
-                            </Form.Control>
-
-                        </div>
-                    </Form.Group>
-
-
-                    <center>
-                        <Button variant="primary" type="submit" >Login</Button>&nbsp;&nbsp;
-                        <Button variant="danger" >Cancel</Button>
-                    </center>
-
-                </Form>
-
-            </div> */}
-        </>
+            
+        </div>
     );
 
 };
