@@ -183,7 +183,7 @@ function handleChange(event){
     //   .catch(error => {
     //       console.log(error)
     //   })
-      const x = await apiHandler('get',`invitations`,uniqueInviteesArray)
+      const x = await apiHandler('post',`invitations`,uniqueInviteesArray)
       //console.log(x.data);
       alert('Invitation sent successfully');
   };
@@ -201,17 +201,17 @@ const [typeOfInvitation,setTypeOfInvitation] = useState()
     <div class="form-bg">
     <Form ref={form} onSubmit={sendEmail}>
       <div class='title-class'>
-      <Form.Label>Event Title</Form.Label>
+      <Form.Label class='left-aligned'>Event Title</Form.Label>
       <Form.Control  id = 'title-name' type="text" name="event_title" value={events.title}></Form.Control>
       <br/>
       </div>
       <div class='description-class'>
-      <Form.Label>Description</Form.Label>
-      <Form.Control id='description-title' type="textarea" name="description" value={events.description}  ></Form.Control>
+      <Form.Label class='left-aligned'>Description</Form.Label>
+      <Form.Control id='description-title' type="textarea" name="description" value={events.description} ></Form.Control>
       <br/>
       </div>
       <div class='invitation'>
-      <Form.Label>Send Invitation To :</Form.Label>
+      <Form.Label class='left-aligned'>Send Invitation To :</Form.Label>
       <br />
       <Form.Check
         inline
@@ -242,7 +242,8 @@ const [typeOfInvitation,setTypeOfInvitation] = useState()
                   onChange={handleChange} 
                   options = {options}
                   isMulti = {true}
-                  value = {options.email} />
+                  value = {options.email}
+                   />
           </>
         :
           null
@@ -265,18 +266,18 @@ const [typeOfInvitation,setTypeOfInvitation] = useState()
       </> 
       </div>
       <div class='message'>
-      <Form.Label>Message</Form.Label>
-      <Form.Control type="textarea" name="message" row="5"/>
+      <Form.Label class='left-aligned'>Message</Form.Label>
+      <Form.Control id="message-area" type="textarea" name="message" row="5"/>
       <br/><br/>
       </div>
       <div class = 'submit-button'>
-      <Form.Control type="submit" value="Send" />
+      <Form.Control id='submit-button' type="submit" value="Invite" />
       </div>
       {/* <Button type='reset' variant='danger' >Cancel</Button> */}
       <div class = 'cancel-button'>
-      <Form.Control type='reset' variant='danger' value="Cancel"/>
+      <Form.Control id='cancel-button' type='reset'  value="Cancel"/>
       </div>
     </Form>
     </div>
-  );
+  )
 };

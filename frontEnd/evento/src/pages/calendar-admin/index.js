@@ -13,26 +13,15 @@ function AdminCalenderEvents() {
     const [events, setEvents] = useState([]);
     const navigate = useNavigate();
 
-    // useEffect(() => {
-    //     axios.get(`http://localhost:4000/events/`)
-    //         .then(response => {
-    //             setEvents(response.data)
-
-
-    //         })
-    //         .catch(error => {
-    //             console.log(error)
-    //         })
-    // },[])
     useEffect(async () => {
         try {
             try {
-                const x = await apiHandler('get', `events/${id}`)
+                const x = await apiHandler('get', `events`)
                 //console.log(x.data);
                 setEvents(x.data)
             }
             catch (err) {
-                const x = await tokenHandler('get', `events/${id}`,sessionStorage.getItem('refreshToken'),apiHandler)
+                const x = await tokenHandler('get', `events`,sessionStorage.getItem('refreshToken'),apiHandler)
                 //console.log(x.data);
                 setEvents(x.data)
             }
@@ -44,8 +33,6 @@ function AdminCalenderEvents() {
     }, [])
 
 
-
-
     return (
         <div className="calenderSize">
             <CalendarEvents
@@ -53,7 +40,6 @@ function AdminCalenderEvents() {
             />
         </div>
     );
-
 };
 
 export default AdminCalenderEvents;

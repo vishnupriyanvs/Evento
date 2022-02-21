@@ -8,7 +8,7 @@ const authenticateToken = require('../middleware/user.middleware')
 router.get('/contactpersons',authenticateToken(['Admin']),userController.findContactPersons)
 
 router.get('/',authenticateToken(['Admin']),userController.findUsers);
-router.get('/:id',authenticateToken(['Admin']), userController.findUserById);
+router.get('/:id',authenticateToken(['Admin','Employee']), userController.findUserById);
 //router.get('/:id',authenticateToken(['Admin']), userController.findUserById);
 
 //router.put('/:id',authenticateToken(['Admin']),userController.updateUser);
