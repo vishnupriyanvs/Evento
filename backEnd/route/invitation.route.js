@@ -6,7 +6,7 @@ const authenticateToken = require('../middleware/user.middleware');
 router.post('/',authenticateToken(['Admin']), invitationController.addInvitation);
 router.get('/',authenticateToken(['Admin']), invitationController.findInvitations);
 router.get('/:id', authenticateToken(['Admin','Employee']),invitationController.findInvitationById);
-router.get('/event/:eventid',authenticateToken(['Admin']), invitationController.findInvitationsByEventId)
+router.get('/event/:eventid',authenticateToken(['Admin','Employee']), invitationController.findInvitationsByEventId)
 router.put('/:id', authenticateToken(['Admin','Employee']),invitationController.updateInvitation);
 //router.delete('/:id',authenticateToken(['Admin']), invitationController.deleteById);
 

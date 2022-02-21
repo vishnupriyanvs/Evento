@@ -71,11 +71,11 @@ function InvitedEvents(props) {
                 try{
                     try {
                         const x = await apiHandler('put',`invitations/${events[0].id}`,{invitationResponse:value})
-                        //console.log(x.data);
+                        console.log(x.data);
                         setEvents(x.data)
                   } catch (error) {
                     const x = await apiHandler('put',`invitations/${events[0].id}`,{invitationResponse:value},sessionStorage.getItem('refreshToken'),apiHandler)
-                    //console.log(x.data);
+                    console.log(x.data);
                     setEvents(x.data)
                   }
                   }
@@ -114,7 +114,7 @@ function InvitedEvents(props) {
         <div className="upcomingEventsTable">
             <SizedBox height="2vh" />
             <MyEventsTable
-                titles={['Event-Titles', 'Start Date','End Date','Status','Actions']}
+                titles={['Event-Titles','Status', 'Start Date','End Date','Actions']}
                 events={events}
                 handleSubmit={handleSubmit}
                 // onClick={navigateToEvent(events.id)}

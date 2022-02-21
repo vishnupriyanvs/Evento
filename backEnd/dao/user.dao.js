@@ -10,7 +10,8 @@ var userDao = {
     deleteById: deleteById,
     updateUser: updateUser,
 
-    findContactPersons : findContactPersons
+    findContactPersons : findContactPersons,
+    
 }
 
 function findAllUsers() {
@@ -69,6 +70,8 @@ function findContactPersons() {
         attributes : ["id","name"]
     });
 }
+
+
 
 
 

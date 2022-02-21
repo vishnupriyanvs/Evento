@@ -87,6 +87,7 @@ function ViewEvents() {
         }
         }
         catch{
+        console.log('hi');
           navigate('/');
         }
       },[events])

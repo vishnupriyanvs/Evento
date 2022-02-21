@@ -6,6 +6,7 @@ import './index.css';
 import { Outlet, useNavigate } from 'react-router-dom';
 import SwitchUserAdminBtn from '../../components/switch-user-admin-btn';
 import { useParams } from 'react-router-dom';
+import decryptData from '../../client-side-encryption/decrypt';
 
 function UsersMainPage() {
     const { id } = useParams()
@@ -59,6 +60,7 @@ function UsersMainPage() {
 
     }
 
+    const decryptedData = decryptData(sessionStorage.getItem('myId'))
     return (<div className="containers">
         <nav>
             <Navbar openMenu={clickMenu} onClick={() => navigate(`create-event/${id}`)} myEvent={faMask} endPoint={'/user/upcoming-events/'}/>
@@ -66,8 +68,12 @@ function UsersMainPage() {
 
 
         <main>
-            {/* <div>{dimension.height}, {dimension.width}</div> */}
-            <Outlet />
+            {decryptedData == id ? 
+                <Outlet  /> 
+            :
+                navigate('/')
+                
+            } 
         </main>
 
         <div className="sidebar">
