@@ -29,7 +29,6 @@ function UpcomingEvents(props) {
         } catch (error) {
             navigate('/')
         }
-<<<<<<< HEAD
       }, [])
 
     
@@ -38,28 +37,9 @@ function UpcomingEvents(props) {
     events.forEach(async (event) => {
         if(event.start_date == today){
             const x = await apiHandler('put',`events/${event.id}/InProgress`);
-=======
-
-
-        //console.log(x.data);
-
-    }, [])
-
-    var today = new Date();
-    events.forEach(async (event) => {
-        if (event.start_date == today) {
-            const x = await apiHandler('put', `events/${event.id}/InProgress`);
-            //console.log(x);
->>>>>>> 90a9d2b2ebbda7e0677833f0bc0967a978adbe6e
         }
     })
 
-<<<<<<< HEAD
-=======
-
-
-    // console.log(events)
->>>>>>> 90a9d2b2ebbda7e0677833f0bc0967a978adbe6e
     return (
         <>
         <h5 className="heading">{props.toptitle}</h5>
