@@ -13,7 +13,7 @@ async function tokenHandler(method, url, refreshToken, cb, inputs='', contentTyp
       };
 
       const response = await axios(config);
-      console.log(response.data);
+      //console.log(response.data);
       const token = response.data.accessToken;
       sessionStorage.setItem('myToken', token)
     //   sessionStorage.setItem('refreshToken', newRefreshToken)

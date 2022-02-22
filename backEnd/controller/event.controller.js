@@ -53,7 +53,9 @@ function updateEvent(req, res) {
     eventDao.updateEvent(req.body, req.params.id).
         then((data) => {
             res.status(200).json({
-                message: "Event updated successfully",
+                message: "Event updated successfully" ,
+                body : req.body,
+                params : req.params.id,
                 event: data
             })
         })

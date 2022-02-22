@@ -9,33 +9,22 @@ import apiHandler from '../../api-handling';
 import tokenHandler from '../../api-handling/tokenHandler';
 
 export  const InviteUser = () => {
+  
   const form = useRef();
   const navigate = useNavigate();
-
   const {id,eventid} = useParams();
   const [events,setEvents] = useState({});
   const [users,setUsers] = useState([]);
   const [groups,setGroups] = useState([]);
   let [invitee,setInvitee] = useState({"eventId" : eventid});
   let [groupInviteeAssign,setGroupInviteeAssign] = useState({})
-
-  
+  const [typeOfInvitation,setTypeOfInvitation] = useState('individual') 
   const options = [];
   const inviteesArray = [];
   const optionsGroup = [];
+  const options2 = [];
  
-
-  // useEffect(() => {
-  //   axios.get(`http://localhost:4000/events/${eventid}`)
-  //     .then(response => {
-  //       setEvents(response.data);
-  //     })
-  //     .catch(error => {
-  //       console.log(error);
-  //     })
-  // },[])
-
- 
+  // Getting event details from backend
   useEffect(async () => {
     try{
       try {
@@ -51,23 +40,12 @@ export  const InviteUser = () => {
       navigate('/');
     }
   },[])
-  // useEffect(() => {
-  //   axios.get(`http://localhost:4000/users`)
-  //     .then(response => {
-  //       setUsers(response.data)
-  //     })
-  //     .catch(error => {
-  //       console.log(error)
-  //     })
-  // },[])
- 
 
-
+  // Getting users details from backend
   useEffect(async () => {
     try{
       try {
         const x = await apiHandler('get',`users`);
-        //console.log(x.data);
         setUsers(x.data);
     } catch (error) {
         const x = await tokenHandler('get',`users`,sessionStorage.getItem('refreshToken'),apiHandler);
@@ -79,24 +57,12 @@ export  const InviteUser = () => {
     }
   },[])
   
-  
-
-  // useEffect(() => {
-  //   axios.get(`http://localhost:4000/jobTitles/`)
-  //     .then(response => {
-  //       setGroups(response.data)
-  //     })
-  //     .catch(error =>{
-  //       console.log(error)
-  //     })
-  // },[])
- 
-
+   
+  //Getting jobTitles details from backend
   useEffect(async () => {
     try{
       try {
         const x = await apiHandler('get',`jobTitles`);
-        //console.log(x.data);
         setGroups(x.data);
     } catch (error) {
         const x = await tokenHandler('get',`jobTitles`,sessionStorage.getItem('refreshToken'),apiHandler);
@@ -109,20 +75,19 @@ export  const InviteUser = () => {
   },[])
   
 
-
-
+//Converting user options for Select
 users.map((user) => {
   const obj = {value : `${user.email}`, key : `${user.id}` , label: `${user.name}`}
   options.push(obj)
 });
 
-
+//Converting jobtitle options for Select
 groups.map((groupmail) => {
   const obj = {value : `${groupmail.id}`, label: `${groupmail.title}`}
   optionsGroup.push(obj)
 })
 
-const options2 = []
+//Appending userid to an array
 groups.map((job) => {
   const name = 'value'
   let groupInvitee = []
@@ -162,7 +127,7 @@ function handleChange(event){
           console.log(inviteesArray)
           } 
   
-
+  //Sending email function
   const sendEmail = async (e) => {
     e.preventDefault();
     console.log(form.current)
@@ -173,27 +138,22 @@ function handleChange(event){
           console.log(error.text);
       });
       
-    
+    //This is to remove duplicates from the array
     const uniqueInviteesArray = Array.from(inviteesArray.reduce((map, obj)=> map.set(obj.userId, obj), new Map()).values())
-
-    // axios.post(`http://localhost:4000/invitations/`,uniqueInviteesArray)
-    //     .then(response => {
-    //      alert(`Invitation sent successfully`)
-    //   })
-    //   .catch(error => {
-    //       console.log(error)
-    //   })
-      const x = await apiHandler('post',`invitations`,uniqueInviteesArray)
-      //console.log(x.data);
-      alert('Invitation sent successfully');
+    
+    //Pushing data to backend tables
+    const x = await apiHandler('post',`invitations`,uniqueInviteesArray)
+    alert('Invitation sent successfully');
   };
   
 
-const [typeOfInvitation,setTypeOfInvitation] = useState() 
-  function invitationsFor(event){
+
+
+function invitationsFor(event){
+  event.stopPropagation()
     const type = event.target.id
     setTypeOfInvitation(type)
-    event.preventDefault()
+   
   }
 
 
@@ -220,6 +180,7 @@ const [typeOfInvitation,setTypeOfInvitation] = useState()
         name = 'invitation'
         label = 'Select Specific Group' 
         onChange = {invitationsFor}
+        checked = {typeOfInvitation === 'group'}
       /> 
       <Form.Check
         inline
@@ -228,6 +189,7 @@ const [typeOfInvitation,setTypeOfInvitation] = useState()
         name = 'invitation'
         label = 'Select Individual user' 
         onChange = {invitationsFor}
+        checked = {typeOfInvitation === 'individual'}
       /> 
       <br />
       <>
@@ -273,7 +235,6 @@ const [typeOfInvitation,setTypeOfInvitation] = useState()
       <div class = 'submit-button'>
       <Form.Control id='submit-button' type="submit" value="Invite" />
       </div>
-      {/* <Button type='reset' variant='danger' >Cancel</Button> */}
       <div class = 'cancel-button'>
       <Form.Control id='cancel-button' type='reset'  value="Cancel"/>
       </div>

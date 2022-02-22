@@ -1,5 +1,4 @@
 import React,{useState,useEffect} from 'react';
-import axios from 'axios';
 import './index.css';
 import { useParams,useNavigate } from 'react-router-dom';
 import CalendarEvents from '../../calendar';
@@ -13,24 +12,11 @@ function UserCalenderEvents() {
     const [events,setEvents] = useState([]);
     const navigate = useNavigate();
 
-    // useEffect(() => {
-    //     axios.get(`http://localhost:4000/events/calendar/${id}`)
-    //         .then(response => {
-    //             setEvents(response.data)
-               
-    //         })
-    //         .catch(error => {
-    //             console.log(error)
-    //         })
-    // },[])
-
     
-
-      useEffect(async () => {
+    useEffect(async () => {
         try{
           try {
             const x = await apiHandler('get',`events/calendar/${id}`);
-            //console.log(x.data);
             setEvents(x.data);
         } catch (error) {
             const x = await tokenHandler('get',`events/calendar/${id}`,sessionStorage.getItem('refreshToken'),apiHandler);

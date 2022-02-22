@@ -62,7 +62,7 @@ function Cancellation(props) {
 
     return (
         <div >
-            <Popup trigger={<Button variant="danger"  size="sm">No</Button>}
+            <Popup trigger={<Button id='button-no' variant="danger"  size="sm">No</Button>}
                 position="bottom right "
                >
                 <Container className= "resContainer"  id="triggerBox">

@@ -1,48 +1,33 @@
 import React, { useEffect, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./index.css";
-import { faUserPlus, faEdit } from "@fortawesome/free-solid-svg-icons";
 import services from "../../constants";
 import { useNavigate, useParams } from "react-router-dom";
 import StatusSelectionBtn from "../event-select-btn";
 import { Button } from "react-bootstrap";
-import Feedback from "../feedback"
-import axios from "axios"
+import Feedback from "../feedback";
 import Cancellation from "../cancellation-reason";
-import apiHandler from '../../api-handling';
+import apiHandler from "../../api-handling";
 import tokenHandler from "../../api-handling/tokenHandler";
 
-
 function MyEventsTable(props) {
-
-
-  const { id } = useParams()
+  
+  const { id } = useParams();
   const navigate = useNavigate();
   const [tHeader, setTHeader] = useState([]);
   const [tRow, setTrow] = useState([]);
   const [invitationArray, setInvitationArray] = useState([]);
-
   const [eventDetails, setEventDetails] = useState([props.events]);
-
   const eventInfo = props.events;
 
   const checkPage = (page, tHeader, tRow) => {
     switch (page) {
+      
       case services.myEventType.UPCOMING_EVENT.INVITED_EVENT:
-        // tHeader = tHeader.filter((title, i) => {
-        //   return title !== "End Date";
-        // });
-
         setTHeader(tHeader);
-
-        // tRow = tRow.filter((content, i) => {
-        //   return delete content["end_date"];
-        // });
         setTrow(tRow);
         break;
 
       case services.myEventType.UPCOMING_EVENT.ACCEPTED_EVENT:
-
         tHeader = tHeader.filter((title, i) => {
           return title !== "Actions";
         });
@@ -54,7 +39,6 @@ function MyEventsTable(props) {
         break;
 
       case services.myEventType.UPCOMING_EVENT.REJECTED_EVENT:
-
         tHeader = tHeader.filter((title, i) => {
           return title !== "Actions";
         });
@@ -66,14 +50,11 @@ function MyEventsTable(props) {
         break;
 
       case services.myEventType.COMPLETED_EVENT.ACCEPTED_EVENT:
-
         setTHeader(tHeader);
-
         setTrow(tRow);
         break;
 
       case services.myEventType.COMPLETED_EVENT.REJECTED_EVENT:
-
         tHeader = tHeader.filter((title, i) => {
           return title !== "Actions";
         });
@@ -85,7 +66,6 @@ function MyEventsTable(props) {
         break;
 
       case services.myEventType.CANCELLED_EVENT:
-
         tHeader = tHeader.filter((title, i) => {
           return title !== "Actions";
         });
@@ -100,11 +80,9 @@ function MyEventsTable(props) {
           return delete content["Actions"];
         });
         setTrow(tRow);
-
         break;
 
       case services.myEventType.ONGOING_EVENT:
-
         tHeader = tHeader.filter((title, i) => {
           return title !== "Actions";
         });
@@ -119,52 +97,41 @@ function MyEventsTable(props) {
     }
   };
 
-
+ 
   useEffect(() => {
     if (props.titles) setTHeader(props.titles);
     checkPage(props.myEventType, props.titles, props.events);
     if (props.content) setTrow(props.content);
-
-
   }, [props.titles, props.content]);
 
+  
   useEffect(async () => {
     const arr = [];
-    try{
-      const response = await apiHandler('get', `feedbacks`)
-      response.data.forEach(item => {
+    try {
+      const response = await apiHandler("get", `feedbacks`);
+      response.data.forEach((item) => {
         arr.push(item.invitationId);
-      })
-    }
-    catch(err){
-      const response= await tokenHandler('get',`feedbacks`,sessionStorage.getItem('refreshToken'),apiHandler)
-      response.data.forEach(item => {
+      });
+    } catch (err) {
+      const response = await tokenHandler(
+        "get",
+        `feedbacks`,
+        sessionStorage.getItem("refreshToken"),
+        apiHandler
+      );
+      response.data.forEach((item) => {
         arr.push(item.invitationId);
-      })
+      });
     }
-    
-    //console.log(x.data);
-    
+
     setInvitationArray(arr);
-    // axios
-    //     .get(`http://localhost:4000/feedbacks`)
-    //     .then(response => {
-    //         response.data.forEach(item => {
-    //           arr.push(item.invitationId);
-    //         })
-    //         setInvitationArray(arr);
-    //     })
-    //     .catch(err =>{
-
-    //     })
-
-
-  }, [])
-
+  }, []);
 
   return (
     <center>
-      {props.events.length == 0 ? <h1>You have no Events</h1> :
+      {props.events.length == 0 ? (
+        <h1>You have no Events</h1>
+      ) : (
         <table id="events">
           <tbody>
             <tr>
@@ -173,74 +140,125 @@ function MyEventsTable(props) {
               ))}
             </tr>
             {tRow.map((item, i) => {
-
               const action = tHeader.includes("Actions");
               return (
                 <tr>
-                   <td onClick={() => navigate(`/user/view-event/${id}/${item.event.id}`)}>{item.event.title}</td>
-                  {/*<td>{item.event.startDate}</td>
-                  {item.event.endDate ?
-                    <td>{item.event.endDate}</td>
-                    : null
-                  } */}
-
-                  {item.event.isActive == 'Active' || item.event.isActive == 'InProgress' || item.event.isActive == 'Cancelled' || item.event.isActive == 'Completed' ?
-                    action ? item.event.isActive == 'Active' ?
-                      <>
-                        <td> <StatusSelectionBtn options={[item.event.isActive]} given={item.event.isActive} role={"Admin"} index={i} /></td>
-                       
-                  <td>{item.event.startDate}</td>
-                  {item.event.endDate ?
-                    <td>{item.event.endDate}</td>
-                    : null
-                  }
-                        <td>
-                          <div className="responseButton">
-                          <Button variant="primary" size="sm" onClick={props.handleSubmit} value="Yes" >Yes</Button>
-                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                          <Cancellation invitationId={item.id} title={item.event.title} />
-                          </div>
-                        </td>
-                      </>
-                      :
-                      <>
-                        <td> <StatusSelectionBtn options={[item.event.isActive]} given={item.event.isActive} role={"Admin"} index={i} /></td>
-                        <td>{item.event.startDate}</td>
-                  {item.event.endDate ?
-                    <td>{item.event.endDate}</td>
-                    : null
-                  }
-                        <td>
-                          {invitationArray.includes(item.id) ? <Button variant="primary" size="sm" disabled>Feedback</Button> : <Feedback invitationId={item.id} title={item.event.title} />}
-                        </td>
-                      </>
-                      :
-                      <>
-                      <td> <StatusSelectionBtn options={[item.event.isActive]} given={item.event.isActive} role={"Admin"} index={i} /></td>
-                      <td>{item.event.startDate}</td>
-                      {item.event.endDate ?
-                        <td>{item.event.endDate}</td>
-                    : null
+                  <td
+                    onClick={() =>
+                      navigate(`/user/view-event/${id}/${item.event.id}`)
                     }
-                    </>
-                    :
-                    <>
-
-                      <td> <StatusSelectionBtn options={[item.event.isActive]} given={item.event.isActive} role={"Admin"} index={i} /></td>
-                      <td>{item.event.startDate}</td>
-                      {item.event.endDate ?
-                        <td>{item.event.endDate}</td>
-                    : null
-                    }
-                    </>
+                  >
+                    {item.event.title}
+                  </td>
                   
-                  }
+                  {item.event.isActive == "Active" ||
+                  item.event.isActive == "InProgress" ||
+                  item.event.isActive == "Cancelled" ||
+                  item.event.isActive == "Completed" ? (
+                    action ? (
+                      item.event.isActive == "Active" ? (
+                        <>
+                          <td>
+                            {" "}
+                            <StatusSelectionBtn
+                              options={[item.event.isActive]}
+                              given={item.event.isActive}
+                              role={"Admin"}
+                              index={i}
+                            />
+                          </td>
+
+                          <td>{item.event.startDate}</td>
+                          {item.event.endDate ? (
+                            <td>{item.event.endDate}</td>
+                          ) : null}
+                          <td>
+                            <div className="responseButton">
+                              <Button
+                                id="button-yes"
+                                size="sm"
+                                onClick={props.handleSubmit}
+                                value="Yes"
+                              >
+                                Yes
+                              </Button>
+                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                              <Cancellation
+                                invitationId={item.id}
+                                title={item.event.title}
+                              />
+                            </div>
+                          </td>
+                        </>
+                      ) : (
+                        <>
+                          <td>
+                            {" "}
+                            <StatusSelectionBtn
+                              options={[item.event.isActive]}
+                              given={item.event.isActive}
+                              role={"Admin"}
+                              index={i}
+                            />
+                          </td>
+                          <td>{item.event.startDate}</td>
+                          {item.event.endDate ? (
+                            <td>{item.event.endDate}</td>
+                          ) : null}
+                          <td>
+                            {invitationArray.includes(item.id) ? (
+                              <Button variant="primary" size="sm" disabled>
+                                Feedback
+                              </Button>
+                            ) : (
+                              <Feedback
+                                invitationId={item.id}
+                                title={item.event.title}
+                              />
+                            )}
+                          </td>
+                        </>
+                      )
+                    ) : (
+                      <>
+                        <td>
+                          {" "}
+                          <StatusSelectionBtn
+                            options={[item.event.isActive]}
+                            given={item.event.isActive}
+                            role={"Admin"}
+                            index={i}
+                          />
+                        </td>
+                        <td>{item.event.startDate}</td>
+                        {item.event.endDate ? (
+                          <td>{item.event.endDate}</td>
+                        ) : null}
+                      </>
+                    )
+                  ) : (
+                    <>
+                      <td>
+                        {" "}
+                        <StatusSelectionBtn
+                          options={[item.event.isActive]}
+                          given={item.event.isActive}
+                          role={"Admin"}
+                          index={i}
+                        />
+                      </td>
+                      <td>{item.event.startDate}</td>
+                      {item.event.endDate ? (
+                        <td>{item.event.endDate}</td>
+                      ) : null}
+                    </>
+                  )}
                 </tr>
-              )
+              );
             })}
           </tbody>
         </table>
-      }
+      )}
     </center>
   );
 }

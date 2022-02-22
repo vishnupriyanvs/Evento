@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import './index.css';
 import { useParams } from 'react-router-dom';
 import CalendarEvents from '../calendar';
@@ -31,7 +30,6 @@ function AdminCalenderEvents() {
         }
 
     }, [])
-
 
     return (
         <div className="calenderSize">

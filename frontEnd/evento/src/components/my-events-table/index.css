@@ -3,9 +3,7 @@
     border-collapse: collapse;
     width: 80%;
     /* height: 100vh; */
-    /* text-align: center; */
-    
-    
+    /* text-align: center; */ 
   }
   
   #events td, #events th {
@@ -73,3 +71,15 @@
   .responseButton{
     display:flex;
   }
+
+ #button-yes {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #0000FF;
+  }
+
+  #button-yes:hover{
+    background-color: #0000FF;
+    color: white;
+  }
+

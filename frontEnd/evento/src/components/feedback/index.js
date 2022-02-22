@@ -10,13 +10,12 @@ import {useNavigate} from "react-router-dom"
 
 
 function Feedback(props) {
-    console.log(props.title)
+    
     const [rating, setRating] = useState(0); 
     const [feedback,setFeedback] = useState('');
     const [flag,setFlag] = useState(false);
     const navigate = useNavigate();
 
-   
 
     const handleChange = (event) =>{
         const value = event.target.value;
@@ -24,23 +23,6 @@ function Feedback(props) {
     }
 
     const handleFeedback = async (invitationId) => {
-
-        console.log({
-            invitationId:invitationId,
-            feedback:feedback
-        })
-
-        // axios
-        //     .post('http://localhost:4000/feedbacks',{
-        //         invitationId:invitationId,
-        //         feedback:feedback
-        //     })
-        //     .then(response => {
-                
-        //     })
-        //     .catch(error => {
-        //         console.log(error)
-        //     })
         try{
             try{
                 const x = await apiHandler('post',`feedbacks`,{
@@ -81,7 +63,6 @@ function Feedback(props) {
                             <Form.Label>Feedback</Form.Label>
                             <Form.Control as="textarea" onChange={handleChange} rows={3} />
                         </Form.Group>
-                        {/* <Rate rating={rating} onRating={(rate) => setRating(rate)} /> */}
 
                         {!flag ? <Button variant="primary" type="submit" onClick={() => handleFeedback(props.invitationId)}>
                             Submit

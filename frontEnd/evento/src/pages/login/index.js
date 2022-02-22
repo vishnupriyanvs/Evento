@@ -10,20 +10,21 @@ import { toast, Slide } from 'react-toastify';
 import encryptData from "../../client-side-encryption/encrypt";
 
 function LoginForm() {
+    
     sessionStorage.clear();
     return (
         <>
-
             <MyForm />
         </>
     );
 }
 
-toast.configure()
+toast.configure();
+
 function MyForm(props) {
+
     const [inputs, setInputs] = useState({});
     const navigate = useNavigate()
-
     function handleChange(event) {
         const name = event.target.name;
         const value = event.target.value;
@@ -32,8 +33,6 @@ function MyForm(props) {
 
     function handleSubmit(event) {
         event.preventDefault();
-       
-
         axios.post('http://localhost:4000/users/login', inputs)
             .then(response => {
                
@@ -44,7 +43,6 @@ function MyForm(props) {
                 const encryptedId = encryptData(response.data.user.id)
                 sessionStorage.setItem('myRole', encryptedRoleId)
                 sessionStorage.setItem('myId',encryptedId)
-                //console.log(encryptedId)
                 toast.success("Welcome" + " " + response.data.user.name, {
                     transition: Slide,
                     hideProgressBar: false,
@@ -65,13 +63,8 @@ function MyForm(props) {
             })
     };
 
-    // function goToHome(){
-    //     window.location = '/';
-    // }
-
     return (
         <>
-
             <div className='wrapper'>
                 <center> <h1 className="display-3" style={{ marginTop: '20px' }}> Sign In</h1></center>
                 <Form onSubmit={handleSubmit}>
@@ -81,9 +74,6 @@ function MyForm(props) {
                             <Form.Control className="input" type="text" name="username" placeholder="Enter UserName"
                                 value={inputs.username || ''} onChange={handleChange}
                                 required></Form.Control>
-                            {/* <Form.Text className="text-muted">
-                    Do not share your login credentials with anyone other than the login purposes
-                </Form.Text> */}
                         </div>
                     </Form.Group>
 
