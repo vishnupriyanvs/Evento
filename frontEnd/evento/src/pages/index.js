@@ -1,7 +1,7 @@
 import React, { useEffect, useState,useContext } from 'react';
 import Navbar from '../components/navbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendar, faFastForward, faCheckCircle, faStopCircle, faAngleDown ,faInbox, faMask} from '@fortawesome/free-solid-svg-icons';
+import { faCalendar, faFastForward, faCheckCircle, faStopCircle, faAngleDown, faInbox, faMask } from '@fortawesome/free-solid-svg-icons';
 import './index.css';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';

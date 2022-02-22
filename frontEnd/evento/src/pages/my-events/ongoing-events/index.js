@@ -35,7 +35,7 @@ function UserOnGoingEvents(props) {
         <div className="upcomingEventsTable">
             <SizedBox height="2vh" />
             <MyEventsTable
-                titles={['Event-Titles', 'Status','Start Date','End Date','Actions']}
+                titles={['Event-Titles', 'Start Date','End Date','Status','Actions']}
                 events={events}
                 myEventType={services.myEventType.ONGOING_EVENT}
             />

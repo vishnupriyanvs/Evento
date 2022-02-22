@@ -68,12 +68,11 @@ function Cancellation(props) {
                 <Container className= "resContainer"  id="triggerBox">
                     <Form onSubmit={(e) => e.preventDefault()}>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                            {/* <Form.Label>Event Title :&nbsp;</Form.Label> */}
-                            
-                            <Form.Label style={{fontWeight:"bold",marginLeft:'30%'}}> {props.title}</Form.Label>
+                            <Form.Label>Event Title :&nbsp;</Form.Label>
+                            <Form.Label style={{fontWeight:"bold"}}> {props.title}</Form.Label>
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                            <Form.Label>Reason for Rejection</Form.Label>
+                            <Form.Label>Reason for Cancellation :</Form.Label>
                             <Form.Control as="textarea" onChange={handleChange} rows={3} />
                         </Form.Group>
                         {/* <Rate rating={rating} onRating={(rate) => setRating(rate)} /> */}

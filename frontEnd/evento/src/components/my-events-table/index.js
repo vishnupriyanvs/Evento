@@ -108,21 +108,24 @@ function MyEventsTable(props) {
   useEffect(async () => {
     const arr = [];
     try {
-      const response = await apiHandler("get", `feedbacks`);
-      response.data.forEach((item) => {
-        arr.push(item.invitationId);
-      });
-    } catch (err) {
-      const response = await tokenHandler(
-        "get",
-        `feedbacks`,
-        sessionStorage.getItem("refreshToken"),
-        apiHandler
-      );
-      response.data.forEach((item) => {
-        arr.push(item.invitationId);
-      });
+      try {
+        const response = await apiHandler('get', `feedbacks`)
+        response.data.forEach(item => {
+          arr.push(item.invitationId);
+        })
+      }
+      catch (err) {
+        const response = await tokenHandler('get', `feedbacks`, sessionStorage.getItem('refreshToken'), apiHandler)
+        response.data.forEach(item => {
+          arr.push(item.invitationId);
+        })
+      }
     }
+    catch (err) {
+      navigate("/")
+    }
+
+    //console.log(x.data);
 
     setInvitationArray(arr);
   }, []);
@@ -143,116 +146,40 @@ function MyEventsTable(props) {
               const action = tHeader.includes("Actions");
               return (
                 <tr>
-                  <td
-                    onClick={() =>
-                      navigate(`/user/view-event/${id}/${item.event.id}`)
-                    }
-                  >
-                    {item.event.title}
-                  </td>
-                  
-                  {item.event.isActive == "Active" ||
-                  item.event.isActive == "InProgress" ||
-                  item.event.isActive == "Cancelled" ||
-                  item.event.isActive == "Completed" ? (
-                    action ? (
-                      item.event.isActive == "Active" ? (
-                        <>
-                          <td>
-                            {" "}
-                            <StatusSelectionBtn
-                              options={[item.event.isActive]}
-                              given={item.event.isActive}
-                              role={"Admin"}
-                              index={i}
-                            />
-                          </td>
+                  <td onClick={() => navigate(`/user/view-event/${id}/${item.event.id}`)}>{item.event.title}</td>
+                  <td>{item.event.startDate}</td>
+                  {item.event.endDate ?
+                    <td>{item.event.endDate}</td>
+                    : null
+                  }
 
-                          <td>{item.event.startDate}</td>
-                          {item.event.endDate ? (
-                            <td>{item.event.endDate}</td>
-                          ) : null}
-                          <td>
-                            <div className="responseButton">
-                              <Button
-                                id="button-yes"
-                                size="sm"
-                                onClick={props.handleSubmit}
-                                value="Yes"
-                              >
-                                Yes
-                              </Button>
-                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                              <Cancellation
-                                invitationId={item.id}
-                                title={item.event.title}
-                              />
-                            </div>
-                          </td>
-                        </>
-                      ) : (
-                        <>
-                          <td>
-                            {" "}
-                            <StatusSelectionBtn
-                              options={[item.event.isActive]}
-                              given={item.event.isActive}
-                              role={"Admin"}
-                              index={i}
-                            />
-                          </td>
-                          <td>{item.event.startDate}</td>
-                          {item.event.endDate ? (
-                            <td>{item.event.endDate}</td>
-                          ) : null}
-                          <td>
-                            {invitationArray.includes(item.id) ? (
-                              <Button variant="primary" size="sm" disabled>
-                                Feedback
-                              </Button>
-                            ) : (
-                              <Feedback
-                                invitationId={item.id}
-                                title={item.event.title}
-                              />
-                            )}
-                          </td>
-                        </>
-                      )
-                    ) : (
+                  {item.event.isActive == 'Active' || item.event.isActive == 'InProgress' || item.event.isActive == 'Cancelled' || item.event.isActive == 'Completed' ?
+                    action ? item.event.isActive == 'Active' ?
                       <>
+                        <td> <StatusSelectionBtn options={[item.event.isActive]} given={item.event.isActive} role={"Admin"} index={i} /></td>
                         <td>
-                          {" "}
-                          <StatusSelectionBtn
-                            options={[item.event.isActive]}
-                            given={item.event.isActive}
-                            role={"Admin"}
-                            index={i}
-                          />
+                          <div className="responseButton">
+                          <Button variant="primary" size="sm" onClick={props.handleSubmit} value="Yes" id={item.id}>Yes</Button>
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          <Cancellation invitationId={item.id} title={item.event.title} id={item.id}/>
+                          </div>
                         </td>
-                        <td>{item.event.startDate}</td>
-                        {item.event.endDate ? (
-                          <td>{item.event.endDate}</td>
-                        ) : null}
                       </>
-                    )
-                  ) : (
+                      :
+                      <>
+                        <td> <StatusSelectionBtn options={[item.event.isActive]} given={item.event.isActive} role={"Admin"} index={i} /></td>
+                        <td>
+                          {invitationArray.includes(item.id) ? <Button variant="primary" size="sm" disabled>Feedback</Button> : <Feedback invitationId={item.id} title={item.event.title} />}
+                        </td>
+                      </>
+                      :
+                      <td> <StatusSelectionBtn options={[item.event.isActive]} given={item.event.isActive} role={"Admin"} index={i} /></td>
+                    :
                     <>
-                      <td>
-                        {" "}
-                        <StatusSelectionBtn
-                          options={[item.event.isActive]}
-                          given={item.event.isActive}
-                          role={"Admin"}
-                          index={i}
-                        />
-                      </td>
-                      <td>{item.event.startDate}</td>
-                      {item.event.endDate ? (
-                        <td>{item.event.endDate}</td>
-                      ) : null}
+
+                      <td> <StatusSelectionBtn options={[item.event.isActive]} given={item.event.isActive} role={"Admin"} index={i} /></td>
                     </>
-                  )}
+                  }
                 </tr>
               );
             })}

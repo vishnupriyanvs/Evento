@@ -21,7 +21,7 @@ function StatusSelectionBtn(props) {
     setDefault(props.given);
     setOptions(props.options);
     styleSet(props.given, props.index);
-    let a = document.querySelectorAll(".SelectnBtn1-content");
+    // let a = document.querySelectorAll(".SelectnBtn1-content");
   }, []);
 
   const styleSet = (item, key) => {

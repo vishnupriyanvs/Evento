@@ -36,7 +36,7 @@ function UserCancelledEvents(props) {
         <div className="upcomingEventsTable">
             <SizedBox height="2vh" />
             <MyEventsTable
-                titles={['Event-Titles', 'Status','Start Date']}
+                titles={['Event-Titles', 'Start Date','Status']}
                 events={events}
                 myEventType={services.myEventType.CANCELLED_EVENT}
             />

@@ -7,7 +7,6 @@ import { useParams } from 'react-router-dom';
 function CalendarEvents(props) {
 
     const allEvents = [];
-    
     props.events.forEach((item) => {
         if(`${item.isActive}` === 'Active'){
             allEvents.push({

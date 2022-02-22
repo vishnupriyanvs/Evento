@@ -10,7 +10,6 @@ import {useNavigate} from "react-router-dom"
 
 
 function Feedback(props) {
-    
     const [rating, setRating] = useState(0); 
     const [feedback,setFeedback] = useState('');
     const [flag,setFlag] = useState(false);

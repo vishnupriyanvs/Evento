@@ -17,6 +17,7 @@ function UserCalenderEvents() {
         try{
           try {
             const x = await apiHandler('get',`events/calendar/${id}`);
+            console.log(x.data);
             setEvents(x.data);
         } catch (error) {
             const x = await tokenHandler('get',`events/calendar/${id}`,sessionStorage.getItem('refreshToken'),apiHandler);

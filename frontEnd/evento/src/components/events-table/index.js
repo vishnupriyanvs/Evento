@@ -2,10 +2,10 @@ import React, { useContext, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./index.css";
 import { faUserPlus, faEdit } from "@fortawesome/free-solid-svg-icons";
-import services from "../../constants";
 import { useNavigate, useParams } from "react-router-dom";
 import StatusSelectionBtn from "../event-select-btn";
 import AdminTitleContext from "../context";
+import { useEventTable } from "./useEventsTable";
 
 function EventsTable(props) {
   const { id } = useParams();
@@ -135,6 +135,18 @@ function EventsTable(props) {
     // if (props.content) setTrow(props.content);
     handlePagination();
   }, [props.titles, props.content, counter]);
+  const { tHeader, tRow, counter, incrementCounter, decrementCounter, setCounter, handlePagination, pages, handleTable } = useEventTable()
+
+
+  useEffect(async () => {
+    // checkPage(props.eventType, props.titles, props.events, counter);
+    await handleTable(props.eventType, props.titles, props.events, counter);
+    // console.log(props.events)
+    // handleRow(props.eventType, props.titles, props.events, counter);
+    handlePagination(props.events.length);
+
+
+  }, [props.titles, counter]);
 
   return (
     <div className="center-elements">
@@ -275,6 +287,10 @@ function EventsTable(props) {
             Next
           </button>
         ) : null}
+        {counter >= 1 ? <button onClick={() => { decrementCounter() }} className="previous-btn">Previous</button> : null}
+        {pages.map((item, i) => <span onClick={() => setCounter(item)}>{item + 1}</span>)}
+        {counter <= (props.events.length % 10 !== 0 ? (Math.floor(props.events.length / 10) + 1) - 1 : Math.floor(props.events.length / 10) - 1) - 1 ? <button onClick={() => { incrementCounter(); }} className="next-btn">Next</button> : null}
+
       </div>
     </div>
   );
