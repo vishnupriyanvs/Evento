@@ -1,16 +1,11 @@
-
-
-.mainFlex{
+.mainFlex {
   display: flex;
   /* align-items: center; */
 
   justify-content: space-between;
-  
-  
 }
 
-.flexLeftItem{
-
+.flexLeftItem {
   display: flex;
   justify-content: space-between;
   gap: 1rem;
@@ -18,16 +13,15 @@
   align-self: center;
 }
 
-.flexRightItem{
+.flexRightItem {
   display: flex;
-  gap: 0.5rem;
+  gap: 1rem;
   align-items: center;
-  padding-bottom: 8px;
-  /* align-self: center; */ 
+  /* padding-bottom: 8px; */
+  align-self: center;
 }
 
-.sizedBox{
-
+.sizedBox {
   width: 50px;
 }
 
@@ -35,7 +29,7 @@
   /* padding-top: 48px; */
   display: flex;
   flex-direction: column;
-  width:fit-content;
+  width: fit-content;
   justify-content: flex-start;
   align-items: center;
   /* transition: width 2s; */
@@ -45,7 +39,6 @@
 .myEventIcons .sideBarText {
   visibility: hidden;
   z-index: 1;
-
 }
 
 .myEventIcons:hover {
@@ -84,8 +77,7 @@
   /* gap: 10px; */
 }
 
-.click{
-  
+.click {
   border-radius: 50%;
   height: 6%;
   width: 3%;
@@ -93,8 +85,7 @@
   right: 40px;
 }
 
-.popup-box .div-li-image{
-  
+.popup-box .div-li-image {
   width: 200px;
   height: 100px;
 
@@ -103,38 +94,32 @@
   align-items: center;
   flex-direction: column;
   padding-top: 16px;
-  border-left: 6px solid #91A4B7;
+  border-left: 6px solid #91a4b7;
 }
-
 .popup-box_profile{
   display: block;
   margin-top: auto;
   z-index: 2;
 }
-
-.div-li{
+.div-li {
   color: aliceblue;
   display: flex;
-  justify-content: center;
-  border-left: 6px solid #91A4B7;
+  justify-content: space-around;
+  border-left: 6px solid #91a4b7;
   padding-top: 32px;
 }
 
-#logout{
-  cursor: pointer;
-}
-
-
-.profile-image{
-
+.profile-image {
   width: 35%;
-  height: 75px;
+  height: auto;
   border-radius: 50%;
 }
 
-
-.profile-image-s{
+.profile-image-s {
   width: 1%;
   height: auto;
   /* border-radius: 30px; */
 }
+#logout{
+  cursor: pointer;
+}   

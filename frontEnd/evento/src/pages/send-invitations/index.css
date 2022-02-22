@@ -1,17 +1,11 @@
-
 .form-bg{ 
     position: relative;
     width: 905px;
-    height: 676px;
+    height: 576px;
     left: 40px;
     top: 95px;
     background: #EFEFEF;
-    /* background-color: rgba(13, 24, 41, 0.76);; */
     border-radius: 7px;
-}
-
-.left-aligned{
-    text-align: left;
 }
 
 .title-class{
@@ -26,7 +20,6 @@
     background: rgba(221, 227, 232, 0.74);
 box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.1);
 border-radius: 5px;
-
 }
 
 
@@ -44,7 +37,7 @@ background: rgba(221, 227, 232, 0.74);
 box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.1);
 border-radius: 5px;
 position: absolute;
-height: 12%;
+height: 1000;
 }
 
 .invitation{
@@ -52,7 +45,7 @@ height: 12%;
     width: 799px;
     height: 149px;
     left: 50px;
-    top: 270px;
+    top: 200px;
 
 }
 
@@ -61,15 +54,16 @@ height: 12%;
     width: 799px;
     height: 149px;
     left: 50px;
-    top: 420px;
-    
+    top: 350px;
 }
+
 #message-area{
     position: absolute;
     height: 60%;
     box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
 }
+
 
 #submit-button{
     position: absolute;
@@ -104,4 +98,3 @@ height: 12%;
     background-color: #f44336;
     color: white;
   }
-

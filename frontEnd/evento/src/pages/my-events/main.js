@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '../../components/navbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendar, faFastForward, faCheckCircle, faStopCircle, faAngleDown,faMask } from '@fortawesome/free-solid-svg-icons';
+import { faCalendar, faFastForward, faCheckCircle, faStopCircle, faAngleDown, faMask } from '@fortawesome/free-solid-svg-icons';
 import './index.css';
 import { Outlet, useNavigate } from 'react-router-dom';
 import SwitchUserAdminBtn from '../../components/switch-user-admin-btn';
 import { useParams } from 'react-router-dom';
 import decryptData from '../../client-side-encryption/decrypt';
+
 
 function UsersMainPage() {
     const { id } = useParams()
@@ -51,7 +52,7 @@ function UsersMainPage() {
     }
 
     const subMenu = (i) => {
-    
+
         let x = document.querySelector('#parent-node').childNodes;
         if (!x[i].style.visibility || x[i].style.visibility === "hidden") {
             x[i].setAttribute('style', 'visibility: visible; position: relative;')
@@ -59,21 +60,21 @@ function UsersMainPage() {
             x[i].setAttribute('style', 'visibility: hidden; position: absolute')
 
     }
-
     const decryptedData = decryptData(sessionStorage.getItem('myId'))
+    const myRole = decryptData(sessionStorage.getItem('myRole'));
     return (<div className="containers">
         <nav>
-            <Navbar openMenu={clickMenu} onClick={() => navigate(`create-event/${id}`)} myEvent={faMask} endPoint={'/user/upcoming-events/'}/>
+            <Navbar openMenu={clickMenu} onClick={() => navigate(`create-event/${id}`)} myEvent={faMask} endPoint={'/user/upcoming-events/'} />
         </nav>
 
 
         <main>
-            {decryptedData == id ? 
-                <Outlet  /> 
-            :
+            {decryptedData == id ?
+                <Outlet />
+                :
                 navigate('/')
-                
-            } 
+
+            }
         </main>
 
         <div className="sidebar">
@@ -95,7 +96,7 @@ function UsersMainPage() {
                     <div className="liClick" ><FontAwesomeIcon icon={faCheckCircle} size="x" color="#91A4B7" /><span>Past Events</span><FontAwesomeIcon icon={faAngleDown} onClick={() => { subMenu(5) }} /></div>
                     <div className='ul-div'>
                         <div className='li-div'><div className='li-div-text' onClick={() => navigateEvents(`my-events/past-events/rejected/${id}`)}>Rejected Events</div></div>
-                        <div className='li-div'><div className='li-div-text'onClick={() => navigateEvents(`my-events/past-events/accepted/${id}`)}>Accepted Events</div></div>
+                        <div className='li-div'><div className='li-div-text' onClick={() => navigateEvents(`my-events/past-events/accepted/${id}`)}>Accepted Events</div></div>
 
                     </div>
                     <div className="liClick" onClick={() => navigateEvents(`my-events/calendar-events/${id}`)}><FontAwesomeIcon icon={faCalendar} size="x" color="#91A4B7" /><span>Calender</span></div>
@@ -108,7 +109,7 @@ function UsersMainPage() {
                     <div className='sideBarIcons'><FontAwesomeIcon icon={faStopCircle} size="2x" color="#91A4B7" onClick={() => navigateEvents(`my-events/cancelled-events/${id}`)} /><span className='sideBarText'>Cancelled Events</span></div>
                 </div>}
 
-                {role === '1' ?  <div><SwitchUserAdminBtn onClick={() => navigate(`create-event/${id}`)} myEvent={faMask} endPoint={'/user/upcoming-events/'} checkAdmin={false}/></div>: null}
+            {myRole === '1' ? <div><SwitchUserAdminBtn onClick={() => navigate(`create-event/${id}`)} myEvent={faMask} endPoint={'/user/upcoming-events/'} checkAdmin={false} /></div> : null}
             {/* Error while mapping in SideBar! <SideBar listContent = {["Upcoming Events"]} listItemFn={[navigateEvents("upcoming-events")]} /> */}
         </div>
     </div>

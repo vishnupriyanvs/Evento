@@ -123,7 +123,7 @@ function MyEventsTable(props) {
   useEffect(() => {
     if (props.titles) setTHeader(props.titles);
     checkPage(props.myEventType, props.titles, props.events);
-    if (props.content) setTrow(props.content);
+    if (props.events) setTrow(props.events);
 
 
   }, [props.titles, props.content]);
@@ -182,63 +182,39 @@ function MyEventsTable(props) {
               const action = tHeader.includes("Actions");
               return (
                 <tr>
-                   <td onClick={() => navigate(`/user/view-event/${id}/${item.event.id}`)}>{item.event.title}</td>
-                  {/*<td>{item.event.startDate}</td>
-                  {item.event.endDate ?
-                    <td>{item.event.endDate}</td>
-                    : null
-                  } */}
-
-                  {item.event.isActive == 'Active' || item.event.isActive == 'InProgress' || item.event.isActive == 'Cancelled' || item.event.isActive == 'Completed' ?
-                    action ? item.event.isActive == 'Active' ?
-                      <>
-                        <td> <StatusSelectionBtn options={[item.event.isActive]} given={item.event.isActive} role={"Admin"} index={i} /></td>
-                       
+                  <td onClick={() => navigate(`/user/view-event/${id}/${item.event.id}`)}>{item.event.title}</td>
                   <td>{item.event.startDate}</td>
                   {item.event.endDate ?
                     <td>{item.event.endDate}</td>
                     : null
                   }
+
+                  {item.event.isActive == 'Active' || item.event.isActive == 'InProgress' || item.event.isActive == 'Cancelled' || item.event.isActive == 'Completed' ?
+                    action ? item.event.isActive == 'Active' ?
+                      <>
+                        <td> <StatusSelectionBtn options={[item.event.isActive]} given={item.event.isActive} role={"Admin"} index={i} /></td>
                         <td>
                           <div className="responseButton">
-                            <Button variant="primary" size="sm" onClick={props.handleSubmit} value="Yes" >Yes</Button>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <Cancellation invitationId={item.id} title={item.event.title} />
+                          <Button variant="primary" size="sm" onClick={props.handleSubmit} value="Yes" id={item.id}>Yes</Button>
+                          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          <Cancellation invitationId={item.id} title={item.event.title} id={item.id}/>
                           </div>
                         </td>
                       </>
                       :
                       <>
                         <td> <StatusSelectionBtn options={[item.event.isActive]} given={item.event.isActive} role={"Admin"} index={i} /></td>
-                        <td>{item.event.startDate}</td>
-                  {item.event.endDate ?
-                    <td>{item.event.endDate}</td>
-                    : null
-                  }
                         <td>
                           {invitationArray.includes(item.id) ? <Button variant="primary" size="sm" disabled>Feedback</Button> : <Feedback invitationId={item.id} title={item.event.title} />}
                         </td>
                       </>
                       :
-                      <>
                       <td> <StatusSelectionBtn options={[item.event.isActive]} given={item.event.isActive} role={"Admin"} index={i} /></td>
-                      <td>{item.event.startDate}</td>
-                      {item.event.endDate ?
-                        <td>{item.event.endDate}</td>
-                    : null
-                    }
-                    </>
                     :
                     <>
 
                       <td> <StatusSelectionBtn options={[item.event.isActive]} given={item.event.isActive} role={"Admin"} index={i} /></td>
-                      <td>{item.event.startDate}</td>
-                      {item.event.endDate ?
-                        <td>{item.event.endDate}</td>
-                    : null
-                    }
                     </>
-                  
                   }
                 </tr>
               )
