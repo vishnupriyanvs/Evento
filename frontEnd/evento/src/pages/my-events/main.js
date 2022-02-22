@@ -15,7 +15,7 @@ function UsersMainPage() {
 
     const [dimension, setDimension] = useState({})
     const [sideCheck, setSideCheck] = useState(false);
-    const role =sessionStorage.getItem('myRole');
+    const role =decryptData(sessionStorage.getItem('myRole'));
     useEffect(() => {
         //console.log("width");
         // navbarCheck();
