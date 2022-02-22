@@ -8,7 +8,7 @@
   height: 100vh;
 }
 
-.next-half{
+.next-half {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
@@ -27,7 +27,7 @@
 }
 
 .cards img {
-  width:30;
+  width: 30;
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
 }
@@ -137,7 +137,9 @@
   border-bottom: 1px solid #ddd;
 }
 
-.flex-table .flex-tr:nth-child(even) {background-color: #f2f2f2;}
+.flex-table .flex-tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
 
 .flex-tr .flex-td {
   width: 50%;
@@ -148,26 +150,36 @@
 .flex-tr .flex-td span.tooltips {
   visibility: hidden;
   position: fixed;
-  background-color: lightgrey;
-  /* padding: 8px; */
-  border-radius: 8px;
+  background: rgba(13, 24, 41, 0.76);
+  /* border-radius: 8px; */
+  border-radius: 10px;
   padding-left: 8px;
   padding-right: 8px;
   font-weight: bolder;
   font-size: 12px;
   font-style: normal;
   text-transform: capitalize;
-  margin-left: 8px;
   overflow: hidden;
-  color: darkgray;
+  color: whitesmoke;
 }
 
 .flex-tr .flex-td:hover span.tooltips {
+ 
   visibility: visible;
-  position: relative;
+  position: absolute;
+  margin-left: 100px;
   display: inline;
   overflow: hidden;
   z-index: 1;
+  padding-left: 16px;
+  padding-right: 16px;
+  margin-left: 10%;
+}
+
+.arrow-left:after{
+  content: " ";
+  border: 22px solid;
+  border-color: lightyellow transparent transparent transparent;
 }
 
 .content-event-title {
@@ -226,22 +238,18 @@
   justify-content: center;
 }
 
-.content-event-further-info .flex-left div{
+.content-event-further-info .flex-left div {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  
 }
-
 
 .content-event-further-info .flex-right {
   display: flex;
   flex-direction: column;
   gap: 8px;
   justify-content: flex-end;
- 
 }
-
 
 .content-event-further-info .flex-right div {
   text-align: right;

@@ -1,6 +1,5 @@
 import './index.css'
 import { useState, useEffect, React } from 'react';
-import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserPlus, faEdit, faClock, faUserAlt, faGlobe, faPhone, faUsers, faUserCheck } from "@fortawesome/free-solid-svg-icons";
@@ -15,35 +14,15 @@ function ViewEvents() {
     const [participants, setParticipants] = useState(0)
     const [participantResponse, setParticipantRespponse] = useState([]);
     const [invitees, setInvitees] = useState([]);
+    const [feedbackState, setFeedbackState] = useState([])
     const [cancellationReason, setCancellationReason] = useState([]);
     const { id, eventid } = useParams();
-    console.log(id, eventid)
-
-    // useEffect(() => {
-    //     axios.get(`http://localhost:4000/events/${eventid}`)
-    //         .then(response => {
-
-    //             setEvents(response.data)
-    //         })
-    //         .catch((err) => {
-    //             console.log(err)
-    //         })
-    //     infoParticipants(eventid);
-    // }, [])
-
-    // useEffect(async () => {
-    //     const x = await apiHandler('get',`events/${eventid}`)
-    //     //console.log(x.data);
-    //     setEvents(x.data)
-    //     infoParticipants(eventid);
-    //   },[])
-
+    let feedbacks = []
 
     useEffect(async () => {
         try {
             try {
                 const x = await apiHandler('get', `events/${eventid}`);
-                //console.log(x.data);
                 setEvents(x.data);
                 infoParticipants(eventid);
             } catch (error) {
@@ -71,53 +50,35 @@ function ViewEvents() {
         catch {
             navigate('/');
         }
-    }, [events])
+    }, [events,])
+
+    // useEffect(() => {
+    //     setFeedbackState(feedbackState)
+    // }, [feedbacks])
 
     const infoParticipants = async (eventid) => {
 
-        // const config = {
-        //     method: 'get',
-        //     url: `http://localhost:4000/invitations/event/${eventid}`,
-        //     headers: { 
-        //         'Authorization': `Bearer ${sessionStorage.getItem('myToken')}`, 
-        //         'Content-Type': 'application/json'
-        //     }
-        // };
         const response = await apiHandler('get', `invitations/event/${eventid}`)
         setParticipants(response.data.length)
         response.data.forEach((item, i) => {
-
-
-            // participantResponse.push({ "name": item.user.name, "response": item.invitationResponse });
             participantResponse.push({ "id": item.id, "name": item.user.name, "response": item.invitationResponse });
         })
+        console.log(response.data)
         let invites = response.data;
         invites = invites.filter((item, i) => { if (item.invitationResponse === 'Yes') return item })
         setInvitees(invites);
+        // 
+        invites.forEach(async (item, i) => {
+            const x = await apiHandler('get', `feedbacks/${item.id}`);
+            feedbacks.push(x.data)
+            setFeedbackState([...feedbackState, x.data]);
+        })
+
+
         invites = response.data.filter((item, i) => { if (item.invitationResponse === 'No') return item })
         setCancellationReason(invites);
         setParticipantRespponse(participantResponse)
-        // axios(config).then((response) => {
-        //     console.log(response.data)
-        //     setParticipants(response.data.length)
-        //     response.data.forEach((item, i) => {
-
-
-        //         participantResponse.push({ "name": item.user.name, "response": item.invitationResponse });
-        //         participantResponse.push({ "id": item.id, "name": item.user.name, "response": item.invitationResponse });
-        //     })
-        //     let invites = response.data;
-        //     invites = invites.filter((item, i) => { if (item.invitationResponse === 'Yes') return item })
-        //     setInvitees(invites);
-        //     invites = response.data.filter((item, i) => { if (item.invitationResponse === 'No') return item })
-        //     setCancellationReason(invites);
-        //     console.log(invites);
-
-        // })
-        // setParticipantRespponse(participantResponse)
-
     }
-
     let action = false;
     if (events.isActive == 'Active') {
         action = true;
@@ -159,51 +120,54 @@ function ViewEvents() {
                     </div>
                 </div>
                 <div className="next-half">
-                        <div className='event-invitees-participants'>
-                            <div className='event-invitees'>
-                                <div><FontAwesomeIcon icon={faUsers} size={"4x"} /></div>
-                                <div>
-                                    <b>Invitees</b>
-                                    <h1>{participants}</h1>
-                                </div>
-                            </div>
-
-                            <div className='event-participants'>
-                                <div><FontAwesomeIcon icon={faUserCheck} size={"4x"} /></div>
-                                <div>
-                                    <b>Participants</b>
-                                    <h1>{invitees.length}</h1>
-                                </div>
+                    <div className='event-invitees-participants'>
+                        <div className='event-invitees'>
+                            <div><FontAwesomeIcon icon={faUsers} size={"4x"} /></div>
+                            <div>
+                                <b>Invitees</b>
+                                <h1>{participants}</h1>
                             </div>
                         </div>
 
-                        <div className='event-invitee-response'>
-                            <div className='flex-table'>
-                                <div className='flex-th'>
-                                    <div className='flex-th-content'>Invitees</div>
-                                    <div className='flex-th-content'>Response</div>
-                                </div>
+                        <div className='event-participants'>
+                            <div><FontAwesomeIcon icon={faUserCheck} size={"4x"} /></div>
+                            <div>
+                                <b>Participants</b>
+                                <h1>{invitees.length}</h1>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className='event-invitee-response'>
+                        <div className='flex-table'>
+                            <div className='flex-th'>
+                                <div className='flex-th-content'>Invitees</div>
+                                <div className='flex-th-content'>Response</div>
+                            </div>
 
 
-                                {
-                                    participantResponse.map((item, i) => {
+                            {
+                                participantResponse.map((item, i) => {
 
-                                        cancellationReason.forEach((content, key) => {
-                                            if (content.id === item.id) item['reason'] = content['invitationCancelReason']
-                                        })
+                                    cancellationReason.forEach((content, key) => {
+                                        if (content.id === item.id) item['reason'] = content['invitationCancelReason']
+                                    })
 
-                                        return (
-                                            <div className='flex-tr'>
-                                                <div className='flex-td'>{item.name}</div>
-                                                <div className='flex-td'>{item.response}{item.reason ? <span className='tooltips'>{item.reason}</span> : null}</div>
-                                            </div>
-                                        )
-                                    }
+                                    feedbackState.forEach((content, key)=>{
+                                        if(content.invitationId === item.id && content.id !== item.id) item['feedback'] = content['feedback']
+                                    })
+                                    return (
+                                        <div className='flex-tr'>
+                                            <div className='flex-td'>{item.name}</div>
+                                            <div className='flex-td'>{item.response}{item.reason ? <span className='tooltips'>{item.reason}</span> : item.feedback ? <span className='tooltips arrow-left'>{item.feedback}</span>:null}</div>
+                                        </div>
                                     )
                                 }
-                            </div>
+                                )
+                            }
                         </div>
-                   
+                    </div>
+
                 </div>
             </div>
         </>
