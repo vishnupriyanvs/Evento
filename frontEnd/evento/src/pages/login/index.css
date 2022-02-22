@@ -51,11 +51,10 @@ color: rgba(0, 0, 0, 0.28);
     
 }
 body{
-    display :fles;
     justify-content:center;
     align-items: center;
     min-height: 100vh;
-
+    
 }
 /* body::before{
     content: '';

@@ -13,17 +13,6 @@ function AdminCalenderEvents() {
     const [events, setEvents] = useState([]);
     const navigate = useNavigate();
 
-    // useEffect(() => {
-    //     axios.get(`http://localhost:4000/events/`)
-    //         .then(response => {
-    //             setEvents(response.data)
-
-
-    //         })
-    //         .catch(error => {
-    //             console.log(error)
-    //         })
-    // },[])
     useEffect(async () => {
         try {
             try {
@@ -44,8 +33,6 @@ function AdminCalenderEvents() {
     }, [])
 
 
-
-
     return (
         <div className="calenderSize">
             <CalendarEvents
@@ -53,7 +40,6 @@ function AdminCalenderEvents() {
             />
         </div>
     );
-
 };
 
 export default AdminCalenderEvents;

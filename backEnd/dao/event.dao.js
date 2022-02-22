@@ -12,7 +12,8 @@ var eventDao = {
     findByEventStatus : findByEventStatus,
     updateEventStatus : updateEventStatus,
     updateEventCancellation:updateEventCancellation,
-    findEventForUserCalendar : findEventForUserCalendar
+    findEventForUserCalendar : findEventForUserCalendar,
+    addImageUrl : addImageUrl
 }
 
 function findAll() {
@@ -83,6 +84,13 @@ function findEventForUserCalendar(id){
     });
 }
 
+function addImageUrl(id, link){
+
+    var updateEvent = {
+        imageUrl: link
+    }
+    return Event.update(updateEvent, {where: {id: id}})
+}
 
 module.exports = eventDao;
 

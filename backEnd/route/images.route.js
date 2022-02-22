@@ -7,7 +7,7 @@ const imageController = require('../controller/image.controller');
 
 router.post("/upload/:eventid", imageController.uploadEventImage.single('avatar'), (req, res) =>res.send("Image Uploaded"));
 router.get("/download/:eventid", imageController.downloadEventImage)
-router.get("/profile/user/:userid",  imageController.downloadUserImage);
+router.get("/profile/user/:userid", imageController.downloadUserImage);
 
 module.exports = router;
 

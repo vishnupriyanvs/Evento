@@ -1,11 +1,17 @@
+
 .form-bg{ 
     position: relative;
     width: 905px;
-    height: 576px;
+    height: 676px;
     left: 40px;
     top: 95px;
     background: #EFEFEF;
+    /* background-color: rgba(13, 24, 41, 0.76);; */
     border-radius: 7px;
+}
+
+.left-aligned{
+    text-align: left;
 }
 
 .title-class{
@@ -20,6 +26,7 @@
     background: rgba(221, 227, 232, 0.74);
 box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.1);
 border-radius: 5px;
+
 }
 
 
@@ -37,7 +44,7 @@ background: rgba(221, 227, 232, 0.74);
 box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.1);
 border-radius: 5px;
 position: absolute;
-height: 1000;
+height: 12%;
 }
 
 .invitation{
@@ -45,7 +52,7 @@ height: 1000;
     width: 799px;
     height: 149px;
     left: 50px;
-    top: 200px;
+    top: 270px;
 
 }
 
@@ -54,22 +61,47 @@ height: 1000;
     width: 799px;
     height: 149px;
     left: 50px;
-    top: 350px;
+    top: 420px;
+    
+}
+#message-area{
+    position: absolute;
+    height: 60%;
+    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
 }
 
-.submit-button{
+#submit-button{
     position: absolute;
     width: 165px;
-    height: 56px;
+    /* height: 56px; */
     left: 500px;
-    top: 500px;
+    top: 590px;
+
+    background-color: white; 
+    color: black; 
+    border: 2px solid #443DF6;
 }
 
-.cancel-button{
+#submit-button:hover {
+    background-color: #443DF6;
+    color: white;
+  }
+
+#cancel-button{
     position: absolute;
     width: 165px;
-    height: 56px;
+    /* height: 156px; */
     left: 300px;
-    top: 500px;
+    top: 590px;
+
+    background-color: white; 
+    color: black; 
+    border: 2px solid #f44336;
 }
+
+#cancel-button:hover {
+    background-color: #f44336;
+    color: white;
+  }
 

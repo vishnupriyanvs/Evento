@@ -94,7 +94,7 @@ function PastAcceptedEvents(props) {
         <div className="upcomingEventsTable">
             <SizedBox height="2vh" />
             <MyEventsTable
-                titles={['Event-Titles', 'Start Date','End Date','Status','Actions']}
+                titles={['Event-Titles', 'Status','Start Date','End Date','Actions']}
                 events={events}
                 // onClick={navigateToEvent(events.id)}
                 // onClick = {() => navigate(`../view-event/${id}/${events.id}`)}
