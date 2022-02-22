@@ -130,21 +130,26 @@ function MyEventsTable(props) {
 
   useEffect(async () => {
     const arr = [];
-    try{
-      const response = await apiHandler('get', `feedbacks`)
-      response.data.forEach(item => {
-        arr.push(item.invitationId);
-      })
+    try {
+      try {
+        const response = await apiHandler('get', `feedbacks`)
+        response.data.forEach(item => {
+          arr.push(item.invitationId);
+        })
+      }
+      catch (err) {
+        const response = await tokenHandler('get', `feedbacks`, sessionStorage.getItem('refreshToken'), apiHandler)
+        response.data.forEach(item => {
+          arr.push(item.invitationId);
+        })
+      }
     }
-    catch(err){
-      const response= await tokenHandler('get',`feedbacks`,sessionStorage.getItem('refreshToken'),apiHandler)
-      response.data.forEach(item => {
-        arr.push(item.invitationId);
-      })
+    catch (err) {
+      navigate("/")
     }
-    
+
     //console.log(x.data);
-    
+
     setInvitationArray(arr);
     // axios
     //     .get(`http://localhost:4000/feedbacks`)

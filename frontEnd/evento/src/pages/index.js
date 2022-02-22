@@ -12,7 +12,7 @@ function MainPage() {
     const { id } = useParams()
     //console.log('from Main page '+id)
     const navigate = useNavigate();
-    const role = sessionStorage.getItem('myRole');
+    const role = decryptData(sessionStorage.getItem('myRole'));
     const [dimension, setDimension] = useState({})
     const [sideCheck, setSideCheck] = useState(false);
 
