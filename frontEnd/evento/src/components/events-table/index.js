@@ -11,10 +11,10 @@ function EventsTable(props) {
   const { id } = useParams()
 
   const navigate = useNavigate();
-  const { tHeader, tRow, counter, incrementCounter, decrementCounter, setCounter, handlePagination, pages,  checkPage, handleTable} = useEventTable()
+  const { tHeader, tRow, counter, incrementCounter, decrementCounter, setCounter, handlePagination, pages, handleTable } = useEventTable()
 
 
-  useEffect(async() => {
+  useEffect(async () => {
     // checkPage(props.eventType, props.titles, props.events, counter);
     await handleTable(props.eventType, props.titles, props.events, counter);
     // console.log(props.events)
