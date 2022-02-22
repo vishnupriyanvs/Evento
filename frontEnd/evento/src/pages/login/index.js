@@ -2,12 +2,12 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import './index.css'
-
+import encryptData from "../../client-side-encryption/encrypt";
 import { useState } from 'react';
 import axios from 'axios';
 import { Form, Button } from 'react-bootstrap';
 import { toast, Slide } from 'react-toastify';
-import encryptData from "../../client-side-encryption/encrypt";
+
 
 function LoginForm() {
     sessionStorage.clear();
@@ -39,12 +39,11 @@ function MyForm(props) {
                
                 sessionStorage.setItem('myToken', response.data.accessToken)
                 sessionStorage.setItem('refreshToken', response.data.refreshToken)
-                
+               
                 const encryptedRoleId = encryptData(response.data.user.roles[0].user_roles.roleId)
                 const encryptedId = encryptData(response.data.user.id)
                 sessionStorage.setItem('myRole', encryptedRoleId)
                 sessionStorage.setItem('myId',encryptedId)
-                //console.log(encryptedId)
                 toast.success("Welcome" + " " + response.data.user.name, {
                     transition: Slide,
                     hideProgressBar: false,

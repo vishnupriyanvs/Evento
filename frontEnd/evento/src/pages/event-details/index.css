@@ -1,24 +1,33 @@
 .cards-container {
-  width: 70%;
+  width: 90%;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  flex-direction: row;
+  justify-content: space-around;
   margin-top: 32px;
   align-items: center;
   height: 100vh;
 }
 
+.next-half{
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .cards {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
-  width: 100%;
+  flex-grow: 1;
+  /* width: 50%; */
   display: flex;
+  flex-direction: column;
   border-radius: 20px;
   flex-shrink: 1;
 }
 
 .cards img {
-  width: 30%;
+  width:30;
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
 }
@@ -39,13 +48,15 @@
 /* event invitees and participants */
 .event-invitees-participants {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   width: 100%;
-  padding: 24px;
+  padding-top: 24px;
+  gap: 8px;
+  flex-grow: 1;
 }
 
 .event-invitees-participants .event-invitees {
-  width: 25%;
+  flex-basis: 1;
   padding: 16px;
   display: flex;
   background-color: #efefef;
@@ -59,7 +70,7 @@
   align-items: center;
 }
 .event-invitees-participants .event-participants {
-  width: 25%;
+  flex-basis: 1;
   padding: 16px;
   display: flex;
   background-color: #efefef;
@@ -78,6 +89,10 @@
   width: 50%;
   overflow-y: scroll;
   padding: 24px;
+  display: flex;
+  justify-content: center;
+  flex-grow: 1;
+  align-items: center;
 }
 
 .event-invitee-response::-webkit-scrollbar {
@@ -87,11 +102,13 @@
 }
 
 .event-invitee-response .flex-table {
-  background-color: #efefef;
+  /* background-color: #efefef; */
   display: flex;
   flex-direction: column;
   width: 100%;
   border-radius: 20px;
+  /* border-style: dashed; */
+  border-collapse: collapse;
 
   /* overflow-y: scroll; */
 }
@@ -100,6 +117,9 @@
   display: flex;
   justify-content: space-between;
   padding: 20px;
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
 }
 
 .flex-th .flex-th-content {
@@ -112,7 +132,12 @@
   justify-content: space-between;
   padding: 20px;
   flex-basis: content;
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
 }
+
+.flex-table .flex-tr:nth-child(even) {background-color: #f2f2f2;}
 
 .flex-tr .flex-td {
   width: 50%;
@@ -128,7 +153,7 @@
   border-radius: 8px;
   padding-left: 8px;
   padding-right: 8px;
-  font-weight:bolder;
+  font-weight: bolder;
   font-size: 12px;
   font-style: normal;
   text-transform: capitalize;
@@ -192,6 +217,7 @@
   justify-content: space-between;
   font-size: smaller;
   font-weight: 500;
+  /* background-color: aqua; */
 }
 
 .content-event-further-info .flex-left {
@@ -200,19 +226,26 @@
   justify-content: center;
 }
 
+.content-event-further-info .flex-left div{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  
+}
+
+
 .content-event-further-info .flex-right {
   display: flex;
   flex-direction: column;
-}
-
-.content-event-further-info .flex-right {
-  display: flex;
-  flex-direction: row;
   gap: 8px;
+  justify-content: flex-end;
+ 
 }
 
-.content-event-further-info .flex-right .flex-side-right div {
-  text-align: left;
+
+.content-event-further-info .flex-right div {
+  text-align: right;
+  width: 100%;
 }
 
 @media only screen and (max-width: 1000px) {

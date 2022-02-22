@@ -201,17 +201,17 @@ const [typeOfInvitation,setTypeOfInvitation] = useState()
     <div class="form-bg">
     <Form ref={form} onSubmit={sendEmail}>
       <div class='title-class'>
-      <Form.Label class='left-aligned'>Event Title</Form.Label>
+      <Form.Label>Event Title</Form.Label>
       <Form.Control  id = 'title-name' type="text" name="event_title" value={events.title}></Form.Control>
       <br/>
       </div>
       <div class='description-class'>
-      <Form.Label class='left-aligned'>Description</Form.Label>
-      <Form.Control id='description-title' type="textarea" name="description" value={events.description} ></Form.Control>
+      <Form.Label>Description</Form.Label>
+      <Form.Control id='description-title' type="textarea" name="description" value={events.description}  ></Form.Control>
       <br/>
       </div>
       <div class='invitation'>
-      <Form.Label class='left-aligned'>Send Invitation To :</Form.Label>
+      <Form.Label>Send Invitation To :</Form.Label>
       <br />
       <Form.Check
         inline
@@ -242,8 +242,7 @@ const [typeOfInvitation,setTypeOfInvitation] = useState()
                   onChange={handleChange} 
                   options = {options}
                   isMulti = {true}
-                  value = {options.email}
-                   />
+                  value = {options.email} />
           </>
         :
           null
@@ -265,19 +264,19 @@ const [typeOfInvitation,setTypeOfInvitation] = useState()
       }
       </> 
       </div>
-      <div class='message'>
-      <Form.Label class='left-aligned'>Message</Form.Label>
+      <div className='message'>
+      <Form.Label>Message</Form.Label>
       <Form.Control id="message-area" type="textarea" name="message" row="5"/>
       <br/><br/>
       </div>
-      <div class = 'submit-button'>
-      <Form.Control id='submit-button' type="submit" value="Invite" />
+      <div className = 'submit-button'>
+      <Form.Control type="submit" id='submit-button' value="Send" />
       </div>
       {/* <Button type='reset' variant='danger' >Cancel</Button> */}
-      <div class = 'cancel-button'>
-      <Form.Control id='cancel-button' type='reset'  value="Cancel"/>
+      <div className = 'cancel-button'>
+      <Form.Control type='reset' id='cancel-button' variant='danger' value="Cancel"/>
       </div>
     </Form>
     </div>
-  )
+  );
 };

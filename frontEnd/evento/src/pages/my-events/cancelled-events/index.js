@@ -99,7 +99,7 @@ function UserCancelledEvents(props) {
         <div className="upcomingEventsTable">
             <SizedBox height="2vh" />
             <MyEventsTable
-                titles={['Event-Titles', 'Status','Start Date']}
+                titles={['Event-Titles', 'Start Date','Status']}
                 events={events}
                 // onClick={navigateToEvent(events.id)}
                 // onClick = {() => navigate(`../view-event/${id}/${events.id}`)}

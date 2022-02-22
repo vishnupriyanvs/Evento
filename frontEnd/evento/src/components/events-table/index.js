@@ -2,113 +2,27 @@ import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./index.css";
 import { faUserPlus, faEdit } from "@fortawesome/free-solid-svg-icons";
-import services from "../../constants";
 import { useNavigate, useParams } from "react-router-dom";
 import StatusSelectionBtn from "../event-select-btn";
+import { useEventTable } from "./useEventsTable";
 
 function EventsTable(props) {
 
   const { id } = useParams()
 
   const navigate = useNavigate();
-  const [tHeader, setTHeader] = useState([]);
-  const [tRow, setTrow] = useState([]);
-  const [counter, setCounter] = useState(0)
-  const [pages, setPages] = useState([]);
-
-  const [eventDetails, setEventDetails] = useState([props.events]);
-
-  const checkPage = (page, tHeader, tRow, i) => {
-    switch (page) {
-      case services.eventType.ONGOING_EVENT:
-        tHeader = tHeader.filter((title, i) => {
-          return title !== "Actions";
-        });
-        setTHeader(tHeader);
-        tRow = tRow.filter((content, i) => {
-          return delete content["Actions"];
-        });
-        // setTrow(tRow);
-        setTrow(tRow.length > (i + 1) * 10 ? tRow.slice(tRow.length - (i + 1) * 10, tRow.length - (i * 10)).reverse() : tRow.slice(0, tRow.length - (i * 10)).reverse());
-        break;
-      case services.eventType.UPCOMING_EVENT:
-        tHeader = tHeader.filter((title, i) => {
-          return title !== "End Date";
-        });
-        setTHeader(tHeader);
-
-        tRow = tRow.filter((content, i) => {
-          return delete content["end_date"];
-        });
-        // setTrow(tRow);
-        setTrow(tRow.length > (i + 1) * 10 ? tRow.slice(tRow.length - (i + 1) * 10, tRow.length - (i * 10)).reverse() : tRow.slice(0, tRow.length - (i * 10)).reverse());
-        break;
-      case services.eventType.CANCELED_EVENT:
-        tHeader = tHeader.filter((title, i) => {
-          return title !== "End Date";
-        });
-        tHeader = tHeader.filter((title, i) => {
-          return title !== "Actions";
-        });
-        setTHeader(tHeader);
-        tRow = tRow.filter((content, i) => {
-          return delete content["end_date"];
-        });
-        tRow = tRow.filter((content, i) => {
-          return delete content["Actions"];
-        });
-        // setTrow(tRow);
-        setTrow(tRow.length > (i + 1) * 10 ? tRow.slice(tRow.length - (i + 1) * 10, tRow.length - (i * 10)).reverse() : tRow.slice(0, tRow.length - (i * 10)).reverse())
-        break;
-      case services.eventType.COMPLETED_EVENT:
-        tHeader = tHeader.filter((title, i) => {
-          return title !== "Actions";
-        });
-        setTHeader(tHeader);
-        tRow = tRow.filter((content, i) => {
-          return delete content["Actions"];
-        });
-        // setTrow(tRow);
-        setTrow(tRow.length > (i + 1) * 10 ? tRow.slice(tRow.length - (i + 1) * 10, tRow.length - (i * 10)).reverse() : tRow.slice(0, tRow.length - (i * 10)).reverse());
-        break; 
-
-      default:
-        console.log("Nothing Selected");
-    }
-
-    if(page === services.eventType.ONGOING_EVENT){
-      tHeader = tHeader.filter((title, i) => {
-        return title !== "Actions";
-      });
-      setTHeader(tHeader);
-      tRow = tRow.filter((content, i) => {
-        return delete content["Actions"];
-      });
-      // setTrow(tRow);
-      setTrow(tRow.length > (i + 1) * 10 ? tRow.slice(tRow.length - (i + 1) * 10, tRow.length - (i * 10)).reverse() : tRow.slice(0, tRow.length - (i * 10)).reverse());
-      
-    }
-  };
-
-  const handlePagination = () => {
-    const t = props.events.length;
-    const q = Math.floor(t / 10);
-    const r = Math.floor(t % 10);
-    const p = r !== 0 ? q + 1 : q;
-
-    const pageList = Array.from(Array(p).keys())
-    setPages(pageList)
-  }
+  const { tHeader, tRow, counter, incrementCounter, decrementCounter, setCounter, handlePagination, pages,  checkPage, handleTable} = useEventTable()
 
 
-  useEffect(() => {
-    if (props.titles) setTHeader(props.titles);
-    checkPage(props.eventType, props.titles, props.events, counter);
-    // if (props.content) setTrow(props.content);
-    handlePagination()
+  useEffect(async() => {
+    // checkPage(props.eventType, props.titles, props.events, counter);
+    await handleTable(props.eventType, props.titles, props.events, counter);
+    // console.log(props.events)
+    // handleRow(props.eventType, props.titles, props.events, counter);
+    handlePagination(props.events.length);
 
 
-  }, [props.titles, props.content, counter]);
+  }, [props.titles, counter]);
 
 
 
@@ -163,9 +77,9 @@ function EventsTable(props) {
         </tbody>
       </table>
       <div className="pageList-items">
-        {counter >= 1 ? <button onClick={() => { setCounter(counter - 1); }} className="previous-btn">Previous</button> : null}
+        {counter >= 1 ? <button onClick={() => { decrementCounter() }} className="previous-btn">Previous</button> : null}
         {pages.map((item, i) => <span onClick={() => setCounter(item)}>{item + 1}</span>)}
-        {counter <= (props.events.length % 10 !== 0 ? (Math.floor(props.events.length / 10) + 1) - 1 : Math.floor(props.events.length / 10) - 1) - 1 ? <button onClick={() => { setCounter(counter + 1); }} className="next-btn">Next</button> : null}
+        {counter <= (props.events.length % 10 !== 0 ? (Math.floor(props.events.length / 10) + 1) - 1 : Math.floor(props.events.length / 10) - 1) - 1 ? <button onClick={() => { incrementCounter(); }} className="next-btn">Next</button> : null}
 
       </div>
     </div>
