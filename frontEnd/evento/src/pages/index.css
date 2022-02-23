@@ -1,6 +1,6 @@
 body {
   font-family: "Inter", sans-serif;
-  overflow:hidden;
+  overflow: hidden;
 }
 
 .containers {
@@ -15,7 +15,7 @@ body {
     "sidebar main main main";
   /* grid-gap: 0.2rem; */
   font-weight: 800;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   font-size: 12px;
   /* color: #004d40; */
   text-align: center;
@@ -23,7 +23,7 @@ body {
 }
 
 nav {
-  background-color: #0d1829;
+  background-color: #3e7ddb;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   grid-area: nav;
   padding-top: 20px;
@@ -43,28 +43,41 @@ main::-webkit-scrollbar {
   height: 0;
 }
 
-
-
 .sidebar {
   width: 100%;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   background-color: #0d1829;
   grid-area: sidebar;
   transition: all 0.5s;
-  padding-top: 24px;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items: center;
+  position: relative;
+  overflow-y: hidden;
+  gap: 10rem;
+
   /* transform: translateX(-30rem); */
   /* overflow-x:visible; */
 }
+
+/* #parent-node{
+  position: absolute;
+  margin-top: -200%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+} */
+/* .mini-parent-node{
+  position: absolute;
+  margin-top: -350%;
+} */
+
 .sidebar.open {
   /* transform: translateX(0); */
   width: 200%;
   z-index: 1;
 }
-
 
 .sideBarIcons {
   padding-top: 48px;
@@ -76,7 +89,6 @@ main::-webkit-scrollbar {
   /* transition: width 2s; */
   /* transition-timing-function: ease; */
 }
-
 
 .sideBarIcons .sideBarText {
   visibility: hidden;
@@ -114,7 +126,7 @@ a {
   font-size: 16px;
   display: flex;
   justify-content: start;
-  gap: 0.8rem;
+  gap: 2rem;
   color: aliceblue;
   margin-top: 24px;
 }
@@ -153,13 +165,20 @@ li {
   margin-top: 16px;
 }
 
+.switch-user-admin {
+  position: absolute;
+  bottom: 10%;
+}
+
+/* Modal style */
+
+
 @media only screen and (max-width: 1000px) {
   .container {
     grid-template-columns: 1fr;
     grid-template-rows: 0.3fr 0.1fr 1fr 0.3fr;
     grid-template-areas:
       "nav"
-      "sidebar"
       "main"
       "main";
     /* grid-gap: 0.2rem; */

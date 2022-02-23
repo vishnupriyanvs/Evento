@@ -71,6 +71,7 @@ function ViewEvents() {
         invites.forEach(async (item, i) => {
             const x = await apiHandler('get', `feedbacks/${item.id}`);
             feedbacks.push(x.data)
+            console.log(x.data)
             setFeedbackState([...feedbackState, x.data]);
         })
 
@@ -87,42 +88,43 @@ function ViewEvents() {
     return (
         <>
             <div className="cards-container">
-                <div className="cards">
-                    <img src={`http://localhost:4000/images/download/${eventid}`} />
-                    <div className="contentss">
-                        <div className='event-content'>
-                            {action && <div>
-                                <FontAwesomeIcon icon={faUserPlus} onClick={() => navigate(`/user/sendinvitations/${id}/${eventid}`)} />
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                <FontAwesomeIcon icon={faEdit} onClick={() => navigate(`/user/edit-event/${id}/${eventid}`)} />
-                            </div>}
-                            <div className='content-event-title'>{events.title}</div>
-                            <div className='content-event-description'>{events.description}</div>
-                        </div>
-
-                        <div className='event-fixture'>
-                            <div className='content-event-date'>
-                                <FontAwesomeIcon icon={faClock} /> <span>{events.startDate} : {events.endDate}</span>
-                                <div className='content-event-venue'><a href="#">{events.venue}</a></div>
+                <div className="next-half">
+                    <div className="cards">
+                        <img src={`http://localhost:4000/images/download/${eventid}`} />
+                        <div className="contentss">
+                            <div className='event-content'>
+                                {action && <div className='event-action'>
+                                    <FontAwesomeIcon icon={faUserPlus} onClick={() => navigate(`/user/sendinvitations/${id}/${eventid}`)} />
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <FontAwesomeIcon icon={faEdit} onClick={() => navigate(`/user/edit-event/${id}/${eventid}`)} />
+                                </div>}
+                                <div className='content-event-title'>{events.title}</div>
+                                <div className='content-event-description'>{events.description}</div>
                             </div>
 
-                            <div className='content-event-contact-person'><FontAwesomeIcon icon={faUserAlt} /><span>{events.resourcePerson}</span></div>
-                        </div>
+                            <div className='event-fixture'>
+                                <div className='content-event-date'>
+                                    <FontAwesomeIcon icon={faClock} /> <span>{events.startDate} : {events.endDate}</span>
+                                    <div className='content-event-venue'><a href="#">{events.venue}</a></div>
+                                </div>
 
-                        <div className='content-event-further-info'>
-                            <div className='flex-left'><div><FontAwesomeIcon icon={faGlobe} />&nbsp;&nbsp;&nbsp;{events.website ? events.website : "www.no-website.com"}</div></div>
-                            <div className='flex-right'>
-                                <div><FontAwesomeIcon icon={faPhone} /> &nbsp;&nbsp;{users.name}</div>
-                                <div>{users.email}</div>
-                                <div>{users.contact}</div>
+                                <div className='content-event-contact-person'><FontAwesomeIcon icon={faUserAlt} /><span>{events.resourcePerson}</span></div>
+                            </div>
+
+                            <div className='content-event-further-info'>
+                                <div className='flex-left'><div><FontAwesomeIcon icon={faGlobe} />&nbsp;&nbsp;&nbsp;{events.website ? events.website : "www.no-website.com"}</div></div>
+                                <div className='flex-right'>
+                                    <div><FontAwesomeIcon icon={faPhone} /> &nbsp;&nbsp;{users.name}</div>
+                                    <div>{users.email}</div>
+                                    <div>{users.contact}</div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div className="next-half">
+
                     <div className='event-invitees-participants'>
                         <div className='event-invitees'>
-                            <div><FontAwesomeIcon icon={faUsers} size={"4x"} /></div>
+                            <div><FontAwesomeIcon icon={faUsers} size={"3x"} /></div>
                             <div>
                                 <b>Invitees</b>
                                 <h1>{participants}</h1>
@@ -130,20 +132,24 @@ function ViewEvents() {
                         </div>
 
                         <div className='event-participants'>
-                            <div><FontAwesomeIcon icon={faUserCheck} size={"4x"} /></div>
+                            <div><FontAwesomeIcon icon={faUserCheck} size={"3x"} /></div>
                             <div>
                                 <b>Participants</b>
                                 <h1>{invitees.length}</h1>
                             </div>
                         </div>
                     </div>
-
+                </div>
+                <div className='second-half'>
                     <div className='event-invitee-response'>
                         <div className='flex-table'>
                             <div className='flex-th'>
                                 <div className='flex-th-content'>Invitees</div>
                                 <div className='flex-th-content'>Response</div>
+                                <div className='flex-th-content'>Cancellation Reason</div>
+                                <div className='flex-th-content'>Feedback</div>
                             </div>
+
 
 
                             {
@@ -153,13 +159,15 @@ function ViewEvents() {
                                         if (content.id === item.id) item['reason'] = content['invitationCancelReason']
                                     })
 
-                                    feedbackState.forEach((content, key)=>{
-                                        if(content.invitationId === item.id && content.id !== item.id) item['feedback'] = content['feedback']
+                                    feedbackState.forEach((content, key) => {
+                                        if (content.invitationId === item.id && content.id !== item.id) item['feedback'] = content['feedback']
                                     })
                                     return (
                                         <div className='flex-tr'>
                                             <div className='flex-td'>{item.name}</div>
-                                            <div className='flex-td'>{item.response}{item.reason ? <span className='tooltips'>{item.reason}</span> : item.feedback ? <span className='tooltips arrow-left'>{item.feedback}</span>:null}</div>
+                                            <div className='flex-td'>{item.response}</div>
+                                            <div className='flex-td'>{item.reason ?item.reason: null}</div>
+                                            <div className='flex-td'>{item.feedback ? item.feedback: null}</div>
                                         </div>
                                     )
                                 }
@@ -167,8 +175,8 @@ function ViewEvents() {
                             }
                         </div>
                     </div>
-
                 </div>
+
             </div>
         </>
 

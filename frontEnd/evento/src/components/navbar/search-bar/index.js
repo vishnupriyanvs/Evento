@@ -11,55 +11,61 @@ import SizedBox from "../../sized-box";
 import apiHandler from '../../../api-handling';
 import tokenHandler from '../../../api-handling/tokenHandler';
 
-function SearchBar(){
-    const [events,setEvents] = useState([]);
+function SearchBar() {
+    const [events, setEvents] = useState([]);
     const options = [];
-    const {id} = useParams()
+    const { id } = useParams()
     const navigate = useNavigate()
 
+    const customStyles = {
+        control: base => ({
+            ...base,
+            height: 40,
+            fontSize: '15px',
+            textAlign: 'left',
+            width: '380px',
+            fontWeight: 'lighter'
+        })
+
+    };
+
     useEffect(async () => {
-        // axios.get('http://localhost:4000/events/')
-        //     .then(response => {
-        //         setEvents(response.data)
-        //     })
-        //     .catch(error => {
-        //         console.log(error)
-        //     })
-        try{
-            try{
-                const response = await apiHandler('get',`events`)
+        try {
+            try {
+                const response = await apiHandler('get', `events`)
                 setEvents(response.data)
             }
-            catch(err){
-                const response = await tokenHandler('get',`events`,sessionStorage.getItem('refreshToken'),apiHandler)
+            catch (err) {
+                const response = await tokenHandler('get', `events`, sessionStorage.getItem('refreshToken'), apiHandler)
                 setEvents(response.data)
             }
         }
-        catch(err){
+        catch (err) {
             navigate("/")
         }
-        
-    },[])
 
-    
+    }, [])
+
+
     events.map((celeb) => {
-        const obj = {value : `${celeb.id}`, label : `${celeb.title}`}
+        const obj = { value: `${celeb.id}`, label: `${celeb.title}` }
         options.push(obj);
     });
-   
 
-   function handleChange(event){
-      
+
+    function handleChange(event) {
+
         navigate(`/user/view-event/${id}/${event.value}`)
-   }
+    }
 
-    return(
+    return (
         <Form >
-            <Select 
+            <Select
                 id='search'
-                options = {options}
-                onChange = {handleChange}
-                placeholder = 'Search for events'
+                options={options}
+                onChange={handleChange}
+                placeholder='Search for events'
+                styles={customStyles}
             ><h1>HI</h1></Select>
             {/* <SizedBox width="5em" />
             <FontAwesomeIcon icon={faSearch} size="2x" className="searchIcon" color="#91A4B7"/> */}
