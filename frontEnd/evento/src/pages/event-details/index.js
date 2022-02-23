@@ -101,23 +101,26 @@ function ViewEvents() {
                                 <div className='content-event-title'>{events.title}</div>
                                 <div className='content-event-description'>{events.description}</div>
                             </div>
-
-                            <div className='event-fixture'>
-                                <div className='content-event-date'>
-                                    <FontAwesomeIcon icon={faClock} /> <span>{events.startDate} : {events.endDate}</span>
-                                    <div className='content-event-venue'><a href="#">{events.venue}</a></div>
+                            <hr></hr>
+                            <div className='card-data'>
+                                <div className='event-fixture'>
+                                    <div className='content-event-date'>
+                                        <FontAwesomeIcon icon={faClock} /> <span>{events.startDate} : {events.endDate}</span>
+                                        <div className='content-event-venue'><a href="#">{events.venue}</a></div>
+                                    </div>
                                 </div>
-
-                                <div className='content-event-contact-person'><FontAwesomeIcon icon={faUserAlt} /><span>{events.resourcePerson}</span></div>
-                            </div>
-
-                            <div className='content-event-further-info'>
-                                <div className='flex-left'><div><FontAwesomeIcon icon={faGlobe} />&nbsp;&nbsp;&nbsp;{events.website ? events.website : "www.no-website.com"}</div></div>
-                                <div className='flex-right'>
-                                    <div><FontAwesomeIcon icon={faPhone} /> &nbsp;&nbsp;{users.name}</div>
-                                    <div>{users.email}</div>
-                                    <div>{users.contact}</div>
-                                </div>
+                                <div class="vl"></div>
+                               
+                                    <div className='flex-left'>
+                                        <div className='content-event-contact-person'><FontAwesomeIcon icon={faUserAlt} /><span>{events.resourcePerson}</span></div>
+                                        <div><FontAwesomeIcon icon={faGlobe} />&nbsp;&nbsp;&nbsp;{events.website ? events.website : "www.no-website.com"}</div></div>
+                                    <div class="vl"></div>
+                                    <div className='flex-right'>
+                                        <div><FontAwesomeIcon icon={faPhone} /> &nbsp;&nbsp;{users.name}</div>
+                                        <div>{users.email}</div>
+                                        <div>{users.contact}</div>
+                                    </div>
+                                
                             </div>
                         </div>
                     </div>
@@ -166,8 +169,8 @@ function ViewEvents() {
                                         <div className='flex-tr'>
                                             <div className='flex-td'>{item.name}</div>
                                             <div className='flex-td'>{item.response}</div>
-                                            <div className='flex-td'>{item.reason ?item.reason: null}</div>
-                                            <div className='flex-td'>{item.feedback ? item.feedback: null}</div>
+                                            <div className='flex-td'>{item.reason ? item.reason : null}</div>
+                                            <div className='flex-td'>{item.feedback ? item.feedback : null}</div>
                                         </div>
                                     )
                                 }
