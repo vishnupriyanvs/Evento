@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '../components/navbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendar, faFastForward, faCheckCircle, faStopCircle, faAngleDown, faInbox, faMask } from '@fortawesome/free-solid-svg-icons';
+import { faCalendar, faFastForward, faCheckCircle, faStopCircle, faAngleDown, faInbox, faMask, faBars } from '@fortawesome/free-solid-svg-icons';
 import './index.css';
 import { Outlet, useNavigate } from 'react-router-dom';
 import decryptData from '../client-side-encryption/decrypt';
@@ -26,7 +26,7 @@ function MainPage() {
         })
     }, [sideCheck]);
 
- 
+
     const navigateEvents = (eventype) => {
         navigate(`/user/${eventype}`);
     }
@@ -56,7 +56,7 @@ function MainPage() {
 
     return (<div className="containers">
         <nav>
-            <Navbar openMenu={clickMenu} myEvent={faInbox} endPoint={'my-events/upcoming-events/invited/'} onClick={() => {var modal = document.getElementById("myModal"); modal.style.display = "block";}} />
+            <Navbar openMenu={clickMenu} myEvent={faInbox} endPoint={'my-events/upcoming-events/invited/'} onClick={() => { var modal = document.getElementById("myModal"); modal.style.display = "block"; }} />
             {/* navigate(`create-event/${id}`) */}
         </nav>
 
@@ -72,20 +72,20 @@ function MainPage() {
 
         <div className="sidebar">
 
+
+            <div className='sideBarx'><FontAwesomeIcon icon={faBars} size="2x" onClick={clickMenu} color="#91A4B7" /></div>
+
+
             {sideCheck ?
                 <div id="parent-node">
-
                     <div className="liClick" onClick={() => navigateEvents(`upcoming-events/${id}`)}><FontAwesomeIcon icon={faFastForward} size="x" color="#91A4B7" /><span>Upcoming Events</span></div>
-
-
                     <div className="liClick" onClick={() => navigateEvents(`ongoing-events/${id}`)}><FontAwesomeIcon icon={faFastForward} size="x" color="#91A4B7" /><span>Ongoing Events</span></div>
                     <div className="liClick" onClick={() => navigateEvents(`cancelled-events/${id}`)} ><FontAwesomeIcon icon={faStopCircle} size="x" color="#91A4B7" /><span>Cancelled Events</span></div>
-
                     <div className="liClick" onClick={() => navigateEvents(`past-events/${id}`)}><FontAwesomeIcon icon={faCheckCircle} size="x" color="#91A4B7" /><span>Past Events</span></div>
-
                     <div className="liClick" onClick={() => navigateEvents(`calender-events/${id}`)}><FontAwesomeIcon icon={faCalendar} size="x" color="#91A4B7" /><span>Calender</span></div>
-
                 </div> : <div className='mini-parent-node'>
+                    {/* <FontAwesomeIcon icon={faBars} size="2x" onClick={clickMenu} color="#91A4B7" className='sideBarIcons' /> */}
+
                     <div className='sideBarIcons'><FontAwesomeIcon icon={faCalendar} size="2x" color="#91A4B7" onClick={() => navigateEvents(`calender-events/${id}`)} /><span className='sideBarText'>Calendar</span></div>
                     <div className='sideBarIcons'><FontAwesomeIcon icon={faFastForward} size="2x" color="#91A4B7" onClick={() => navigateEvents(`upcoming-events/${id}`)} /><span className='sideBarText'>Upcoming Events</span></div>
                     <div className='sideBarIcons'><FontAwesomeIcon icon={faFastForward} size="2x" color="#91A4B7" onClick={() => navigateEvents(`ongoing-events/${id}`)} /><span className='sideBarText'>Ongoing Events</span></div>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Navbar from '../../components/navbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendar, faFastForward, faCheckCircle, faStopCircle, faAngleDown, faMask } from '@fortawesome/free-solid-svg-icons';
+import { faCalendar, faFastForward, faCheckCircle, faStopCircle, faAngleDown, faMask, faBars } from '@fortawesome/free-solid-svg-icons';
 // import './index.css';
 import { Outlet, useNavigate } from 'react-router-dom';
 import SwitchUserAdminBtn from '../../components/switch-user-admin-btn';
@@ -79,6 +79,8 @@ function UsersMainPage() {
 
         <div className="sidebar">
 
+
+        <div className='sideBarx'><FontAwesomeIcon icon={faBars} size="2x" onClick={clickMenu} color="#91A4B7" /></div>
             {sideCheck ?
                 <div id="parent-node">
 
@@ -109,7 +111,7 @@ function UsersMainPage() {
                     <div className='sideBarIcons'><FontAwesomeIcon icon={faStopCircle} size="2x" color="#91A4B7" onClick={() => navigateEvents(`my-events/cancelled-events/${id}`)} /><span className='sideBarText'>Cancelled Events</span></div>
                 </div>}
 
-            {myRole === '1' ? <div><SwitchUserAdminBtn onClick={() => navigate(`create-event/${id}`)} myEvent={faMask} endPoint={'/user/upcoming-events/'} checkAdmin={false} /></div> : null}
+            {myRole === '1' ? <div className='switch-user-admin'><SwitchUserAdminBtn onClick={() => navigate(`create-event/${id}`)} myEvent={faMask} endPoint={'/user/upcoming-events/'} checkAdmin={false} /></div> : null}
             {/* Error while mapping in SideBar! <SideBar listContent = {["Upcoming Events"]} listItemFn={[navigateEvents("upcoming-events")]} /> */}
         </div>
     </div>

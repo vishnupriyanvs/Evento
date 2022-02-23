@@ -50,7 +50,7 @@ function Navbar(props) {
 
                 <div className="flexLeftItem">
                     <SizedBox width="24px" />
-                    <FontAwesomeIcon icon={faBars} size="2x" onClick={props.openMenu} color="#91A4B7" />
+                    {/* <FontAwesomeIcon icon={faBars} size="2x" onClick={props.openMenu} color="#91A4B7" /> */}
                 </div>
 
                 <div className="flexRightItem">
