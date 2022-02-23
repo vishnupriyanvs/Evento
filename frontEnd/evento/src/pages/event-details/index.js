@@ -129,7 +129,7 @@ function ViewEvents() {
                         <div className='event-invitees'>
                             <div><FontAwesomeIcon icon={faUsers} size={"3x"} /></div>
                             <div>
-                                <b>Invitees</b>
+                                Invitees
                                 <h1>{participants}</h1>
                             </div>
                         </div>
@@ -137,7 +137,7 @@ function ViewEvents() {
                         <div className='event-participants'>
                             <div><FontAwesomeIcon icon={faUserCheck} size={"3x"} /></div>
                             <div>
-                                <b>Participants</b>
+                                Participants
                                 <h1>{invitees.length}</h1>
                             </div>
                         </div>
