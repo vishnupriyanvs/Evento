@@ -5,7 +5,7 @@
 }
 .SelectnBtn1-content {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   gap: 8px;
   /* background-color: black; */
   padding: 8px;

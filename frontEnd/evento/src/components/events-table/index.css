@@ -106,7 +106,9 @@ td {
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  font-size: 17px;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
   justify-content: space-between;
 }
 
@@ -137,4 +139,10 @@ td {
 .main-box {
   display: flex;
   justify-content: center;
+}
+
+.tile-image {
+  width: 48px;
+  height: 48px;
+  border-radius: 4px;
 }

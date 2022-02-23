@@ -15,13 +15,8 @@ function EventsTable(props) {
 
 
   useEffect(async () => {
-    // checkPage(props.eventType, props.titles, props.events, counter);
     await handleTable(props.eventType, props.titles, props.events, counter);
-    // console.log(props.events)
-    // handleRow(props.eventType, props.titles, props.events, counter);
     handlePagination(props.events.length);
-
-
   }, [props.titles, counter]);
 
 
@@ -42,7 +37,7 @@ function EventsTable(props) {
               const action = tHeader.includes("Actions");
               return (
                 <tr>
-                  <td onClick={() => navigate(`/user/view-event/${id}/${item.id}`)}>{item.title}</td>
+                  <td onClick={() => navigate(`/user/view-event/${id}/${item.id}`)}><img src={`http://localhost:4000/images/download/${item.id}`} className="tile-image" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{item.title}</td>
                   <td>{item.start_date}</td>
                   {item.is_active == 'Active' || item.is_active == 'Cancelled' ?
                     action ?

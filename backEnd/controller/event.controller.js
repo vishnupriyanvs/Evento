@@ -4,7 +4,7 @@ const eventDao = require('../dao/event.dao');
 var eventController = {
     addEvent: addEvent,
     findEvents: findEvents,
-    findEventById: findEventById,
+    findEventById: findEventById, 
     updateEvent: updateEvent,
     deleteById: deleteById,
  

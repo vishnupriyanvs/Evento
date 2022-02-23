@@ -26,16 +26,7 @@ function MainPage() {
         })
     }, [sideCheck]);
 
-    // This function is not required anymore
-    const navbarCheck = () => {
-        if (document.querySelector('.sidebar').classList.contains('open')) {
-            setSideCheck(true);
-        } else {
-            setSideCheck(false);
-        }
-
-    }
-
+ 
     const navigateEvents = (eventype) => {
         navigate(`/user/${eventype}`);
     }
