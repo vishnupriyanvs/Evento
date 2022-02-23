@@ -226,7 +226,9 @@ width: 100%;
 }
 
 .event-fixture .content-event-date {
-  font-size: x-large;
+  font-size:medium;
+  font-style: normal;
+  font-weight: normal;
   text-align: left;
 }
 
@@ -278,9 +280,14 @@ width: 100%;
   justify-content: flex-end;
 }
 
-.content-event-further-info .flex-right div {
-  text-align: right;
+.flex-right div {
+  text-align: left;
   width: 100%;
+}
+
+.mail{
+  display: flex;
+  align-items: center;
 }
 
 @media only screen and (max-width: 1000px) {
