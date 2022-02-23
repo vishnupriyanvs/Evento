@@ -144,7 +144,7 @@ textarea {
   gap: 8px;
 }
 
-.formRowBtn{
+.form-btn-center{
     display: flex; 
     gap: 8px; 
     justify-content: center;

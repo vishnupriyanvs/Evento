@@ -5,11 +5,12 @@ import { faUserPlus, faEdit } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate, useParams } from "react-router-dom";
 import StatusSelectionBtn from "../event-select-btn";
 import { useEventTable } from "./useEventsTable";
+import UpdateEventModal from "../../pages/update-event-modal";
 
 function EventsTable(props) {
 
   const { id } = useParams()
-
+  const [eventState, setEventState] = useState(null)
   const navigate = useNavigate();
   const { tHeader, tRow, counter, incrementCounter, decrementCounter, setCounter, handlePagination, pages, handleTable } = useEventTable()
 
@@ -17,7 +18,7 @@ function EventsTable(props) {
   useEffect(async () => {
     await handleTable(props.eventType, props.titles, props.events, counter);
     handlePagination(props.events.length);
-  }, [props.titles, counter]);
+  }, [props.titles, counter, eventState]);
 
 
 
@@ -48,7 +49,8 @@ function EventsTable(props) {
                         <td>
                           <FontAwesomeIcon icon={faUserPlus} onClick={() => navigate(`/user/sendinvitations/${id}/${item.id}`)} />
                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                          <FontAwesomeIcon icon={faEdit} onClick={() => navigate(`/user/edit-event/${id}/${item.id}`)} />
+                          <FontAwesomeIcon icon={faEdit} onClick={()=>{setEventState(item.id); var modal = document.getElementById("myUpdateModal"); modal.style.display = "block";}}/>
+                          <UpdateEventModal eventid={eventState} />
                         </td>
                       </>
                       :

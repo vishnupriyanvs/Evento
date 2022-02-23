@@ -214,7 +214,7 @@ function EventForm(props) {
 
                 </div> */}
 
-                <div>
+                <div className="form-btn-center">
                     <Button type='reset' variant='danger' onClick={props.handleReset} >Cancel</Button>
                     &nbsp; &nbsp; &nbsp;
                     <Button type='submit' variant="primary">{props.buttonValue}</Button>
