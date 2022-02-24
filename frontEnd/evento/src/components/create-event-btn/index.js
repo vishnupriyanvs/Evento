@@ -6,11 +6,6 @@ import "./index.css";
 
 function CreateEvent(props) {
     
-    // useEffect(()=>{
-    //     // document.getElementById("create").addEventListener("click", function() {
-    //     //     document.getElementById("myModal").style.display = 'none'
-    //       }, []);
-    // })
     return (
         <div className="create-event-main" >
             <div className="createEventBtn" onClick={props.onClick}>
