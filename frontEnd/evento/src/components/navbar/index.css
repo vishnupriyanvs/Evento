@@ -12,6 +12,8 @@
   gap: 1rem;
   align-items: center;
   align-self: center;
+  font-family: inherit;
+  text-transform: capitalize;
 }
 
 .flexRightItem {
@@ -25,6 +27,7 @@
 .sizedBox {
   width: 50px;
 }
+
 
 .myEventIcons {
   /* padding-top: 48px; */

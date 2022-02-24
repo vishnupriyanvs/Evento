@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import './index.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCoffee, faBars, faCalendar, faPowerOff, faImage, faUser, faUserCircle, faInbox } from '@fortawesome/free-solid-svg-icons'
@@ -9,10 +9,12 @@ import { useParams, useNavigate } from 'react-router-dom';
 import apiHandler from '../../api-handling';
 import tokenHandler from '../../api-handling/tokenHandler';
 import decryptData from "../../client-side-encryption/decrypt";
+import TitleContext from "../../context/titleContext";
 
 
 
 function Navbar(props) {
+    const {titles,setTitles} = useContext(TitleContext)
     const { id } = useParams()
     const navigateMyEvents = useNavigate()
     const box = document.querySelector('.popup-box');
@@ -51,6 +53,7 @@ function Navbar(props) {
                 <div className="flexLeftItem">
                     <SizedBox width="24px" />
                     {/* <FontAwesomeIcon icon={faBars} size="2x" onClick={props.openMenu} color="#91A4B7" /> */}
+                    <h4>{titles.toUpperCase()}</h4>
                 </div>
 
                 <div className="flexRightItem">

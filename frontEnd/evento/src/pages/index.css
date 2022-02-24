@@ -103,23 +103,27 @@ main::-webkit-scrollbar {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  
   /* transition: width 2s; */
   /* transition-timing-function: ease; */
 }
 
 .sideBarIcons .sideBarText{
   position: absolute;
-  left: 100px;
+  left: 100%;
   height: 50px;
   width: 0;
   background: rgba(13, 24, 41, 0.76);;
-  /* box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); */
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   color: whitesmoke;
   line-height: 45px;
   text-align: center;
   /* transition: 100ms; */
   visibility: hidden;
   transition: width 100ms;
+  font-size: large;
+  font-family: inherit;
+  font-weight: normal;
 }
 .sideBarIcons:hover {
   /* box-shadow: inset 0 0 0 0 rgba(0, 0, 0, 0.2), 4px 0 0 0 #91a4b7; */
@@ -134,7 +138,7 @@ main::-webkit-scrollbar {
   text-align: center;
   color: white;
   opacity: 1;
-  width: 100px;
+  width: 200px;
 }
 
 a {
