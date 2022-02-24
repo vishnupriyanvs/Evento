@@ -95,7 +95,7 @@ function Navbar(props) {
                                 {role == 1 ? !switchUser ? <li><SwitchUserAdminBtn myEvent={faInbox} handle={1}   checkAdmin={true} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div></div></li> : <li><SwitchUserAdminBtn myEvent={faMask} handle={0}   checkAdmin={false} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li> : null}
                                 {/* <li><SwitchUserAdminBtn myEvent={faInbox} handle={'1'} endPoint={'my-events/upcoming-events/invited/'}  checkAdmin={true} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div><span className="profileSpan" onClick={() => {navigateMyEvents(`/user/upcoming-events/${id}`)}}>My Event</span></div></li> */}
                                 {/* <li><SwitchUserAdminBtn myEvent={faMask} handle={'0'} endPoint={'/user/upcoming-events/'}  checkAdmin={true} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="profileSpan">Admin Event</span></li> */}
-                                <li style={{cursor:'pointer'}} onClick={logOut}><FontAwesomeIcon id="logout" icon={faPowerOff} color="blue" size="1x"  />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="profileSpan">Log out</span></li>
+                                <li style={{cursor:'pointer'}} onClick={logOut}><FontAwesomeIcon id="logout" icon={faPowerOff} color="whitesmoke" size="1x"  />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="profileSpan">Log out</span></li>
                             </ul>
                         </div>
                     </div>
