@@ -1,19 +1,4 @@
-.createEventBtn{
-    background-color: #443DF6;
-    color: #FFFFFF;
-    padding: .5rem;
-    border-radius: 10px;
-    /* box-shadow: 5px 10px 8px #888888; */
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size:small;
-    gap: 0.5rem;
-    cursor: pointer;
-}
-
-/* Modal Style */
-.modal {
+.update-modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 3; /* Sit on top */
@@ -28,7 +13,7 @@
 
   }
   
-.modal::-webkit-scrollbar {
+.update-modal::-webkit-scrollbar {
     /* WebKit */
     width: 0;
     height: 0;

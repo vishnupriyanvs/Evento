@@ -1,17 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import CreateEventForm from "../../pages/create-event-form";
 import "./index.css";
 
-function CreateEvent(props){
-
+function CreateEvent(props) {
     
+    return (
+        <div className="create-event-main" >
+            <div className="createEventBtn" onClick={props.onClick}>
+                <FontAwesomeIcon icon={faPlus} size="2x" />
+                <b>Create Event</b>
+            </div>
 
-    return(
-        
-        <div className="createEventBtn" onClick={props.onClick}>
-            <FontAwesomeIcon icon={faPlus} size="2x" />
-            <b>Create Event</b>
+          <div id="myModal" class="modal">
+
+               <CreateEventForm />
+
+            </div>
         </div>
     )
 }

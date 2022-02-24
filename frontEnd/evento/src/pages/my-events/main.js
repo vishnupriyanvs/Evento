@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react';
 import Navbar from '../../components/navbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendar, faFastForward, faCheckCircle, faStopCircle, faAngleDown, faMask } from '@fortawesome/free-solid-svg-icons';
-import './index.css';
+import { faCalendar, faFastForward, faCheckCircle, faStopCircle, faAngleDown, faMask, faBars } from '@fortawesome/free-solid-svg-icons';
+// import './index.css';
 import { Outlet, useNavigate } from 'react-router-dom';
 import SwitchUserAdminBtn from '../../components/switch-user-admin-btn';
 import { useParams } from 'react-router-dom';
@@ -91,6 +91,8 @@ function UsersMainPage() {
 
         <div className="sidebar">
 
+
+        <div className='sideBarx'><FontAwesomeIcon icon={faBars} size="2x" onClick={clickMenu} color="#91A4B7" /></div>
             {sideCheck ?
                 <div id="parent-node">
 

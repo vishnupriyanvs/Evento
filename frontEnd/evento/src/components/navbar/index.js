@@ -58,15 +58,10 @@ function Navbar(props) {
 
                 <div className="flexLeftItem">
                     <SizedBox width="24px" />
-                    <FontAwesomeIcon icon={faBars} size="2x" onClick={props.openMenu} color="#91A4B7" />
+                    {/* <FontAwesomeIcon icon={faBars} size="2x" onClick={props.openMenu} color="#91A4B7" /> */}
                 </div>
 
                 <div className="flexRightItem">
-
-                    {/* <FontAwesomeIcon icon={faCalendar} size="2x" onClick={props.onCalenderClick}/> */}
-
-                    {/* {role === '1' ? <div className='myEventIcons'><FontAwesomeIcon icon={props.myEvent} size="2x" color="#91A4B7" onClick={() => navigateMyEvents(`${props.endPoint}${id}`)} /><span className='myEventText'>My Events</span></div> : null} */}
-
                     <SearchBars />
                     <SizedBox width="8vh" />
                     {role === '1' ? <CreateEvent onClick={props.onClick} id={id} /> : null}

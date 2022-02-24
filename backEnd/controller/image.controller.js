@@ -12,6 +12,21 @@ const downloadEventImage = async (req, res) => {
         console.log("in downloads", data.imageUrl);
 
         res.download(data.imageUrl, (err) => {
+            if (err) {
+                res.download('./asset/event-images/1.png')
+                // res.status(500).send({
+
+                //     message: "File can not be downloaded: " + err,
+
+                // });
+
+            }
+
+        });
+
+    }catch(err){
+
+        res.download('./asset/event-images/1.png', (err) => {
 
             if (err) {
 
@@ -24,13 +39,7 @@ const downloadEventImage = async (req, res) => {
             }
 
         });
-
-    }catch(err){
-
-        res.status(401).send({message: "No image"})
-
     }
-
 };
 
 const uploadEventImage = multer({ storage: eventImageDao.eventImagesStorage });
