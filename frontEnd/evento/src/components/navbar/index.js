@@ -87,7 +87,7 @@ function Navbar(props) {
                             
                         </div>
                         <div className="menu">
-                            <h3>Someone name<br></br><span>someone@experion.global.com</span></h3>
+                            <h3>{users.name}<br></br><span>{users.email}</span></h3>
                             <ul>
                                 {role == 1 ? !switchUser ? <li><SwitchUserAdminBtn myEvent={faInbox} handle={1}   checkAdmin={true} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div></div></li> : <li><SwitchUserAdminBtn myEvent={faMask} handle={0}   checkAdmin={false} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li> : null}
                                 {/* <li><SwitchUserAdminBtn myEvent={faInbox} handle={'1'} endPoint={'my-events/upcoming-events/invited/'}  checkAdmin={true} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div><span className="profileSpan" onClick={() => {navigateMyEvents(`/user/upcoming-events/${id}`)}}>My Event</span></div></li> */}
