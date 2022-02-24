@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import ViewEvents from "../pages/event-details";
 import MainPage from "../pages";
@@ -23,14 +23,16 @@ import OngoingEvents from "../pages/ongoing-events";
 import {InviteUser} from "../pages/send-invitations"
 import AdminCalenderEvents from "../pages/calendar-admin";
 import UserCalendarEvents from "../pages/my-events/calendar-users";
+import SwitchContext from "../components/context/switchuser";
 
 
 
 function Paths() {
-
+    const [switchUser,setSwitchUser] = useState(0);
 
 
     return (
+        <SwitchContext.Provider value ={{switchUser,setSwitchUser}}>
         <BrowserRouter>
 
 
@@ -53,7 +55,7 @@ function Paths() {
 
                 </Route>
                 
-                <Route path="/user/my-events" element={<UsersMainPage />} >
+                <Route path="/user/my-events" element={<UsersMainPage/>} >
                     <Route path="upcoming-events/invited/:id" element={<InvitedEvents toptitle='My Upcoming Events/Invited'/>} />
                     <Route path="upcoming-events/accepted/:id" element={<AcceptedEvents toptitle='My Upcoming Events/Accepted'/>} />
                     <Route path="upcoming-events/rejected/:id" element={<RejectedEvents toptitle='My Upcoming Events/Rejected'/>} />
@@ -67,6 +69,7 @@ function Paths() {
 
             </Routes>
         </BrowserRouter>
+        </SwitchContext.Provider>
     )
 }
 

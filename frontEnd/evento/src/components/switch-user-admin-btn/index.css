@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:100,200,300,400,500,600,700,800,900');
 .myEventIcons {
   /* padding-top: 48px; */
   display: flex;
@@ -31,3 +32,4 @@
   visibility: hidden;
   z-index: 1;
 }
+

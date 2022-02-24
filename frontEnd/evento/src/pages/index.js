@@ -101,7 +101,7 @@ function MainPage() {
                     <div className='sideBarIcons'><FontAwesomeIcon icon={faStopCircle} size="2x" color="#91A4B7" onClick={() => navigateEvents(`cancelled-events/${id}`)} /><span className='sideBarText'>Cancelled Events</span></div>
                 </div>}
 
-            {myRole === '1' ? <div><SwitchUserAdminBtn myEvent={faInbox} endPoint={'my-events/upcoming-events/invited/'} onClick={() => navigate(`create-event/${id}`)} checkAdmin={true} /></div> : null}
+            {/* {myRole === '1' ? <div><SwitchUserAdminBtn myEvent={faInbox} endPoint={'my-events/upcoming-events/invited/'} onClick={() => navigate(`create-event/${id}`)} checkAdmin={true} /></div> : null} */}
             {/* Error while mapping in SideBar! <SideBar listContent = {["Upcoming Events"]} listItemFn={[navigateEvents("upcoming-events")]} /> */}
         </div>
     </div>

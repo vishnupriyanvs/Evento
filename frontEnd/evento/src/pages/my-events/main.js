@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Navbar from '../../components/navbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendar, faFastForward, faCheckCircle, faStopCircle, faAngleDown, faMask } from '@fortawesome/free-solid-svg-icons';
@@ -7,6 +7,7 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import SwitchUserAdminBtn from '../../components/switch-user-admin-btn';
 import { useParams } from 'react-router-dom';
 import decryptData from '../../client-side-encryption/decrypt';
+import SwitchContext from '../../components/context/switchuser';
 
 
 function UsersMainPage() {
@@ -16,6 +17,7 @@ function UsersMainPage() {
 
     const [dimension, setDimension] = useState({})
     const [sideCheck, setSideCheck] = useState(false);
+    // const [switchUser,setSwitchUser] = useContext(SwitchContext);
     const role =decryptData(sessionStorage.getItem('myRole'));
     useEffect(() => {
         //console.log("width");
@@ -25,7 +27,17 @@ function UsersMainPage() {
             width: window.innerWidth
         })
     }, [sideCheck]);
-
+   
+    const handleUserSwitch = () =>{
+        // if(switchUser == 0){
+        //     navigate(`/user/upcoming-events/${id}`)
+        // }
+       
+    }
+    // useEffect(() => {
+    //     // handleUserSwitch();
+    //     navigate(`/user/upcoming-events/${id}`)
+    // }, []);
     // This function is not required anymore
     const navbarCheck = () => {
         if (document.querySelector('.sidebar').classList.contains('open')) {
@@ -109,7 +121,7 @@ function UsersMainPage() {
                     <div className='sideBarIcons'><FontAwesomeIcon icon={faStopCircle} size="2x" color="#91A4B7" onClick={() => navigateEvents(`my-events/cancelled-events/${id}`)} /><span className='sideBarText'>Cancelled Events</span></div>
                 </div>}
 
-            {myRole === '1' ? <div><SwitchUserAdminBtn onClick={() => navigate(`create-event/${id}`)} myEvent={faMask} endPoint={'/user/upcoming-events/'} checkAdmin={false} /></div> : null}
+            {/* {myRole === '1' ? <div><SwitchUserAdminBtn onClick={() => navigate(`create-event/${id}`)} myEvent={faMask} endPoint={'/user/upcoming-events/'} checkAdmin={false} /></div> : null} */}
             {/* Error while mapping in SideBar! <SideBar listContent = {["Upcoming Events"]} listItemFn={[navigateEvents("upcoming-events")]} /> */}
         </div>
     </div>
