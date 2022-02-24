@@ -9,6 +9,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import apiHandler from '../../api-handling';
 import tokenHandler from '../../api-handling/tokenHandler';
 import decryptData from "../../client-side-encryption/decrypt";
+import TitleContext from "../../context/titleContext";
 import SwitchUserAdminBtn from '../../components/switch-user-admin-btn';
 import encryptData from "../../client-side-encryption/encrypt";
 import SwitchContext from "../context/switchuser";
@@ -16,6 +17,7 @@ import SwitchContext from "../context/switchuser";
 
 
 function Navbar(props) {
+    const {titles,setTitles} = useContext(TitleContext)
     const {switchUser,setSwitchUser}= useContext(SwitchContext);
     const { id } = useParams()
     const navigateMyEvents = useNavigate()
@@ -59,6 +61,7 @@ function Navbar(props) {
                 <div className="flexLeftItem">
                     <SizedBox width="24px" />
                     {/* <FontAwesomeIcon icon={faBars} size="2x" onClick={props.openMenu} color="#91A4B7" /> */}
+                    <h4>{titles.toUpperCase()}</h4>
                 </div>
 
                 <div className="flexRightItem">

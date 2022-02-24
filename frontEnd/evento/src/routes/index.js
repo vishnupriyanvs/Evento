@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React,{useState} from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import ViewEvents from "../pages/event-details";
 import MainPage from "../pages";
@@ -23,15 +23,16 @@ import OngoingEvents from "../pages/ongoing-events";
 import {InviteUser} from "../pages/send-invitations"
 import AdminCalenderEvents from "../pages/calendar-admin";
 import UserCalendarEvents from "../pages/my-events/calendar-users";
+import TitleContext from "../context/titleContext";
 import SwitchContext from "../components/context/switchuser";
 
 
-
 function Paths() {
+
+    const [titles,setTitles] = useState('Upcoming Events')
     const [switchUser,setSwitchUser] = useState(0);
-
-
     return (
+        <TitleContext.Provider value={{titles,setTitles}}>
         <SwitchContext.Provider value ={{switchUser,setSwitchUser}}>
         <BrowserRouter>
 
@@ -42,10 +43,10 @@ function Paths() {
                 <Route path="/user" element={<MainPage />} >
                 
                     <Route index element={<Home />} />
-                    <Route path="upcoming-events/:id" element={<UpcomingEvents toptitle='Upcoming Events'/>} />
-                    <Route path="ongoing-events/:id" element={<OngoingEvents toptitle='Ongoing Events'/>} />
-                    <Route path="past-events/:id" element={<PastEvents toptitle='Past Events'/>} />
-                    <Route path="cancelled-events/:id" element={<CancelledEvents toptitle='Cancelled Events'/>} />
+                    <Route path="upcoming-events/:id" element={<UpcomingEvents />} />
+                    <Route path="ongoing-events/:id" element={<OngoingEvents />} />
+                    <Route path="past-events/:id" element={<PastEvents />} />
+                    <Route path="cancelled-events/:id" element={<CancelledEvents />} />
                     <Route path="calender-events/:id" element={<AdminCalenderEvents />} />
                     <Route path="view-event/:id/:eventid" element={<ViewEvents />} />
                     <Route path="create-event/:id" element={<CreateEventForm />} />
@@ -69,7 +70,9 @@ function Paths() {
 
             </Routes>
         </BrowserRouter>
+        
         </SwitchContext.Provider>
+        </TitleContext.Provider>
     )
 }
 
