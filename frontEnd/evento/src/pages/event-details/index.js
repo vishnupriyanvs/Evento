@@ -2,7 +2,7 @@ import './index.css'
 import { useState, useEffect, React } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserPlus, faEdit, faClock, faUserAlt, faGlobe, faPhone, faUsers, faUserCheck } from "@fortawesome/free-solid-svg-icons";
+import { faUserPlus, faEdit, faClock, faUserAlt, faGlobe, faPhone, faUsers, faUserCheck, faUser, faMailBulk } from "@fortawesome/free-solid-svg-icons";
 import apiHandler from '../../api-handling';
 import tokenHandler from '../../api-handling/tokenHandler';
 
@@ -103,24 +103,27 @@ function ViewEvents() {
                             </div>
                             <hr></hr>
                             <div className='card-data'>
+                                <div className='flex-right'>
+                                    <div><FontAwesomeIcon icon={faUser} /> &nbsp;&nbsp;{users.name}</div>
+                                    <div className='mail'><FontAwesomeIcon icon={faMailBulk} /> &nbsp;&nbsp;<span>{users.email}</span></div>
+                                    <div><FontAwesomeIcon icon={faPhone} /> &nbsp;&nbsp;{users.contact}</div>
+                                </div>
+
+                                <div class="vl"></div>
                                 <div className='event-fixture'>
                                     <div className='content-event-date'>
                                         <FontAwesomeIcon icon={faClock} /> <span>{events.startDate} : {events.endDate}</span>
                                         <div className='content-event-venue'><a href="#">{events.venue}</a></div>
                                     </div>
                                 </div>
+
                                 <div class="vl"></div>
-                               
-                                    <div className='flex-left'>
-                                        <div className='content-event-contact-person'><FontAwesomeIcon icon={faUserAlt} /><span>{events.resourcePerson}</span></div>
-                                        <div><FontAwesomeIcon icon={faGlobe} />&nbsp;&nbsp;&nbsp;{events.website ? events.website : "www.no-website.com"}</div></div>
-                                    <div class="vl"></div>
-                                    <div className='flex-right'>
-                                        <div><FontAwesomeIcon icon={faPhone} /> &nbsp;&nbsp;{users.name}</div>
-                                        <div>{users.email}</div>
-                                        <div>{users.contact}</div>
-                                    </div>
-                                
+                                <div className='flex-left'>
+                                    <div className='content-event-contact-person'><FontAwesomeIcon icon={faUserAlt} /><span>{events.resourcePerson}</span></div>
+                                    <div><FontAwesomeIcon icon={faGlobe} />&nbsp;&nbsp;&nbsp;{events.website ? events.website : "www.no-website.com"}</div>
+                                </div>
+
+
                             </div>
                         </div>
                     </div>

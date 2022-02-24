@@ -1,9 +1,8 @@
 import { useState } from "react";
-import { checkPage } from "./eventsTableLogic";
+import { checkPage } from "./myEventsTableLogic";
 
 
-
-export const useEventTable = () => {
+export const useMyEventsTable = () => {
 
     const [tHeader, setTHeader] = useState([]);
     const [tRow, setTrow] = useState([]);
@@ -41,7 +40,6 @@ export const useEventTable = () => {
         tHeader,
         tRow,
         counter,
-        // checkPage,
         incrementCounter,
         decrementCounter,
         setCounter,

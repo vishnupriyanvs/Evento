@@ -11,125 +11,125 @@ import axios from "axios"
 import Cancellation from "../cancellation-reason";
 import apiHandler from '../../api-handling';
 import tokenHandler from "../../api-handling/tokenHandler";
-
+import { useMyEventsTable } from "./useMyEventsTable";
 
 function MyEventsTable(props) {
 
 
   const { id } = useParams()
   const navigate = useNavigate();
-  const [tHeader, setTHeader] = useState([]);
-  const [tRow, setTrow] = useState([]);
+  // const [tHeader, setTHeader] = useState([]);
+  // const [tRow, setTrow] = useState([]);
   const [invitationArray, setInvitationArray] = useState([]);
-  const [counter, setCounter] = useState(0);
-  const [pages, setPages] = useState([]);
+  // const [counter, setCounter] = useState(0);
+  // const [pages, setPages] = useState([]);
   const [eventDetails, setEventDetails] = useState([props.events]);
-
+  const { tHeader, tRow, counter, incrementCounter, decrementCounter, setCounter, handlePagination, pages, handleTable } = useMyEventsTable()
   const eventInfo = props.events;
 
-  const checkPage = (page, tHeader, tRow, i) => {
-    switch (page) {
-      case services.myEventType.UPCOMING_EVENT.INVITED_EVENT:
-        // tHeader = tHeader.filter((title, i) => {
-        //   return title !== "End Date";
-        // });
+  // const checkPage = (page, tHeader, tRow, i) => {
+  //   switch (page) {
+  //     case services.myEventType.UPCOMING_EVENT.INVITED_EVENT:
+  //       // tHeader = tHeader.filter((title, i) => {
+  //       //   return title !== "End Date";
+  //       // });
 
-        setTHeader(tHeader);
+  //       setTHeader(tHeader);
 
-        // tRow = tRow.filter((content, i) => {
-        //   return delete content["end_date"];
-        // });
-        tRow = tRow.length > (i + 1) * 10 ? tRow.length.slice(tRow.length - (i + 1) * 10, tRow.length - (i * 10)).reverse() : tRow.slice(0, tRow.length - (i * 10)).reverse();
-        setTrow(tRow);
-        break;
+  //       // tRow = tRow.filter((content, i) => {
+  //       //   return delete content["end_date"];
+  //       // });
+  //       tRow = tRow.length > (i + 1) * 10 ? tRow.length.slice(tRow.length - (i + 1) * 10, tRow.length - (i * 10)).reverse() : tRow.slice(0, tRow.length - (i * 10)).reverse();
+  //       setTrow(tRow);
+  //       break;
 
-      case services.myEventType.UPCOMING_EVENT.ACCEPTED_EVENT:
+  //     case services.myEventType.UPCOMING_EVENT.ACCEPTED_EVENT:
 
-        tHeader = tHeader.filter((title, i) => {
-          return title !== "Actions";
-        });
-        setTHeader(tHeader);
-        tRow = tRow.filter((content, i) => {
-          return delete content["Actions"];
-        });
-        tRow = tRow.length > (i + 1) * 10 ? tRow.length.slice(tRow.length - (i + 1) * 10, tRow.length - (i * 10)).reverse() : tRow.slice(0, tRow.length - (i * 10)).reverse();
-        setTrow(tRow);
-        break;
+  //       tHeader = tHeader.filter((title, i) => {
+  //         return title !== "Actions";
+  //       });
+  //       setTHeader(tHeader);
+  //       tRow = tRow.filter((content, i) => {
+  //         return delete content["Actions"];
+  //       });
+  //       tRow = tRow.length > (i + 1) * 10 ? tRow.length.slice(tRow.length - (i + 1) * 10, tRow.length - (i * 10)).reverse() : tRow.slice(0, tRow.length - (i * 10)).reverse();
+  //       setTrow(tRow);
+  //       break;
 
-      case services.myEventType.UPCOMING_EVENT.REJECTED_EVENT:
+  //     case services.myEventType.UPCOMING_EVENT.REJECTED_EVENT:
 
-        tHeader = tHeader.filter((title, i) => {
-          return title !== "Actions";
-        });
-        setTHeader(tHeader);
-        tRow = tRow.filter((content, i) => {
-          return delete content["Actions"];
-        });
-        tRow = tRow.length > (i + 1) * 10 ? tRow.length.slice(tRow.length - (i + 1) * 10, tRow.length - (i * 10)).reverse() : tRow.slice(0, tRow.length - (i * 10)).reverse();
-        setTrow(tRow);
-        break;
+  //       tHeader = tHeader.filter((title, i) => {
+  //         return title !== "Actions";
+  //       });
+  //       setTHeader(tHeader);
+  //       tRow = tRow.filter((content, i) => {
+  //         return delete content["Actions"];
+  //       });
+  //       tRow = tRow.length > (i + 1) * 10 ? tRow.length.slice(tRow.length - (i + 1) * 10, tRow.length - (i * 10)).reverse() : tRow.slice(0, tRow.length - (i * 10)).reverse();
+  //       setTrow(tRow);
+  //       break;
 
-      case services.myEventType.COMPLETED_EVENT.ACCEPTED_EVENT:
+  //     case services.myEventType.COMPLETED_EVENT.ACCEPTED_EVENT:
 
-        setTHeader(tHeader);
-        tRow = tRow.length > (i + 1) * 10 ? tRow.length.slice(tRow.length - (i + 1) * 10, tRow.length - (i * 10)).reverse() : tRow.slice(0, tRow.length - (i * 10)).reverse();
-        setTrow(tRow);
-        break;
+  //       setTHeader(tHeader);
+  //       tRow = tRow.length > (i + 1) * 10 ? tRow.length.slice(tRow.length - (i + 1) * 10, tRow.length - (i * 10)).reverse() : tRow.slice(0, tRow.length - (i * 10)).reverse();
+  //       setTrow(tRow);
+  //       break;
 
-      case services.myEventType.COMPLETED_EVENT.REJECTED_EVENT:
+  //     case services.myEventType.COMPLETED_EVENT.REJECTED_EVENT:
 
-        tHeader = tHeader.filter((title, i) => {
-          return title !== "Actions";
-        });
-        setTHeader(tHeader);
-        tRow = tRow.filter((content, i) => {
-          return delete content["Actions"];
-        });
-        tRow = tRow.length > (i + 1) * 10 ? tRow.length.slice(tRow.length - (i + 1) * 10, tRow.length - (i * 10)).reverse() : tRow.slice(0, tRow.length - (i * 10)).reverse();
-        setTrow(tRow);
-        break;
+  //       tHeader = tHeader.filter((title, i) => {
+  //         return title !== "Actions";
+  //       });
+  //       setTHeader(tHeader);
+  //       tRow = tRow.filter((content, i) => {
+  //         return delete content["Actions"];
+  //       });
+  //       tRow = tRow.length > (i + 1) * 10 ? tRow.length.slice(tRow.length - (i + 1) * 10, tRow.length - (i * 10)).reverse() : tRow.slice(0, tRow.length - (i * 10)).reverse();
+  //       setTrow(tRow);
+  //       break;
 
-      case services.myEventType.CANCELLED_EVENT:
+  //     case services.myEventType.CANCELLED_EVENT:
 
-        tHeader = tHeader.filter((title, i) => {
-          return title !== "Actions";
-        });
-        tHeader = tHeader.filter((title, i) => {
-          return title !== "End Date";
-        });
-        setTHeader(tHeader);
-        tRow = tRow.filter((content, i) => {
-          return delete content.event["endDate"];
-        });
-        tRow = tRow.filter((content, i) => {
-          return delete content["Actions"];
-        });
-        tRow = tRow.length > (i + 1) * 10 ? tRow.length.slice(tRow.length - (i + 1) * 10, tRow.length - (i * 10)).reverse() : tRow.slice(0, tRow.length - (i * 10)).reverse();
-        setTrow(tRow);
+  //       tHeader = tHeader.filter((title, i) => {
+  //         return title !== "Actions";
+  //       });
+  //       tHeader = tHeader.filter((title, i) => {
+  //         return title !== "End Date";
+  //       });
+  //       setTHeader(tHeader);
+  //       tRow = tRow.filter((content, i) => {
+  //         return delete content.event["endDate"];
+  //       });
+  //       tRow = tRow.filter((content, i) => {
+  //         return delete content["Actions"];
+  //       });
+  //       tRow = tRow.length > (i + 1) * 10 ? tRow.length.slice(tRow.length - (i + 1) * 10, tRow.length - (i * 10)).reverse() : tRow.slice(0, tRow.length - (i * 10)).reverse();
+  //       setTrow(tRow);
 
-        break;
+  //       break;
 
-      case services.myEventType.ONGOING_EVENT:
+  //     case services.myEventType.ONGOING_EVENT:
 
-        tHeader = tHeader.filter((title, i) => {
-          return title !== "Actions";
-        });
-        setTHeader(tHeader);
-        tRow = tRow.filter((content, i) => {
-          return delete content["Actions"];
-        });
-        tRow = tRow.length > (i + 1) * 10 ? tRow.length.slice(tRow.length - (i + 1) * 10, tRow.length - (i * 10)).reverse() : tRow.slice(0, tRow.length - (i * 10)).reverse();
-        setTrow(tRow);
-        break;
-      default:
-        console.log("Nothing Selected");
-    }
-  };
+  //       tHeader = tHeader.filter((title, i) => {
+  //         return title !== "Actions";
+  //       });
+  //       setTHeader(tHeader);
+  //       tRow = tRow.filter((content, i) => {
+  //         return delete content["Actions"];
+  //       });
+  //       tRow = tRow.length > (i + 1) * 10 ? tRow.length.slice(tRow.length - (i + 1) * 10, tRow.length - (i * 10)).reverse() : tRow.slice(0, tRow.length - (i * 10)).reverse();
+  //       setTrow(tRow);
+  //       break;
+  //     default:
+  //       console.log("Nothing Selected");
+  //   }
+  // };
 
 
-  useEffect(() => {
+  useEffect(async() => {
     // if (props.titles) setTHeader(props.titles);
-    checkPage(props.myEventType, props.titles, props.events, counter);
+    await handleTable(props.myEventType, props.titles, props.events, counter);
     handlePagination(props.events.length)
     // if (props.events) setTrow(props.events);
 
@@ -175,15 +175,15 @@ function MyEventsTable(props) {
   }, [])
 
 
-  const handlePagination = (eventsCount) => {
-    const t = eventsCount;
-    const q = Math.floor(t / 10);
-    const r = Math.floor(t % 10);
-    const p = r !== 0 ? q + 1 : q;
+  // const handlePagination = (eventsCount) => {
+  //   const t = eventsCount;
+  //   const q = Math.floor(t / 10);
+  //   const r = Math.floor(t % 10);
+  //   const p = r !== 0 ? q + 1 : q;
 
-    const pageList = Array.from(Array(p).keys())
-    setPages(pageList)
-  }
+  //   const pageList = Array.from(Array(p).keys())
+  //   setPages(pageList)
+  // }
 
 
   return (
@@ -246,9 +246,9 @@ function MyEventsTable(props) {
       <div className="main-box">
         <div className="pageList-items">
 
-          {counter >= 1 ? <button onClick={() => { setCounter(counter - 1) }} className="previous-btn">Previous</button> : null}
+          {counter >= 1 ? <button onClick={() => { decrementCounter()}} className="previous-btn">Previous</button> : null}
           {pages.map((item, i) => <span onClick={() => setCounter(item)}>{item + 1}</span>)}
-          {counter <= (props.events.length % 10 !== 0 ? (Math.floor(props.events.length / 10) + 1) - 1 : Math.floor(props.events.length / 10) - 1) - 1 ? <button onClick={() => { setCounter(counter + 1) }} className="next-btn">Next</button> : null}
+          {counter <= (props.events.length % 10 !== 0 ? (Math.floor(props.events.length / 10) + 1) - 1 : Math.floor(props.events.length / 10) - 1) - 1 ? <button onClick={() => { incrementCounter();  }} className="next-btn">Next</button> : null}
         </div>
       </div>
     </div>
