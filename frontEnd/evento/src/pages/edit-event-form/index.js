@@ -5,6 +5,7 @@ import './index.css'
 import { useParams, useNavigate } from 'react-router-dom';
 import apiHandler from '../../api-handling';
 import tokenHandler from '../../api-handling/tokenHandler';
+import { toast, Slide } from 'react-toastify';
 
 function EditEventForm(props) {
 
@@ -168,9 +169,19 @@ function EditEventForm(props) {
         const x = await apiHandler('put', `events/${eventid}`);
         //console.log(x.data);
         setUsers(x.data)
+      //   toast.success("Event successfully updated", {
+      //     transition: Slide,
+      //     hideProgressBar: false,
+      //     autoClose: 6000
+      // })
       } catch (error) {
         const x = await tokenHandler('put', `events/${eventid}`, sessionStorage.getItem('refreshToken'), apiHandler);
         setUsers(x.data)
+      //   toast.success("Event successfully updated", {
+      //     transition: Slide,
+      //     hideProgressBar: false,
+      //     autoClose: 6000
+      // })
       }
     }
     catch {
@@ -187,8 +198,7 @@ function EditEventForm(props) {
     modal.style.display = "none";
     // setSubmitted(false)
   }
-  console.log(events)
-
+  
   return (
     <div className="createEventForm">
       <EventForm

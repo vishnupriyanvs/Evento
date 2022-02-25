@@ -4,6 +4,8 @@ import { useContext } from "react";
 import SwitchContext from "../context/switchuser";
 
 
+
+
 function SwitchUserAdminBtn(props) {
     const { id } = useParams()
     const {switchUser,setSwitchUser}= useContext(SwitchContext);
@@ -24,7 +26,7 @@ function SwitchUserAdminBtn(props) {
     }
     return (
         // <div className='myEventIcons'><FontAwesomeIcon icon={props.myEvent} size="2x" color="whitesmoke" onClick={() => { navigateMyEvents(`${props.endPoint}${id}`); }} /><span className='myEventText'>{!props.checkAdmin ? "Admin Events" : "My Events"}</span></div>
-        <div style={{cursor:"pointer"}} onClick={() => { handleSwitching() }}><FontAwesomeIcon icon={props.myEvent} size="1x" color="whitesmoke"  />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style={{color:"whitesmoke",fontWeight:"normal",fontFamily:"Poppins, sans-serif"}}>{!props.checkAdmin ? "Admin Events" : "My Events"}</span></div>
+        <div style={{cursor:"pointer"}} onClick={() => { handleSwitching() }}><FontAwesomeIcon icon={props.myEvent} size="1x" color="whitesmoke"  />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span  >{!props.checkAdmin ? "Admin Events" : "My Events"}</span></div>
     )
 }
 
