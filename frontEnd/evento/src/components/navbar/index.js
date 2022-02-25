@@ -18,6 +18,9 @@ function Navbar(props) {
   const box = document.querySelector(".popup-box");
   const role = decryptData(sessionStorage.getItem("myRole"));
   const [users, setUsers] = useState({});
+  const [show, setShow] = useState(false);
+    
+  const handleShow = () => setShow(true);
 
   useEffect(async () => {
     try {
@@ -44,6 +47,7 @@ function Navbar(props) {
     navigateMyEvents("/");
   }
 
+//console.log(show)
   return (
     <div>
       <div className="mainFlex">
@@ -63,7 +67,8 @@ function Navbar(props) {
         <div className="flexRightItem">
           <SearchBars />
           <SizedBox width="5vh" />
-          {role == 1 && <CreateEvent onClick={props.onClick} id={id} />}
+          {/* {role == 1 && <CreateEvent onClick={props.onClick} id={id} />} */}
+          {role == 1 && <CreateEvent onClick={handleShow} show={show} id={id} data-toggle="modal" />}
           <SizedBox width="8vh" />
           <img
             className="small-profile"

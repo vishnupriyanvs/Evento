@@ -1,12 +1,13 @@
-import axios from "axios";
 import React, { useState, useEffect } from "react";
-import EventForm from "../../components/event-form";
+import EventForm from "../../components/event-form/index_ACTUAL";
 import "./index.css";
 import apiHandler from "../../api-handling";
 import { useParams, useNavigate } from "react-router-dom";
 import tokenHandler from "../../api-handling/tokenHandler";
 
-function CreateEventForm() {
+function CreateEventForm(props) {
+
+  console.log(props)
   const { id } = useParams();
   const [events, setEvents] = useState({created_by: id, updated_by: id });
   const [users, setUsers] = useState([]);
@@ -137,6 +138,8 @@ function CreateEventForm() {
         users={options}
         buttonValue="Create Event"
         created_by={id}
+        show = {props.show}
+        
       />
     </div>
   );

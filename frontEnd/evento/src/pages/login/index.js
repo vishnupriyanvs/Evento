@@ -22,11 +22,6 @@ function LoginForm() {
 toast.configure();
 
 function MyForm(props) {
-<<<<<<< HEAD
-
-=======
-    
->>>>>>> 90a9d2b2ebbda7e0677833f0bc0967a978adbe6e
     const [inputs, setInputs] = useState({});
     const navigate = useNavigate()
     function handleChange(event) {
@@ -37,11 +32,6 @@ function MyForm(props) {
 
     function handleSubmit(event) {
         event.preventDefault();
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 90a9d2b2ebbda7e0677833f0bc0967a978adbe6e
         axios.post('http://localhost:4000/users/login', inputs)
             .then(response => {
 
@@ -73,20 +63,6 @@ function MyForm(props) {
     };
 
     return (
-<<<<<<< HEAD
-        <>
-            <div className='wrapper'>
-                <center> <h1 className="display-3" style={{ marginTop: '20px' }}> Sign In</h1></center>
-                <Form onSubmit={handleSubmit}>
-                    <Form.Group className="mb-3">
-                        <Form.Label>User Name</Form.Label>
-                        <div className="form-field d-flex align-items-center"> <span className="fa fa-user"></span>
-                            <Form.Control className="input" type="text" name="username" placeholder="Enter UserName"
-                                value={inputs.username || ''} onChange={handleChange}
-                                required></Form.Control>
-                        </div>
-                    </Form.Group>
-=======
         
         <div className="loginBody">
             <div className="containerx">
@@ -105,7 +81,6 @@ function MyForm(props) {
                                         required>
 
                                     </Form.Control>
->>>>>>> 90a9d2b2ebbda7e0677833f0bc0967a978adbe6e
 
                                 </div>
                             </Form.Group>

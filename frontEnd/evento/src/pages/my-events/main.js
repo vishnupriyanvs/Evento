@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import Navbar from '../../components/navbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendar, faFastForward, faCheckCircle, faStopCircle, faAngleDown, faMask } from '@fortawesome/free-solid-svg-icons';
-import './index.css';
+//import './index.css';
 import { Outlet, useNavigate } from 'react-router-dom';
 import SwitchUserAdminBtn from '../../components/switch-user-admin-btn';
 import { useParams } from 'react-router-dom';

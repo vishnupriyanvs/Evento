@@ -234,14 +234,9 @@ function invitationsFor(event){
       <div className = 'submit-button'>
       <Form.Control type="submit" id='submit-button' value="Send" />
       </div>
-<<<<<<< HEAD
-      <div class = 'cancel-button'>
-      <Form.Control id='cancel-button' type='reset'  value="Cancel"/>
-=======
       {/* <Button type='reset' variant='danger' >Cancel</Button> */}
       <div className = 'cancel-button'>
       <Form.Control type='reset' id='cancel-button' variant='danger' value="Cancel"/>
->>>>>>> 90a9d2b2ebbda7e0677833f0bc0967a978adbe6e
       </div>
     </Form>
     </div>

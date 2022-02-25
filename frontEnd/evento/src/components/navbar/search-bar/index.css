@@ -23,3 +23,8 @@
 	margin-top: 3px;
 	cursor: pointer;
 }
+
+#search{
+	font-size: medium;
+	font-weight: lighter;
+}

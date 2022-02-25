@@ -15,8 +15,8 @@ body {
     "sidebar main main main";
   /* grid-gap: 0.2rem; */
   font-weight: 800;
-  text-transform: uppercase;
-  font-size: 12px;
+  text-transform: capitalize;
+  font-size: 14px;
   /* color: #004d40; */
   text-align: center;
   transition: grid-template-columns 2s;
@@ -84,16 +84,19 @@ main::-webkit-scrollbar {
 }
 
 .sideBarIcons:hover {
-  box-shadow: inset 0 0 0 0 rgba(0, 0, 0, 0.2), 4px 0 0 0 #91a4b7;
+  /* box-shadow: inset 0 0 0 0 rgba(0, 0, 0, 0.2), 4px 0 0 0 #91a4b7; */
   z-index: 1;
   cursor: pointer;
-  /* width: 200%;
-  background-color: whitesmoke; */
+  /* width: 200%; */
+  /* background-color: whitesmoke;  */
+  color : whitesmoke;
+  opacity: 0.5;
 }
 .sideBarIcons:hover .sideBarText {
   visibility: visible;
   text-align: center;
-  color: whitesmoke;
+  color: white;
+  /* opacity: 0.1; */
 }
 
 a {
@@ -120,8 +123,9 @@ a {
 }
 
 .liClick:hover {
-  background-color: lightgreen;
+  background-color: #0D1829;
   color: aliceblue;
+  opacity: 0.5;
 }
 
 /* Create event align */
@@ -172,3 +176,25 @@ li {
     text-align: center;
   }
 }
+
+
+.sideBarIcons .sideBarText{
+  position: absolute;
+  left: 5.2%;
+  /* //top : 50%; */
+  /* transform: translateY(-50%); */
+  height: 50px;
+  width: 200px;
+  
+  background: rgba(13, 24, 41, 0.76);;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  color: whitesmoke;
+  font-size: large;
+  font-family: inherit;
+  font-weight: normal;
+
+  line-height: 45px;
+  text-align: center;
+  transition: 0ms;
+}
+

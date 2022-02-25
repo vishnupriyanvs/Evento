@@ -1,20 +1,15 @@
-//Duplicate event for for modal try
+// This is the actual event form file
 
-import React,{useState} from "react";
+import React from "react";
 import './index.css';
 import {Button} from 'react-bootstrap';
 import Select from 'react-select'
-import { Modal, Alert} from 'react-bootstrap';
 
 
-function EventForm(props) {
+
+function EventForm_ACTUAL(props) {
     //console.log(props)
     //console.log(new Date().getDate())
-
-    //const [show, setShow] = useState(false);
-    
-    //const handleShow = () => setShow(true);
-    const handleClose = () => props.show = false;
 
     function Today(){
         let today;
@@ -30,13 +25,6 @@ function EventForm(props) {
     Today()
 
     return (
-        <Modal show={props.show} onHide={handleClose}>
-        <Modal.Header closeButton>
-            <Modal.Title>
-                Add Employee
-            </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
         <div className="form-style-5">
             <form onSubmit={props.handleSubmit}>
                 <fieldset>
@@ -236,14 +224,7 @@ function EventForm(props) {
 
             </form>
         </div>
-        </Modal.Body>
-        <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
-                    Close Button
-                </Button>
-        </Modal.Footer>
-    </Modal>
     )
 }
 
-export default EventForm;
+export default EventForm_ACTUAL;

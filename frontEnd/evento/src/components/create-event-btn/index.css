@@ -7,7 +7,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-size:small;
+    font-size: large;
     gap: 0.5rem;
     cursor: pointer;
 }

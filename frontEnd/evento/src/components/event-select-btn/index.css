@@ -4,6 +4,7 @@
   width: 50%;
 }
 .SelectnBtn1-content {
+  text-align: center;
   display: flex;
   justify-content: space-between;
   gap: 8px;

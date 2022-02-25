@@ -12,6 +12,20 @@ function SearchBar(){
     const {id} = useParams()
     const navigate = useNavigate()
 
+    const customStyles = {
+        control: base => ({
+          ...base,
+        //   position : 'absolute',
+          height: 40,
+          fontSize: '15px',
+            textAlign: 'left',
+            width: '380px',
+            // top:'0px',
+            // left:'5px',
+            fontWeight : 'lighter'
+        })
+      };
+
     useEffect(async () => {
         try{
             try{
@@ -45,7 +59,8 @@ function SearchBar(){
                 id='search'
                 options = {options}
                 onChange = {handleChange}
-                placeholder = 'Search for events'
+                placeholder = 'Search for Events'
+                styles={customStyles}
             ><h1>HI</h1></Select>
         </Form>
     )

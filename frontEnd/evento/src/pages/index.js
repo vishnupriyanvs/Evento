@@ -69,7 +69,8 @@ function MainPage() {
         <div className="containers">
             {/* Calling Navbar */}
             <nav>
-                <Navbar openMenu={clickMenu} myEvent={faInbox} endPoint={'my-events/upcoming-events/invited/'} onClick={() => {navigate(`create-event/${id}`);setTitles('Create New Event')}} />
+                {/* <Navbar openMenu={clickMenu} myEvent={faInbox} endPoint={'my-events/upcoming-events/invited/'} onClick={() => {navigate(`create-event/${id}`);setTitles('Create New Event')}} /> */}
+                <Navbar openMenu={clickMenu} myEvent={faInbox}  />
             </nav>
         <main>
             {decryptedData == id ?
