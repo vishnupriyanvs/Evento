@@ -80,19 +80,21 @@ function MainPage() {
 
             {sideCheck ?
                 <div id="parent-node">
-                    <div className="liClick" onClick={() => {navigateEvents(`upcoming-events/${id}`);setTitles('Upcoming Events')}}><FontAwesomeIcon icon={faFastForward} size="x" color="#91A4B7" /><span>Upcoming Events</span></div>
-                    <div className="liClick" onClick={() => {navigateEvents(`ongoing-events/${id}`);setTitles('Ongoing Events')}}><FontAwesomeIcon icon={faFastForward} size="x" color="#91A4B7" /><span>Ongoing Events</span></div>
-                    <div className="liClick" onClick={() => {navigateEvents(`cancelled-events/${id}`);setTitles('Cancelled Events')}} ><FontAwesomeIcon icon={faStopCircle} size="x" color="#91A4B7" /><span>Cancelled Events</span></div>
-                    <div className="liClick" onClick={() => {navigateEvents(`past-events/${id}`);setTitles('Past Events')}}><FontAwesomeIcon icon={faCheckCircle} size="x" color="#91A4B7" /><span>Past Events</span></div>
-                    <div className="liClick" onClick={() => {navigateEvents(`calender-events/${id}`);setTitles('Calendar')}}><FontAwesomeIcon icon={faCalendar} size="x" color="#91A4B7" /><span>Calender</span></div>
+                    <div className="liClick" onClick={() => {navigateEvents(`calender-events/${id}`);setTitles('Calendar')}}><FontAwesomeIcon icon={faCalendar} size="2x" color="#91A4B7" /><span>Calender</span></div>
+                    <div className="liClick" onClick={() => {navigateEvents(`upcoming-events/${id}`);setTitles('Upcoming Events')}}><FontAwesomeIcon icon={faFastForward} size="2x" color="#91A4B7" /><span>Upcoming Events</span></div>
+                    <div className="liClick" onClick={() => {navigateEvents(`ongoing-events/${id}`);setTitles('Ongoing Events')}}><FontAwesomeIcon icon={faFastForward} size="2x" color="#91A4B7" /><span>Ongoing Events</span></div>
+                    <div className="liClick" onClick={() => {navigateEvents(`past-events/${id}`);setTitles('Past Events')}}><FontAwesomeIcon icon={faCheckCircle} size="2x" color="#91A4B7" /><span>Past Events</span></div>
+                    <div className="liClick" onClick={() => {navigateEvents(`cancelled-events/${id}`);setTitles('Cancelled Events')}} ><FontAwesomeIcon icon={faStopCircle} size="2x" color="#91A4B7" /><span>Cancelled Events</span></div>
+                    
+                    
                 </div> : <div className='mini-parent-node'>
                     {/* <FontAwesomeIcon icon={faBars} size="2x" onClick={clickMenu} color="#91A4B7" className='sideBarIcons' /> */}
 
-                    <div className='sideBarIcons'><FontAwesomeIcon icon={faCalendar} size="2x" color="#91A4B7" onClick={() => {navigateEvents(`calender-events/${id}`);setTitles('Calendar')}} /><span className='sideBarText'>Calendar</span></div>
-                    <div className='sideBarIcons'><FontAwesomeIcon icon={faFastForward} size="2x" color="#91A4B7" onClick={() => {navigateEvents(`upcoming-events/${id}`);setTitles('Upcoming Events')}} /><span className='sideBarText'>Upcoming Events</span></div>
-                    <div className='sideBarIcons'><FontAwesomeIcon icon={faFastForward} size="2x" color="#91A4B7" onClick={() => {navigateEvents(`ongoing-events/${id}`);setTitles('Ongoing Events')}} /><span className='sideBarText'>Ongoing Events</span></div>
-                    <div className='sideBarIcons'><FontAwesomeIcon icon={faCheckCircle} size="2x" color="#91A4B7" onClick={() => {navigateEvents(`past-events/${id}`);setTitles('Cancelled Events')}} /><span className='sideBarText'>Completed Events</span></div>
-                    <div className='sideBarIcons'><FontAwesomeIcon icon={faStopCircle} size="2x" color="#91A4B7" onClick={() => {navigateEvents(`cancelled-events/${id}`);setTitles('Past Events')}} /><span className='sideBarText'>Cancelled Events</span></div>
+                    <div className='sideBarIcons'><FontAwesomeIcon classname='icon-close' icon={faCalendar} size="2x" color="#91A4B7" onClick={() => {navigateEvents(`calender-events/${id}`);setTitles('Calendar')}} /><span className='sideBarText'>Calendar</span></div>
+                    <div className='sideBarIcons'><FontAwesomeIcon classname='icon-close' icon={faFastForward} size="2x" color="#91A4B7" onClick={() => {navigateEvents(`upcoming-events/${id}`);setTitles('Upcoming Events')}} /><span className='sideBarText'>Upcoming Events</span></div>
+                    <div className='sideBarIcons'><FontAwesomeIcon classname='icon-close' icon={faFastForward} size="2x" color="#91A4B7" onClick={() => {navigateEvents(`ongoing-events/${id}`);setTitles('Ongoing Events')}} /><span className='sideBarText'>Ongoing Events</span></div>
+                    <div className='sideBarIcons'><FontAwesomeIcon classname='icon-close' icon={faCheckCircle} size="2x" color="#91A4B7" onClick={() => {navigateEvents(`past-events/${id}`);setTitles('Cancelled Events')}} /><span className='sideBarText'>Completed Events</span></div>
+                    <div className='sideBarIcons'><FontAwesomeIcon classname='icon-close' icon={faStopCircle} size="2x" color="#91A4B7" onClick={() => {navigateEvents(`cancelled-events/${id}`);setTitles('Past Events')}} /><span className='sideBarText'>Cancelled Events</span></div>
                 </div>}
 
             {/* {myRole === '1' ? <div><SwitchUserAdminBtn myEvent={faInbox} endPoint={'my-events/upcoming-events/invited/'} onClick={() => navigate(`create-event/${id}`)} checkAdmin={true} /></div> : null} */}

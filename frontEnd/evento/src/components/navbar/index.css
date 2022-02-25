@@ -160,9 +160,9 @@
   border:0.5px solid rgb(216, 214, 214);
   transition: 0.5s;
   visibility: hidden;
-  opacity: 0.1;
-  /* background-color: #f2f2f2; */
+  opacity: 0;
   background-color: rgba(13, 24, 41, 0.76);
+  z-index: 4;
 }
 .action .menu.active{
   visibility: visible;

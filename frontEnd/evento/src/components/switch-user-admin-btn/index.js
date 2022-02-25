@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate, useParams } from "react-router-dom";
 import { useContext } from "react";
 import SwitchContext from "../context/switchuser";
+import TitleContext from "../../context/titleContext";
 
 
 
@@ -9,18 +10,21 @@ import SwitchContext from "../context/switchuser";
 function SwitchUserAdminBtn(props) {
     const { id } = useParams()
     const {switchUser,setSwitchUser}= useContext(SwitchContext);
+    const {titles,setTitles} = useContext(TitleContext)
     const navigateMyEvents = useNavigate()
    
     function handleSwitching(){
         if(props.handle){
             setSwitchUser(1)
-            console.log(switchUser)
+            //console.log(switchUser)
             navigateMyEvents(`my-events/upcoming-events/invited/${id}`)
+            setTitles('My Events - Upcoming - Invited')
         }
         if(!props.handle){
             setSwitchUser(0)
-            console.log(switchUser)
-            navigateMyEvents(`/user/upcoming-events/${id}`)
+            //console.log(switchUser)
+            navigateMyEvents(`/user/upcoming-events/${id}`);
+            setTitles('Upcoming Events')
         }
         // props.handle == 1 ? navigateMyEvents(`${props.endPoint}${id}`)  : navigateMyEvents(`/user/upcoming-events/${id}`)
     }
