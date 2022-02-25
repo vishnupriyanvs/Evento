@@ -1,75 +1,23 @@
-import './index1.css'
+import './index.css'
 import { useState, useEffect, React } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserPlus, faEdit, faClock, faUserAlt, faGlobe, faPhone, faUsers, faUserCheck, faUser, faMailBulk, faCalendar } from "@fortawesome/free-solid-svg-icons";
+import { faUserPlus, faEdit, faClock, faUserAlt, faGlobe, faPhone, faUsers, faUserCheck, faUser, faMailBulk } from "@fortawesome/free-solid-svg-icons";
 import apiHandler from '../../api-handling';
 import tokenHandler from '../../api-handling/tokenHandler';
 
-import { Image,Card,Descriptions, Table} from 'antd';
-// import {PieChart} from 'react-easy-chart'
-
-
 function ViewEvents() {
-
-    const {Meta} = Card;
 
     const navigate = useNavigate();
     const [events, setEvents] = useState({});
     const [users, setUsers] = useState([]);
     const [participants, setParticipants] = useState(0)
     const [participantResponse, setParticipantRespponse] = useState([]);
-    const [columnData, setColumndata] = useState([]);
     const [invitees, setInvitees] = useState([]);
     const [feedbackState, setFeedbackState] = useState([])
     const [cancellationReason, setCancellationReason] = useState([]);
     const { id, eventid } = useParams();
     let feedbacks = []
-
-    const columns = [
-        // {
-        //   title: 'Name',
-        //   dataIndex: 'name',
-        // },
-        // {
-        //   title: 'Response',
-        //   dataIndex: 'response',
-        // },
-        // {
-        //   title: 'Rejection Reason',
-        //   dataIndex: 'rejection',
-        // },
-        // {
-        //     title: 'Feedback',
-        //     dataIndex: 'feedback',
-        //   }
-        {
-            title : 'invitationResponse',
-            dataIndex : 'invitationResponse'
-        }
-      ];
-
-    //   const data = [{
-    //     participantResponse.map((item, i) => {
-
-    //         cancellationReason.forEach((content, key) => {
-    //             if (content.id === item.id) item['reason'] = content['invitationCancelReason']
-    //         })
-
-    //         feedbackState.forEach((content, key) => {
-    //             if (content.invitationId === item.id && content.id !== item.id) item['feedback'] = content['feedback']
-    //         })
-    //         return (
-    //             <div className='flex-tr'>
-    //                 <div className='flex-td'>{item.name}</div>
-    //                 <div className='flex-td'>{item.response}</div>
-    //                 <div className='flex-td'>{item.reason ? item.reason : null}</div>
-    //                 <div className='flex-td'>{item.feedback ? item.feedback : null}</div>
-    //             </div>
-    //         )
-    //     }
-    //     )
-    // }]
 
     useEffect(async () => {
         try {
@@ -108,19 +56,15 @@ function ViewEvents() {
     //     setFeedbackState(feedbackState)
     // }, [feedbacks])
 
-
     const infoParticipants = async (eventid) => {
-        
+
         const response = await apiHandler('get', `invitations/event/${eventid}`)
         setParticipants(response.data.length)
-        console.log(participants)
-        // response.data.forEach((item, i) => {
-        //     participantResponse.push({ "id": item.id, "name": item.user.name, "response": item.invitationResponse });
-        // })
+        response.data.forEach((item, i) => {
+            participantResponse.push({ "id": item.id, "name": item.user.name, "response": item.invitationResponse });
+        })
         console.log(response.data)
-        setColumndata(response.data)
         let invites = response.data;
-    
         invites = invites.filter((item, i) => { if (item.invitationResponse === 'Yes') return item })
         setInvitees(invites);
         // 
@@ -136,31 +80,14 @@ function ViewEvents() {
         setCancellationReason(invites);
         setParticipantRespponse(participantResponse)
     }
-
     let action = false;
     if (events.isActive == 'Active') {
         action = true;
     }
 
-    console.log(participantResponse)
-
-    // useEffect(() => {
-    //     setColumndata(participants)
-    // },[participants])
-    // console.log(columnData)
-
-
-    // const data = [
-    //     {
-    //       key: '1',
-    //       name: 'John Brown',
-    //       age: 32,
-    //       address: 'New York No. 1 Lake Park',
-    //     }]
-
     return (
         <>
-            {/* <div className="cards-container">
+            <div className="cards-container">
                 <div className="next-half">
                     <div className="cards">
                         <img src={`http://localhost:4000/images/download/${eventid}`} />
@@ -256,84 +183,10 @@ function ViewEvents() {
                     </div>
                 </div>
 
-            </div> */}
-
-
-<Image src={`http://localhost:4000/images/download/${eventid}`}/>
-<Card id='main-card'  title= {events.title}
-        
-        hoverable
-        extra= {
-            <>
-            <FontAwesomeIcon className='icon-card' icon={faUserPlus} onClick={() => navigate(`/user/sendinvitations/${id}/${eventid}`)} />
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <FontAwesomeIcon className='icon-card' icon={faEdit} onClick={() => navigate(`/user/edit-event/${id}/${eventid}`)} />
-            </>      
-        } 
-        style={{}}>
-        <Descriptions>
-            <Descriptions.Item >{events.description}</Descriptions.Item>
-        </Descriptions>
-        <Card id='time-card' hoverable>
-            <div><FontAwesomeIcon icon={faCalendar} /> &nbsp;&nbsp;<span>{events.startDate} : {events.endDate}</span></div>
-        </Card>
-        <Card id='date-card' hoverable>
-            <div><FontAwesomeIcon icon={faClock} /> &nbsp;&nbsp;<span>{events.startTime} : {events.endTime}</span></div>
-        </Card>
-        <br/><br/>
-        <div className='content-event-venue'><a href="#">{events.venue}</a></div>
-        <br/>
-        <div className='contact-person'>
-            <div><FontAwesomeIcon icon={faUser} /> &nbsp;&nbsp;{users.name}</div>
-            <div className='mail'><FontAwesomeIcon icon={faMailBulk} /> &nbsp;&nbsp;<span>{users.email}</span></div>
-            <div><FontAwesomeIcon icon={faPhone} /> &nbsp;&nbsp;{users.contact}</div>
-        </div>
-        <div className='resource-person'>
-            <div><FontAwesomeIcon icon={faUserAlt} />&nbsp;&nbsp;&nbsp;<span>{events.resourcePerson}</span></div>
-            <div><FontAwesomeIcon icon={faGlobe} />&nbsp;&nbsp;&nbsp;{events.website ? events.website : "www.no-website.com"}</div>
-        </div>
-             
-</Card>
-
-{/* <PieChart
-    labels
-    data={[
-      {key: 'A', value: 100, color: '#aaac84'},
-      {key: 'B', value: 200, color: '#dce7c5'},
-      {key: 'C', value: 50, color: '#e3a51a'}
-    ]}
-    styles={{
-      '.chart_text': {
-        fontSize: '1em',
-        fill: '#fff'
-      }
-    }} 
-  /> */}
-
-  <Card id='participant-card' style={{height:'90%'}} >
-      <div className='count-left'>
-        <div >&nbsp;&nbsp;&nbsp;&nbsp;<FontAwesomeIcon icon={faUserCheck} size={"3x"}/></div>
-        <h2><Meta title='Participants'></Meta></h2>
-      </div>
-      <div>
-      <h1 id='participant-id'>{invitees.length}</h1>
-      </div>
-  </Card>
-
-  <Card id='invitee-card' style={{height:'90%'}} >
-      <div className='count-left'>
-        <div >&nbsp;&nbsp;&nbsp;&nbsp;<FontAwesomeIcon icon={faUsers} size={"3x"}/></div>
-        <h2><Meta title=' Invitations'></Meta></h2>
-      </div>
-      <div>
-      <h1 id='invitee-id'>{participants}</h1>
-      </div>
-  </Card>
-  
-  <Table columns={columns} dataSource={columnData} size="middle" />
+            </div>
         </>
 
     )
 }
 
-export default ViewEvents;
+// export default ViewEvents;
