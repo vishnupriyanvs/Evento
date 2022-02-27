@@ -24,52 +24,29 @@ function ViewEvents() {
     const [feedbackState, setFeedbackState] = useState([])
     const [cancellationReason, setCancellationReason] = useState([]);
     const { id, eventid } = useParams();
+    let newColumnData = []
     let feedbacks = []
 
     const columns = [
-        // {
-        //   title: 'Name',
-        //   dataIndex: 'name',
-        // },
-        // {
-        //   title: 'Response',
-        //   dataIndex: 'response',
-        // },
-        // {
-        //   title: 'Rejection Reason',
-        //   dataIndex: 'rejection',
-        // },
-        // {
-        //     title: 'Feedback',
-        //     dataIndex: 'feedback',
-        //   }
         {
-            title : 'invitationResponse',
-            dataIndex : 'invitationResponse'
-        }
+          title: 'Name',
+          dataIndex: 'name',
+        },
+        {
+          title: 'Response',
+          dataIndex: 'response',
+        },
+        {
+            title : 'Cancel Reason',
+            dataIndex : 'cancelReason'
+        },
+        {
+            title: 'Feedback',
+            dataIndex: 'feedback',
+          },
       ];
 
-    //   const data = [{
-    //     participantResponse.map((item, i) => {
-
-    //         cancellationReason.forEach((content, key) => {
-    //             if (content.id === item.id) item['reason'] = content['invitationCancelReason']
-    //         })
-
-    //         feedbackState.forEach((content, key) => {
-    //             if (content.invitationId === item.id && content.id !== item.id) item['feedback'] = content['feedback']
-    //         })
-    //         return (
-    //             <div className='flex-tr'>
-    //                 <div className='flex-td'>{item.name}</div>
-    //                 <div className='flex-td'>{item.response}</div>
-    //                 <div className='flex-td'>{item.reason ? item.reason : null}</div>
-    //                 <div className='flex-td'>{item.feedback ? item.feedback : null}</div>
-    //             </div>
-    //         )
-    //     }
-    //     )
-    // }]
+    
 
     useEffect(async () => {
         try {
@@ -113,36 +90,87 @@ function ViewEvents() {
         
         const response = await apiHandler('get', `invitations/event/${eventid}`)
         setParticipants(response.data.length)
-        console.log(participants)
-        // response.data.forEach((item, i) => {
-        //     participantResponse.push({ "id": item.id, "name": item.user.name, "response": item.invitationResponse });
-        // })
-        console.log(response.data)
-        setColumndata(response.data)
+        //console.log(participants)
+        // console.log(response.data)
+        response.data.map((item, i) => {
+            participantResponse.push({ "id": item.id, "name": item.user.name, "response": item.invitationResponse , 'cancelReason' : item.invitationCancelReason});
+        })
+        // console.log(participantResponse)
+        // console.log(response.data)
+        // setColumndata(response.data)
+        
         let invites = response.data;
-    
-        invites = invites.filter((item, i) => { if (item.invitationResponse === 'Yes') return item })
+        // console.log(invites)
+        invites = invites.filter((item, i) => { if (item.invitationResponse == 'Yes'){
+            // console.log(item)
+            return item
+        }})
+        
+
+
+
+        // console.log(invites)
         setInvitees(invites);
-        // 
+        //console.log(invitees)
+        // console.log('helo')
         invites.forEach(async (item, i) => {
             const x = await apiHandler('get', `feedbacks/${item.id}`);
+            // console.log(x.data)
             feedbacks.push(x.data)
-            console.log(x.data)
-            setFeedbackState([...feedbackState, x.data]);
+            //console.log(x.data)
+            // console.log(feedbacks)
+           // setFeedbackState([...feedbackState, x.data]);
+            //console.log(feedbackState)
         })
 
+
+        
+    
+     
+       console.log(feedbacks)
+        setFeedbackState(feedbacks)
+        // console.log(feedbackState)
+
+        //console.log(participantResponse)
+        // console.log(participantResponse)
+        // console.log(feedbackState)
+
+    
+        feedbackState.forEach((item,i) => {
+            
+            participantResponse.forEach((content,key)=>{
+                
+                if(item.invitationId === content.id){
+                    // console.log('hi')
+                    newColumnData.push({ "id": content.id, "name" : content.name , "response": content.response , 'cancelReason' : content.cancelReason, 'feedback' : item.feedback});
+                }
+            })
+        })
+
+
+
+        console.log(newColumnData)
+        // setColumndata(newColumnData)
+        // console.log(columnData)
 
         invites = response.data.filter((item, i) => { if (item.invitationResponse === 'No') return item })
         setCancellationReason(invites);
         setParticipantRespponse(participantResponse)
     }
 
+
+    useEffect(() => {
+        setColumndata(newColumnData)
+    },[feedbackState,participantResponse])
+
+    console.log(newColumnData)
+
     let action = false;
     if (events.isActive == 'Active') {
         action = true;
     }
 
-    console.log(participantResponse)
+    //console.log(participantResponse)
 
     // useEffect(() => {
     //     setColumndata(participants)
@@ -294,6 +322,15 @@ function ViewEvents() {
         </div>
              
 </Card>
+
+
+
+
+
+
+
+
+
 
 {/* <PieChart
     labels
