@@ -265,16 +265,16 @@ const [typeOfInvitation,setTypeOfInvitation] = useState()
       }
       </> 
       </div>
-      <div class='message'>
+      <div className='message'>
       <Form.Label class='left-aligned'>Message</Form.Label>
       <Form.Control id="message-area" type="textarea" name="message" row="5"/>
       <br/><br/>
       </div>
-      <div class = 'submit-button'>
+      <div className = 'submit-button'>
       <Form.Control id='submit-button' type="submit" value="Invite" />
       </div>
       {/* <Button type='reset' variant='danger' >Cancel</Button> */}
-      <div class = 'cancel-button'>
+      <div className = 'cancel-button'>
       <Form.Control id='cancel-button' type='reset'  value="Cancel"/>
       </div>
     </Form>

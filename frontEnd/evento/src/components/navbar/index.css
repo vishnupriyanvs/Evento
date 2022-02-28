@@ -89,7 +89,7 @@
   border-radius: 50%;
   height: 6%;
   width: 3%;
-  position: absolute;
+  position: relative;
   right: 40px;
 }
 
