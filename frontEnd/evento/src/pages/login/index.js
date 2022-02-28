@@ -7,6 +7,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { Form, Button } from 'react-bootstrap';
 import { toast, Slide } from 'react-toastify';
+import { useToastBox } from "../../components/toast";
 
 
 function LoginForm() {
@@ -23,7 +24,8 @@ toast.configure()
 function MyForm(props) {
     
     const [inputs, setInputs] = useState({});
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const {handleSuccessToast, handleErrorToast} = useToastBox()
 
     function handleChange(event) {
         const name = event.target.name;
@@ -45,11 +47,7 @@ function MyForm(props) {
                 const encryptedId = encryptData(response.data.user.id)
                 sessionStorage.setItem('myRole', encryptedRoleId)
                 sessionStorage.setItem('myId',encryptedId)
-                toast.success("Welcome" + " " + response.data.user.name, {
-                    transition: Slide,
-                    hideProgressBar: false,
-                    autoClose: 6000
-                })
+                handleSuccessToast(`Welocme + ${response.data.user.name}`)
                 if (response.data.user.roles[0].user_roles.roleId === 1) {
                     navigate(`/user/upcoming-events/${response.data.user.id}`)
                 }
@@ -60,7 +58,7 @@ function MyForm(props) {
             .catch(error => {
                 sessionStorage.clear();
                 if (error.response) {
-                    alert(error.response.data)  //=> response payload
+                    handleErrorToast('Incorrect credentials')  //=> response payload
                 }
             })
     };

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import './index.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCoffee, faBars, faCalendar, faPowerOff, faImage, faUser, faUserCircle, faInbox ,faMask} from '@fortawesome/free-solid-svg-icons'
+import { faCoffee, faBars, faCalendar, faPowerOff, faImage, faUser, faUserCircle, faInbox, faMask } from '@fortawesome/free-solid-svg-icons'
 import SearchBars from "./search-bar";
 import SizedBox from "../sized-box";
 import CreateEvent from "../create-event-btn";
@@ -13,12 +13,14 @@ import TitleContext from "../../context/titleContext";
 import SwitchUserAdminBtn from '../../components/switch-user-admin-btn';
 import encryptData from "../../client-side-encryption/encrypt";
 import SwitchContext from "../context/switchuser";
+import OutsideAlerter from "./useOutsideClick";
 
 
 
 function Navbar(props) {
-    const {titles,setTitles} = useContext(TitleContext)
-    const {switchUser,setSwitchUser}= useContext(SwitchContext);
+    const { titles, setTitles } = useContext(TitleContext)
+    const { switchUser, setSwitchUser } = useContext(SwitchContext);
+    const titleContext = useContext(TitleContext);
     const { id } = useParams()
     const navigateMyEvents = useNavigate()
     const box = document.querySelector('.popup-box');
@@ -48,7 +50,7 @@ function Navbar(props) {
         sessionStorage.clear();
         navigateMyEvents("/")
     }
-    function menuToggle(){
+    function menuToggle() {
         const toggleMenu = document.querySelector('.menu');
         toggleMenu.classList.toggle('active')
     }
@@ -61,7 +63,7 @@ function Navbar(props) {
                 <div className="flexLeftItem">
                     <SizedBox width="24px" />
                     {/* <FontAwesomeIcon icon={faBars} size="2x" onClick={props.openMenu} color="#91A4B7" /> */}
-                    <h4>{titles.toUpperCase()}</h4>
+                    <h4>{titleContext.titles}</h4>
                 </div>
 
                 <div className="flexRightItem">
@@ -84,21 +86,23 @@ function Navbar(props) {
 
                         </div>
                     </div> */}
-                    <img  style={{cursor:"pointer"}}src={`http://localhost:4000/images/profile/user/${id}`} alt='userimage'  onClick={menuToggle} className="click"/>
-                    <div className="action">
-                        <div className="profile">
-                            
+                    <OutsideAlerter>
+                        <img style={{ cursor: "pointer" }} src={`http://localhost:4000/images/profile/user/${id}`} alt='userimage' onClick={menuToggle} className="click" />
+                        <div className="action">
+                            <div className="profile">
+
+                            </div>
+                            <div className="menu">
+                                <h3>{users.name}<br></br><span>{users.email}</span></h3>
+                                <ul>
+                                    {role == 1 ? !switchUser ? <li><SwitchUserAdminBtn myEvent={faInbox} handle={1} checkAdmin={true} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div></div></li> : <li><SwitchUserAdminBtn myEvent={faMask} handle={0} checkAdmin={false} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li> : null}
+                                    {/* <li><SwitchUserAdminBtn myEvent={faInbox} handle={'1'} endPoint={'my-events/upcoming-events/invited/'}  checkAdmin={true} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div><span className="profileSpan" onClick={() => {navigateMyEvents(`/user/upcoming-events/${id}`)}}>My Event</span></div></li> */}
+                                    {/* <li><SwitchUserAdminBtn myEvent={faMask} handle={'0'} endPoint={'/user/upcoming-events/'}  checkAdmin={true} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="profileSpan">Admin Event</span></li> */}
+                                    <li style={{ cursor: 'pointer' }} onClick={logOut}><FontAwesomeIcon id="logout" icon={faPowerOff} color="blue" size="1x" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="profileSpan">Log out</span></li>
+                                </ul>
+                            </div>
                         </div>
-                        <div className="menu">
-                            <h3>{users.name}<br></br><span>{users.email}</span></h3>
-                            <ul>
-                                {role == 1 ? !switchUser ? <li><SwitchUserAdminBtn myEvent={faInbox} handle={1}   checkAdmin={true} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div></div></li> : <li><SwitchUserAdminBtn myEvent={faMask} handle={0}   checkAdmin={false} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li> : null}
-                                {/* <li><SwitchUserAdminBtn myEvent={faInbox} handle={'1'} endPoint={'my-events/upcoming-events/invited/'}  checkAdmin={true} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div><span className="profileSpan" onClick={() => {navigateMyEvents(`/user/upcoming-events/${id}`)}}>My Event</span></div></li> */}
-                                {/* <li><SwitchUserAdminBtn myEvent={faMask} handle={'0'} endPoint={'/user/upcoming-events/'}  checkAdmin={true} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="profileSpan">Admin Event</span></li> */}
-                                <li style={{cursor:'pointer'}} onClick={logOut}><FontAwesomeIcon id="logout" icon={faPowerOff} color="whitesmoke" size="1x"  />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="profileSpan">Log out</span></li>
-                            </ul>
-                        </div>
-                    </div>
+                    </OutsideAlerter>
                 </div>
             </div>
         </div>

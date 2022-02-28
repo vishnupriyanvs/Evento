@@ -10,6 +10,8 @@
     font-size:small;
     gap: 0.5rem;
     cursor: pointer;
+    font-weight: normal;
+    font-family: arial;
 }
 
 /* Modal Style */
