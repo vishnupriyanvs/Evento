@@ -13,7 +13,7 @@
   /* border: 1px solid #ddd; */
 
   padding: 8px;
-  border-radius: 10px;
+  /* border-radius: 10px; */
 }
 
 td {
@@ -109,7 +109,7 @@ td {
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: normal;
   font-style: normal;
   justify-content: space-between;
@@ -148,4 +148,38 @@ td {
   width: 48px;
   height: 48px;
   border-radius: 4px;
+}
+
+.add-box {
+  display: inline-block;
+}
+.add-box .hover-icon {
+  display: none;
+  position: absolute;
+}
+
+.add-box:hover .hover-icon {
+  display: inline-block;
+  padding: 5px;
+  background-color: #dbe4ec;
+  border-radius: 10px;
+  font-size: small;
+  
+}
+
+.edit-box {
+  display: inline-block;
+}
+
+.edit-box .hover-icon {
+  display: none;
+  position: absolute;
+}
+
+.edit-box:hover .hover-icon {
+  display: inline-block;
+  padding: 5px;
+  background-color: #dbe4ec;
+  border-radius: 10px;
+  font-size: small;
 }

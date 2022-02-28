@@ -1,7 +1,7 @@
 .calenderSize{
     width: 90%;
     padding-top: 64px;
-    margin-top: 24px;
+    margin-top: 10%;
     border-radius: 16px;
-    background-color: whitesmoke;
+    background-color: inherit;
 }

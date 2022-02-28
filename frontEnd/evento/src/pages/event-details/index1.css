@@ -130,3 +130,9 @@
     margin-top: -75px;
     margin-right: -30%;
 }
+
+
+.ant-table-tbody > tr > td {
+    font-weight: 300;
+    font-size: medium;
+}
