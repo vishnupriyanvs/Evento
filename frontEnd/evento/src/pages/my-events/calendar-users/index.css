@@ -1,7 +1,42 @@
 .calenderSize{
     width: 90%;
-    padding-top: 64px;
-    margin-top: 24px;
+    /* padding-top: 64px; */
+    margin-top: -10px;
     border-radius: 16px;
-    background-color: whitesmoke;
+    background-color: white;
+    font-size: large;
+    font-weight: normal;
+}
+
+.dayText{
+    height: 25px;
+    width: 50px;
+    line-height: 15px;
+    font-size: 0.9em;
+    text-align: center;
+}
+
+.dailyEventWrapper {
+    font-size: 1.1em;
+    min-height: 1.6em;
+    left: 50px;
+    height: 100%;
+    color: white;
+    border-radius: 10px;
+    box-sizing: border-box;
+    padding: 5px 10px;
+    line-height: 100%;
+}
+
+
+.eventTitle {
+    padding: 0 5px;
+    color: white;
+    font-size: 0.9em;
+    line-height: 14px;
+    font-weight: 600;
+    /* white-space: nowrap; */
+    text-overflow: ellipsis;
+    display: block;
+    overflow: hidden;
 }

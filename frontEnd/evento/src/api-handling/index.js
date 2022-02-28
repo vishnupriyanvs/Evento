@@ -31,6 +31,6 @@ async function apiHandler(method, url, inputs = '', contentType = true) {
     return error;
   }
 }
-
+ 
 
 export default apiHandler;

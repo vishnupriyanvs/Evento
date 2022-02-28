@@ -1,27 +1,30 @@
-import React, { useState,useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import './index.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCoffee, faBars, faCalendar, faPowerOff, faImage, faUser, faUserCircle, faInbox } from '@fortawesome/free-solid-svg-icons'
+import { faCoffee, faBars, faCalendar, faPowerOff, faImage, faUser, faUserCircle, faInbox ,faMask} from '@fortawesome/free-solid-svg-icons'
 import SearchBars from "./search-bar";
 import SizedBox from "../sized-box";
 import CreateEvent from "../create-event-btn";
 import { useParams, useNavigate } from 'react-router-dom';
-import decryptData from "../../client-side-encryption/decrypt";
-import logo from "../../assets/logo-2.png"
 import apiHandler from '../../api-handling';
 import tokenHandler from '../../api-handling/tokenHandler';
+import decryptData from "../../client-side-encryption/decrypt";
+import TitleContext from "../../context/titleContext";
+import SwitchUserAdminBtn from '../../components/switch-user-admin-btn';
+import encryptData from "../../client-side-encryption/encrypt";
+import SwitchContext from "../context/switchuser";
+
 
 
 function Navbar(props) {
+    const {titles,setTitles} = useContext(TitleContext)
+    const {switchUser,setSwitchUser}= useContext(SwitchContext);
     const { id } = useParams()
     const navigateMyEvents = useNavigate()
     const box = document.querySelector('.popup-box');
-    //console.log(props)
     const role = decryptData(sessionStorage.getItem('myRole'));
-    //console.log(role)
+    const [users, setUsers] = useState({})
     //console.log('params id' + id)
-
-    const [users,setUsers] = useState({})
     useEffect(async () => {
         try {
             try {
@@ -30,7 +33,7 @@ function Navbar(props) {
                 setUsers(x.data)
             }
             catch (err) {
-                const x = await tokenHandler('get', `users/${id}`,sessionStorage.getItem('refreshToken'),apiHandler)
+                const x = await tokenHandler('get', `users/${id}`, sessionStorage.getItem('refreshToken'), apiHandler)
                 //console.log(x.data);
                 setUsers(x.data)
             }
@@ -40,11 +43,14 @@ function Navbar(props) {
         }
 
     }, [])
-    //console.log(users);
 
-    function logOut(){
+    function logOut() {
         sessionStorage.clear();
         navigateMyEvents("/")
+    }
+    function menuToggle(){
+        const toggleMenu = document.querySelector('.menu');
+        toggleMenu.classList.toggle('active')
     }
 
 
@@ -54,41 +60,48 @@ function Navbar(props) {
 
                 <div className="flexLeftItem">
                     <SizedBox width="24px" />
-                    <FontAwesomeIcon icon={faBars} size="2x" onClick={props.openMenu} color="#91A4B7" />
-                    {/* <img src={logo} width='20%' height={'20%'}/> */}
+                    {/* <FontAwesomeIcon icon={faBars} size="2x" onClick={props.openMenu} color="#91A4B7" /> */}
+                    <h4>{titles.toUpperCase()}</h4>
                 </div>
 
                 <div className="flexRightItem">
-
-                    {/* <FontAwesomeIcon icon={faCalendar} size="2x" onClick={props.onCalenderClick}/> */}
-                   
-                    {role == 1 && <div className='myEventIcons'><FontAwesomeIcon icon={props.myEvent} size="2x" color="#91A4B7" onClick={() => navigateMyEvents(`${props.endPoint}${id}`)} /><span className='myEventText'>My Events</span></div> }
-    
                     <SearchBars />
-                    <SizedBox width="5vh" />
-                    {role == 1 && <CreateEvent onClick={props.onClick} id={id}/>}
+                    <SizedBox width="8vh" />
+                    {role === '1' ? <CreateEvent onClick={props.onClick} id={id} /> : null}
                     <SizedBox width="8vh" />
                     {/* <FontAwesomeIcon icon={faUserCircle} size="2x" color="#91A4B7" onClick={() => { getComputedStyle(box).visibility === 'hidden' ? box.setAttribute('style', 'visibility: visible;') : box.setAttribute('style', 'visibility: hidden;') }} className="click" /> */}
-                    <img className="small-profile" src={`http://localhost:4000/images/profile/user/${id}`} alt='userimage' onClick={() => { getComputedStyle(box).visibility === 'hidden' ? box.setAttribute('style', 'visibility: visible;') : box.setAttribute('style', 'visibility: hidden;') }} className="click" />
-                    <div className="popup-box_profile">
+                    {/* <img src={`http://localhost:4000/images/profile/user/${id}`} alt='userimage' onClick={() => { getComputedStyle(box).visibility === 'hidden' ? box.setAttribute('style', 'visibility: visible;') : box.setAttribute('style', 'visibility: hidden;') }} className="click" /> */}
+                    {/* <div className="popup-box_profile">
                         <div className="popup-box">
                             <div className="div-li-image">{id ? <img className="profile-image" src={`http://localhost:4000/images/profile/user/${id}`} /> : <FontAwesomeIcon icon={faUser} size="3x" />}
                                 <div>{users.name}</div>
-                                <div>{users.email}</div>    
+                                <div>{users.email}</div>
                             </div>
-                            {/* <div className="div-li"><span>User</span> : <span>Full Name</span></div> */}
-                            {/* <div className="div-li">Sign Out</div> */}
+                           
 
-                            <div className="div-li"><FontAwesomeIcon  id="logout" icon={faPowerOff} size="2x" onClick={logOut}/></div>
+                            <div className="div-li"><FontAwesomeIcon id="logout" icon={faPowerOff} size="2x" onClick={logOut} /></div>
+                            <div className="sizedBox" />
+
+                        </div>
+                    </div> */}
+                    <img  style={{cursor:"pointer"}}src={`http://localhost:4000/images/profile/user/${id}`} alt='userimage'  onClick={menuToggle} className="click"/>
+                    <div className="action">
+                        <div className="profile">
+                            
+                        </div>
+                        <div className="menu">
+                            <h3>{users.name}<br></br><span>{users.email}</span></h3>
+                            <ul>
+                                {role == 1 ? !switchUser ? <li><SwitchUserAdminBtn myEvent={faInbox} handle={1}   checkAdmin={true} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div></div></li> : <li><SwitchUserAdminBtn myEvent={faMask} handle={0}   checkAdmin={false} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li> : null}
+                                {/* <li><SwitchUserAdminBtn myEvent={faInbox} handle={'1'} endPoint={'my-events/upcoming-events/invited/'}  checkAdmin={true} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<div><span className="profileSpan" onClick={() => {navigateMyEvents(`/user/upcoming-events/${id}`)}}>My Event</span></div></li> */}
+                                {/* <li><SwitchUserAdminBtn myEvent={faMask} handle={'0'} endPoint={'/user/upcoming-events/'}  checkAdmin={true} />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="profileSpan">Admin Event</span></li> */}
+                                <li style={{cursor:'pointer'}} onClick={logOut}><FontAwesomeIcon id="logout" icon={faPowerOff} color="whitesmoke" size="1x"  />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span className="profileSpan">Log out</span></li>
+                            </ul>
                         </div>
                     </div>
-
-
-                    <div className="sizedBox" />
-
                 </div>
             </div>
-        </div >
+        </div>
 
     )
 }

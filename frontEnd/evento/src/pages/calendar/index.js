@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom';
 function CalendarEvents(props) {
 
     const allEvents = [];
-    //console.log(props.events)
+
     props.events.forEach((item) => {
         if(`${item.isActive}` === 'Active'){
             allEvents.push({
@@ -27,24 +27,24 @@ function CalendarEvents(props) {
                 'color': '#FF8A00'
             })
         }
-        else if(`${item.isActive}` === 'Completed'){
-            allEvents.push({
-                'id' : `${item.id}`,
-                'from' : `${item.startDate}T${item.startTime}+00:00`,
-                'to' : `${item.endDate}T${item.endTime}+00:00`,
-                'title' : `${item.title}`,
-                'color': '#1ccb9e'
-            })
-        }
-        else{
-            allEvents.push({
-                'id' : `${item.id}`,
-                'from' : `${item.startDate}T${item.startTime}+00:00`,
-                'to' : `${item.endDate}T${item.endTime}+00:00`,
-                'title' : `${item.title}`,
-                'color': '#fd3153'
-            })
-        }
+        // else if(`${item.isActive}` === 'Completed'){
+        //     allEvents.push({
+        //         'id' : `${item.id}`,
+        //         'from' : `${item.startDate}T${item.startTime}+00:00`,
+        //         'to' : `${item.endDate}T${item.endTime}+00:00`,
+        //         'title' : `${item.title}`,
+        //         'color': '#1ccb9e'
+        //     })
+        // }
+        // else{
+        //     allEvents.push({
+        //         'id' : `${item.id}`,
+        //         'from' : `${item.startDate}T${item.startTime}+00:00`,
+        //         'to' : `${item.endDate}T${item.endTime}+00:00`,
+        //         'title' : `${item.title}`,
+        //         'color': '#fd3153'
+        //     })
+        //}
     })
 
    
@@ -52,6 +52,7 @@ function CalendarEvents(props) {
         <div className="calenderSize">
             <Calendar
                 events={allEvents}
+                className={['c1,c2']}
             />
         </div>
     );

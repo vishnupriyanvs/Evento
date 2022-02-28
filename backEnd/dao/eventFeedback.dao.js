@@ -13,7 +13,7 @@ function findAll() {
 
 
 function findById(id) {
-    return EventFeedback.findAll({where:{invitationId:id}});
+    return EventFeedback.findOne({where:{invitationId:id}});
 }
 
 function deleteById(id) {

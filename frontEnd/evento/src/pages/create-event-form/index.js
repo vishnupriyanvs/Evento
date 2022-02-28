@@ -158,6 +158,8 @@ function CreateEventForm() {
 
     const handleReset = () => {
         console.clear()
+        var modal = document.getElementById("myModal");
+        modal.style.display = "none";
     }
 
     console.log(users)
@@ -171,7 +173,7 @@ function CreateEventForm() {
                 handleFileChange={handleFileChange}
                 handleReset={handleReset}
                 users={options}
-                buttonValue="Create Event"
+                buttonValue="Create"
                 created_by={id} />
         </div>
     )
