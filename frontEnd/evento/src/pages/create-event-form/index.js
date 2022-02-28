@@ -166,6 +166,7 @@ function CreateEventForm() {
     return (
         <div className="createEventForm">
             <EventForm
+                formTitle = {'Create Event'}
                 events={events}
                 handleSubmit={handleSubmit}
                 handleChange={handleChange}

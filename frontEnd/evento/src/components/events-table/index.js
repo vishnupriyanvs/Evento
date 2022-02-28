@@ -6,11 +6,13 @@ import { useNavigate, useParams } from "react-router-dom";
 import StatusSelectionBtn from "../event-select-btn";
 import { useEventTable } from "./useEventsTable";
 import UpdateEventModal from "../../pages/update-event-modal";
+import { InviteUser } from "../../pages/send-invitations";
 
 function EventsTable(props) {
 
   const { id } = useParams()
-  const [eventState, setEventState] = useState(null)
+  const [eventState, setEventState] = useState(null);
+  const [eventTitle, setEventTitle] = useState(null);
   const navigate = useNavigate();
   const { tHeader, tRow, counter, incrementCounter, decrementCounter, setCounter, handlePagination, pages, handleTable } = useEventTable()
 
@@ -47,10 +49,16 @@ function EventsTable(props) {
                           <StatusSelectionBtn options={["InProgress", "Completed", "Cancelled", "Active"]} given={item.is_active} role={"Admin"} index={i} eventid={item.id} reason={item.cancellation_reason} eventType={props.eventType} />
                         </td>
                         <td>
-                          <FontAwesomeIcon icon={faUserPlus} onClick={() => navigate(`/user/sendinvitations/${id}/${item.id}`)} />
+                          {/* navigate(`/user/sendinvitations/${id}/${item.id}`) */}
+                          <div className="add-box">
+                            <FontAwesomeIcon icon={faUserPlus} onClick={() => { setEventState(item.id); setEventTitle(item.title); var modal = document.getElementById("myInvitationModal"); modal.style.display = "flex"; }} className='hover-edit' /><div className='hover-icon'>Add participants</div>
+                            <InviteUser id={id} eventid={eventState} title={eventTitle} />
+                          </div>
                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                          <FontAwesomeIcon icon={faEdit} onClick={()=>{setEventState(item.id); var modal = document.getElementById("myUpdateModal"); modal.style.display = "block";}}/>
-                          <UpdateEventModal eventid={eventState} />
+                          <div className='edit-box'>
+                            <FontAwesomeIcon icon={faEdit} onClick={() => { setEventState(item.id); var modal = document.getElementById("myUpdateModal"); modal.style.display = "block"; }} className='hover-edit' /><div className='hover-icon'>Edit Event</div>
+                            <UpdateEventModal eventid={eventState} />
+                          </div>
                         </td>
                       </>
                       :

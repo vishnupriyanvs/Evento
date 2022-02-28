@@ -25,6 +25,7 @@ async function apiHandler(method, url, inputs = '', contentType = true) {
 
   const data = await axios(config)
   try {
+    // console.log(data)
     return data;
   } catch (error) {
     alert('Not Authorized');

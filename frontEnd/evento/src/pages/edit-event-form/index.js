@@ -7,10 +7,11 @@ import apiHandler from '../../api-handling';
 import tokenHandler from '../../api-handling/tokenHandler';
 
 function EditEventForm(props) {
-
+  console.log('hi')
+  console.log(props)
   const { id, eventid } = useParams()
 
-  const [events, setEvents] = useState({})
+  const [events, setEvents] = useState({ updated_by: id })
   const [users, setUsers] = useState([])
   const options = [];
   const navigate = useNavigate();
@@ -21,7 +22,7 @@ function EditEventForm(props) {
     name = event.target.name
     value = event.target.value
 
-    console.log(event.target.name, event.target.value)
+    //console.log(event.target.name, event.target.value)
     //Start Date Validation
     if (event.target.name === "startDate") {
       var today = new Date();
@@ -91,18 +92,18 @@ function EditEventForm(props) {
   useEffect(async () => {
     try {
       try {
-        const x = await apiHandler('get', `events/${eventid}`);
+        const x = await apiHandler('get', `events/${props.eventid}`);
         //console.log(x.data);
         setEvents(x.data);
       } catch (error) {
-        const x = await tokenHandler('get', `events/${eventid}`, sessionStorage.getItem('refreshToken'), apiHandler);
+        const x = await tokenHandler('get', `events/${props.eventid}`, sessionStorage.getItem('refreshToken'), apiHandler);
         setEvents(x.data);
       }
     }
     catch {
       navigate('/');
     }
-  }, [])
+  }, [props.eventid])
 
   // useEffect(() => {
   //     axios
@@ -163,19 +164,56 @@ function EditEventForm(props) {
     // //console.log(x.data);
     // setUsers(x.data)
 
-    try {
-      try {
-        const x = await apiHandler('put', `events/${eventid}`);
-        //console.log(x.data);
-        setUsers(x.data)
-      } catch (error) {
-        const x = await tokenHandler('put', `events/${eventid}`, sessionStorage.getItem('refreshToken'), apiHandler);
-        setUsers(x.data)
+    // try {
+    //   try {
+    //     const x = await apiHandler('put', `events/${eventid}`);
+    //     //console.log(x.data);
+    //     setUsers(x.data)
+    //   } catch (error) {
+    //     const x = await tokenHandler('put', `events/${eventid}`, sessionStorage.getItem('refreshToken'), apiHandler);
+    //     setUsers(x.data)
+    //   }
+    // }
+    // catch {
+    //   navigate('/');
+    // }
+    var config = {
+      method: 'put',
+      url: `http://localhost:4000/events/${props.eventid}`,
+      data: events,
+      headers: {
+        'Authorization': `Bearer ${sessionStorage.getItem('myToken')}`,
+        'Content-Type': 'application/json'
       }
-    }
-    catch {
-      navigate('/');
-    }
+    };
+    axios(config)
+      //  axios  
+
+      //            .put(`http://localhost:4000/events/${eventid}`,events)
+
+      .then(response => {
+
+        setEvents(response.data)
+
+        alert(`${events.title} updated successfully`)
+
+      })
+
+      .catch(error => {
+
+        console.log(error)
+
+      })
+
+
+
+
+
+    const x = await apiHandler('put', `events/${props.eventid}`)
+
+    //console.log(x.data);
+
+    setUsers(x.data)
 
 
   }
@@ -192,6 +230,7 @@ function EditEventForm(props) {
   return (
     <div className="createEventForm">
       <EventForm
+        formTitle={'Edit Event'}
         events={events}
         handleSubmit={handleSubmit}
         handleChange={handleChange}
@@ -203,8 +242,6 @@ function EditEventForm(props) {
         disabled={true} />
     </div>
   )
-
-
 }
 
 export default EditEventForm;

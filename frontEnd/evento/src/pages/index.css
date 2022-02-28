@@ -79,16 +79,16 @@ main::-webkit-scrollbar {
 
 .sidebar.open {
   /* transform: translateX(0); */
-  width: 200%;
+  width: 310px;
   z-index: 1;
 }
 
 .sideBarIcons {
-  /* padding-top: 48px; */
+  padding-top: 48px;
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content:flex-start;
+  justify-content: center;
   align-items: center;
   /* transition: width 2s; */
   /* transition-timing-function: ease; */
@@ -103,6 +103,7 @@ main::-webkit-scrollbar {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
   
   /* transition: width 2s; */
   /* transition-timing-function: ease; */
@@ -131,6 +132,10 @@ main::-webkit-scrollbar {
   cursor: pointer;
   /* width: 200%; */
   /* background-color: whitesmoke;  */
+  /* background-color: rgba(255, 255, 255, 0.2); */
+  color: whitesmoke;
+  font-size: large;
+  font-weight: 700;
 }
 
 .sideBarIcons:hover .sideBarText {
@@ -139,6 +144,9 @@ main::-webkit-scrollbar {
   color: white;
   opacity: 1;
   width: 200px;
+}
+.icons-close:hover{
+  color: whitesmoke;
 }
 
 a {
@@ -153,21 +161,62 @@ a {
 /* SIdebar content design */
 
 .liClick {
-  margin: 8px;
-  padding-top: 8px;
-  text-align: left;
-  font-size: 16px;
+  margin: 2px;
+  padding-top: 9px;
+  padding-bottom: 9px;
+  padding-left: 16px;
+  padding-right: 16px;
+  width: 100%;
+  text-align: center;
+  font-size: 14px;
   display: flex;
   justify-content: start;
   gap: 2rem;
   color: aliceblue;
   margin-top: 24px;
+  align-items: center;
+  line-height: 10px;
+}
+
+.liClick span{
+  font-size: 18px;
+  font-weight: 300;
+}
+
+/* div .liClick:hover{
+ background-color: red;
+ width: 50%;
+} */
+
+#parent-node{
+  width: 100%;
+  text-align: center;
 }
 
 .liClick:hover {
-  background-color: lightgreen;
-  color: aliceblue;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: whitesmoke;
+  font-size: large;
+  font-weight: 700;
+  cursor: pointer;
+  /* border-radius: 5%; */
+  transition:  100ms;
+  width: 100%;
+  
 }
+
+.fa-2x {
+  font-size: 1.7em;
+}
+
+.liClick span:hover{
+  font-size: larger;
+  font-weight: 400;
+  color : aliceblue
+}
+
+
+
 
 /* Create event align */
 .alignButtonEnd {

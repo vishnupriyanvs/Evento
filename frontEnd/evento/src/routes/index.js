@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import ViewEvents from "../pages/event-details";
 import MainPage from "../pages";
@@ -20,59 +20,61 @@ import Home from "../pages/home";
 
 import AdminAccess from "../pages/temp-login";
 import OngoingEvents from "../pages/ongoing-events";
-import {InviteUser} from "../pages/send-invitations"
+import { InviteUser } from "../pages/send-invitations"
 import AdminCalenderEvents from "../pages/calendar-admin";
 import UserCalendarEvents from "../pages/my-events/calendar-users";
 import TitleContext from "../context/titleContext";
 import SwitchContext from "../components/context/switchuser";
-
+import { TitleContextProvider } from "../context/provider/titleContextProvider";
 
 function Paths() {
 
-    const [titles,setTitles] = useState('Upcoming Events')
-    const [switchUser,setSwitchUser] = useState(0);
+    const [titles, setTitles] = useState('Upcoming Events')
+    const [switchUser, setSwitchUser] = useState(0);
     return (
-        <TitleContext.Provider value={{titles,setTitles}}>
-        <SwitchContext.Provider value ={{switchUser,setSwitchUser}}>
-        <BrowserRouter>
+        // <TitleContext.Provider value={{titles,setTitles}}>
+
+        <SwitchContext.Provider value={{ switchUser, setSwitchUser }}>
+            <BrowserRouter>
+                <TitleContextProvider>
+
+                    <Routes>
+
+                        <Route path="/" element={<Login />} />
+                        <Route path="/user" element={<MainPage />} >
+
+                            <Route index element={<Home />} />
+                            <Route path="upcoming-events/:id" element={<UpcomingEvents />} />
+                            <Route path="ongoing-events/:id" element={<OngoingEvents />} />
+                            <Route path="past-events/:id" element={<PastEvents />} />
+                            <Route path="cancelled-events/:id" element={<CancelledEvents />} />
+                            <Route path="calender-events/:id" element={<AdminCalenderEvents />} />
+                            <Route path="view-event/:id/:eventid" element={<ViewEvents />} />
+                            <Route path="create-event/:id" element={<CreateEventForm />} />
+                            <Route path="edit-event/:id/:eventid" element={<EditEventForm />} />
+                            <Route path="sendinvitations/:id/:eventid" element={<InviteUser />} />
+                            <Route path="temp/:id" element={<AdminAccess />} />
+
+                        </Route>
+
+                        <Route path="/user/my-events" element={<UsersMainPage />} >
+                            <Route path="upcoming-events/invited/:id" element={<InvitedEvents toptitle='My Upcoming Events/Invited' />} />
+                            <Route path="upcoming-events/accepted/:id" element={<AcceptedEvents toptitle='My Upcoming Events/Accepted' />} />
+                            <Route path="upcoming-events/rejected/:id" element={<RejectedEvents toptitle='My Upcoming Events/Rejected' />} />
+                            <Route path="past-events/rejected/:id" element={<PastRejectedEvents toptitle='My Past Events/Rejected' />} />
+                            <Route path="past-events/accepted/:id" element={<PastAcceptedEvents toptitle='My Past Events/Accepted' />} />
+                            <Route path="cancelled-events/:id" element={<UserCancelledEvents toptitle='My Cancelled Events' />} />
+                            <Route path="ongoing-events/:id" element={<UserOnGoingEvents toptitle='My Ongoing Events' />} />
+                            <Route path="calendar-events/:id" element={<UserCalendarEvents />} />
+                        </Route>
 
 
-            <Routes>
+                    </Routes>
+                </TitleContextProvider>
+            </BrowserRouter>
 
-                <Route path="/" element={<Login />} />
-                <Route path="/user" element={<MainPage />} >
-                
-                    <Route index element={<Home />} />
-                    <Route path="upcoming-events/:id" element={<UpcomingEvents />} />
-                    <Route path="ongoing-events/:id" element={<OngoingEvents />} />
-                    <Route path="past-events/:id" element={<PastEvents />} />
-                    <Route path="cancelled-events/:id" element={<CancelledEvents />} />
-                    <Route path="calender-events/:id" element={<AdminCalenderEvents />} />
-                    <Route path="view-event/:id/:eventid" element={<ViewEvents />} />
-                    <Route path="create-event/:id" element={<CreateEventForm />} />
-                    <Route path="edit-event/:id/:eventid" element={<EditEventForm />} />
-                    <Route path="sendinvitations/:id/:eventid" element={<InviteUser />} />
-                    <Route path="temp/:id" element = {<AdminAccess />} />
-
-                </Route>
-                
-                <Route path="/user/my-events" element={<UsersMainPage/>} >
-                    <Route path="upcoming-events/invited/:id" element={<InvitedEvents toptitle='My Upcoming Events/Invited'/>} />
-                    <Route path="upcoming-events/accepted/:id" element={<AcceptedEvents toptitle='My Upcoming Events/Accepted'/>} />
-                    <Route path="upcoming-events/rejected/:id" element={<RejectedEvents toptitle='My Upcoming Events/Rejected'/>} />
-                    <Route path="past-events/rejected/:id" element={<PastRejectedEvents toptitle='My Past Events/Rejected'/>} />
-                    <Route path="past-events/accepted/:id" element={<PastAcceptedEvents toptitle='My Past Events/Accepted'/>} />
-                    <Route path="cancelled-events/:id" element={<UserCancelledEvents toptitle='My Cancelled Events'/>} />
-                    <Route path="ongoing-events/:id" element={<UserOnGoingEvents toptitle='My Ongoing Events'/>} />
-                    <Route path= "calendar-events/:id" element={<UserCalendarEvents/>} />
-                </Route>
-
-
-            </Routes>
-        </BrowserRouter>
-        
         </SwitchContext.Provider>
-        </TitleContext.Provider>
+
     )
 }
 

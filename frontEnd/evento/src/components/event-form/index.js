@@ -5,8 +5,6 @@ import Select from 'react-select'
 
 
 function EventForm(props) {
-    //console.log(props)
-    //console.log(new Date().getDate())
 
     function Today() {
         let today;
@@ -23,6 +21,7 @@ function EventForm(props) {
 
     return (
         <div className="form-style-5">
+            <div className="form-title">{props.formTitle}</div>
             <form onSubmit={props.handleSubmit}>
                 <fieldset>
 
