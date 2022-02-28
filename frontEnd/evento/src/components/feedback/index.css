@@ -9,7 +9,7 @@
 }
 .resContainer{
   padding: 5px;
-  background-color: rgba(13, 24, 41, 0.76);
+  
   color:white;
 }
 .resSubmit{
@@ -22,8 +22,4 @@
 .popup-overlay {
   background: rgba(13, 24, 41, 0.76);
   border:1px solid grey;
-}
-
-.container{
-  background-color: rgba(13, 24, 41, 0.76) !important;
 }

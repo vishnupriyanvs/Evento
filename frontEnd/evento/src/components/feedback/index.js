@@ -5,6 +5,7 @@ import axios from "axios"
 import apiHandler from "../../api-handling";
 import tokenHandler from "../../api-handling/tokenHandler";
 import {useNavigate} from "react-router-dom"
+import "./index.css"
 
 
 
@@ -70,7 +71,7 @@ function Feedback(props) {
         <div >
             <Popup trigger={<Button variant="primary" size="sm">Feedback</Button>}
                 position="bottom right ">
-                <Container style={{ backgroundColor: "white" }} id="triggerBox">
+                <Container  id="triggerBox">
                     <Form onSubmit={(e) => e.preventDefault()}>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>Event Title :&nbsp;</Form.Label>

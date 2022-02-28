@@ -65,8 +65,8 @@ function Cancellation(props) {
             <Popup trigger={<Button variant="danger"  size="sm">No</Button>}
                 position="bottom right "
                >
-                <Container className= "resContainer"  id="triggerBox">
-                    <Form onSubmit={(e) => e.preventDefault()}>
+                <Container   id="triggerBox" >
+                    <Form  onSubmit={(e) => e.preventDefault()}>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>Event Title :&nbsp;</Form.Label>
                             <Form.Label style={{fontWeight:"bold"}}> {props.title}</Form.Label>
