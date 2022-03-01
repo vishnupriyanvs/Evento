@@ -38,6 +38,8 @@ export const InviteUser = (props) => {
 
 
   useEffect(async () => {
+    setInvitee({"eventId": eventid});
+    console.log(eventid)
     try {
       try {
         const x = await apiHandler('get', `events/${eventid}`);
