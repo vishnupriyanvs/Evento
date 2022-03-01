@@ -26,7 +26,7 @@
 
 }
 .SelectnBtn1-option {
-  display:none;
+  display: none;
   visibility: hidden;
   background-color: inherit;
   padding: 8px;
@@ -46,48 +46,47 @@
   background-color: whitesmoke;
   position: relative;
   width: 100%;
-} 
+}
 
 .SelectnBtn1:hover .SelectnBtn1-option:hover {
   visibility: visible;
   background-color: gainsboro;
 }
 
-@media only screen and (max-width: 1000px) {
-    .SelectnBtn1 {
-        display: inline-block;
-        position: relative;
-        width: 100%;
-      }
+.reasonBox {
+  display: flex; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 3; /* Sit on top */
+  /* padding-top: 100px; */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100vh; /* Full height */
+  overflow: hidden; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+  justify-content: center;
+  align-items: center;
 }
 
-.popup-content {
+/* .container{
+  background-color: black !important;
+} */
+
+.containerPopupBox {
   margin: auto;
   background-color: rgba(13, 24, 41, 0.76);
   border: 1px solid white;
-  color:white;
-  width: 25%;
-  padding: 20px 10px;
+  color: white;
+  width: 35%;
+  padding: 16px;
   border-radius: 8px;
 }
-.resContainer{
-  padding: 5px;
-  background-color: rgba(13, 24, 41, 0.76);
-  color:white;
-}
-/* .resSubmit{
- margin-left: 83%;
-} */
-.popup-arrow {
-  color:  white;
-}
 
-.popup-overlay {
-  background: rgba(13, 24, 41, 0.76);
-  border:1px solid grey;
+@media only screen and (max-width: 1000px) {
+  .SelectnBtn1 {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+  }
 }
-
-.container{
-  background-color: none !important;
-}
-

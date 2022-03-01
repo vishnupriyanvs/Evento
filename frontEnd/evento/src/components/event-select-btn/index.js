@@ -20,6 +20,7 @@ function StatusSelectionBtn(props) {
     const [cancellationReason, setCancellationReason] = useState('');
     const [flag, setFlag] = useState(false);
     const navigate = useNavigate();
+    const [reasonState, setReasonState] = useState(false)
     const { handleSuccessToast, handleErrorToast } = useToastBox()
     const { styleSet } = useStyleSet()
 
@@ -27,6 +28,7 @@ function StatusSelectionBtn(props) {
         setDefault(props.given);
         setOptions(props.options);
         styleSet(props.given, props.index);
+        console.log(props.eventTitle)
 
 
     }, [])
@@ -131,30 +133,27 @@ function StatusSelectionBtn(props) {
                 else
                     x[props.index].setAttribute('style', 'display:none; visibility: hidden;')
             }}>
-                <div className="SelectnBtn1-content">
+                <div className="SelectnBtn1-content" >
                     {defaults === 'Cancelled' && options.includes(defaults) && (props.eventType === services.eventType.UPCOMING_EVENT || props.eventType === services.eventType.ONGOING_EVENT)
                         ?
-                        <Popup trigger={<div id="select-btn-value" style={{cursor:"pointer"}}>{props.reason !== undefined ? "Reason" : defaults}</div>}
-                            position="bottom right ">
 
-                        <Container  id="triggerBox">
-                            <Form onSubmit={(e) => e.preventDefault()}>
-                                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                    {/* <Form.Label>Event Title :&nbsp;</Form.Label> */}
-                                    <Form.Label style={{ fontWeight: "bold",fontSize:"30px"}}> {props.title}</Form.Label>
-                                </Form.Group>
-                                <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                                    <Form.Label>Reason for Cancellation</Form.Label>
-                                    <Form.Control as="textarea" onChange={handleReasonChange} rows={3} />
-                                </Form.Group>
+                          (reasonState && <div className="reasonBox" onClick={(e)=> e.stopPropagation()}><div className="containerPopupBox"><Container id="triggerBox">
+                                <Form onSubmit={(e) => e.preventDefault()}>
+                                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                        <Form.Label>Event Title :&nbsp;</Form.Label>
+                                        <Form.Label style={{ fontWeight: "bold" }}> {props.eventTitle}</Form.Label>
+                                    </Form.Group>
+                                    <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                                        <Form.Label>Reason for Cancellation</Form.Label>
+                                        <Form.Control as="textarea" onChange={handleReasonChange} rows={3} />
+                                    </Form.Group>
 
                                     {!flag ? <Button variant="primary" type="submit" onClick={() => handleEventCancellation(props.invitationId)}>
                                         Submit
                                     </Button> : <Button variant="danger" onClick={() => { const x = document.getElementById("triggerBox"); console.log(x); x.style.display = 'none'; window.location.reload(false) }}>Close</Button>
                                     }
                                 </Form>
-                            </Container>
-                        </Popup>
+                            </Container></div></div>)
                         :
                         <div>{options.includes(defaults) ? defaults : null}</div>
                     }
@@ -184,7 +183,8 @@ function StatusSelectionBtn(props) {
                                         if (item === 'Cancelled') {
                                             const result = await confirm("Are you sure?");
                                             if (result) {
-                                                a[props.index].setAttribute('style', 'outline: 1px solid rgb(243, 20, 20); color:rgb(243, 20, 20);')
+                                                a[props.index].setAttribute('style', 'outline: 1px solid rgb(243, 20, 20); color:rgb(243, 20, 20);');
+                                                setReasonState(true);
                                                 return;
                                             }
                                             window.location.reload(false)                                      // handleChange(item)

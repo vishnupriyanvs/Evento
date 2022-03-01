@@ -46,7 +46,7 @@ function EventsTable(props) {
                     action ?
                       <>
                         <td>
-                          <StatusSelectionBtn options={["InProgress", "Completed", "Cancelled", "Active"]} given={item.is_active} role={"Admin"} index={i} eventid={item.id} reason={item.cancellation_reason} eventType={props.eventType} title={item.title}/>
+                          <StatusSelectionBtn options={["InProgress", "Completed", "Cancelled", "Active"]} given={item.is_active} role={"Admin"} index={i} eventid={item.id} reason={item.cancellation_reason} eventType={props.eventType} eventTitle={item.title}/>
                         </td>
                         <td>
                           {/* navigate(`/user/sendinvitations/${id}/${item.id}`) */}
@@ -68,7 +68,7 @@ function EventsTable(props) {
                     item.is_active == 'InProgress' ?
                       <>
                         <td>{item.end_date}</td>
-                        <td> <StatusSelectionBtn options={["InProgress", "Completed", "Cancelled", "Active"]} given={item.is_active} role={"Admin"} index={i} eventid={item.id} reason={item.cancellation_reason} eventType={props.eventType} /></td>
+                        <td> <StatusSelectionBtn options={["InProgress", "Completed", "Cancelled", "Active"]} given={item.is_active} role={"Admin"} index={i} eventid={item.id} reason={item.cancellation_reason} eventType={props.eventType} eventTitle={item.title}/></td>
                       </>
                       :
                       <>
