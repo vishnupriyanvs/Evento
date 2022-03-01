@@ -41,7 +41,7 @@ export const InviteUser = (props) => {
     try {
       try {
         const x = await apiHandler('get', `events/${eventid}`);
-        //console.log(x.data);
+        console.log(x.data);
         setEvents(x.data);
       } catch (error) {
         const x = await tokenHandler('get', `events/${eventid}`, sessionStorage.getItem('refreshToken'), apiHandler);
@@ -51,7 +51,7 @@ export const InviteUser = (props) => {
     catch {
       navigate('/');
     }
-  }, [])
+  }, [eventid])
   // useEffect(() => {
   //   axios.get(`http://localhost:4000/users`)
   //     .then(response => {

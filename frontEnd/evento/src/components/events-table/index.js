@@ -52,7 +52,7 @@ function EventsTable(props) {
                           {/* navigate(`/user/sendinvitations/${id}/${item.id}`) */}
                           {/* setEventState(item.id); setEventTitle(item.title); var modal = document.getElementById("myInvitationModal"); modal.style.display = "flex"; */}
                           <div className="add-box">
-                            <FontAwesomeIcon icon={faUserPlus} onClick={() => {  navigate(`/user/sendinvitations/${id}/${item.id}`) }} className='hover-edit' /><div className='hover-icon'>Add participants</div>
+                            <FontAwesomeIcon icon={faUserPlus} onClick={() => {   setEventState(item.id); setEventTitle(item.title); var modal = document.getElementById("myInvitationModal"); modal.style.display = "flex"; }} className='hover-edit' /><div className='hover-icon'>Add participants</div>
                             <InviteUser id={id} eventid={eventState} title={eventTitle} />
                           </div>
                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
