@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import ViewEvents from "../pages/event-details";
+import ViewEvents from "../pages/event-details/actual";
 import MainPage from "../pages";
 import UsersMainPage from "../pages/my-events/main";
 import Login from "../pages/login";

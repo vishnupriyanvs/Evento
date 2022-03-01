@@ -261,16 +261,26 @@ width: 100%;
   /* background-color: aqua; */
 }
 
-.content-event-further-info .flex-left {
+.flex-left {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.content-event-further-info .flex-left div {
+.flex-left .content-event-contact-person {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
+}
+
+.flex-left div {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: normal;
+  font-style: normal;
 }
 
 .content-event-further-info .flex-right {
@@ -278,11 +288,15 @@ width: 100%;
   flex-direction: column;
   gap: 8px;
   justify-content: flex-end;
+  
 }
 
 .flex-right div {
   text-align: left;
   width: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: normal;
+  font-style: normal;
 }
 
 .mail{
