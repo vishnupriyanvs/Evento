@@ -58,3 +58,33 @@
       }
 }
 
+.popup-content {
+  margin: auto;
+  background-color: rgba(13, 24, 41, 0.76);
+  border: 1px solid white;
+  color:white;
+  width: 25%;
+  padding: 20px 10px;
+  border-radius: 8px;
+}
+.resContainer{
+  padding: 5px;
+  background-color: rgba(13, 24, 41, 0.76);
+  color:white;
+}
+/* .resSubmit{
+ margin-left: 83%;
+} */
+.popup-arrow {
+  color:  white;
+}
+
+.popup-overlay {
+  background: rgba(13, 24, 41, 0.76);
+  border:1px solid grey;
+}
+
+.container{
+  background-color: none !important;
+}
+

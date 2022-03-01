@@ -12,9 +12,9 @@
   background-color: rgba(13, 24, 41, 0.76);
   color:white;
 }
-.resSubmit{
+/* .resSubmit{
  margin-left: 83%;
-}
+} */
 .popup-arrow {
   color:  white;
 }
@@ -25,5 +25,5 @@
 }
 
 .container{
-  background-color: rgba(13, 24, 41, 0.76) !important;
+  background-color: none !important;
 }

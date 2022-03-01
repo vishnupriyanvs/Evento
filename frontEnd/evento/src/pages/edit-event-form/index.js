@@ -8,8 +8,6 @@ import tokenHandler from '../../api-handling/tokenHandler';
 import { toast, Slide } from 'react-toastify';
 
 function EditEventForm(props) {
-  console.log('hi')
-  console.log(props)
   const { id, eventid } = useParams()
 
   const [events, setEvents] = useState({ updated_by: id })

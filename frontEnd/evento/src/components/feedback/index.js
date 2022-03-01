@@ -73,13 +73,13 @@ function Feedback(props) {
                 position="bottom right ">
                 <Container  id="triggerBox">
                     <Form onSubmit={(e) => e.preventDefault()}>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                            <Form.Label>Event Title :&nbsp;</Form.Label>
-                            <Form.Label style={{fontWeight:"bold"}}> {props.title}</Form.Label>
+                        <Form.Group  controlId="exampleForm.ControlInput1">
+                            {/* <Form.Label>Event Title :&nbsp;</Form.Label> */}
+                            <Form.Label style={{fontWeight:"bold",fontSize:"30px"}}> {props.title}</Form.Label>
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                             <Form.Label>Feedback</Form.Label>
-                            <Form.Control as="textarea" onChange={handleChange} rows={3} />
+                            <Form.Control as="textarea" className="input-hr" onChange={handleChange} rows={3} />
                         </Form.Group>
                         {/* <Rate rating={rating} onRating={(rate) => setRating(rate)} /> */}
 

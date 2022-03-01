@@ -3,8 +3,7 @@ import './index.css';
 import Modal  from 'react-modal'
 function UpdateEventModal(props) {
 
-    console.log('helo')
-console.log(props)
+   
 
     return (
         <div className="update-event-main">
