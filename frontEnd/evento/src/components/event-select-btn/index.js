@@ -132,27 +132,32 @@ function StatusSelectionBtn(props) {
                     x[props.index].setAttribute('style', 'display:none; visibility: hidden;')
             }}>
                 <div className="SelectnBtn1-content">
-                    {defaults === 'Cancelled' && options.includes(defaults) && (props.eventType === services.eventType.UPCOMING_EVENT || props.eventType === services.eventType.ONGOING_EVENT) ? <Popup trigger={<div id="select-btn-value">{props.reason !== undefined ? "Reason" : defaults}</div>}
-                        position="bottom right ">
+                    {defaults === 'Cancelled' && options.includes(defaults) && (props.eventType === services.eventType.UPCOMING_EVENT || props.eventType === services.eventType.ONGOING_EVENT)
+                        ?
+                        <Popup trigger={<div id="select-btn-value">{props.reason !== undefined ? "Reason" : defaults}</div>}
+                            position="bottom right ">
 
-                        <Container style={{ backgroundColor: "white" }} id="triggerBox">
-                            <Form onSubmit={(e) => e.preventDefault()}>
-                                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                                    <Form.Label>Event Title :&nbsp;</Form.Label>
-                                    <Form.Label style={{ fontWeight: "bold" }}> {props.title}</Form.Label>
-                                </Form.Group>
-                                <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-                                    <Form.Label>Reason for Cancellation</Form.Label>
-                                    <Form.Control as="textarea" onChange={handleReasonChange} rows={3} />
-                                </Form.Group>
+                            <Container style={{ backgroundColor: "white" }} id="triggerBox">
+                                <Form onSubmit={(e) => e.preventDefault()}>
+                                    <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                        <Form.Label>Event Title :&nbsp;</Form.Label>
+                                        <Form.Label style={{ fontWeight: "bold" }}> {props.title}</Form.Label>
+                                    </Form.Group>
+                                    <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                                        <Form.Label>Reason for Cancellation</Form.Label>
+                                        <Form.Control as="textarea" onChange={handleReasonChange} rows={3} />
+                                    </Form.Group>
 
-                                {!flag ? <Button variant="primary" type="submit" onClick={() => handleEventCancellation(props.invitationId)}>
-                                    Submit
-                                </Button> : <Button variant="danger" onClick={() => { const x = document.getElementById("triggerBox"); console.log(x); x.style.display = 'none'; window.location.reload(false) }}>Close</Button>
-                                }
-                            </Form>
-                        </Container>
-                    </Popup> : <div>{options.includes(defaults) ? defaults : null}</div>}
+                                    {!flag ? <Button variant="primary" type="submit" onClick={() => handleEventCancellation(props.invitationId)}>
+                                        Submit
+                                    </Button> : <Button variant="danger" onClick={() => { const x = document.getElementById("triggerBox"); console.log(x); x.style.display = 'none'; window.location.reload(false) }}>Close</Button>
+                                    }
+                                </Form>
+                            </Container>
+                        </Popup>
+                        :
+                        <div>{options.includes(defaults) ? defaults : null}</div>
+                    }
 
                     {props.eventType === services.eventType.UPCOMING_EVENT || props.eventType === services.eventType.ONGOING_EVENT ? <div> <FontAwesomeIcon icon={faAngleDown} /></div> : null}
                 </div>
