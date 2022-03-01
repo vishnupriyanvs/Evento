@@ -112,7 +112,7 @@ function ViewEvents() {
                                 <div class="vl"></div>
                                 <div className='event-fixture'>
                                     <div className='content-event-date'>
-                                        <FontAwesomeIcon icon={faClock} /> <span>{events.startDate} : {events.endDate}</span>
+                                       <div><FontAwesomeIcon icon={faClock} /> <div>{events.startDate} : {events.endDate}</div></div> 
                                         <div className='content-event-venue'><a href="#">{events.venue}</a></div>
                                     </div>
                                 </div>

@@ -232,7 +232,10 @@ width: 100%;
   text-align: left;
 }
 
-.event-fixture .content-event-date span {
+.event-fixture .content-event-date div {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
   color: red;
 }
 
