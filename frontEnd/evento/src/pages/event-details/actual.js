@@ -112,7 +112,7 @@ function ViewEvents() {
                                 <div class="vl"></div>
                                 <div className='event-fixture'>
                                     <div className='content-event-date'>
-                                        <FontAwesomeIcon icon={faClock} /> <span>{events.startDate} : {events.endDate}</span>
+                                       <div><FontAwesomeIcon icon={faClock} /> <div>{events.startDate} : {events.endDate}</div></div> 
                                         <div className='content-event-venue'><a href="#">{events.venue}</a></div>
                                     </div>
                                 </div>
@@ -120,7 +120,7 @@ function ViewEvents() {
                                 <div class="vl"></div>
                                 <div className='flex-left'>
                                     <div className='content-event-contact-person'><FontAwesomeIcon icon={faUserAlt} /><span>{events.resourcePerson}</span></div>
-                                    <div><FontAwesomeIcon icon={faGlobe} />&nbsp;&nbsp;&nbsp;{events.website ? events.website : "www.no-website.com"}</div>
+                                    <div><FontAwesomeIcon icon={faGlobe} />&nbsp;&nbsp;&nbsp;<span>{events.website ? events.website : "www.no-website.com"}</span></div>
                                 </div>
 
 
@@ -189,4 +189,4 @@ function ViewEvents() {
     )
 }
 
-// export default ViewEvents;
+export default ViewEvents;

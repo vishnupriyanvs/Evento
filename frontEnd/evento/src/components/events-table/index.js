@@ -26,7 +26,7 @@ function EventsTable(props) {
 
 
   return (
-    <div>
+    <div className="space-content">
       <div className="center-elements">
         <table id="events">
           <tbody>
