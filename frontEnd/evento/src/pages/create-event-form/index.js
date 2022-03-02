@@ -5,6 +5,7 @@ import './index.css'
 import apiHandler from '../../api-handling';
 import { useParams , useNavigate} from 'react-router-dom';
 import tokenHandler from '../../api-handling/tokenHandler';
+import { toast, Slide } from 'react-toastify';
 
 
 function CreateEventForm() {
@@ -132,12 +133,35 @@ function CreateEventForm() {
         // };
         setEvents(values => ({ ...values, "created_by": id, "updated_by": id }))
 
+        try{
+            try{
+                const response = await apiHandler('post', `events`, events)
+                console.log(response)
+                setEvents(response.data);
+                const imageResponse = await apiHandler('post', `images/upload/${response.data.id}`, formData)
+                toast.success("Event successfully created", {
+                    transition: Slide,
+                    hideProgressBar: false,
+                    autoClose: 6000
+                })
+            }
+            catch(err){
+                const response = await tokenHandler('post', `events`,sessionStorage.getItem('refreshToken'), apiHandler, events)
+                setEvents(response.data);
+                const imageResponse = await tokenHandler('post', `images/upload/${response.data.id}`,sessionStorage.getItem('refreshToken'), apiHandler, formData)
+                toast.success("Event successfully created" , {
+                    transition: Slide,
+                    hideProgressBar: false,
+                    autoClose: 6000
+                })
+            }
+            
+        }
+        catch(err){
+            navigate("/")
+        }
 
-
-        const response = await apiHandler('post', `events`, events)
-
-        setEvents(response.data);
-        const imageResponse = await apiHandler('post', `images/upload/${response.data.id}`, formData)
+      
 
 
         // axios
@@ -162,10 +186,10 @@ function CreateEventForm() {
         modal.style.display = "none";
     }
 
-    console.log(users)
     return (
         <div className="createEventForm">
             <EventForm
+                formTitle = {'Create Event'}
                 events={events}
                 handleSubmit={handleSubmit}
                 handleChange={handleChange}

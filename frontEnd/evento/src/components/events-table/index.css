@@ -85,7 +85,7 @@ td {
   /* justify-content: space-between; */
   flex-direction: row;
   gap: 1.5rem;
-  position: absolute;
+  /* position: absolute; */
   justify-content: center;
   bottom: 10%;
   background-color: #0563af;
@@ -112,7 +112,7 @@ td {
   font-size: 18px;
   font-weight: normal;
   font-style: normal;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .next-btn:hover {
@@ -148,4 +148,45 @@ td {
   width: 48px;
   height: 48px;
   border-radius: 4px;
+}
+
+.add-box {
+  display: inline-block;
+}
+.add-box .hover-icon {
+  display: none;
+  position: absolute;
+}
+
+.add-box:hover .hover-icon {
+  display: inline-block;
+  padding: 5px;
+  background-color: #ddd;
+  border-radius: 10px;
+  font-size: small;
+  
+}
+
+.edit-box {
+  display: inline-block;
+}
+
+.edit-box .hover-icon {
+  display: none;
+  position: absolute;
+}
+
+.edit-box:hover .hover-icon {
+  display: inline-block;
+  padding: 5px;
+  background-color: #ddd;
+  border-radius: 10px;
+  font-size: small;
+}
+
+.space-content{
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  gap: .8rem;
 }

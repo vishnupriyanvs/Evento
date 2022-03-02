@@ -1,10 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:100,200,300,400,500,600,700,800,900');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:100,200,300,400,500,600,700,800,900");
 .mainFlex {
   display: flex;
   /* align-items: center; */
   align-items: flex-start;
   justify-content: space-between;
-  
 }
 
 .flexLeftItem {
@@ -28,7 +27,6 @@
 .sizedBox {
   width: 50px;
 }
-
 
 .myEventIcons {
   /* padding-top: 48px; */
@@ -64,7 +62,7 @@
   z-index: 1;
 }
 
-.popup-box{
+.popup-box {
   visibility: hidden;
   color: white;
   position: absolute;
@@ -88,6 +86,7 @@
   width: 3%;
   position: absolute;
   right: 15px;
+  top: 1.3%;
 }
 
 .popup-box .div-li-image {
@@ -101,7 +100,7 @@
   padding-top: 16px;
   border-left: 6px solid #91a4b7;
 }
-.popup-box_profile{
+.popup-box_profile {
   display: block;
   margin-top: auto;
   z-index: 2;
@@ -125,9 +124,9 @@
   height: auto;
   /* border-radius: 30px; */
 }
-#logout{
+#logout {
   cursor: pointer;
-}  
+}
 
 /* .action{
   position: fixed;
@@ -151,77 +150,155 @@
   height: 100px;
   object-fit: cover;
 } */
-.action .menu{
+.action .menu {
   position: absolute;
-  top: 80px;
-  right:10px;
+  top: 65px;
+  right: 10px;
   padding: 10px 15px;
-  box-sizing: 0 5px 25px rgba(0,0,0,0.1);
+  box-sizing: 0 5px 25px rgba(0, 0, 0, 0.1);
   border-radius: 15px;
-  border:0.5px solid rgb(216, 214, 214);
+  border: 0.5px solid rgb(216, 214, 214);
   transition: 0.5s;
   visibility: hidden;
   opacity: 0;
-  background-color: #f2f2f2;
+  background-color: rgba(13, 24, 41, 0.76);
   z-index: 4;
 }
-.action .menu.active{
+.action .menu.active {
   visibility: visible;
   opacity: 1;
 }
-.action .menu::before{
-  content: '';
-  position: absolute;
-  top:-5px;
-  right:28px;
-  width:20px;
-  height: 20px;
-  background-color: #f2f2f2;
-  transform: rotate(45deg);
-}
-.action .menu h3{
-  width:100%;
+
+.action .menu h3 {
+  width: 100%;
   text-align: center;
   font-size: 18px;
   padding: 20px 0;
   font-weight: 500;
   font-size: 18px;
-  color:#555;
+  color: whitesmoke;
   line-height: 1.2em;
 }
-.action .menu h3 span{
+.action .menu h3 span {
   font-size: 14px;
-  color:#c3c2c2;
+  color: #c3c2c2;
   font-weight: 400;
 }
-.action .menu ul li{
+.action .menu ul li {
   list-style: none;
   padding: 10px 0;
-  border-top: 1px solid rgba(0,0,0,0.05);
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
   display: flex;
   align-items: center;
 }
-.action .menu ul li  .profileImage{
+.action .menu ul li .profileImage {
   max-width: 20px;
   margin-right: 10px;
   opacity: 0.5;
   transition: 0.5s;
 }
-.action .menu ul li:hover .profileImage{
+.action .menu ul li:hover .profileImage {
   opacity: 1;
 }
-.action .menu ul li  .profileSpan{
+.action .menu ul li .profileSpan {
   display: inline-block;
   text-decoration: none;
-  color:#555;
+  color:whitesmoke;
   font-weight: 500;
   transition: 0.5s;
 }
-.action .menu ul li :hover .profileSpan{
+.action .menu ul li :hover .profileSpan {
   color: #ff5d94;
 }
 
-.profileSpan{
+/* .profileSpan{
   font-family: 'Poppins', sans-serif;
+} */
+
+.responsiveMainFlex{
+
+  display: none;
+
 }
 
+
+
+@media only screen and (max-width: 1000px) {
+
+  .mainFlex {
+
+    display: none;
+
+  }
+
+
+
+  .responsiveMainFlex {
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: flex-start;
+
+    align-items: flex-end;
+
+    margin-right: 5%;
+
+    gap: .8rem;
+
+    /* height: 01rem; */
+
+  }
+
+
+
+  .navbarMain {
+
+    transition: all 500ms;
+
+    height: 0px;
+
+  }
+
+
+
+  .responsiveMainFlex.open {
+
+    /* transform: translateX(0); */
+
+    height: inherit;
+
+    z-index: 1;
+
+  }
+
+
+
+.responsiveContent{
+
+  display: none;
+
+  justify-content:space-around;
+
+  align-items: flex-start;
+
+  gap: 1.6rem;
+
+  width: 100%;
+
+  padding-left: 24px;
+
+}
+
+
+
+.responsiveCreateBtn{
+
+  display: flex;
+
+  justify-content: flex-start;
+
+}
+
+}

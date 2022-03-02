@@ -1,100 +1,130 @@
-.form-bg{ 
-    position: relative;
-    width: 905px;
-    height: 576px;
-    left: 40px;
-    top: 95px;
-    background: #EFEFEF;
-    border-radius: 7px;
+.invitationModal {
+  display: none; /* Hidden by default */
+  justify-content: center;
+  position: fixed;
+  z-index: 3; /* Sit on top */
+  padding-top: 0px;
+  left: 0;
+  right: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100vh; /* Full height */
+  overflow: hidden; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
 
-.title-class{
-    position: absolute;
-    width: 804px;
-    height: 77px;
-    left: 50px;
-    top: 20px;
+.send-invitations-title{
+
+  text-align: center;
+  font-size: larger;
+  font-family: Arial, Helvetica, sans-serif;
+  position: relative;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  font-weight: 500;
+  /* font-weight: bold; */
 }
 
-#title-name{
-    background: rgba(221, 227, 232, 0.74);
-box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.1);
-border-radius: 5px;
+.form-bg {
+  position: relative;
+  width: 905px;
+  height: 800px;
+  left: 40px;
+  top: 95px;
+  background: #efefef;
+  border-radius: 7px;
 }
 
-
-
-.description-class{
-    position: absolute;
-    width: 804px;
-    height: 1000px;
-    left: 50px;
-    top: 100px;
+.title-class {
+  position: absolute;
+  width: 804px;
+  height: inherit;
+  left: 50px;
+  top: 20px;
 }
 
-#description-title{
-background: rgba(221, 227, 232, 0.74);
-box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.1);
-border-radius: 5px;
-position: absolute;
-height: 1000;
+.relative-layout{
+  position: relative;
+  text-align: center;
 }
 
-.invitation{
-    position: absolute;
-    width: 799px;
-    height: 149px;
-    left: 50px;
-    top: 200px;
-
+#title-name {
+  background: rgba(221, 227, 232, 0.74);
+  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  height: inherit;
 }
 
-.message{
-    position: absolute;
-    width: 799px;
-    height: 149px;
-    left: 50px;
-    top: 350px;
+.description-class {
+  position: absolute;
+  width: 804px;
+  height: inherit;
+  left: 50px;
+  top: 100px;
 }
 
-#message-area{
-    position: absolute;
-    height: 60%;
-    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
+#description-title {
+  background: rgba(221, 227, 232, 0.74);
+  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  position: absolute;
+  height: inherit;
 }
 
+.invitation {
+  position: absolute;
+  width: 799px;
+  height: inherit;
+  left: 50px;
+  top: 200px;
+}
 
-#submit-button{
-    position: absolute;
-    width: 165px;
-    /* height: 56px; */
-    left: 500px;
-    top: 590px;
+.message {
+  position: absolute;
+  width: 799px;
+  height: inherit;
+  left: 50px;
+  top: 350px;
+}
 
-    background-color: white; 
-    color: black; 
-    border: 2px solid #443DF6;
+#message-area {
+  position: absolute;
+  height: 60%;
+  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+#submit-button {
+  position: absolute;
+  width: 165px;
+  /* height: 56px; */
+  left: 500px;
+  top: 590px;
+
+  background-color: white;
+  color: black;
+  border: 2px solid #443df6;
 }
 
 #submit-button:hover {
-    background-color: #443DF6;
-    color: white;
-  }
+  background-color: #443df6;
+  color: white;
+}
 
-#cancel-button{
-    position: absolute;
-    width: 165px;
-    /* height: 156px; */
-    left: 300px;
-    top: 590px;
+#cancel-button {
+  position: absolute;
+  width: 165px;
+  /* height: 156px; */
+  left: 300px;
+  top: 590px;
 
-    background-color: white; 
-    color: black; 
-    border: 2px solid #f44336;
+  background-color: white;
+  color: black;
+  border: 2px solid #f44336;
 }
 
 #cancel-button:hover {
-    background-color: #f44336;
-    color: white;
-  }
+  background-color: #f44336;
+  color: white;
+}

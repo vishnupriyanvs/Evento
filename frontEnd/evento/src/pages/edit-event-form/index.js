@@ -5,13 +5,12 @@ import './index.css'
 import { useParams, useNavigate } from 'react-router-dom';
 import apiHandler from '../../api-handling';
 import tokenHandler from '../../api-handling/tokenHandler';
+import { toast, Slide } from 'react-toastify';
 
 function EditEventForm(props) {
-  console.log('hi')
-  console.log(props)
   const { id, eventid } = useParams()
 
-  const [events, setEvents] = useState({ updated_by: id})
+  const [events, setEvents] = useState({ updated_by: id })
   const [users, setUsers] = useState([])
   const options = [];
   const navigate = useNavigate();
@@ -180,40 +179,40 @@ function EditEventForm(props) {
     var config = {
       method: 'put',
       url: `http://localhost:4000/events/${props.eventid}`,
-      data : events,
-      headers: { 
-        'Authorization': `Bearer ${sessionStorage.getItem('myToken')}`, 
+      data: events,
+      headers: {
+        'Authorization': `Bearer ${sessionStorage.getItem('myToken')}`,
         'Content-Type': 'application/json'
       }
     };
-  axios(config)
-//  axios  
+    axios(config)
+      //  axios  
 
-//            .put(`http://localhost:4000/events/${eventid}`,events)
+      //            .put(`http://localhost:4000/events/${eventid}`,events)
 
-           .then(response => {
+      .then(response => {
 
-               setEvents(response.data)
+        setEvents(response.data)
 
-               alert(`${events.title} updated successfully`)
+        alert(`${events.title} updated successfully`)
 
-           })
+      })
 
-           .catch(error => {
+      .catch(error => {
 
-               console.log(error)
+        console.log(error)
 
-           })
+      })
 
 
 
-     
 
-          const x = await apiHandler('put',`events/${props.eventid}`)
 
-          //console.log(x.data);
+    const x = await apiHandler('put', `events/${props.eventid}`)
 
-          setUsers(x.data)
+    //console.log(x.data);
+
+    setUsers(x.data)
 
 
   }
@@ -225,11 +224,11 @@ function EditEventForm(props) {
     modal.style.display = "none";
     // setSubmitted(false)
   }
-  console.log(events)
-
+  
   return (
     <div className="createEventForm">
       <EventForm
+        formTitle={'Edit Event'}
         events={events}
         handleSubmit={handleSubmit}
         handleChange={handleChange}

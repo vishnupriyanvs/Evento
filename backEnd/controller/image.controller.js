@@ -24,7 +24,7 @@ const downloadEventImage = async (req, res) => {
 
         });
 
-    }catch(err){
+    } catch (err) {
 
         res.download('./asset/event-images/1.png', (err) => {
 
@@ -46,15 +46,27 @@ const uploadEventImage = multer({ storage: eventImageDao.eventImagesStorage });
 
 const downloadUserImage = async (req, res) => {
 
-    const data = await eventImageDao.findUserImageUrl(req.params.userid);
-    console.log("in downloads", data.imageUrl);
-    res.download(data.imageUrl, (err) => {
-        if (err) {
-            res.status(500).send({
-                message: "File can not be downloaded: " + err,
-            });
-        }
-    });
+    try {
+        const data = await eventImageDao.findUserImageUrl(req.params.userid);
+        res.download(data.imageUrl, (err) => {
+            if (err) {
+                res.status(500).send({
+                    message: "File can not be downloaded: " + err,
+                });
+            }
+        });
+    } catch (err) {
+        console.log(err)
+    }
+    // if (data.imageUrl !== null) {
+    //     res.download(data.imageUrl, (err) => {
+    //         if (err) {
+    //             res.status(500).send({
+    //                 message: "File can not be downloaded: " + err,
+    //             });
+    //         }
+    //     });
+    // }
 
 };
 
