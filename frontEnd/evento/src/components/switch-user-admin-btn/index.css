@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:100,200,300,400,500,600,700,800,900');
 .myEventIcons {
   /* padding-top: 48px; */
   display: flex;
@@ -33,3 +32,11 @@
   z-index: 1;
 }
 
+#switch-user{
+  color:whitesmoke;
+  cursor: pointer;
+  font-weight: lighter !important;
+}
+#switch-user:hover {
+  color:rgb(91, 194, 241);
+}

@@ -32,7 +32,7 @@ function StatusSelectionBtn(props) {
 
 
     }, [])
-
+    // let element = document.getElementById('select-btn-value').innerHTML;
     // const styleSet = (item, key) => {
     //     let a = document.querySelectorAll('.SelectnBtn1-content');
     //     if (item === 'InProgress')
@@ -158,12 +158,12 @@ function StatusSelectionBtn(props) {
                         <div>{options.includes(defaults) ? defaults : null}</div>
                     }
 
-                    {props.eventType === services.eventType.UPCOMING_EVENT || props.eventType === services.eventType.ONGOING_EVENT ? <div> <FontAwesomeIcon icon={faAngleDown} /></div> : null}
+                    {props.eventType === services.eventType.UPCOMING_EVENT || props.eventType === services.eventType.ONGOING_EVENT  ? <div> <FontAwesomeIcon icon={faAngleDown} /></div> : null}
                 </div>
 
 
 
-                {props.role === 'Admin' ? (<div className="SelectnBtn1-options">
+                {props.role === 'Admin' ? (<div  className="SelectnBtn1-options">
                     {
                         options.map((item, i) => {
                             if (item !== defaults) {

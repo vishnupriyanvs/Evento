@@ -29,7 +29,7 @@ function SwitchUserAdminBtn(props) {
     }
     return (
         // <div className='myEventIcons'><FontAwesomeIcon icon={props.myEvent} size="2x" color="whitesmoke" onClick={() => { navigateMyEvents(`${props.endPoint}${id}`); }} /><span className='myEventText'>{!props.checkAdmin ? "Admin Events" : "My Events"}</span></div>
-        <div style={{cursor:"pointer"}} onClick={() => { handleSwitching() }}><FontAwesomeIcon icon={props.myEvent} size="1x" color="blue"  />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style={{color:"#555",fontWeight:"normal",fontFamily:"Poppins, sans-serif"}}>{!props.checkAdmin ? "Admin Events" : "My Events"}</span></div>
+        <div style={{cursor:"pointer"}} onClick={() => { handleSwitching() }}><FontAwesomeIcon icon={props.myEvent} size="1x" color="whitesmoke"  />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style={{color:"whitesmoke",fontWeight:"normal",fontFamily:"Poppins, sans-serif"}}>{!props.checkAdmin ? "Admin Events" : "My Events"}</span></div>
     )
 }
 

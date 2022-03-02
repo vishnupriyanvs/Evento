@@ -288,3 +288,5 @@ export const InviteUser = (props) => {
     </div>
   );
 };
+
+export default InviteUser;

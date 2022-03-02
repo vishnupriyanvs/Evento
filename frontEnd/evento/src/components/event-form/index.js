@@ -14,7 +14,6 @@ function EventForm(props) {
         else {
             today = `${new Date().getFullYear()}-${new Date().getMonth()}-${new Date().getDate()}`
         }
-        console.log(today)
         return today;
     }
     Today()
