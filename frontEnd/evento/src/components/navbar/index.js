@@ -26,6 +26,7 @@ function Navbar(props) {
     const box = document.querySelector('.popup-box');
     const role = decryptData(sessionStorage.getItem('myRole'));
     const [users, setUsers] = useState({})
+    const [responsiveCheck, setResponsiveCheck] = useState(false)
     //console.log('params id' + id)
     useEffect(async () => {
         try {
@@ -57,7 +58,7 @@ function Navbar(props) {
 
 
     return (
-        <div>
+        <div className="navbarMain">
             <div className="mainFlex">
 
                 <div className="flexLeftItem">
@@ -103,6 +104,29 @@ function Navbar(props) {
                             </div>
                         </div>
                     </OutsideAlerter>
+                </div>
+            </div>
+
+            {/* For size < 750px */}
+            <div className="responsiveMainFlex">
+                <div>
+                    <FontAwesomeIcon icon={faBars} size='5x' onClick={() => {
+                        if (!responsiveCheck) {
+                            document.querySelector('.navbarMain').setAttribute('style', 'height: 20vh;');
+                            document.querySelector('.responsiveContent').setAttribute('style', 'display: flex')
+                            setResponsiveCheck(true);
+                        } else {
+                            document.querySelector('.navbarMain').setAttribute('style', 'height: 0px;');
+                            document.querySelector('.responsiveContent').setAttribute('style', 'display: none');
+                            setResponsiveCheck(false);
+                        }
+                    }} />
+                </div>
+                <div className="responsiveContent">
+                    
+                        <SearchBars />
+                        <div className="responsiveCreateBtn">{role === '1' ? <CreateEvent onClick={props.onClick} id={id} /> : null}</div>
+                    
                 </div>
             </div>
         </div>

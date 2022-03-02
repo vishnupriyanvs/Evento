@@ -96,7 +96,7 @@ main::-webkit-scrollbar {
 
 .sideBarx {
   /* padding: 48px; */
-  padding-top:30px;
+  padding-top: 30px;
   padding-bottom: 30px;
   width: 100%;
   display: flex;
@@ -104,17 +104,17 @@ main::-webkit-scrollbar {
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  
+
   /* transition: width 2s; */
   /* transition-timing-function: ease; */
 }
 
-.sideBarIcons .sideBarText{
+.sideBarIcons .sideBarText {
   position: absolute;
   left: 100%;
   height: 50px;
   width: 0;
-  background: rgba(13, 24, 41, 0.76);;
+  background: rgba(13, 24, 41, 0.76);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   color: whitesmoke;
   line-height: 45px;
@@ -145,7 +145,7 @@ main::-webkit-scrollbar {
   opacity: 1;
   width: 200px;
 }
-.icons-close:hover{
+.icons-close:hover {
   color: whitesmoke;
 }
 
@@ -178,7 +178,7 @@ a {
   line-height: 10px;
 }
 
-.liClick span{
+.liClick span {
   font-size: 18px;
   font-weight: 300;
 }
@@ -188,7 +188,7 @@ a {
  width: 50%;
 } */
 
-#parent-node{
+#parent-node {
   width: 100%;
   text-align: center;
 }
@@ -200,23 +200,19 @@ a {
   font-weight: 700;
   cursor: pointer;
   /* border-radius: 5%; */
-  transition:  100ms;
+  transition: 100ms;
   width: 100%;
-  
 }
 
 .fa-2x {
   font-size: 1.7em;
 }
 
-.liClick span:hover{
+.liClick span:hover {
   font-size: larger;
   font-weight: 400;
-  color : aliceblue
+  color: aliceblue;
 }
-
-
-
 
 /* Create event align */
 .alignButtonEnd {
@@ -255,20 +251,63 @@ li {
 /* Modal style */
 
 @media only screen and (max-width: 1000px) {
-  .container {
+  .containers {
+    transition: grid-template-rows 2s;
     grid-template-columns: 1fr;
-    grid-template-rows: 0.3fr 0.1fr 1fr 0.3fr;
+    grid-template-rows: 0.15fr 0.15fr 1fr 0.3fr;
     grid-template-areas:
       "nav"
+      "sidebar"
       "main"
       "main";
-    /* grid-gap: 0.2rem; */
   }
 
   .sidebar.open {
-    width: inherit;
+    display: none;
   }
-  li {
+  .sideBarx {
+    display: none;
+  }
+  .mini-parent-node {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 100%;
+    position: relative;
+    left: 0%;
+  }
+
+  .sideBarIcons {
+    padding-top: 0px;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  .sideBarIcons:hover .sideBarText {
+    visibility: visible;
     text-align: center;
+    color: white;
+    opacity: 1;
+    width: 200px;
+    display: none;
+  }
+
+  .sidebar{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+}
+
+@media only screen and (max-width: 700px) {
+  .containers {
+    transition: grid-template-rows 2s;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.15fr 0.15fr 1fr 0.3fr;
+    grid-template-areas:
+      "nav"
+      "sidebar"
+      "main"
+      "main";
   }
 }
