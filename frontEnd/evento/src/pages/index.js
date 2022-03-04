@@ -21,7 +21,6 @@ function MainPage() {
 
 
     useEffect(() => {
-        console.log("width");
         // navbarCheck();
         setDimension({
             height: window.innerHeight,

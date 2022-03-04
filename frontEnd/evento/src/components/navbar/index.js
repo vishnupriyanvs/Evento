@@ -32,12 +32,10 @@ function Navbar(props) {
         try {
             try {
                 const x = await apiHandler('get', `users/${id}`)
-                console.log(x.data);
                 setUsers(x.data)
             }
             catch (err) {
                 const x = await tokenHandler('get', `users/${id}`, sessionStorage.getItem('refreshToken'), apiHandler)
-                //console.log(x.data);
                 setUsers(x.data)
             }
         }

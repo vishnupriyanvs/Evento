@@ -39,11 +39,9 @@ export const InviteUser = (props) => {
 
   useEffect(async () => {
     setInvitee({"eventId": eventid});
-    console.log(eventid)
     try {
       try {
         const x = await apiHandler('get', `events/${eventid}`);
-        console.log(x.data);
         setEvents(x.data);
       } catch (error) {
         const x = await tokenHandler('get', `events/${eventid}`, sessionStorage.getItem('refreshToken'), apiHandler);
@@ -82,19 +80,7 @@ export const InviteUser = (props) => {
     }
   }, [])
 
-
-
-  // useEffect(() => {
-  //   axios.get(`http://localhost:4000/jobTitles/`)
-  //     .then(response => {
-  //       setGroups(response.data)
-  //     })
-  //     .catch(error =>{
-  //       console.log(error)
-  //     })
-  // },[])
-
-
+  
   useEffect(async () => {
     try {
       try {
