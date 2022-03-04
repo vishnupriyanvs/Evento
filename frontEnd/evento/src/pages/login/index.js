@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import './index.css'
@@ -9,9 +9,10 @@ import { Form, Button } from 'react-bootstrap';
 import { toast, Slide } from 'react-toastify';
 import { useToastBox } from "../../components/toast";
 
+import { useParams } from 'react-router-dom';
 
 function LoginForm() {
-    sessionStorage.clear();
+    // sessionStorage.clear();
     return (
         <>
 
@@ -22,10 +23,46 @@ function LoginForm() {
 
 toast.configure()
 function MyForm(props) {
+
+    // const { role,accessToken, refreshToken } = useParams()
+    // console.log(role)
     
+    
+
     const [inputs, setInputs] = useState({});
     const navigate = useNavigate();
     const {handleSuccessToast, handleErrorToast} = useToastBox()
+    const [msal,setMsal] = useState(null);
+
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const params = Object.fromEntries(urlSearchParams.entries());
+    console.log(params)
+
+    useEffect(() => {
+    if(params.msal){
+        console.log(params)
+
+        sessionStorage.setItem('myToken', params.accessToken)
+        sessionStorage.setItem('refreshToken', params.refreshToken)
+               
+        const encryptedRoleId = encryptData(params.role)
+        const encryptedId = encryptData(params.id)
+        sessionStorage.setItem('myRole', encryptedRoleId)
+        sessionStorage.setItem('myId',encryptedId)
+        handleSuccessToast(`Welocme  ${params.name}`)
+        console.log(params.role)
+        // useEffect(() => {
+            if (params.role == 1) {
+                console.log(params.role)
+                navigate(`/user/upcoming-events/${params.id}`)
+            }
+            else if (params.role == 2) {
+                navigate(`/user/my-events/upcoming-events/invited/${params.id}`)
+            }
+        // },[])  
+    }
+},[params])
+    
 
     function handleChange(event) {
         const name = event.target.name;
@@ -66,6 +103,33 @@ function MyForm(props) {
     // function goToHome(){
     //     window.location = '/';
     // }
+// useEffect(() => {
+//     if(params.accessToken){
+//         navigate(`/user/upcoming-events/${params.id}`)
+//     }
+// },[])
+    function msalLogin(){
+        // setMsal(params.accessToken)
+        // sessionStorage.setItem('myToken', params.accessToken)
+        // sessionStorage.setItem('refreshToken', params.refreshToken)
+               
+        // const encryptedRoleId = encryptData(params.role)
+        // const encryptedId = encryptData(params.id)
+        // sessionStorage.setItem('myRole', encryptedRoleId)
+        // sessionStorage.setItem('myId',encryptedId)
+        // handleSuccessToast(`Welocme  ${params.name}`)
+        // console.log(params.role)
+        // // useEffect(() => {
+        //     if (params.role == 1) {
+        //         console.log(params.role)
+        //         navigate(`/user/upcoming-events/${params.id}`)
+        //     }
+        //     else if (params.role == 2) {
+        //         navigate(`/user/my-events/upcoming-events/invited/${params.id}`)
+        //     }
+        
+    }
+    // console.log(data)
 
     return (
         
@@ -108,13 +172,21 @@ function MyForm(props) {
                                 <button className="loginSubmit" type="submit" >Login</button>
                             </center>
 
+                            
                         </Form>
+
+                        <br/><br/>
+                            <center>
+                                <button><a href='http://localhost:4000/microsoft-login' onClick={() => {msalLogin()}} >MS Login</a></button>
+                            </center>
                     </div>
 
                 </div>
             </div>
             <script type="text/javascript" src="vanilla-tilt.js"></script>
     
+        {/* <div style={{backgroundColor:'black'}} dangerouslySetInnerHTML={{__html:msal}}/> */}
+            
             
         </div>
     );

@@ -41,10 +41,7 @@ function findUserById(req, res) {
 }
 
 
-
-function loginUser(req, res){
-    const username = req.body.username;
-    const password = req.body.password;
+function msalLogin(req, res){
     
     userDao.findByUsername(username).
         then((data) => {
