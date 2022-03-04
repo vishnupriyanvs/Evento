@@ -213,13 +213,15 @@ body::after{
 }
 .divider {
     display: inline-block;
-    border-bottom: white 1px solid;
+    border-top: white 1px solid;
     width: 130px;
+    height:7px;
     margin: 0px;
     opacity:0.3;
 }
 .or{
     padding: 0px 10px;
+    margin-top:50px;
     top:5px;
     font-size: 15px;
     font-weight: 500;
