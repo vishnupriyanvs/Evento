@@ -32,12 +32,10 @@ function Navbar(props) {
         try {
             try {
                 const x = await apiHandler('get', `users/${id}`)
-                console.log(x.data);
                 setUsers(x.data)
             }
             catch (err) {
                 const x = await tokenHandler('get', `users/${id}`, sessionStorage.getItem('refreshToken'), apiHandler)
-                //console.log(x.data);
                 setUsers(x.data)
             }
         }
@@ -90,9 +88,6 @@ function Navbar(props) {
                     <OutsideAlerter>
                         <img style={{ cursor: "pointer" }} src={`http://localhost:4000/images/profile/user/${id}`} alt='userimage' onClick={menuToggle} className="click" />
                         <div className="action">
-                            <div className="profile">
-
-                            </div>
                             <div className="menu">
                                 <h3>{users.name}<br></br><span>{users.email}</span></h3>
                                 <ul>

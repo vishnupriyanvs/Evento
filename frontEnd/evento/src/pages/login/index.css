@@ -94,8 +94,8 @@ body::after{
 }
 .containerx .cardx{
     position: relative;
-    width:350px;
-    height:450px;
+    width:380px;
+    height:540px;
     margin:30px;
     margin-top: 130px;
     margin-left: 250px;
@@ -179,3 +179,49 @@ body::after{
     width:300px;
     height:70px;
   }
+.ms-png{
+    width:20px;
+    height:20px;
+}
+
+.ms-button{
+    border:thin solid grey;
+}
+
+.a-ms-btn{
+    background: #ffffff;
+    color: #666666;
+    border-radius: 50px;
+    padding: 4px 10px;
+    font-size: 16px;
+    border: 1px solid #eeeeee;
+    cursor: pointer;
+    transition: 0.4s;
+    height: 44px!important;
+    box-shadow: 0px 5px 10px #eaecf1;
+    font-weight: 500;
+    height: 36px;
+    width: 100px;
+    width: 100%;
+    margin: 0;
+}
+/* .hr-or{
+    display: inline-block;
+} */
+.div-or{
+    margin:20px 0;
+}
+.divider {
+    display: inline-block;
+    border-bottom: white 1px solid;
+    width: 130px;
+    margin: 0px;
+    opacity:0.3;
+}
+.or{
+    padding: 0px 10px;
+    top:5px;
+    font-size: 15px;
+    font-weight: 500;
+    opacity:0.7;
+}

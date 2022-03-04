@@ -35,7 +35,6 @@ function UpcomingEvents(props) {
         try {
             try {
                 const response = await apiHandler('get', `events/status/Active`)
-                console.log(response);
                 setEvents(response.data)
             }
             catch (err) {

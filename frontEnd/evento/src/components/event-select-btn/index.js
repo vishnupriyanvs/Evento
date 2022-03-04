@@ -28,9 +28,6 @@ function StatusSelectionBtn(props) {
         setDefault(props.given);
         setOptions(props.options);
         styleSet(props.given, props.index);
-        console.log(props.eventTitle)
-
-
     }, [])
     // let element = document.getElementById('select-btn-value').innerHTML;
     // const styleSet = (item, key) => {

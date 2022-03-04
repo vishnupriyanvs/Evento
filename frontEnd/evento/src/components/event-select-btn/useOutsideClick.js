@@ -10,7 +10,6 @@ function useOutsideAlerter(ref, i) {
                 const x = document.querySelectorAll('.SelectnBtn1-options');
                if(x[i].style.display !== 'none')
                 x[i].setAttribute('style', 'display:none; visibility: hidden;')
-                console.log(x[i].style.display)
             }
         }
 

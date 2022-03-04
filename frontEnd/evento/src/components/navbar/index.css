@@ -163,6 +163,7 @@
   opacity: 0;
   background-color: rgba(13, 24, 41, 0.76);
   z-index: 4;
+  width: 19%;
 }
 .action .menu.active {
   visibility: visible;
@@ -184,9 +185,16 @@
   color: #c3c2c2;
   font-weight: 400;
 }
+.action .menu ul{
+  width: auto;
+  text-align: center;
+  margin-left: 50px;
+  display: block;
+  justify-content: center;
+}
 .action .menu ul li {
   list-style: none;
-  padding: 10px 0;
+  padding :0 0 10px 0;
   border-top: 1px solid rgba(0, 0, 0, 0.05);
   display: flex;
   align-items: center;
