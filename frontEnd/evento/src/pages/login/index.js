@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import './index.css'
@@ -9,9 +9,10 @@ import { Form, Button } from 'react-bootstrap';
 import { toast, Slide } from 'react-toastify';
 import { useToastBox } from "../../components/toast";
 
+import { useParams } from 'react-router-dom';
 
 function LoginForm() {
-    sessionStorage.clear();
+    // sessionStorage.clear();
     return (
         <>
 
@@ -22,10 +23,46 @@ function LoginForm() {
 
 toast.configure()
 function MyForm(props) {
-    
+
+    // const { role,accessToken, refreshToken } = useParams()
+    // console.log(role)
+
+
+
     const [inputs, setInputs] = useState({});
     const navigate = useNavigate();
-    const {handleSuccessToast, handleErrorToast} = useToastBox()
+    const { handleSuccessToast, handleErrorToast } = useToastBox()
+    const [msal, setMsal] = useState(null);
+
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const params = Object.fromEntries(urlSearchParams.entries());
+    console.log(params)
+
+    useEffect(() => {
+        if (params.msal) {
+            console.log(params)
+
+            sessionStorage.setItem('myToken', params.accessToken)
+            sessionStorage.setItem('refreshToken', params.refreshToken)
+
+            const encryptedRoleId = encryptData(params.role)
+            const encryptedId = encryptData(params.id)
+            sessionStorage.setItem('myRole', encryptedRoleId)
+            sessionStorage.setItem('myId', encryptedId)
+            handleSuccessToast(`Welocme  ${params.name}`)
+            console.log(params.role)
+            // useEffect(() => {
+            if (params.role == 1) {
+                console.log(params.role)
+                navigate(`/user/upcoming-events/${params.id}`)
+            }
+            else if (params.role == 2) {
+                navigate(`/user/my-events/upcoming-events/invited/${params.id}`)
+            }
+            // },[])  
+        }
+    }, [params])
+
 
     function handleChange(event) {
         const name = event.target.name;
@@ -42,11 +79,11 @@ function MyForm(props) {
 
                 sessionStorage.setItem('myToken', response.data.accessToken)
                 sessionStorage.setItem('refreshToken', response.data.refreshToken)
-               
+
                 const encryptedRoleId = encryptData(response.data.user.roles[0].user_roles.roleId)
                 const encryptedId = encryptData(response.data.user.id)
                 sessionStorage.setItem('myRole', encryptedRoleId)
-                sessionStorage.setItem('myId',encryptedId)
+                sessionStorage.setItem('myId', encryptedId)
                 handleSuccessToast(`Welocme + ${response.data.user.name}`)
                 if (response.data.user.roles[0].user_roles.roleId === 1) {
                     navigate(`/user/upcoming-events/${response.data.user.id}`)
@@ -66,15 +103,42 @@ function MyForm(props) {
     // function goToHome(){
     //     window.location = '/';
     // }
+    // useEffect(() => {
+    //     if(params.accessToken){
+    //         navigate(`/user/upcoming-events/${params.id}`)
+    //     }
+    // },[])
+    function msalLogin() {
+        // setMsal(params.accessToken)
+        // sessionStorage.setItem('myToken', params.accessToken)
+        // sessionStorage.setItem('refreshToken', params.refreshToken)
+
+        // const encryptedRoleId = encryptData(params.role)
+        // const encryptedId = encryptData(params.id)
+        // sessionStorage.setItem('myRole', encryptedRoleId)
+        // sessionStorage.setItem('myId',encryptedId)
+        // handleSuccessToast(`Welocme  ${params.name}`)
+        // console.log(params.role)
+        // // useEffect(() => {
+        //     if (params.role == 1) {
+        //         console.log(params.role)
+        //         navigate(`/user/upcoming-events/${params.id}`)
+        //     }
+        //     else if (params.role == 2) {
+        //         navigate(`/user/my-events/upcoming-events/invited/${params.id}`)
+        //     }
+
+    }
+    // console.log(data)
 
     return (
-        
+
         <div className="loginBody">
             <div className="containerx">
                 <div className="cardx" >
                     <div className="content">
                         <center>
-                            <img className="experionImg" src ="experion.png"></img>
+                            <img className="experionImg" src="experion.png"></img>
                             <h4 className="display-3" > Event Hosting Platform</h4>
                         </center>
                         <Form onSubmit={handleSubmit}>
@@ -108,14 +172,30 @@ function MyForm(props) {
                                 <button className="loginSubmit" type="submit" >Login</button>
                             </center>
 
+
                         </Form>
+
+
+
+                        {/* <center>
+                                <button><a href='http://localhost:4000/microsoft-login' onClick={() => {msalLogin()}} >MS Login</a></button>
+                            </center> */}
+
+                        <center>
+                            <div className="div-or">
+                                <div className="divider"></div><span className="or">OR</span><div className="divider"></div>
+                            </div>
+                            <a className="a-ms-btn" href='http://localhost:4000/microsoft-login' onClick={() => { msalLogin() }} ><img className="ms-png" src="microsoft.png"></img>&nbsp;&nbsp;Sign in</a>
+                        </center>
                     </div>
 
                 </div>
             </div>
             <script type="text/javascript" src="vanilla-tilt.js"></script>
-    
-            
+
+            {/* <div style={{backgroundColor:'black'}} dangerouslySetInnerHTML={{__html:msal}}/> */}
+
+
         </div>
     );
 

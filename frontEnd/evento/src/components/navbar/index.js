@@ -88,9 +88,6 @@ function Navbar(props) {
                     <OutsideAlerter>
                         <img style={{ cursor: "pointer" }} src={`http://localhost:4000/images/profile/user/${id}`} alt='userimage' onClick={menuToggle} className="click" />
                         <div className="action">
-                            <div className="profile">
-
-                            </div>
                             <div className="menu">
                                 <h3>{users.name}<br></br><span>{users.email}</span></h3>
                                 <ul>

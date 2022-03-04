@@ -11,6 +11,7 @@ var userDao = {
     updateUser: updateUser,
 
     findContactPersons : findContactPersons,
+    findByMail : findByMail
     
 }
 
@@ -31,6 +32,15 @@ function findById(id) {
 function findByUsername(username) {
     return User.findOne({
         where : {username : username},
+        include: [{
+            model: Role
+           }]
+    });
+}
+
+function findByMail(email) {
+    return User.findOne({
+        where : {email : email},
         include: [{
             model: Role
            }]
