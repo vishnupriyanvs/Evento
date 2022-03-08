@@ -52,12 +52,12 @@ function EventsTable(props) {
                           {/* navigate(`/user/sendinvitations/${id}/${item.id}`) */}
                           {/* setEventState(item.id); setEventTitle(item.title); var modal = document.getElementById("myInvitationModal"); modal.style.display = "flex"; */}
                           <div className="add-box">
-                            <FontAwesomeIcon icon={faUserPlus} onClick={() => {   setEventState(item.id); setEventTitle(item.title); var modal = document.getElementById("myInvitationModal"); modal.style.display = "flex"; }} className='hover-edit' /><div className='hover-icon'>Add participants</div>
+                            <FontAwesomeIcon style={{cursor:"pointer"}} icon={faUserPlus} onClick={() => {   setEventState(item.id); setEventTitle(item.title); var modal = document.getElementById("myInvitationModal"); modal.style.display = "flex"; }} className='hover-edit' /><div className='hover-icon'>Add participants</div>
                             <InviteUser id={id} eventid={eventState} title={eventTitle} />
                           </div>
                           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                           <div className='edit-box'>
-                            <FontAwesomeIcon icon={faEdit} onClick={() => { setEventState(item.id); var modal = document.getElementById("myUpdateModal"); modal.style.display = "block"; }} className='hover-edit' /><div className='hover-icon'>Edit Event</div>
+                            <FontAwesomeIcon style={{cursor:"pointer"}} icon={faEdit} onClick={() => { setEventState(item.id); var modal = document.getElementById("myUpdateModal"); modal.style.display = "block"; }} className='hover-edit' /><div className='hover-icon'>Edit Event</div>
                             <UpdateEventModal eventid={eventState} />
                           </div>
                         </td>
@@ -87,7 +87,7 @@ function EventsTable(props) {
       <div className="main-box">
         <div className="pageList-items">
 
-          {counter >= 1 ? <button onClick={() => { decrementCounter() }} className="previous-btn">Previous</button> : null}
+          {counter >= 1 ? <button onClick={() => { decrementCounter() }} className="previous-btn">prev</button> : null}
           {pages.map((item, i) => <span onClick={() => setCounter(item)}>{item + 1}</span>)}
           {counter <= (props.events.length % 10 !== 0 ? (Math.floor(props.events.length / 10) + 1) - 1 : Math.floor(props.events.length / 10) - 1) - 1 ? <button onClick={() => { incrementCounter(); }} className="next-btn">Next</button> : null}
         </div>
