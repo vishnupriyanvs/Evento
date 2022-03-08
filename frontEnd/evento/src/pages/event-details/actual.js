@@ -97,11 +97,9 @@ function ViewEvents() {
                         <div className="contentss">
                             <div className='event-content'>
                                 {action && <div className='event-action'>
-                                    <FontAwesomeIcon icon={faUserPlus} onClick={() => {var modal = document.getElementById("myInvitationModal"); modal.style.display = "flex";}} />
-                                    <InviteUser id={id} eventid={eventid} title={events.title} />
+                                    <FontAwesomeIcon style={{cursor:"pointer"}} size="2x" icon={faUserPlus} onClick={() => navigate(`/user/sendinvitations/${id}/${eventid}`)} />
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <FontAwesomeIcon icon={faEdit} onClick={() => {var modal = document.getElementById("myUpdateModal"); modal.style.display = "block";}} />
-                                    <UpdateEventModal eventid={eventid} />
+                                    <FontAwesomeIcon style={{cursor:"pointer"}} size="2x" icon={faEdit} onClick={() => navigate(`/user/edit-event/${id}/${eventid}`)} />
                                 </div>}
                                 <div className='content-event-title'>{events.title}</div>
                                 <div className='content-event-description'>{events.description}</div>

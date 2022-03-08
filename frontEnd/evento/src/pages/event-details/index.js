@@ -293,9 +293,9 @@ function ViewEvents() {
         hoverable
         extra= {
             <>
-            <FontAwesomeIcon className='icon-card' icon={faUserPlus} onClick={() => navigate(`/user/sendinvitations/${id}/${eventid}`)} />
+            <FontAwesomeIcon style={{cursor:"pointer"}} className='icon-card' icon={faUserPlus} onClick={() => navigate(`/user/sendinvitations/${id}/${eventid}`)} />
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <FontAwesomeIcon className='icon-card' icon={faEdit} onClick={() => navigate(`/user/edit-event/${id}/${eventid}`)} />
+            <FontAwesomeIcon style={{cursor:"pointer"}} className='icon-card' icon={faEdit} onClick={() => navigate(`/user/edit-event/${id}/${eventid}`)} />
             </>      
         } 
         style={{}}>
