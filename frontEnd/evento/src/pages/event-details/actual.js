@@ -94,9 +94,9 @@ function ViewEvents() {
                         <div className="contentss">
                             <div className='event-content'>
                                 {action && <div className='event-action'>
-                                    <FontAwesomeIcon icon={faUserPlus} onClick={() => navigate(`/user/sendinvitations/${id}/${eventid}`)} />
+                                    <FontAwesomeIcon style={{cursor:"pointer"}} size="2x" icon={faUserPlus} onClick={() => navigate(`/user/sendinvitations/${id}/${eventid}`)} />
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <FontAwesomeIcon icon={faEdit} onClick={() => navigate(`/user/edit-event/${id}/${eventid}`)} />
+                                    <FontAwesomeIcon style={{cursor:"pointer"}} size="2x" icon={faEdit} onClick={() => navigate(`/user/edit-event/${id}/${eventid}`)} />
                                 </div>}
                                 <div className='content-event-title'>{events.title}</div>
                                 <div className='content-event-description'>{events.description}</div>
