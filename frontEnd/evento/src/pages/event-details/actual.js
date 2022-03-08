@@ -5,6 +5,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserPlus, faEdit, faClock, faUserAlt, faGlobe, faPhone, faUsers, faUserCheck, faUser, faMailBulk } from "@fortawesome/free-solid-svg-icons";
 import apiHandler from '../../api-handling';
 import tokenHandler from '../../api-handling/tokenHandler';
+import InviteUser from '../send-invitations';
+import UpdateEventModal from '../update-event-modal';
+
 
 function ViewEvents() {
 
@@ -94,9 +97,11 @@ function ViewEvents() {
                         <div className="contentss">
                             <div className='event-content'>
                                 {action && <div className='event-action'>
-                                    <FontAwesomeIcon icon={faUserPlus} onClick={() => navigate(`/user/sendinvitations/${id}/${eventid}`)} />
+                                    <FontAwesomeIcon icon={faUserPlus} onClick={() => {var modal = document.getElementById("myInvitationModal"); modal.style.display = "flex";}} />
+                                    <InviteUser id={id} eventid={eventid} title={events.title} />
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <FontAwesomeIcon icon={faEdit} onClick={() => navigate(`/user/edit-event/${id}/${eventid}`)} />
+                                    <FontAwesomeIcon icon={faEdit} onClick={() => {var modal = document.getElementById("myUpdateModal"); modal.style.display = "block";}} />
+                                    <UpdateEventModal eventid={eventid} />
                                 </div>}
                                 <div className='content-event-title'>{events.title}</div>
                                 <div className='content-event-description'>{events.description}</div>

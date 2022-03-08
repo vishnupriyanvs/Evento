@@ -16,6 +16,15 @@ function EditEventForm(props) {
   const navigate = useNavigate();
   // const [submitted,setSubmitted] = useState(false)
 
+  function handleContactPerson(event) {
+    let name, value;
+
+    name = event.name
+    value = event.value
+
+    setEvents(values => ({ ...values, [name]: value }))
+}
+
   function handleChange(event) {
     let name, value;
     name = event.target.name
@@ -144,6 +153,7 @@ function EditEventForm(props) {
   const handleSubmit = async (event) => {
 
     event.preventDefault()
+    console.log(id)
     setEvents(values => ({ ...values, "updated_by": id }))
     // setSubmitted(true)
 
@@ -176,6 +186,7 @@ function EditEventForm(props) {
     // catch {
     //   navigate('/');
     // }
+    console.log(events)
     var config = {
       method: 'put',
       url: `http://localhost:4000/events/${props.eventid}`,
@@ -233,6 +244,7 @@ function EditEventForm(props) {
         handleSubmit={handleSubmit}
         handleChange={handleChange}
         handleReset={handleReset}
+        handleContactPerson = {handleContactPerson}
         users={options}
         buttonValue="Update"
         updated_by={id}

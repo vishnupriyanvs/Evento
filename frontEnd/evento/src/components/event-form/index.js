@@ -134,7 +134,7 @@ function EventForm(props) {
                                     <Select
                                         id="contact-person"
                                         name="contact_person"
-                                        value={props.events.contact_person}
+                                        //value={props.events.contact_person}
                                         //onChange={props.handleChange}
                                         options={props.users}
                                         value={props.users.find(c => c.value === props.users.id)}
