@@ -49,14 +49,16 @@ function MyForm(props) {
             const encryptedId = encryptData(params.id)
             sessionStorage.setItem('myRole', encryptedRoleId)
             sessionStorage.setItem('myId', encryptedId)
-            handleSuccessToast(`Welocme  ${params.name}`)
+            handleSuccessToast(`Welcome  ${params.name}`)
             console.log(params.role)
             // useEffect(() => {
             if (params.role == 1) {
                 console.log(params.role)
+                sessionStorage.setItem('isSwitchAdmin',1)
                 navigate(`/user/upcoming-events/${params.id}`)
             }
             else if (params.role == 2) {
+                sessionStorage.setItem('isSwitchAdmin',3)
                 navigate(`/user/my-events/upcoming-events/invited/${params.id}`)
             }
             // },[])  
@@ -84,11 +86,13 @@ function MyForm(props) {
                 const encryptedId = encryptData(response.data.user.id)
                 sessionStorage.setItem('myRole', encryptedRoleId)
                 sessionStorage.setItem('myId', encryptedId)
-                handleSuccessToast(`Welocme + ${response.data.user.name}`)
+                handleSuccessToast(`Welcome  ${response.data.user.name}`)
                 if (response.data.user.roles[0].user_roles.roleId === 1) {
+                    sessionStorage.setItem('isSwitchAdmin',1)
                     navigate(`/user/upcoming-events/${response.data.user.id}`)
                 }
                 else if (response.data.user.roles[0].user_roles.roleId === 2) {
+                    sessionStorage.setItem('isSwitchAdmin',3)
                     navigate(`/user/my-events/upcoming-events/invited/${response.data.user.id}`)
                 }
             })

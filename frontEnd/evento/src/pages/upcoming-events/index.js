@@ -63,7 +63,6 @@ function UpcomingEvents(props) {
     // console.log(events)
     return (
         <>
-            <h5 className="heading">{props.toptitle}</h5>
             <div className="upcomingEventsTable">
                 <SizedBox height="2vh" />
                 <EventsTable

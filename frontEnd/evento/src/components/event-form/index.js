@@ -134,10 +134,10 @@ function EventForm(props) {
                                     <Select
                                         id="contact-person"
                                         name="contact_person"
-                                        value={props.events.contact_person}
-                                        //onChange={props.handleChange}
+                                        //value={props.events.contact_person}
                                         options={props.users}
                                         value={props.users.find(c => c.value === props.users.id)}
+                                        //onChange={props.handleChange}
                                         onChange={props.handleContactPerson}
                                         required />
                                     {/* <optgroup label="Select Person">

@@ -105,7 +105,7 @@ function MyEventsTable(props) {
                 const action = tHeader.includes("Actions");
                 return (
                   <tr>
-                    <td onClick={() => navigate(`/user/view-event/${id}/${item.event.id}`)}><img src={`http://localhost:4000/images/download/${item.id}`} className="tile-image" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{item.event.title}</td>
+                    <td style={{cursor:'pointer'}} onClick={() => navigate(`/user/view-event/${id}/${item.event.id}`)}><img src={`http://localhost:4000/images/download/${item.id}`} className="tile-image" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{item.event.title}</td>
                     <td>{item.event.startDate}</td>
                     {item.event.endDate ?
                       <td>{item.event.endDate}</td>

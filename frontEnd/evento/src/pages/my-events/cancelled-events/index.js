@@ -95,7 +95,6 @@ function UserCancelledEvents(props) {
     
     return (
         <>
-        <p>{props.toptitle}</p>
         <div className="upcomingEventsTable">
             <SizedBox height="2vh" />
             <MyEventsTable

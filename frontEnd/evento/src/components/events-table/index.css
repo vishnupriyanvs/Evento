@@ -17,6 +17,10 @@
   /* border-radius: 10px; */
 }
 
+#tile-title{
+  cursor: pointer;
+}
+
 td {
   text-align: left;
 }
@@ -109,6 +113,7 @@ td {
 	padding: 10px 16px;
 	border-radius: 20%;
   border:thin solid grey;
+  cursor: pointer;
 }
 /* a:hover, a:nth-child(2){
 	background-color: #cc66ff;

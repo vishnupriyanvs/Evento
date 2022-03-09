@@ -38,14 +38,17 @@ function updateEvent(event, id) {
     var updateEvent = {
         title: event.title,
         description : event.description,
-        imageUrl : event.image_url,
-        startDate : event.start_date,
-        endDate : event.end_date,
+        imageUrl : event.imageUrl,
+        startDate : event.startDate,
+        endDate : event.endDate,
+        startTime : event.startTime,
+        endTime : event.endTime,
         venue  : event.venue,
-        resourcePerson : event.resource_person,
+        resourcePerson : event.resourcePerson,
+        contact_person : event.contact_person,
         website : event.website,
-        isActive : event.is_active,
-        cancellationReason : event.cancellation_reason 
+        isActive : event.isActive,
+        cancellationReason : event.cancellationReason 
     };
     return Event.update(updateEvent, { where: { id: id } });
 }

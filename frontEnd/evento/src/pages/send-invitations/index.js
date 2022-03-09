@@ -241,6 +241,7 @@ export const InviteUser = (props) => {
                 type="textarea"
                 name="description"
                 value={events.description}
+                row = {5}
               ></Form.Control>
               <br />
             </div>
