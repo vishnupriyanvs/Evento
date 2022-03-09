@@ -40,7 +40,7 @@ function EventsTable(props) {
               const action = tHeader.includes("Actions");
               return (
                 <tr>
-                  <td onClick={() => navigate(`/user/view-event/${id}/${item.id}`)}><img src={`http://localhost:4000/images/download/${item.id}`} className="tile-image" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{item.title}</td>
+                  <td onClick={() => navigate(`/user/view-event/${id}/${item.id}`)}><img src={`http://localhost:4000/images/download/${item.id}`} className="tile-image" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span id='tile-title'>{item.title}</span></td>
                   <td>{item.start_date}</td>
                   {item.is_active == 'Active' || item.is_active == 'Cancelled' ?
                     action ?

@@ -90,7 +90,6 @@ function PastAcceptedEvents(props) {
    //console.log(events)
     return (
         <>
-        <p>{props.toptitle}</p>
         <div className="upcomingEventsTable">
             <SizedBox height="2vh" />
             <MyEventsTable

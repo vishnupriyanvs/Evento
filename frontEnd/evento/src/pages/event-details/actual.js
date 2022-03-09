@@ -2,7 +2,7 @@ import './index.css'
 import { useState, useEffect, React } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserPlus, faEdit, faClock, faUserAlt, faGlobe, faPhone, faUsers, faUserCheck, faUser, faMailBulk } from "@fortawesome/free-solid-svg-icons";
+import { faUserPlus, faEdit, faClock, faUserAlt, faGlobe, faPhone, faUsers, faUserCheck, faUser, faMailBulk, faCalendar } from "@fortawesome/free-solid-svg-icons";
 import apiHandler from '../../api-handling';
 import tokenHandler from '../../api-handling/tokenHandler';
 import InviteUser from '../send-invitations';
@@ -22,6 +22,8 @@ function ViewEvents() {
     const { id, eventid } = useParams();
     let feedbacks = []
 
+    
+    
     useEffect(async () => {
         try {
             try {
@@ -96,10 +98,12 @@ function ViewEvents() {
                         <img src={`http://localhost:4000/images/download/${eventid}`} />
                         <div className="contentss">
                             <div className='event-content'>
-                                {action && <div className='event-action'>
-                                    <FontAwesomeIcon style={{cursor:"pointer"}} size="2x" icon={faUserPlus} onClick={() => navigate(`/user/sendinvitations/${id}/${eventid}`)} />
+                                {action  && <div className='event-action'>
+                                    <FontAwesomeIcon style={{cursor:"pointer",color:'#004643'}} size="2x" icon={faUserPlus} onClick={() => {var modal = document.getElementById("myInvitationModal"); modal.style.display = "flex"; }} />
+                                    <InviteUser id={id} eventid={eventid} title={events.title} />
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <FontAwesomeIcon style={{cursor:"pointer"}} size="2x" icon={faEdit} onClick={() => navigate(`/user/edit-event/${id}/${eventid}`)} />
+                                    <FontAwesomeIcon style={{cursor:"pointer",color:'#004643'}} size="2x" icon={faEdit} onClick={() => {var modal = document.getElementById("myUpdateModal"); modal.style.display = "block";}} />
+                                    <UpdateEventModal eventid={eventid} />
                                 </div>}
                                 <div className='content-event-title'>{events.title}</div>
                                 <div className='content-event-description'>{events.description}</div>
@@ -115,8 +119,12 @@ function ViewEvents() {
                                 <div class="vl"></div>
                                 <div className='event-fixture'>
                                     <div className='content-event-date'>
-                                       <div><FontAwesomeIcon icon={faClock} /> <div>{events.startDate} : {events.endDate}</div></div> 
-                                        <div className='content-event-venue'><a href="#">{events.venue}</a></div>
+                                       {/* <div><FontAwesomeIcon icon={faCalendar} /> <div>{events.startDate} : {events.endDate}</div></div> 
+                                       <div><FontAwesomeIcon icon={faClock} /> <div>{events.startTime} : {events.endTime}</div></div> 
+                                        <div className='content-event-venue'><a href="#">{events.venue}</a></div> */}
+                                        <div><FontAwesomeIcon icon={faCalendar} /> {events.startDate} : {events.endDate}</div> 
+                                       <div><FontAwesomeIcon icon={faClock} /> {events.startTime} : {events.endTime}</div> 
+                                        <div className='content-event-venue' ><a href="#" style={{marginTop:'3px',marginLeft:'26px'}}>{events.venue}</a></div>
                                     </div>
                                 </div>
 

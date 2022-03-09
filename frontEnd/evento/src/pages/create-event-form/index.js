@@ -119,7 +119,7 @@ function CreateEventForm() {
 
     const handleSubmit = async (event) => {
 
-        event.preventDefault()
+        // event.preventDefault()
         const formData = new FormData()
         formData.append('avatar', file);
         // var config = {

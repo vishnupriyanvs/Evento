@@ -87,7 +87,6 @@ function AcceptedEvents(props) {
    
     return (
         <>
-        <h5>{props.toptitle}</h5>
         <div className="upcomingEventsTable">
             <SizedBox height="2vh" />
             <MyEventsTable
