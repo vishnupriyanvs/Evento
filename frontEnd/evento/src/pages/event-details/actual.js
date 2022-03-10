@@ -23,7 +23,8 @@ function ViewEvents() {
     let feedbacks = []
 
     
-    
+    let isSwitchAdmin_ = sessionStorage.getItem('isSwitchAdmin');
+    // console.log(isSwitchAdmin_)
     useEffect(async () => {
         try {
             try {
@@ -90,6 +91,8 @@ function ViewEvents() {
         action = true;
     }
 
+    const admincheck = action && isSwitchAdmin_
+    console.log(admincheck)
     return (
         <>
             <div className="cards-container">
@@ -98,7 +101,7 @@ function ViewEvents() {
                         <img src={`http://localhost:4000/images/download/${eventid}`} />
                         <div className="contentss">
                             <div className='event-content'>
-                                {action  && <div className='event-action'>
+                                {admincheck=='true' && <div className='event-action'>
                                     <FontAwesomeIcon style={{cursor:"pointer",color:'#004643'}} size="2x" icon={faUserPlus} onClick={() => {var modal = document.getElementById("myInvitationModal"); modal.style.display = "flex"; }} />
                                     <InviteUser id={id} eventid={eventid} title={events.title} />
                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

@@ -28,6 +28,9 @@ function Navbar(props) {
     const [users, setUsers] = useState({})
     const [responsiveCheck, setResponsiveCheck] = useState(false)
     //console.log('params id' + id)
+
+    let admincheck = sessionStorage.getItem('isSwitchAdmin');
+    console.log('from navbar' + admincheck)
     useEffect(async () => {
         try {
             try {
@@ -68,7 +71,7 @@ function Navbar(props) {
                 <div className="flexRightItem">
                     <SearchBars />
                     <SizedBox width="8vh" />
-                    {role === '1' ? <CreateEvent onClick={props.onClick} id={id} /> : null}
+                    {role === '1' && admincheck == 'true' ? <CreateEvent onClick={props.onClick} id={id} /> : null}
                     <SizedBox width="8vh" />
                     {/* <FontAwesomeIcon icon={faUserCircle} size="2x" color="#91A4B7" onClick={() => { getComputedStyle(box).visibility === 'hidden' ? box.setAttribute('style', 'visibility: visible;') : box.setAttribute('style', 'visibility: hidden;') }} className="click" /> */}
                     {/* <img src={`http://localhost:4000/images/profile/user/${id}`} alt='userimage' onClick={() => { getComputedStyle(box).visibility === 'hidden' ? box.setAttribute('style', 'visibility: visible;') : box.setAttribute('style', 'visibility: hidden;') }} className="click" /> */}

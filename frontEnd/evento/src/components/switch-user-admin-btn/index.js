@@ -18,14 +18,14 @@ function SwitchUserAdminBtn(props) {
             //console.log(switchUser)
             navigateMyEvents(`my-events/upcoming-events/invited/${id}`)
             titleContext.handleTitles('My Events - Upcoming - Invited')
-            sessionStorage.setItem('isSwitchAdmin',0)
+            sessionStorage.setItem('isSwitchAdmin',false)
         }
         if(!props.checkAdmin){
             setSwitchUser(0)
             //console.log(switchUser)
             navigateMyEvents(`/user/upcoming-events/${id}`);
             titleContext.handleTitles('Upcoming Events');
-            sessionStorage.setItem('isSwitchAdmin',1);
+            sessionStorage.setItem('isSwitchAdmin',true);
         }
         // props.handle == 1 ? navigateMyEvents(`${props.endPoint}${id}`)  : navigateMyEvents(`/user/upcoming-events/${id}`)
     }

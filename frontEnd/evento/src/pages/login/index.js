@@ -54,11 +54,11 @@ function MyForm(props) {
             // useEffect(() => {
             if (params.role == 1) {
                 console.log(params.role)
-                sessionStorage.setItem('isSwitchAdmin',1)
+                sessionStorage.setItem('isSwitchAdmin',true)
                 navigate(`/user/upcoming-events/${params.id}`)
             }
             else if (params.role == 2) {
-                sessionStorage.setItem('isSwitchAdmin',3)
+                sessionStorage.setItem('isSwitchAdmin','bleh')
                 navigate(`/user/my-events/upcoming-events/invited/${params.id}`)
             }
             // },[])  
@@ -88,11 +88,11 @@ function MyForm(props) {
                 sessionStorage.setItem('myId', encryptedId)
                 handleSuccessToast(`Welcome  ${response.data.user.name}`)
                 if (response.data.user.roles[0].user_roles.roleId === 1) {
-                    sessionStorage.setItem('isSwitchAdmin',1)
+                    sessionStorage.setItem('isSwitchAdmin',true)
                     navigate(`/user/upcoming-events/${response.data.user.id}`)
                 }
                 else if (response.data.user.roles[0].user_roles.roleId === 2) {
-                    sessionStorage.setItem('isSwitchAdmin',3)
+                    sessionStorage.setItem('isSwitchAdmin','bleh')
                     navigate(`/user/my-events/upcoming-events/invited/${response.data.user.id}`)
                 }
             })
